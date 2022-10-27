@@ -1,10 +1,10 @@
-import { CoreMenu } from '@core/types';
+import { CoreMenu } from '@core/types'
 
 //? DOC: http://localhost:7777/demo/vuexy-angular-admin-dashboard-template/documentation/guide/development/navigation-menus.html#interface
 
 export const menu: CoreMenu[] = [
   // Dashboard
-  {
+  /* {
     id: 'dashboard',
     title: 'Dashboard',
     translate: 'MENU.DASHBOARD.COLLAPSIBLE',
@@ -14,7 +14,7 @@ export const menu: CoreMenu[] = [
     badge: {
       title: '2',
       translate: 'MENU.DASHBOARD.BADGE',
-      classes: 'badge-light-warning badge-pill'
+      classes: 'badge-light-danger badge-pill',
     },
     children: [
       {
@@ -24,7 +24,7 @@ export const menu: CoreMenu[] = [
         type: 'item',
         role: ['Admin'], //? To set multiple role: ['Admin', 'Client']
         icon: 'circle',
-        url: 'dashboard/analytics'
+        url: 'dashboard/analytics',
       },
       {
         // If role is not assigned will be display to all
@@ -33,9 +33,18 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.DASHBOARD.ECOMMERCE',
         type: 'item',
         icon: 'circle',
-        url: 'dashboard/ecommerce'
-      }
-    ]
+        url: 'dashboard/ecommerce',
+      },
+    ],
+  },*/
+  {
+    id: 'analytics',
+    title: 'Dashboard',
+    translate: 'MENU.DASHBOARD.COLLAPSIBLE',
+    type: 'item',
+    role: ['Admin'], //? To set multiple role: ['Admin', 'Client']
+    icon: 'home',
+    url: 'dashboard/analytics',
   },
   // Apps & Pages
   {
@@ -51,7 +60,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.EMAIL',
         type: 'item',
         icon: 'mail',
-        url: 'apps/email'
+        url: 'apps/email',
       },
       {
         id: 'chat',
@@ -59,7 +68,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.CHAT',
         type: 'item',
         icon: 'message-square',
-        url: 'apps/chat'
+        url: 'apps/chat',
       },
       {
         id: 'todo',
@@ -67,7 +76,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.TODO',
         type: 'item',
         icon: 'check-square',
-        url: 'apps/todo'
+        url: 'apps/todo',
       },
       {
         id: 'calendar',
@@ -75,7 +84,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.APPS.CALENDAR',
         type: 'item',
         icon: 'calendar',
-        url: 'apps/calendar'
+        url: 'apps/calendar',
       },
       {
         id: 'pages',
@@ -97,7 +106,7 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.AUTH.LOGIN1',
                 type: 'item',
                 url: 'pages/authentication/login-v1',
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'login-v2',
@@ -105,7 +114,7 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.AUTH.LOGIN2',
                 type: 'item',
                 url: 'pages/authentication/login-v2',
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'register-v1',
@@ -113,7 +122,7 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.AUTH.REGISTER1',
                 type: 'item',
                 url: 'pages/authentication/register-v1',
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'register-v2',
@@ -121,15 +130,15 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.AUTH.REGISTER2',
                 type: 'item',
                 url: 'pages/authentication/register-v2',
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
-                id: 'forgot-password-v1',
+                id: 'forgot-password',
                 title: 'Forgot Password V1',
                 translate: 'MENU.PAGES.AUTH.FORGOTPASSWORD1',
                 type: 'item',
-                url: 'pages/authentication/forgot-password-v1',
-                openInNewTab: true
+                url: 'pages/authentication/forgot-password',
+                openInNewTab: true,
               },
               {
                 id: 'forgot-password-v2',
@@ -137,7 +146,7 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.AUTH.FORGOTPASSWORD2',
                 type: 'item',
                 url: 'pages/authentication/forgot-password-v2',
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'reset-password-v1',
@@ -145,7 +154,7 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.AUTH.RESETPASSWORD1',
                 type: 'item',
                 url: 'pages/authentication/reset-password-v1',
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'reset-password-v2',
@@ -153,9 +162,9 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.AUTH.RESETPASSWORD2',
                 type: 'item',
                 url: 'pages/authentication/reset-password-v2',
-                openInNewTab: true
-              }
-            ]
+                openInNewTab: true,
+              },
+            ],
           },
           {
             id: 'account-settings',
@@ -163,7 +172,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.PAGES.ACCOUNTSETTINGS',
             type: 'item',
             icon: 'circle',
-            url: 'pages/account-settings'
+            url: 'pages/account-settings',
           },
           {
             id: 'profile',
@@ -171,7 +180,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.PAGES.PROFILE',
             type: 'item',
             icon: 'circle',
-            url: 'pages/profile'
+            url: 'pages/profile',
             // collapsed: true
           },
           {
@@ -180,7 +189,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.PAGES.FAQ',
             type: 'item',
             icon: 'circle',
-            url: 'pages/faq'
+            url: 'pages/faq',
           },
           {
             id: 'knowledgeBase',
@@ -188,7 +197,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.PAGES.KB',
             type: 'item',
             icon: 'circle',
-            url: 'pages/knowledge-base'
+            url: 'pages/knowledge-base',
           },
           {
             id: 'pricing',
@@ -196,7 +205,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.PAGES.PRICING',
             type: 'item',
             icon: 'circle',
-            url: 'pages/pricing'
+            url: 'pages/pricing',
           },
 
           {
@@ -211,23 +220,23 @@ export const menu: CoreMenu[] = [
                 title: 'List',
                 translate: 'MENU.PAGES.BLOG.LIST',
                 type: 'item',
-                url: 'pages/blog-list'
+                url: 'pages/blog-list',
               },
               {
                 id: 'blog-details',
                 title: 'Detail',
                 translate: 'MENU.PAGES.BLOG.DETAILS',
                 type: 'item',
-                url: 'pages/blog-details'
+                url: 'pages/blog-details',
               },
               {
                 id: 'blog-edit',
                 title: 'Edit',
                 translate: 'MENU.PAGES.BLOG.EDIT',
                 type: 'item',
-                url: 'pages/blog-edit'
-              }
-            ]
+                url: 'pages/blog-edit',
+              },
+            ],
           },
 
           {
@@ -242,56 +251,62 @@ export const menu: CoreMenu[] = [
                 title: 'Welcome',
                 translate: 'MENU.PAGES.MAIL.WELCOME',
                 type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-welcome.html',
+                url:
+                  'https://pixinvent.com/demo/vuexy-mail-template/mail-welcome.html',
                 externalUrl: true,
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'mail-reset',
                 title: 'Reset Password',
                 translate: 'MENU.PAGES.MAIL.RESET',
                 type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-reset-password.html',
+                url:
+                  'https://pixinvent.com/demo/vuexy-mail-template/mail-reset-password.html',
                 externalUrl: true,
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'mail-verify',
                 title: 'Verify',
                 translate: 'MENU.PAGES.MAIL.VERIFY',
                 type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-verify-email.html',
+                url:
+                  'https://pixinvent.com/demo/vuexy-mail-template/mail-verify-email.html',
                 externalUrl: true,
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'mail-deactivate',
                 title: 'Deactivate',
                 translate: 'MENU.PAGES.MAIL.DEACTIVATE',
                 type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-deactivate-account.html',
+                url:
+                  'https://pixinvent.com/demo/vuexy-mail-template/mail-deactivate-account.html',
                 externalUrl: true,
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'mail-invoice',
                 title: 'Invoice',
                 translate: 'MENU.PAGES.MAIL.INVOICE',
                 type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-invoice.html',
+                url:
+                  'https://pixinvent.com/demo/vuexy-mail-template/mail-invoice.html',
                 externalUrl: true,
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'mail-promotional',
                 title: 'Promotional',
                 translate: 'MENU.PAGES.MAIL.PROMOTIONAL',
                 type: 'item',
-                url: 'https://pixinvent.com/demo/vuexy-mail-template/mail-promotional.html',
+                url:
+                  'https://pixinvent.com/demo/vuexy-mail-template/mail-promotional.html',
                 externalUrl: true,
-                openInNewTab: true
-              }
-            ]
+                openInNewTab: true,
+              },
+            ],
           },
 
           {
@@ -307,7 +322,7 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.MISC.COMINGSOON',
                 type: 'item',
                 url: 'pages/miscellaneous/coming-soon',
-                openInNewTab: true
+                openInNewTab: true,
               },
 
               {
@@ -316,7 +331,7 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.MISC.NOTAUTH',
                 type: 'item',
                 url: 'pages/miscellaneous/not-authorized',
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'maintenance',
@@ -324,7 +339,7 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.MISC.MAINTENANCE',
                 type: 'item',
                 url: 'pages/miscellaneous/maintenance',
-                openInNewTab: true
+                openInNewTab: true,
               },
               {
                 id: 'error',
@@ -332,11 +347,11 @@ export const menu: CoreMenu[] = [
                 translate: 'MENU.PAGES.MISC.ERROR',
                 type: 'item',
                 url: 'pages/miscellaneous/error',
-                openInNewTab: true
-              }
-            ]
-          }
-        ]
+                openInNewTab: true,
+              },
+            ],
+          },
+        ],
       },
       {
         id: 'invoice',
@@ -351,7 +366,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.INVOICE.LIST',
             type: 'item',
             icon: 'circle',
-            url: 'apps/invoice/list'
+            url: 'apps/invoice/list',
           },
           {
             id: 'invoicePreview',
@@ -359,7 +374,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.INVOICE.PREVIEW',
             type: 'item',
             icon: 'circle',
-            url: 'apps/invoice/preview'
+            url: 'apps/invoice/preview',
           },
           {
             id: 'invoiceEdit',
@@ -367,7 +382,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.INVOICE.EDIT',
             type: 'item',
             icon: 'circle',
-            url: 'apps/invoice/edit'
+            url: 'apps/invoice/edit',
           },
           {
             id: 'invoiceAdd',
@@ -375,9 +390,9 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.INVOICE.ADD',
             type: 'item',
             icon: 'circle',
-            url: 'apps/invoice/add'
-          }
-        ]
+            url: 'apps/invoice/add',
+          },
+        ],
       },
       {
         id: 'e-commerce',
@@ -392,7 +407,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.ECOMMERCE.SHOP',
             type: 'item',
             icon: 'circle',
-            url: 'apps/e-commerce/shop'
+            url: 'apps/e-commerce/shop',
           },
           {
             id: 'details',
@@ -400,7 +415,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.ECOMMERCE.DETAIL',
             type: 'item',
             icon: 'circle',
-            url: 'apps/e-commerce/details'
+            url: 'apps/e-commerce/details',
           },
           {
             id: 'wishList',
@@ -408,7 +423,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.ECOMMERCE.WISHLIST',
             type: 'item',
             icon: 'circle',
-            url: 'apps/e-commerce/wishlist'
+            url: 'apps/e-commerce/wishlist',
           },
           {
             id: 'checkout',
@@ -416,9 +431,9 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.ECOMMERCE.CHECKOUT',
             type: 'item',
             icon: 'circle',
-            url: 'apps/e-commerce/checkout'
-          }
-        ]
+            url: 'apps/e-commerce/checkout',
+          },
+        ],
       },
       {
         id: 'users',
@@ -433,7 +448,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.USER.LIST',
             type: 'item',
             icon: 'circle',
-            url: 'apps/user/user-list'
+            url: 'apps/user/user-list',
           },
           {
             id: 'view',
@@ -441,7 +456,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.USER.VIEW',
             type: 'item',
             icon: 'circle',
-            url: 'apps/user/user-view'
+            url: 'apps/user/user-view',
           },
           {
             id: 'edit',
@@ -449,11 +464,11 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.APPS.USER.EDIT',
             type: 'item',
             icon: 'circle',
-            url: 'apps/user/user-edit'
-          }
-        ]
-      }
-    ]
+            url: 'apps/user/user-edit',
+          },
+        ],
+      },
+    ],
   },
   // User Interface
   {
@@ -469,7 +484,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.UI.TYPOGRAPHY',
         type: 'item',
         icon: 'type',
-        url: 'ui/content/typography'
+        url: 'ui/content/typography',
       },
       {
         id: 'colors',
@@ -477,7 +492,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.UI.COLORS',
         type: 'item',
         icon: 'droplet',
-        url: 'ui/colors'
+        url: 'ui/colors',
       },
       {
         id: 'feather',
@@ -485,7 +500,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.UI.FEATHER',
         type: 'item',
         icon: 'eye',
-        url: 'ui/icons/feather'
+        url: 'ui/icons/feather',
       },
       {
         id: 'cards',
@@ -496,7 +511,7 @@ export const menu: CoreMenu[] = [
         badge: {
           title: 'New',
           translate: 'MENU.UI.CARDS.BADGE',
-          classes: 'badge-light-success badge-pill'
+          classes: 'badge-light-success badge-pill',
         },
         children: [
           {
@@ -505,7 +520,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.CARDS.BASIC',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/card-basic'
+            url: 'ui/card/card-basic',
           },
           {
             id: 'card-advance',
@@ -513,7 +528,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.CARDS.ADVANCE',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/advance'
+            url: 'ui/card/advance',
           },
           {
             id: 'card-statistics',
@@ -521,7 +536,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.CARDS.STATISTICS',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/statistics'
+            url: 'ui/card/statistics',
           },
           {
             id: 'Card-analytics',
@@ -529,7 +544,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.CARDS.ANALYTICS',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/analytics'
+            url: 'ui/card/analytics',
           },
           {
             id: 'card-actions',
@@ -537,9 +552,9 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.CARDS.ACTIONS',
             type: 'item',
             icon: 'circle',
-            url: 'ui/card/actions'
-          }
-        ]
+            url: 'ui/card/actions',
+          },
+        ],
       },
       {
         id: 'components',
@@ -554,7 +569,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.ALERTS',
             type: 'item',
             icon: 'circle',
-            url: 'components/alerts'
+            url: 'components/alerts',
           },
           {
             id: 'components-avatar',
@@ -562,7 +577,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.AVATAR',
             type: 'item',
             icon: 'circle',
-            url: 'components/avatar'
+            url: 'components/avatar',
           },
           {
             id: 'components-badges',
@@ -570,7 +585,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.BADGES',
             type: 'item',
             icon: 'circle',
-            url: 'components/badges'
+            url: 'components/badges',
           },
           {
             id: 'components-breadcrumbs',
@@ -578,7 +593,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.BREADCRUMBS',
             type: 'item',
             icon: 'circle',
-            url: 'components/breadcrumbs'
+            url: 'components/breadcrumbs',
           },
           {
             id: 'components-buttons',
@@ -586,7 +601,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.BUTTONS',
             type: 'item',
             icon: 'circle',
-            url: 'components/buttons'
+            url: 'components/buttons',
           },
           {
             id: 'components-carousel',
@@ -594,7 +609,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.CAROUSEL',
             type: 'item',
             icon: 'circle',
-            url: 'components/carousel'
+            url: 'components/carousel',
           },
           {
             id: 'components-collapse',
@@ -602,7 +617,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.COLLAPSE',
             type: 'item',
             icon: 'circle',
-            url: 'components/collapse'
+            url: 'components/collapse',
           },
           {
             id: 'components-divider',
@@ -610,7 +625,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.DIVIDER',
             type: 'item',
             icon: 'circle',
-            url: 'components/divider'
+            url: 'components/divider',
           },
           {
             id: 'components-drop-downs',
@@ -618,7 +633,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.DROPDOWNS',
             type: 'item',
             icon: 'circle',
-            url: 'components/dropdowns'
+            url: 'components/dropdowns',
           },
           {
             id: 'components-list-group',
@@ -626,7 +641,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.GROUP',
             type: 'item',
             icon: 'circle',
-            url: 'components/list-group'
+            url: 'components/list-group',
           },
           {
             id: 'components-media-objects',
@@ -634,7 +649,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.OBJECTS',
             type: 'item',
             icon: 'circle',
-            url: 'components/media-objects'
+            url: 'components/media-objects',
           },
           {
             id: 'components-modals',
@@ -642,7 +657,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.MODALS',
             type: 'item',
             icon: 'circle',
-            url: 'components/modals'
+            url: 'components/modals',
           },
           {
             id: 'components-navs',
@@ -650,7 +665,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.COMPONENT',
             type: 'item',
             icon: 'circle',
-            url: 'components/navs'
+            url: 'components/navs',
           },
           {
             id: 'components-pagination',
@@ -658,7 +673,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.PAGINATION',
             type: 'item',
             icon: 'circle',
-            url: 'components/pagination'
+            url: 'components/pagination',
           },
           {
             id: 'components-pill-badges',
@@ -666,7 +681,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.PBADGES',
             type: 'item',
             icon: 'circle',
-            url: 'components/pill-badges'
+            url: 'components/pill-badges',
           },
           {
             id: 'components-pills',
@@ -674,7 +689,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.PILLS',
             type: 'item',
             icon: 'circle',
-            url: 'components/pills'
+            url: 'components/pills',
           },
           {
             id: 'components-popovers',
@@ -682,7 +697,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.POPOVERS',
             type: 'item',
             icon: 'circle',
-            url: 'components/popovers'
+            url: 'components/popovers',
           },
           {
             id: 'components-progress',
@@ -690,7 +705,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.PROGRESS',
             type: 'item',
             icon: 'circle',
-            url: 'components/progress'
+            url: 'components/progress',
           },
           {
             id: 'components-ratings',
@@ -698,7 +713,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.RATINGS',
             type: 'item',
             icon: 'circle',
-            url: 'components/ratings'
+            url: 'components/ratings',
           },
           {
             id: 'components-spinner',
@@ -706,7 +721,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.SPINNER',
             type: 'item',
             icon: 'circle',
-            url: 'components/spinner'
+            url: 'components/spinner',
           },
           {
             id: 'components-tabs',
@@ -714,7 +729,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.TABS',
             type: 'item',
             icon: 'circle',
-            url: 'components/tabs'
+            url: 'components/tabs',
           },
           {
             id: 'components-timeline',
@@ -722,7 +737,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.TIMELINE',
             type: 'item',
             icon: 'circle',
-            url: 'components/timeline'
+            url: 'components/timeline',
           },
           {
             id: 'components-toasts',
@@ -730,7 +745,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.TOASTS',
             type: 'item',
             icon: 'circle',
-            url: 'components/toasts'
+            url: 'components/toasts',
           },
           {
             id: 'components-tooltips',
@@ -738,9 +753,9 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.COMPONENTS.TOOLTIPS',
             type: 'item',
             icon: 'circle',
-            url: 'components/tooltips'
-          }
-        ]
+            url: 'components/tooltips',
+          },
+        ],
       },
       {
         id: 'extensions',
@@ -755,7 +770,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.SWEET_ALERTS',
             icon: 'circle',
             type: 'item',
-            url: '/extensions/sweet-alerts'
+            url: '/extensions/sweet-alerts',
           },
           {
             id: 'ex-blockui',
@@ -763,7 +778,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.BLOCKUI',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/blockui'
+            url: 'extensions/blockui',
           },
           {
             id: 'ex-toastr',
@@ -771,7 +786,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.TOASTER',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/toastr'
+            url: 'extensions/toastr',
           },
           {
             id: 'ex-noui-slider',
@@ -779,7 +794,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.SLIDER',
             icon: 'circle',
             type: 'item',
-            url: '/extensions/noui-slider'
+            url: '/extensions/noui-slider',
           },
           {
             id: 'ex-drag-drop',
@@ -787,7 +802,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.DRAGDROP',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/drag-drop'
+            url: 'extensions/drag-drop',
           },
           {
             id: 'ex-tour',
@@ -795,7 +810,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.TOUR',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/tour'
+            url: 'extensions/tour',
           },
           {
             id: 'ex-clip-board',
@@ -803,7 +818,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.CLIPBOARD',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/clipboard'
+            url: 'extensions/clipboard',
           },
           {
             id: 'ex-media-player',
@@ -811,7 +826,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.MEDIAPLAYER',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/media-player'
+            url: 'extensions/media-player',
           },
           {
             id: 'ex-content-menu',
@@ -819,7 +834,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.CONTEXTMENU',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/context-menu'
+            url: 'extensions/context-menu',
           },
           {
             id: 'ex-swiper',
@@ -827,7 +842,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.SWIPER',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/swiper'
+            url: 'extensions/swiper',
           },
           {
             id: 'ex-tree-view',
@@ -835,7 +850,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.TREEVIEW',
             icon: 'circle',
             type: 'item',
-            url: 'extensions/tree-view'
+            url: 'extensions/tree-view',
           },
           {
             id: 'i18n',
@@ -843,9 +858,9 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.EX.I18N',
             icon: 'circle',
             type: 'item',
-            url: '/extensions/i18n'
-          }
-        ]
+            url: '/extensions/i18n',
+          },
+        ],
       },
       {
         id: 'page-layouts',
@@ -860,7 +875,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.LAYOUTS.COLLAPSED_MENU',
             icon: 'circle',
             type: 'item',
-            url: 'ui/page-layouts/collapsed-menu'
+            url: 'ui/page-layouts/collapsed-menu',
           },
           {
             id: 'layout-boxed',
@@ -868,7 +883,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.LAYOUTS.BOXED_LAYOUT',
             icon: 'circle',
             type: 'item',
-            url: 'ui/page-layouts/boxed-layout'
+            url: 'ui/page-layouts/boxed-layout',
           },
           {
             id: 'layout-without-menu',
@@ -876,7 +891,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.LAYOUTS.WITHOUT_MENU',
             icon: 'circle',
             type: 'item',
-            url: 'ui/page-layouts/without-menu'
+            url: 'ui/page-layouts/without-menu',
           },
           {
             id: 'layout-empty',
@@ -884,7 +899,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.LAYOUTS.LAYOUT_EMPTY',
             icon: 'circle',
             type: 'item',
-            url: 'ui/page-layouts/layout-empty'
+            url: 'ui/page-layouts/layout-empty',
           },
           {
             id: 'layout-blank',
@@ -892,11 +907,11 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.UI.LAYOUTS.LAYOUT_BLANK',
             icon: 'circle',
             type: 'item',
-            url: 'ui/page-layouts/layout-blank'
-          }
-        ]
-      }
-    ]
+            url: 'ui/page-layouts/layout-blank',
+          },
+        ],
+      },
+    ],
   },
   // Forms & Tables
   {
@@ -919,7 +934,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.INPUT',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/input'
+            url: 'forms/form-elements/input',
           },
           {
             id: 'form-elements-inputgroups',
@@ -927,7 +942,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.INPUTGROUPS',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/input-groups'
+            url: 'forms/form-elements/input-groups',
           },
           {
             id: 'form-elements-inputmask',
@@ -935,7 +950,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.INPUTMASK',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/input-mask'
+            url: 'forms/form-elements/input-mask',
           },
           {
             id: 'form-elements-textarea',
@@ -943,7 +958,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.TEXTAREA',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/textarea'
+            url: 'forms/form-elements/textarea',
           },
           {
             id: 'form-elements-checkbox',
@@ -951,7 +966,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.CHECKBOX',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/checkbox'
+            url: 'forms/form-elements/checkbox',
           },
           {
             id: 'form-elements-radio',
@@ -959,7 +974,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.RADIO',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/radio'
+            url: 'forms/form-elements/radio',
           },
           {
             id: 'form-elements-switch',
@@ -967,7 +982,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.SWITCH',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/switch'
+            url: 'forms/form-elements/switch',
           },
           {
             id: 'form-elements-select',
@@ -975,7 +990,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.SELECT',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/select'
+            url: 'forms/form-elements/select',
           },
           {
             id: 'form-elements-numberInput',
@@ -983,7 +998,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.NUMBERINPUT',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/number-input'
+            url: 'forms/form-elements/number-input',
           },
           {
             id: 'form-elements-file-uploader',
@@ -991,7 +1006,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.FILEUPLOADER',
             icon: 'circle',
             type: 'item',
-            url: 'forms/form-elements/file-uploader'
+            url: 'forms/form-elements/file-uploader',
           },
           {
             id: 'form-elements-quill-editor',
@@ -999,7 +1014,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.QUILLEDITOR',
             icon: 'circle',
             type: 'item',
-            url: 'forms/form-elements/quill-editor'
+            url: 'forms/form-elements/quill-editor',
           },
           {
             id: 'form-elements-flatpicker',
@@ -1007,7 +1022,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.FLATPICKER',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/flatpickr'
+            url: 'forms/form-elements/flatpickr',
           },
           {
             id: 'form-elements-date-time-icker',
@@ -1015,9 +1030,9 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.FT.ELEMENT.DATETIMEPICKER',
             type: 'item',
             icon: 'circle',
-            url: 'forms/form-elements/date-time-picker'
-          }
-        ]
+            url: 'forms/form-elements/date-time-picker',
+          },
+        ],
       },
       {
         id: 'form-layouts',
@@ -1025,7 +1040,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.FT.LAYOUTS',
         type: 'item',
         icon: 'box',
-        url: 'forms/form-layout'
+        url: 'forms/form-layout',
       },
       {
         id: 'form-wizard',
@@ -1033,7 +1048,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.FT.WIZARD',
         type: 'item',
         icon: 'package',
-        url: 'forms/form-wizard'
+        url: 'forms/form-wizard',
       },
       {
         id: 'form-validation',
@@ -1041,7 +1056,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.FT.VALIDATION',
         type: 'item',
         icon: 'check-circle',
-        url: 'forms/form-validation'
+        url: 'forms/form-validation',
       },
       {
         id: 'form-repeater',
@@ -1049,7 +1064,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.FT.REPEATER',
         type: 'item',
         icon: 'rotate-cw',
-        url: 'forms/form-repeater'
+        url: 'forms/form-repeater',
       },
       {
         id: 'tables-table',
@@ -1057,7 +1072,7 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.FT.TABLE',
         type: 'item',
         icon: 'server',
-        url: 'tables/table'
+        url: 'tables/table',
       },
       {
         id: 'tables-datatable',
@@ -1065,9 +1080,9 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.FT.DATATABLES',
         type: 'item',
         icon: 'grid',
-        url: 'tables/datatables'
-      }
-    ]
+        url: 'tables/datatables',
+      },
+    ],
   },
   // Charts & Maps
   {
@@ -1086,7 +1101,7 @@ export const menu: CoreMenu[] = [
         badge: {
           title: '2',
           translate: 'MENU.CM.CHARTS.BADGE',
-          classes: 'badge-light-danger badge-pill'
+          classes: 'badge-light-danger badge-pill',
         },
         children: [
           {
@@ -1095,7 +1110,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.CM.CHARTS.APEX',
             type: 'item',
             icon: 'circle',
-            url: 'charts-and-maps/apex'
+            url: 'charts-and-maps/apex',
           },
           {
             id: 'chartJs',
@@ -1103,9 +1118,9 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.CM.CHARTS.CHARTJS',
             type: 'item',
             icon: 'circle',
-            url: 'charts-and-maps/chartjs'
-          }
-        ]
+            url: 'charts-and-maps/chartjs',
+          },
+        ],
       },
       {
         id: 'google-maps',
@@ -1113,9 +1128,9 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.CM.MAPS',
         icon: 'map',
         type: 'item',
-        url: 'charts-and-maps/google-maps'
-      }
-    ]
+        url: 'charts-and-maps/google-maps',
+      },
+    ],
   },
   // Others
   {
@@ -1138,7 +1153,7 @@ export const menu: CoreMenu[] = [
             translate: 'MENU.OTHERS.LEVELS.SECOND',
             icon: 'circle',
             type: 'item',
-            url: '#'
+            url: '#',
           },
           {
             id: 'second-level1',
@@ -1152,18 +1167,18 @@ export const menu: CoreMenu[] = [
                 title: 'Third Level',
                 translate: 'MENU.OTHERS.LEVELS.SECOND1.THIRD',
                 type: 'item',
-                url: '#'
+                url: '#',
               },
               {
                 id: 'third-level1',
                 title: 'Third Level',
                 translate: 'MENU.OTHERS.LEVELS.SECOND1.THIRD1',
                 type: 'item',
-                url: '#'
-              }
-            ]
-          }
-        ]
+                url: '#',
+              },
+            ],
+          },
+        ],
       },
       {
         id: 'disabled-menu',
@@ -1172,7 +1187,7 @@ export const menu: CoreMenu[] = [
         icon: 'eye-off',
         type: 'item',
         url: '#',
-        disabled: true
+        disabled: true,
       },
       {
         id: 'documentation',
@@ -1180,9 +1195,10 @@ export const menu: CoreMenu[] = [
         translate: 'MENU.OTHERS.DOCUMENTATION',
         icon: 'file-text',
         type: 'item',
-        url: 'https://pixinvent.com/demo/vuexy-angular-admin-dashboard-template/documentation',
+        url:
+          'https://pixinvent.com/demo/vuexy-angular-admin-dashboard-template/documentation',
         externalUrl: true,
-        openInNewTab: true
+        openInNewTab: true,
       },
       {
         id: 'raise-support',
@@ -1192,8 +1208,8 @@ export const menu: CoreMenu[] = [
         type: 'item',
         url: 'https://pixinvent.ticksy.com/',
         externalUrl: true,
-        openInNewTab: true
-      }
-    ]
-  }
-];
+        openInNewTab: true,
+      },
+    ],
+  },
+]

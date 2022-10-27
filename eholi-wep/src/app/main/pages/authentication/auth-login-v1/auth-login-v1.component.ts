@@ -1,26 +1,37 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from './../../../../auth/service/authentication.service'
+import { Component, OnInit, ViewEncapsulation } from '@angular/core'
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
-import { CoreConfigService } from '@core/services/config.service';
+import { CoreConfigService } from '@core/services/config.service'
+import { TranslateService } from '@ngx-translate/core'
+import { ToastrService } from 'ngx-toastr'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-auth-login-v1',
   templateUrl: './auth-login-v1.component.html',
   styleUrls: ['./auth-login-v1.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthLoginV1Component implements OnInit {
   //  Public
-  public coreConfig: any;
-  public loginForm: UntypedFormGroup;
-  public submitted = false;
-  public passwordTextType: boolean;
-
+  public coreConfig: any
+  public loginForm: UntypedFormGroup
+  public submitted = false
+  public passwordTextType: boolean
+  param = { value: 'world' }
   // Private
-  private _unsubscribeAll: Subject<any>;
+  private _unsubscribeAll: Subject<any>
+  returnUrl: any
+  loading = false
+  errorMessage!: string
 
   /**
    * Constructor
@@ -28,49 +39,101 @@ export class AuthLoginV1Component implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
-    this._unsubscribeAll = new Subject();
+  constructor(
+    private _coreConfigService: CoreConfigService,
+    private _formBuilder: UntypedFormBuilder,
+    public translate: TranslateService,
+    private _authService: AuthenticationService,
+    private _toastrService: ToastrService,
+    private _router: Router,
+    private _route: ActivatedRoute,
+  ) {
+    if (this._authService.currentUserValue) {
+      this._router.navigate(['/'])
+    }
+
+    translate.addLangs(['en', 'fr'])
+    translate.setDefaultLang('fr')
+
+    const browserLang = translate.getBrowserLang()
+    console.log(browserLang)
+
+    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en')
+
+    this._unsubscribeAll = new Subject()
 
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
         },
         menu: {
-          hidden: true
+          hidden: true,
         },
         footer: {
-          hidden: true
+          hidden: true,
         },
         customizer: false,
-        enableLocalStorage: false
-      }
-    };
+        enableLocalStorage: false,
+      },
+    }
   }
 
   // convenience getter for easy access to form fields
   get f() {
-    return this.loginForm.controls;
+    return this.loginForm.controls
   }
 
   /**
    * Toggle password
    */
   togglePasswordTextType() {
-    this.passwordTextType = !this.passwordTextType;
+    this.passwordTextType = !this.passwordTextType
   }
 
   /**
    * On Submit
    */
   onSubmit() {
-    this.submitted = true;
+    this.submitted = true
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-      return;
+      return
     }
+
+    this.loading = true
+    this._authService
+      .login(this.loginForm.value.username, this.loginForm.value.password)
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          this.loading = false
+          let m = ''
+          let t = ''
+          this.translate
+            .get('auth.login.ok.message')
+            .subscribe((text) => (m = text))
+          this.translate
+            .get('auth.login.ok.title')
+            .subscribe((text) => (t = text))
+          this._toastrService.show(m, t, {
+            toastClass: 'toast ngx-toastr',
+            closeButton: true,
+          })
+          this._toastrService.success(m, t, {
+            toastClass: 'toast ngx-toastr',
+            closeButton: true,
+          })
+          this._router.navigate([this.returnUrl])
+        },
+        error: (errors) => {
+          console.log(errors)
+          this.loading = false
+          this.errorMessage = errors
+        },
+      })
   }
 
   // Lifecycle Hooks
@@ -81,14 +144,19 @@ export class AuthLoginV1Component implements OnInit {
    */
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
+      username: ['', [Validators.required]],
+      password: ['', Validators.required],
+    })
+
+    this.returnUrl =
+      this._route.snapshot.queryParams['returnUrl'] || '/dashboard'
 
     // Subscribe to config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.coreConfig = config;
-    });
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.coreConfig = config
+      })
   }
 
   /**
@@ -96,7 +164,7 @@ export class AuthLoginV1Component implements OnInit {
    */
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();
+    this._unsubscribeAll.next()
+    this._unsubscribeAll.complete()
   }
 }

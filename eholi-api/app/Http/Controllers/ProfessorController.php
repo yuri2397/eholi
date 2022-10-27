@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfessorRequest;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,18 @@ class ProfessorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data = Professor::with($request->with);
+
+        if ($request->search_query) {
+            $data->where('first_name', 'like', '%' . $request->search_query . '%')
+                ->orWhere('last_name', 'like', '%' . $request->search_query . '%')
+                ->orWhere('reference', 'like', '%' . $request->search_query . '%')
+                ->orWhere('email', 'like', '%' . $request->search_query . '%');
+        }
+
+        return $data->simplePaginate($request->per_page, $request->columns, $request->page_name, $request->page);
     }
 
     /**
@@ -23,9 +33,9 @@ class ProfessorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProfessorRequest $request)
     {
-        //
+        $request->validate();
     }
 
     /**

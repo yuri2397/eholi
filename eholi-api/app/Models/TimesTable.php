@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\UUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TimesTable extends Model
+class TimesTable extends AbstractModel
 {
-    use HasFactory;
 }

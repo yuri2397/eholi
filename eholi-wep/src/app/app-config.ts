@@ -1,4 +1,4 @@
-import { CoreConfig } from '@core/types';
+import { CoreConfig } from '@core/types'
 
 /**
  * Default App Config
@@ -16,10 +16,10 @@ import { CoreConfig } from '@core/types';
 // prettier-ignore
 export const coreConfig: CoreConfig = {
   app: {
-    appName     : 'Vuexy',                                        // App Name
-    appTitle    : 'Vuexy - Angular 14+ Bootstrap Admin Template', // App Title
-    appLogoImage: 'assets/images/logo/logo.svg',                  // App Logo
-    appLanguage : 'en',                                           // App Default Language (en, fr, de, pt etc..)
+    appName     : 'Eholi',                                        // App Name
+    appTitle    : 'Eholi - Gérer votre établissement scolaire.', // App Title
+    appLogoImage: 'assets/images/logo/holi1.svg',                  // App Logo
+    appLanguage : 'fr',                                           // App Default Language (en, fr, de, pt etc..)
   },
   layout: {
     skin  : 'default',                        // default, dark, bordered, semi-dark
@@ -32,7 +32,7 @@ export const coreConfig: CoreConfig = {
     // ? For horizontal menu, navbar type will work for navMenu type
     navbar: {
       hidden               : false,           // Boolean: true, false
-      type                 : 'floating-nav',  // navbar-static-top, fixed-top, floating-nav, d-none
+      type                 : 'fixed-top',  // navbar-static-top, fixed-top, floating-nav, d-none
       background           : 'navbar-light',  // navbar-light. navbar-dark
       customBackgroundColor: true,            // Boolean: true, false
       backgroundColor      : ''               // BS color i.e bg-primary, bg-success
@@ -45,8 +45,8 @@ export const coreConfig: CoreConfig = {
       backgroundColor      : ''               // BS color i.e bg-primary, bg-success
     },
     enableLocalStorage: true,
-    customizer  : true,                       // Boolean: true, false (Enable theme customizer)
+    customizer  : false,                       // Boolean: true, false (Enable theme customizer)
     scrollTop   : true,                       // Boolean: true, false (Enable scroll to top button)
-    buyNow      : true                        // Boolean: true, false (Set false in real project, For demo purpose only)
+    buyNow      : false                        // Boolean: true, false (Set false in real project, For demo purpose only)
   }
 }

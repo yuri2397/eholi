@@ -11,7 +11,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Analytics Dashboard',
           icon: 'home',
-          link: '/dashboard/analytics'
+          link: '/dashboard/analytics',
         },
         {
           id: 1,
@@ -19,7 +19,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'eCommerce Dashboard',
           icon: 'home',
-          link: '/'
+          link: '/',
         },
         {
           id: 2,
@@ -27,7 +27,7 @@ export class SearchFakeData {
           isBookmarked: true,
           title: 'Email',
           icon: 'mail',
-          link: '/apps/email'
+          link: '/apps/email',
         },
         {
           id: 3,
@@ -35,7 +35,7 @@ export class SearchFakeData {
           isBookmarked: true,
           title: 'Chat',
           icon: 'message-square',
-          link: '/apps/chat'
+          link: '/apps/chat',
         },
         {
           id: 4,
@@ -43,7 +43,7 @@ export class SearchFakeData {
           isBookmarked: true,
           title: 'Todo',
           icon: 'check-square',
-          link: '/apps/todo'
+          link: '/apps/todo',
         },
         {
           id: 5,
@@ -51,7 +51,7 @@ export class SearchFakeData {
           isBookmarked: true,
           title: 'Calendar',
           icon: 'calendar',
-          link: '/apps/calendar'
+          link: '/apps/calendar',
         },
         {
           id: 6,
@@ -59,7 +59,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Invoice List',
           icon: 'list',
-          link: '/apps/invoice/list'
+          link: '/apps/invoice/list',
         },
         {
           id: 7,
@@ -67,7 +67,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Invoice Preview',
           icon: 'file-text',
-          link: '/apps/invoice/preview/4987'
+          link: '/apps/invoice/preview/4987',
         },
         {
           id: 8,
@@ -75,7 +75,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Invoice Edit',
           icon: 'edit',
-          link: '/apps/invoice/edit/4987'
+          link: '/apps/invoice/edit/4987',
         },
         {
           id: 9,
@@ -83,7 +83,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Invoice Add',
           icon: 'plus',
-          link: '/apps/invoice/add'
+          link: '/apps/invoice/add',
         },
         {
           id: 10,
@@ -91,7 +91,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Shop Ecommerce',
           icon: 'shopping-cart',
-          link: '/apps/e-commerce/shop'
+          link: '/apps/e-commerce/shop',
         },
         {
           id: 11,
@@ -99,7 +99,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Product Detail',
           icon: 'circle',
-          link: '/apps/e-commerce/details/27'
+          link: '/apps/e-commerce/details/27',
         },
         {
           id: 12,
@@ -107,7 +107,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Wish List',
           icon: 'heart',
-          link: '/apps/e-commerce/wishlist'
+          link: '/apps/e-commerce/wishlist',
         },
         {
           id: 13,
@@ -115,7 +115,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Checkout',
           icon: 'credit-card',
-          link: '/apps/e-commerce/checkout'
+          link: '/apps/e-commerce/checkout',
         },
         {
           id: 14,
@@ -123,7 +123,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'User List',
           icon: 'user',
-          link: '/apps/user/user-list'
+          link: '/apps/user/user-list',
         },
         {
           id: 15,
@@ -131,7 +131,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'User View',
           icon: 'user',
-          link: '/apps/user/user-view/2'
+          link: '/apps/user/user-view/2',
         },
         {
           id: 16,
@@ -139,7 +139,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'User Edit',
           icon: 'user',
-          link: '/apps/user/user-edit/2'
+          link: '/apps/user/user-edit/2',
         },
         {
           id: 17,
@@ -147,7 +147,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Login v1 Page',
           icon: 'user-plus',
-          link: '/pages/authentication/login-v1'
+          link: '/pages/authentication/login-v1',
         },
         {
           id: 18,
@@ -155,7 +155,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Login v2 Page',
           icon: 'user-plus',
-          link: '/pages/authentication/login-v2'
+          link: '/pages/authentication/login-v2',
         },
         {
           id: 19,
@@ -163,7 +163,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Register v1 Page',
           icon: 'user-plus',
-          link: '/pages/authentication/register-v1'
+          link: '/pages/authentication/register-v1',
         },
         {
           id: 20,
@@ -171,7 +171,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Register v2 Page',
           icon: 'user-plus',
-          link: '/pages/authentication/register-v2'
+          link: '/pages/authentication/register-v2',
         },
         {
           id: 21,
@@ -179,7 +179,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Forgot Password v1 Page',
           icon: 'trending-up',
-          link: '/pages/authentication/forgot-password-v1'
+          link: '/pages/authentication/forgot-password',
         },
         {
           id: 22,
@@ -187,7 +187,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Forgot Password v2 Page',
           icon: 'trending-up',
-          link: '/pages/authentication/forgot-password-v2'
+          link: '/pages/authentication/forgot-password-v2',
         },
         {
           id: 23,
@@ -195,7 +195,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Reset Password v1 Page',
           icon: 'trending-up',
-          link: '/pages/authentication/reset-password-v1'
+          link: '/pages/authentication/reset-password-v1',
         },
         {
           id: 24,
@@ -203,7 +203,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Lock Screen',
           icon: 'trending-up',
-          link: '/pages/authentication/lock-screen'
+          link: '/pages/authentication/lock-screen',
         },
         {
           id: 25,
@@ -211,7 +211,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Account Settings',
           icon: 'settings',
-          link: '/pages/account-settings'
+          link: '/pages/account-settings',
         },
         {
           id: 26,
@@ -220,7 +220,7 @@ export class SearchFakeData {
           title: 'Profile Page',
           icon: 'users',
           link: '/pages/profile',
-          collapsed: true
+          collapsed: true,
         },
         {
           id: 27,
@@ -228,7 +228,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'FAQ Page',
           icon: 'zap',
-          link: '/pages/faq'
+          link: '/pages/faq',
         },
         {
           id: 28,
@@ -236,7 +236,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Knowledge Base Page',
           icon: 'align-left',
-          link: '/pages/knowledge-base'
+          link: '/pages/knowledge-base',
         },
 
         {
@@ -245,7 +245,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Pricing',
           icon: 'dollar-sign',
-          link: '/pages/pricing'
+          link: '/pages/pricing',
         },
 
         {
@@ -254,7 +254,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Blog List',
           icon: 'list',
-          link: '/pages/blog-list'
+          link: '/pages/blog-list',
         },
         {
           id: 31,
@@ -262,7 +262,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Blog Details',
           icon: 'file-text',
-          link: '/pages/blog-details/1'
+          link: '/pages/blog-details/1',
         },
         {
           id: 32,
@@ -270,7 +270,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Blog Edit',
           icon: 'edit',
-          link: '/pages/blog-edit'
+          link: '/pages/blog-edit',
         },
 
         {
@@ -279,7 +279,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Coming Soon Page',
           icon: 'watch',
-          link: '/miscellaneous/coming-soon'
+          link: '/miscellaneous/coming-soon',
         },
 
         {
@@ -288,7 +288,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Not Authorized Page',
           icon: 'user-x',
-          link: '/miscellaneous/not-authorized'
+          link: '/miscellaneous/not-authorized',
         },
         {
           id: 35,
@@ -296,7 +296,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Maintenance Page',
           icon: 'aperture',
-          link: '/miscellaneous/maintenance'
+          link: '/miscellaneous/maintenance',
         },
         {
           id: 36,
@@ -304,7 +304,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Error',
           icon: 'alert-triangle',
-          link: '/miscellaneous/error'
+          link: '/miscellaneous/error',
         },
         {
           id: 37,
@@ -312,7 +312,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Typography',
           icon: 'type',
-          link: 'ui/content/typography'
+          link: 'ui/content/typography',
         },
         {
           id: 38,
@@ -320,7 +320,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Colors',
           icon: 'feather',
-          link: '/ui/colors'
+          link: '/ui/colors',
         },
         {
           id: 39,
@@ -328,7 +328,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Feather Icons',
           icon: 'feather',
-          link: '/ui/icons/feather'
+          link: '/ui/icons/feather',
         },
         {
           id: 40,
@@ -336,7 +336,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Card Basic',
           icon: 'square',
-          link: '/ui/card/card-basic'
+          link: '/ui/card/card-basic',
         },
         {
           id: 41,
@@ -344,7 +344,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Card Advance',
           icon: 'tablet',
-          link: '/ui/card/advance'
+          link: '/ui/card/advance',
         },
         {
           id: 42,
@@ -352,7 +352,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Card Statistics',
           icon: 'tablet',
-          link: '/ui/card/statistics'
+          link: '/ui/card/statistics',
         },
         {
           id: 43,
@@ -360,7 +360,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Card Analytics',
           icon: 'bar-chart-2',
-          link: '/ui/card/analytics'
+          link: '/ui/card/analytics',
         },
         {
           id: 44,
@@ -368,7 +368,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Card Actions',
           icon: 'air-play',
-          link: '/ui/card/actions'
+          link: '/ui/card/actions',
         },
         {
           id: 45,
@@ -376,7 +376,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Alerts',
           icon: 'info',
-          link: '/components/alerts'
+          link: '/components/alerts',
         },
         {
           id: 46,
@@ -384,7 +384,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Ratings',
           icon: 'star',
-          link: '/components/ratings'
+          link: '/components/ratings',
         },
         {
           id: 47,
@@ -392,7 +392,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Avatar',
           icon: 'user',
-          link: '/components/avatar'
+          link: '/components/avatar',
         },
         {
           id: 48,
@@ -400,7 +400,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Badges',
           icon: 'circle',
-          link: '/components/badges'
+          link: '/components/badges',
         },
         {
           id: 49,
@@ -408,7 +408,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Breadcrumbs',
           icon: 'more-horizontal',
-          link: '/components/breadcrumbs'
+          link: '/components/breadcrumbs',
         },
         {
           id: 50,
@@ -416,7 +416,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Buttons',
           icon: 'inbox',
-          link: '/components/buttons'
+          link: '/components/buttons',
         },
         {
           id: 51,
@@ -424,7 +424,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Carousel',
           icon: 'map',
-          link: '/components/carousel'
+          link: '/components/carousel',
         },
         {
           id: 52,
@@ -432,7 +432,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Collapse',
           icon: 'minimize',
-          link: '/components/collapse'
+          link: '/components/collapse',
         },
         {
           id: 53,
@@ -440,7 +440,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Divider',
           icon: 'minus',
-          link: '/components/divider'
+          link: '/components/divider',
         },
         {
           id: 54,
@@ -448,7 +448,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Dropdowns',
           icon: 'inbox',
-          link: '/components/dropdowns'
+          link: '/components/dropdowns',
         },
         {
           id: 55,
@@ -456,7 +456,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'List Group',
           icon: 'layers',
-          link: '/components/list-group'
+          link: '/components/list-group',
         },
         {
           id: 56,
@@ -464,7 +464,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Media Objects',
           icon: 'image',
-          link: '/components/media-objects'
+          link: '/components/media-objects',
         },
         {
           id: 57,
@@ -472,7 +472,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Modals',
           icon: 'maximize-2',
-          link: '/components/modals'
+          link: '/components/modals',
         },
         {
           id: 58,
@@ -480,7 +480,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Navs',
           icon: 'more-vertical',
-          link: '/components/navs'
+          link: '/components/navs',
         },
         {
           id: 59,
@@ -488,7 +488,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Pagination',
           icon: 'chevrons-right',
-          link: '/components/pagination'
+          link: '/components/pagination',
         },
         {
           id: 60,
@@ -496,7 +496,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Pill Badges',
           icon: 'circle',
-          link: '/components/pill-badges'
+          link: '/components/pill-badges',
         },
         {
           id: 61,
@@ -504,7 +504,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Pills Component',
           icon: 'toggle-right',
-          link: '/components/pills'
+          link: '/components/pills',
         },
         {
           id: 62,
@@ -512,7 +512,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Popovers',
           icon: 'message-circle',
-          link: '/components/popovers'
+          link: '/components/popovers',
         },
         {
           id: 63,
@@ -520,7 +520,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Progress',
           icon: 'server',
-          link: '/components/progress'
+          link: '/components/progress',
         },
         {
           id: 64,
@@ -528,7 +528,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Spinner',
           icon: 'sun',
-          link: '/components/spinner'
+          link: '/components/spinner',
         },
         {
           id: 65,
@@ -536,7 +536,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Tabs',
           icon: 'server',
-          link: '/components/tabs'
+          link: '/components/tabs',
         },
         {
           id: 66,
@@ -544,7 +544,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Timeline',
           icon: 'more-vertical',
-          link: '/components/timeline'
+          link: '/components/timeline',
         },
         {
           id: 67,
@@ -552,7 +552,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Toasts',
           icon: 'triangle',
-          link: '/components/toasts'
+          link: '/components/toasts',
         },
         {
           id: 68,
@@ -560,7 +560,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Tooltips',
           icon: 'message-circle',
-          link: '/components/tooltips'
+          link: '/components/tooltips',
         },
         {
           id: 69,
@@ -568,7 +568,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Sweet Alerts',
           icon: 'alert-triangle',
-          link: '/extensions/sweet-alerts'
+          link: '/extensions/sweet-alerts',
         },
         {
           id: 70,
@@ -576,7 +576,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'BlockUI',
           icon: 'loader',
-          link: '/extensions/blockui'
+          link: '/extensions/blockui',
         },
         {
           id: 71,
@@ -584,7 +584,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Toastr',
           icon: 'credit-card',
-          link: '/extensions/toastr'
+          link: '/extensions/toastr',
         },
         {
           id: 72,
@@ -592,7 +592,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Slider',
           icon: 'sliders',
-          link: '/extensions/noui-slider'
+          link: '/extensions/noui-slider',
         },
         {
           id: 73,
@@ -600,7 +600,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Drag & Drop',
           icon: 'move',
-          link: '/extensions/drag-drop'
+          link: '/extensions/drag-drop',
         },
         {
           id: 74,
@@ -608,7 +608,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Tour',
           icon: 'airplay',
-          link: '/extensions/tour'
+          link: '/extensions/tour',
         },
         {
           id: 75,
@@ -616,7 +616,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Clipboard',
           icon: 'clipboard',
-          link: '/extensions/clipboard'
+          link: '/extensions/clipboard',
         },
         {
           id: 76,
@@ -624,7 +624,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Media Player',
           icon: 'film',
-          link: '/extensions/media-player'
+          link: '/extensions/media-player',
         },
         {
           id: 77,
@@ -632,7 +632,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Context Menu',
           icon: 'menu',
-          link: '/extensions/context-menu'
+          link: '/extensions/context-menu',
         },
         {
           id: 78,
@@ -640,7 +640,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Swiper',
           icon: 'smartphone',
-          link: '/extensions/swiper'
+          link: '/extensions/swiper',
         },
         {
           id: 79,
@@ -648,7 +648,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Tree View',
           icon: 'star',
-          link: '/extensions/tree-view'
+          link: '/extensions/tree-view',
         },
         {
           id: 80,
@@ -656,7 +656,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'I18n',
           icon: 'globe',
-          link: '/extensions/i18n'
+          link: '/extensions/i18n',
         },
         {
           id: 81,
@@ -664,7 +664,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Input',
           icon: 'server',
-          link: '/forms/form-elements/input'
+          link: '/forms/form-elements/input',
         },
         {
           id: 82,
@@ -672,7 +672,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Input Group',
           icon: 'package',
-          link: '/forms/form-elements/input-groups'
+          link: '/forms/form-elements/input-groups',
         },
         {
           id: 83,
@@ -680,7 +680,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Input Mask',
           icon: 'copy',
-          link: '/forms/form-elements/input-mask'
+          link: '/forms/form-elements/input-mask',
         },
         {
           id: 84,
@@ -688,7 +688,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Textarea',
           icon: 'edit-2',
-          link: '/forms/form-elements/textarea'
+          link: '/forms/form-elements/textarea',
         },
         {
           id: 85,
@@ -696,7 +696,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Checkbox',
           icon: 'check-square',
-          link: '/forms/form-elements/checkbox'
+          link: '/forms/form-elements/checkbox',
         },
         {
           id: 86,
@@ -704,7 +704,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Radio',
           icon: 'stop-circle',
-          link: '/forms/form-elements/radio'
+          link: '/forms/form-elements/radio',
         },
         {
           id: 87,
@@ -712,7 +712,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Switch',
           icon: 'toggle-left',
-          link: '/forms/form-elements/switch'
+          link: '/forms/form-elements/switch',
         },
         {
           id: 88,
@@ -720,7 +720,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Select',
           icon: 'server',
-          link: '/forms/form-elements/select'
+          link: '/forms/form-elements/select',
         },
         {
           id: 89,
@@ -728,7 +728,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Number Input',
           icon: 'plus',
-          link: '/forms/form-elements/number-input'
+          link: '/forms/form-elements/number-input',
         },
         {
           id: 90,
@@ -736,7 +736,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'File Uploader',
           icon: 'upload',
-          link: '/forms/form-elements/file-uploader'
+          link: '/forms/form-elements/file-uploader',
         },
         {
           id: 91,
@@ -744,7 +744,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Quill Editor',
           icon: 'type',
-          link: '/forms/form-elements/quill-editor'
+          link: '/forms/form-elements/quill-editor',
         },
         {
           id: 108,
@@ -752,7 +752,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Flatpicker',
           icon: 'calendar',
-          link: '/forms/form-elements/flatpickr'
+          link: '/forms/form-elements/flatpickr',
         },
         {
           id: 92,
@@ -760,7 +760,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Date & Time Picker',
           icon: 'calendar',
-          link: '/forms/form-elements/date-time-picker'
+          link: '/forms/form-elements/date-time-picker',
         },
         {
           id: 93,
@@ -768,7 +768,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Form Layouts',
           icon: 'layout',
-          link: '/forms/form-layout'
+          link: '/forms/form-layout',
         },
         {
           id: 94,
@@ -776,7 +776,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Form Wizard',
           icon: 'sliders',
-          link: '/forms/form-wizard'
+          link: '/forms/form-wizard',
         },
         {
           id: 95,
@@ -784,7 +784,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Form Validation',
           icon: 'thumbs-up',
-          link: '/forms/form-validation'
+          link: '/forms/form-validation',
         },
         {
           id: 96,
@@ -792,7 +792,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Form Repeater',
           icon: 'rotate-cw',
-          link: '/forms/form-repeater'
+          link: '/forms/form-repeater',
         },
         {
           id: 97,
@@ -800,7 +800,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Table',
           icon: 'grid',
-          link: '/tables/table'
+          link: '/tables/table',
         },
         {
           id: 98,
@@ -808,7 +808,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'DataTables',
           icon: 'grid',
-          link: '/tables/datatables'
+          link: '/tables/datatables',
         },
         {
           id: 99,
@@ -816,7 +816,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Apex Charts',
           icon: 'bar-chart',
-          link: '/charts-and-maps/apex'
+          link: '/charts-and-maps/apex',
         },
         {
           id: 100,
@@ -824,7 +824,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'ChartJS',
           icon: 'activity',
-          link: '/charts-and-maps/chartjs'
+          link: '/charts-and-maps/chartjs',
         },
         {
           id: 101,
@@ -832,7 +832,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Google Maps',
           icon: 'map',
-          link: '/charts-and-maps/google-maps'
+          link: '/charts-and-maps/google-maps',
         },
         {
           id: 102,
@@ -840,7 +840,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Accordion',
           icon: 'minimize',
-          link: '/components/accordion'
+          link: '/components/accordion',
         },
         {
           id: 103,
@@ -848,7 +848,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Collapsed Menu',
           icon: 'layout',
-          link: '/ui/page-layouts/collapsed-menu'
+          link: '/ui/page-layouts/collapsed-menu',
         },
         {
           id: 104,
@@ -856,7 +856,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Boxed Layout',
           icon: 'layout',
-          link: '/ui/page-layouts/boxed-layout'
+          link: '/ui/page-layouts/boxed-layout',
         },
         {
           id: 105,
@@ -864,7 +864,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Without Menu',
           icon: 'layout',
-          link: '/ui/page-layouts/without-menu'
+          link: '/ui/page-layouts/without-menu',
         },
         {
           id: 106,
@@ -872,7 +872,7 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Layout Empty',
           icon: 'layout',
-          link: '/ui/page-layouts/layout-empty'
+          link: '/ui/page-layouts/layout-empty',
         },
         {
           id: 107,
@@ -880,9 +880,9 @@ export class SearchFakeData {
           isBookmarked: false,
           title: 'Layout Blank',
           icon: 'layout',
-          link: '/ui/page-layouts/layout-blank'
-        }
-      ]
+          link: '/ui/page-layouts/layout-blank',
+        },
+      ],
     },
     {
       groupTitle: 'Files',
@@ -892,27 +892,27 @@ export class SearchFakeData {
           title: 'Passport Image',
           by: 'Oliver Queen',
           size: '52kb',
-          file: 'assets/images/icons/jpg.png'
+          file: 'assets/images/icons/jpg.png',
         },
         {
           title: 'Parenting Guide',
           by: 'Alfred Pennyworth',
           size: '2.3mb',
-          file: 'assets/images/icons/doc.png'
+          file: 'assets/images/icons/doc.png',
         },
         {
           title: 'Class Notes',
           by: 'Barry Allen',
           size: '30kb',
-          file: 'assets/images/icons/doc.png'
+          file: 'assets/images/icons/doc.png',
         },
         {
           title: 'Class Attendance',
           by: 'Walter White',
           size: '52mb',
-          file: 'assets/images/icons/xls.png'
-        }
-      ]
+          file: 'assets/images/icons/xls.png',
+        },
+      ],
     },
     {
       groupTitle: 'Contacts',
@@ -922,27 +922,27 @@ export class SearchFakeData {
           title: 'Mia Davis',
           email: 'miadavis@teleworm.us',
           img: 'assets/images/portrait/small/avatar-s-8.jpg',
-          date: '01/03/2020'
+          date: '01/03/2020',
         },
         {
           title: 'Norris Carrière',
           email: 'NorrisCarriere@rhyta.com',
           img: 'assets/images/portrait/small/avatar-s-3.jpg',
-          date: '07/03/2020'
+          date: '07/03/2020',
         },
         {
           title: 'Charlotte Gordon',
           email: 'CharlotteGordon@jourrapide.com',
           img: 'assets/images/portrait/small/avatar-s-26.jpg',
-          date: '14/03/2020'
+          date: '14/03/2020',
         },
         {
           title: 'Robert Nash',
           email: 'RobertNash@dayrep.com',
           img: 'assets/images/portrait/small/avatar-s-25.jpg',
-          date: '21/03/2020'
-        }
-      ]
-    }
-  ];
+          date: '21/03/2020',
+        },
+      ],
+    },
+  ]
 }

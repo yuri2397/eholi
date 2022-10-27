@@ -12,9 +12,12 @@ class SchoolYearController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return SchoolYear::with($request->with ?? [])
+
+            ->orderBy($request->order_by ?? 'created_at', $request->order ?? 'DESC')
+            ->simplePaginate($request->per_page ?: null, $request->columns ?: '*', $request->page_name ?: null, $request->page ?: null);
     }
 
     /**

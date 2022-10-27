@@ -1,26 +1,30 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core'
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms'
 
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators'
+import { Subject } from 'rxjs'
 
-import { CoreConfigService } from '@core/services/config.service';
+import { CoreConfigService } from '@core/services/config.service'
 
 @Component({
-  selector: 'app-auth-forgot-password-v1',
+  selector: 'app-auth-forgot-password',
   templateUrl: './auth-forgot-password-v1.component.html',
   styleUrls: ['./auth-forgot-password-v1.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthForgotPasswordV1Component implements OnInit {
   // Public
-  public emailVar;
-  public coreConfig: any;
-  public forgotPasswordForm: UntypedFormGroup;
-  public submitted = false;
+  public emailVar
+  public coreConfig: any
+  public forgotPasswordForm: UntypedFormGroup
+  public submitted = false
 
   // Private
-  private _unsubscribeAll: Subject<any>;
+  private _unsubscribeAll: Subject<any>
 
   /**
    * Constructor
@@ -29,41 +33,44 @@ export class AuthForgotPasswordV1Component implements OnInit {
    * @param {FormBuilder} _formBuilder
    *
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
-    this._unsubscribeAll = new Subject();
+  constructor(
+    private _coreConfigService: CoreConfigService,
+    private _formBuilder: UntypedFormBuilder,
+  ) {
+    this._unsubscribeAll = new Subject()
 
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
         },
         footer: {
-          hidden: true
+          hidden: true,
         },
         menu: {
-          hidden: true
+          hidden: true,
         },
         customizer: false,
-        enableLocalStorage: false
-      }
-    };
+        enableLocalStorage: false,
+      },
+    }
   }
 
   // convenience getter for easy access to form fields
   get f() {
-    return this.forgotPasswordForm.controls;
+    return this.forgotPasswordForm.controls
   }
 
   /**
    * On Submit
    */
   onSubmit() {
-    this.submitted = true;
+    this.submitted = true
 
     // stop here if form is invalid
     if (this.forgotPasswordForm.invalid) {
-      return;
+      return
     }
   }
 
@@ -75,13 +82,15 @@ export class AuthForgotPasswordV1Component implements OnInit {
    */
   ngOnInit(): void {
     this.forgotPasswordForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
+      email: ['', [Validators.required, Validators.email]],
+    })
 
     // Subscribe to config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
-      this.coreConfig = config;
-    });
+    this._coreConfigService.config
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((config) => {
+        this.coreConfig = config
+      })
   }
 
   /**
@@ -89,7 +98,7 @@ export class AuthForgotPasswordV1Component implements OnInit {
    */
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions
-    this._unsubscribeAll.next();
-    this._unsubscribeAll.complete();
+    this._unsubscribeAll.next()
+    this._unsubscribeAll.complete()
   }
 }

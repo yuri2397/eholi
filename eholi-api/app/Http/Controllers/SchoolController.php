@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SchoolRequest;
 use App\Models\School;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,14 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return School::with($request->with ?: [])
+            ->where('name', 'LIKE', '%' . $request->search_query ?: '' . '%')
+            ->orWhere('reference', 'LIKE', '%' . $request->search_query ?: '' . '%')
+            ->orWhere('phone', 'LIKE', '%' . $request->search_query ?: '' . '%')
+            ->orWhere('email', 'LIKE', '%' . $request->search_query ?: '' . '%')
+            ->simplePaginate($request->per_page ?: null, $request->columns ?: '*', $request->page_name ?: null, $request->page ?: null);
     }
 
     /**
@@ -23,9 +29,9 @@ class SchoolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SchoolRequest $request)
     {
-        //
+        $request->validate();
     }
 
     /**
@@ -59,6 +65,5 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        //
     }
 }

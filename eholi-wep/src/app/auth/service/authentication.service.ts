@@ -1,47 +1,54 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 
-import { environment } from 'environments/environment';
-import { User, Role } from 'app/auth/models';
-import { ToastrService } from 'ngx-toastr';
+import { environment } from 'environments/environment'
+import { User, Role } from 'app/auth/models'
+import { ToastrService } from 'ngx-toastr'
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+  private _baseUrl!: string
+
   //public
-  public currentUser: Observable<User>;
+  public currentUser: Observable<User>
 
   //private
-  private currentUserSubject: BehaviorSubject<User>;
+  private currentUserSubject: BehaviorSubject<User>
 
   /**
    *
    * @param {HttpClient} _http
    * @param {ToastrService} _toastrService
    */
-  constructor(private _http: HttpClient, private _toastrService: ToastrService) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+  constructor(private _http: HttpClient) {
+    this._baseUrl = `${environment.api}users/`
+    this.currentUserSubject = new BehaviorSubject<User>(
+      JSON.parse(localStorage.getItem('currentUser')),
+    )
+    this.currentUser = this.currentUserSubject.asObservable()
   }
 
   // getter: currentUserValue
   public get currentUserValue(): User {
-    return this.currentUserSubject.value;
+    return this.currentUserSubject.value
   }
 
   /**
    *  Confirms if user is admin
    */
   get isAdmin() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Admin;
+    return this.currentUser && this.currentUserSubject.value.role === Role.Admin
   }
 
   /**
    *  Confirms if user is client
    */
   get isClient() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Client;
+    return (
+      this.currentUser && this.currentUserSubject.value.role === Role.Client
+    )
   }
 
   /**
@@ -51,34 +58,25 @@ export class AuthenticationService {
    * @param password
    * @returns user
    */
-  login(email: string, password: string) {
+  login(username: string, password: string) {
     return this._http
-      .post<any>(`${environment.apiUrl}/users/authenticate`, { email, password })
+      .post<any>(`${this._baseUrl}authenticate`, {
+        username: username,
+        password: password,
+      })
       .pipe(
-        map(user => {
+        map((user) => {
           // login successful if there's a jwt token in the response
           if (user && user.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
+            localStorage.setItem('currentUser', JSON.stringify(user))
 
-            // Display welcome toast!
-            setTimeout(() => {
-              this._toastrService.success(
-                'You have successfully logged in as an ' +
-                  user.role +
-                  ' user to Vuexy. Now you can start to explore. Enjoy! 🎉',
-                '👋 Welcome, ' + user.firstName + '!',
-                { toastClass: 'toast ngx-toastr', closeButton: true }
-              );
-            }, 2500);
-
-            // notify
-            this.currentUserSubject.next(user);
+            this.currentUserSubject.next(user)
           }
 
-          return user;
-        })
-      );
+          return user
+        }),
+      )
   }
 
   /**
@@ -87,8 +85,8 @@ export class AuthenticationService {
    */
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUser')
     // notify
-    this.currentUserSubject.next(null);
+    this.currentUserSubject.next(null)
   }
 }
