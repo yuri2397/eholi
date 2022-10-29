@@ -286,6 +286,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set the application page title
     this._title.setTitle(this.coreConfig.app.appTitle)
+
+    setTimeout(() => {
+      this._coreLoadingScreenService.hide()
+    }, 3000)
   }
 
   /**

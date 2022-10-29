@@ -13,6 +13,7 @@ import { CoreConfigService } from '@core/services/config.service'
 import { TranslateService } from '@ngx-translate/core'
 import { ToastrService, GlobalConfig } from 'ngx-toastr'
 import { ActivatedRoute, Router } from '@angular/router'
+import { CoreLoadingScreenService } from '@core/services/loading-screen.service'
 
 @Component({
   selector: 'app-auth-login-v1',
@@ -114,7 +115,14 @@ export class AuthLoginV1Component implements OnInit {
           })
 
           this._authService
-            .getCurrentUser({ 'with[]': ['owner', 'roles', 'permissions'] })
+            .getCurrentUser({
+              'with[]': [
+                'owner',
+                'roles',
+                'permissions',
+                'owner.school_user.school',
+              ],
+            })
             .subscribe({
               next: (user: any) => {
                 console.log(user)

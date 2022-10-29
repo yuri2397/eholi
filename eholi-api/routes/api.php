@@ -2,16 +2,17 @@
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\School;
+use App\Models\SchoolUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\SchoolYearController;
-use App\Models\School;
 use Spatie\Permission\Contracts\Role as ContractsRole;
 
 
@@ -59,4 +60,41 @@ Route::prefix('professors')->middleware('auth:api')->controller(ProfessorControl
 
     Route::post('create', 'create');
     Route::put('update/professor', 'update');
+});
+
+
+
+Route::any('tests', function () {
+    DB::beginTransaction();
+    try {
+        $admin = new Admin();
+        $admin->first_name = "Sophiatou";
+        $admin->last_name = "Mbathie";
+        $admin->email = "sophie.mbathie@holi.sn";
+        $admin->telephone = "786739908";
+        $admin->save();
+
+        $user = new User();
+        $user->username = 'sophie';
+        $user->password = Hash::make('password');
+        $user->owner()->associate($admin);
+        $user->save();
+
+        $role = Role::whereName('Super Admin')->first();
+        $user->assignRole($role);
+        $user->syncPermissions($role->permissions);
+
+        $school = School::first();
+
+        $schoolUser = new SchoolUser();
+        $schoolUser->user()->associate($admin);
+        $schoolUser->school_id = $school->id;
+        $schoolUser->save();
+
+        DB::commit();
+        return $schoolUser->load(['user', 'school']);
+    } catch (\Throwable $th) {
+        DB::rollBack();
+        return $th;
+    }
 });

@@ -57,6 +57,7 @@ const routes: Routes = [
   {
     path: 'authentication/forgot-password',
     component: AuthForgotPasswordV1Component,
+    canActivate: [LoginGuard],
   },
   // {
   //   path: 'authentication/forgot-password-v2',

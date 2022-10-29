@@ -47,6 +47,7 @@ const appRoutes: Routes = [
       import('./main/dashboard/dashboard.module').then(
         (m) => m.DashboardModule,
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'apps',
