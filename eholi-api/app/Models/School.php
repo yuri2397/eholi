@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class School extends AbstractModel
 {
+    public const BASE_REFERENCE = "es";
+
+    protected $fillable = ['reference', 'name', 'address', 'phone', 'email'];
+
+
     public function school_years()
     {
         return $this->hasMany(SchoolYear::class);

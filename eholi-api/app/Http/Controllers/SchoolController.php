@@ -31,7 +31,10 @@ class SchoolController extends Controller
      */
     public function store(SchoolRequest $request)
     {
-        $request->validate();
+        // $request->validate();
+        $request->merge(['reference' => School::BASE_REFERENCE . time()]);
+        $school = School::create($request->all());
+        return $school;
     }
 
     /**

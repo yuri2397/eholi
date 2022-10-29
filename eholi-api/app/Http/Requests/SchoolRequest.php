@@ -24,11 +24,11 @@ class SchoolRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
-            'address' => ['string'],
-            'email' => ['email'],
-            'phone' => ['string', 'regex:(77|78|75|70|76|33)[0-9]{7}$'],
-            'reference' => ['numeric']
+            'name' => 'required|string',
+            'address' => 'string',
+            'email' => 'email',
+            'phone' => 'string',
+            'reference' => 'numeric'
         ];
     }
 }

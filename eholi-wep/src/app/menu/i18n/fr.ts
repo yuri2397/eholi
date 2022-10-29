@@ -6,7 +6,7 @@ export const locale = {
         COLLAPSIBLE: 'Tableaux de bord',
         BADGE: '2',
         ANALYTICS: 'Analytique',
-        ECOMMERCE: 'commerce électronique'
+        ECOMMERCE: 'commerce électronique',
       },
       APPS: {
         SECTION: 'Applications et pages',
@@ -19,21 +19,21 @@ export const locale = {
           LIST: 'Lister',
           PREVIEW: 'Aperçu',
           EDIT: 'Éditer',
-          ADD: 'Ajouter'
+          ADD: 'Ajouter',
         },
         ECOMMERCE: {
           COLLAPSIBLE: 'commerce électronique',
           SHOP: 'Magasin',
           DETAIL: 'Des détails',
           WISHLIST: 'Liste de souhaits',
-          CHECKOUT: 'Vérifier'
+          CHECKOUT: 'Vérifier',
         },
         USER: {
           COLLAPSIBLE: 'Utilisateur',
           LIST: 'Lister',
           VIEW: 'Vue',
-          EDIT: 'Éditer'
-        }
+          EDIT: 'Éditer',
+        },
       },
       PAGES: {
         SECTION: 'Des pages',
@@ -46,7 +46,7 @@ export const locale = {
           FORGOTPASSWORD1: 'Mot de passe oublié V1',
           FORGOTPASSWORD2: 'Mot de passe oublié V2',
           RESETPASSWORD1: 'Réinitialiser le mot de passe V1',
-          RESETPASSWORD2: 'Réinitialiser le mot de passe V2'
+          RESETPASSWORD2: 'Réinitialiser le mot de passe V2',
         },
         ACCOUNTSETTINGS: 'Paramètres du compte',
         PROFILE: 'Profil',
@@ -57,7 +57,7 @@ export const locale = {
           COLLAPSIBLE: 'Blog',
           LIST: 'Lister',
           DETAILS: 'Des détails',
-          EDIT: 'Éditer'
+          EDIT: 'Éditer',
         },
         MAIL: {
           COLLAPSIBLE: 'Modèle de courrier',
@@ -66,15 +66,15 @@ export const locale = {
           VERIFY: 'Vérifier',
           DEACTIVATE: 'Désactiver',
           INVOICE: "Facture d'achat",
-          PROMOTIONAL: 'Promotionnel'
+          PROMOTIONAL: 'Promotionnel',
         },
         MISC: {
           COLLAPSIBLE: 'Divers',
           COMINGSOON: 'Arrive bientôt',
           NOTAUTH: 'Pas autorisé',
           MAINTENANCE: 'Maintenance',
-          ERROR: 'Erreur'
-        }
+          ERROR: 'Erreur',
+        },
       },
       UI: {
         SECTION: 'Interface utilisateur',
@@ -88,7 +88,7 @@ export const locale = {
           ADVANCE: 'Avance',
           STATISTICS: 'Statistiques',
           ANALYTICS: 'Analytique',
-          ACTIONS: 'Actions'
+          ACTIONS: 'Actions',
         },
         COMPONENTS: {
           COLLAPSIBLE: 'Composants',
@@ -115,7 +115,7 @@ export const locale = {
           TABS: 'Onglets',
           TIMELINE: 'Chronologie',
           TOASTS: 'Toasts',
-          TOOLTIPS: 'Info-bulles'
+          TOOLTIPS: 'Info-bulles',
         },
         EX: {
           COLLAPSIBLE: 'Extension',
@@ -130,7 +130,7 @@ export const locale = {
           CONTEXTMENU: 'Menu contextuel',
           SWIPER: 'Swiper',
           TREEVIEW: 'Vue arborescente',
-          I18N: 'I18n'
+          I18N: 'I18n',
         },
         LAYOUTS: {
           COLLAPSIBLE: 'Mises en page',
@@ -138,8 +138,8 @@ export const locale = {
           BOXED_LAYOUT: 'Disposition encadrée',
           WITHOUT_MENU: 'Sans menu',
           LAYOUT_EMPTY: 'Disposition vide',
-          LAYOUT_BLANK: 'Mise en page vierge'
-        }
+          LAYOUT_BLANK: 'Mise en page vierge',
+        },
       },
       FT: {
         SECTION: 'Formulaires et tableaux',
@@ -157,14 +157,14 @@ export const locale = {
           FILEUPLOADER: 'Téléchargeur de fichiers',
           QUILLEDITOR: 'Éditeur de plumes',
           FLATPICKER: 'Flatpicker',
-          DATETIMEPICKER: "Sélecteur de date et d'heure"
+          DATETIMEPICKER: "Sélecteur de date et d'heure",
         },
         LAYOUTS: 'Dispositions de formulaire',
         WIZARD: 'Assistant de formulaire',
         VALIDATION: 'Validations de formulaire',
         REPEATER: 'Répéteur de formulaire',
         TABLE: 'Table',
-        DATATABLES: 'DataTables'
+        DATATABLES: 'DataTables',
       },
       CM: {
         SECTION: 'Graphiques et cartes',
@@ -172,9 +172,9 @@ export const locale = {
           COLLAPSIBLE: 'Graphiques',
           BADGE: '2',
           APEX: 'Sommet',
-          CHARTJS: 'GraphiqueJS'
+          CHARTJS: 'GraphiqueJS',
         },
-        MAPS: 'Google Maps'
+        MAPS: 'Google Maps',
       },
       OTHERS: {
         SECTION: 'Autres',
@@ -184,13 +184,13 @@ export const locale = {
           SECOND1: {
             COLLAPSIBLE: 'Deuxième niveau',
             THIRD: 'Troisième niveau',
-            THIRD1: 'Troisième niveau'
-          }
+            THIRD1: 'Troisième niveau',
+          },
         },
         DISABLED: 'Menu désactivé',
         DOCUMENTATION: 'Documentation',
-        SUPPORT: 'Augmenter le soutien'
-      }
-    }
-  }
-};
+        SUPPORT: 'Augmenter le soutien',
+      },
+    },
+  },
+}

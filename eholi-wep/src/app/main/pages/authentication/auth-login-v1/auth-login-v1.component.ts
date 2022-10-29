@@ -7,11 +7,11 @@ import {
 } from '@angular/forms'
 
 import { first, takeUntil } from 'rxjs/operators'
-import { Subject } from 'rxjs'
+import { pipe, Subject } from 'rxjs'
 
 import { CoreConfigService } from '@core/services/config.service'
 import { TranslateService } from '@ngx-translate/core'
-import { ToastrService } from 'ngx-toastr'
+import { ToastrService, GlobalConfig } from 'ngx-toastr'
 import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
@@ -48,18 +48,6 @@ export class AuthLoginV1Component implements OnInit {
     private _router: Router,
     private _route: ActivatedRoute,
   ) {
-    if (this._authService.currentUserValue) {
-      this._router.navigate(['/'])
-    }
-
-    translate.addLangs(['en', 'fr'])
-    translate.setDefaultLang('fr')
-
-    const browserLang = translate.getBrowserLang()
-    console.log(browserLang)
-
-    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en')
-
     this._unsubscribeAll = new Subject()
 
     // Configure the layout
@@ -109,6 +97,8 @@ export class AuthLoginV1Component implements OnInit {
       .pipe(first())
       .subscribe({
         next: (response) => {
+          console.log(response)
+
           this.loading = false
           let m = ''
           let t = ''
@@ -118,15 +108,19 @@ export class AuthLoginV1Component implements OnInit {
           this.translate
             .get('auth.login.ok.title')
             .subscribe((text) => (t = text))
-          this._toastrService.show(m, t, {
+          this._toastrService.success(`👋 ${m}`, t, {
             toastClass: 'toast ngx-toastr',
             closeButton: true,
           })
-          this._toastrService.success(m, t, {
-            toastClass: 'toast ngx-toastr',
-            closeButton: true,
-          })
-          this._router.navigate([this.returnUrl])
+
+          this._authService
+            .getCurrentUser({ 'with[]': ['owner', 'roles', 'permissions'] })
+            .subscribe({
+              next: (user: any) => {
+                console.log(user)
+                this._router.navigate([this.returnUrl])
+              },
+            })
         },
         error: (errors) => {
           console.log(errors)
@@ -143,6 +137,8 @@ export class AuthLoginV1Component implements OnInit {
    * On init
    */
   ngOnInit(): void {
+    console.log('LOGIN PAGE')
+
     this.loginForm = this._formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', Validators.required],

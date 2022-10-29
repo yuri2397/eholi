@@ -7,14 +7,9 @@
   <!-- itemContent template -->
   <ng-template #itemContent>
     <span [data-feather]="item.icon" *ngIf="item.icon"></span>
-    <span class="menu-title text-truncate" [translate]="item.translate">{{ item.title }}</span>
-    <span
-      class="badge ml-auto mr-1"
-      *ngIf="item.badge"
-      [translate]="item.badge.translate"
-      [ngClass]="item.badge.classes"
-    >
-      {{ item.badge.title }}
+    <span class="menu-title text-truncate">{{ item.title|translate }}</span>
+    <span class="badge ml-auto mr-1" *ngIf="item.badge" [ngClass]="item.badge.classes">
+      {{ item.badge.title|translate }}
     </span>
   </ng-template>
 
@@ -22,28 +17,17 @@
   <ul class="menu-content">
     <ng-container *ngFor="let item of item.children">
       <!-- item -->
-      <li
-        core-menu-vertical-item
-        [item]="item"
-        *ngIf="
+      <li core-menu-vertical-item [item]="item" *ngIf="
           item.type == 'item' && (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-        "
-        [ngClass]="{ disabled: item.disabled === true }"
-        [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
-        [routerLinkActiveOptions]="{ exact: item.exactMatch || false }"
-      >
+        " [ngClass]="{ disabled: item.disabled === true }" [routerLinkActive]="!item.openInNewTab ? 'active' : ''"
+        [routerLinkActiveOptions]="{ exact: item.exactMatch || false }">
         <span [routerLink]="item.openInNewTab ? [] : [item.url]" class="d-none"></span>
       </li>
       <!-- collapsible -->
-      <li
-        core-menu-vertical-collapsible
-        *ngIf="
+      <li core-menu-vertical-collapsible *ngIf="
           item.type == 'collapsible' &&
           (item.role ? item.role.includes(currentUser.role) : false || item.role == undefined)
-        "
-        [item]="item"
-        class="nav-item has-sub"
-      ></li>
+        " [item]="item" class="nav-item has-sub"></li>
     </ng-container>
   </ul>
 </ng-container>

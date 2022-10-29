@@ -23,7 +23,7 @@ export const coreConfig: CoreConfig = {
   },
   layout: {
     skin  : 'default',                        // default, dark, bordered, semi-dark
-    type  : 'vertical',                       // vertical, horizontal
+    type  : 'horizontal',                       // vertical, horizontal
     animation : 'fadeIn',                     // fadeInLeft, zoomIn , fadeIn, none
     menu : {
       hidden               : false,           // Boolean: true, false
@@ -45,7 +45,7 @@ export const coreConfig: CoreConfig = {
       backgroundColor      : ''               // BS color i.e bg-primary, bg-success
     },
     enableLocalStorage: true,
-    customizer  : false,                       // Boolean: true, false (Enable theme customizer)
+    customizer  : true,                       // Boolean: true, false (Enable theme customizer)
     scrollTop   : true,                       // Boolean: true, false (Enable scroll to top button)
     buyNow      : false                        // Boolean: true, false (Set false in real project, For demo purpose only)
   }

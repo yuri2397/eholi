@@ -1,17 +1,22 @@
-import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core'
+import { DOCUMENT } from '@angular/common'
 
-import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/animations';
-import { NavigationEnd, Router } from '@angular/router';
+import {
+  animate,
+  AnimationBuilder,
+  AnimationPlayer,
+  style,
+} from '@angular/animations'
+import { NavigationEnd, Router } from '@angular/router'
 
-import { filter, take } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CoreLoadingScreenService {
-  loadingScreenEl: any;
-  animationPlayer: AnimationPlayer;
+  loadingScreenEl: any
+  animationPlayer: AnimationPlayer
 
   /**
    * Constructor
@@ -23,10 +28,10 @@ export class CoreLoadingScreenService {
   constructor(
     @Inject(DOCUMENT) private _document: any,
     private _router: Router,
-    private _animationBuilder: AnimationBuilder
+    private _animationBuilder: AnimationBuilder,
   ) {
     // Initialize
-    this._init();
+    this._init()
   }
 
   // Private methods
@@ -39,21 +44,21 @@ export class CoreLoadingScreenService {
    */
   private _init(): void {
     // Get the loading screen element
-    this.loadingScreenEl = this._document.body.querySelector('#loading-bg');
+    this.loadingScreenEl = this._document.body.querySelector('#loading-bg')
 
     // If loading screen element
     if (this.loadingScreenEl) {
       // Hide it on the first NavigationEnd event
       this._router.events
         .pipe(
-          filter(event => event instanceof NavigationEnd),
-          take(1)
+          filter((event) => event instanceof NavigationEnd),
+          take(1),
         )
         .subscribe(() => {
           setTimeout(() => {
-            this.hide();
-          });
-        });
+            this.hide()
+          })
+        })
     }
   }
 
@@ -63,20 +68,20 @@ export class CoreLoadingScreenService {
   /**
    * Show the loading screen
    */
-  show(): void {
+  show(timings?: number): void {
     this.animationPlayer = this._animationBuilder
       .build([
         style({
           opacity: '0',
-          zIndex: '99999'
+          zIndex: '99999',
         }),
-        animate('250ms ease', style({ opacity: '1' }))
+        animate(timings ?? 200 + 'ms ease', style({ opacity: '1' })),
       ])
-      .create(this.loadingScreenEl);
+      .create(this.loadingScreenEl)
 
     setTimeout(() => {
-      this.animationPlayer.play();
-    }, 0);
+      this.animationPlayer.play()
+    }, 0)
   }
 
   /**
@@ -90,15 +95,15 @@ export class CoreLoadingScreenService {
           '250ms ease',
           style({
             opacity: '0',
-            zIndex: '-10'
-          })
-        )
+            zIndex: '-10',
+          }),
+        ),
       ])
-      .create(this.loadingScreenEl);
+      .create(this.loadingScreenEl)
 
     setTimeout(() => {
-      this.loadingScreenEl.remove();
-      this.animationPlayer.play();
-    }, 0);
+      this.loadingScreenEl.remove()
+      this.animationPlayer.play()
+    }, 0)
   }
 }
