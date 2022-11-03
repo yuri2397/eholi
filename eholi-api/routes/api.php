@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\AssociateCustomerToSchool;
+use App\Events\AssociateUserTo;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\School;
@@ -13,6 +15,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\SchoolYearController;
+use App\Http\Controllers\StudentController;
+use App\Models\SchoolStudent;
+use App\Models\SchoolYear;
+use App\Models\Student;
+use App\Models\StudentSubscribe;
 use Spatie\Permission\Contracts\Role as ContractsRole;
 
 
@@ -62,39 +69,68 @@ Route::prefix('professors')->middleware('auth:api')->controller(ProfessorControl
     Route::put('update/professor', 'update');
 });
 
+/**
+ * StudentController
+ */
 
+Route::prefix('students')->middleware('auth:api')->controller(StudentController::class)->group(function () {
+    Route::get('', 'index');
+    Route::get('dashboard', 'dashboard');
+    Route::get('show/{student}', 'show');
 
-Route::any('tests', function () {
-    DB::beginTransaction();
-    try {
-        $admin = new Admin();
-        $admin->first_name = "Sophiatou";
-        $admin->last_name = "Mbathie";
-        $admin->email = "sophie.mbathie@holi.sn";
-        $admin->telephone = "786739908";
-        $admin->save();
-
-        $user = new User();
-        $user->username = 'sophie';
-        $user->password = Hash::make('password');
-        $user->owner()->associate($admin);
-        $user->save();
-
-        $role = Role::whereName('Super Admin')->first();
-        $user->assignRole($role);
-        $user->syncPermissions($role->permissions);
-
-        $school = School::first();
-
-        $schoolUser = new SchoolUser();
-        $schoolUser->user()->associate($admin);
-        $schoolUser->school_id = $school->id;
-        $schoolUser->save();
-
-        DB::commit();
-        return $schoolUser->load(['user', 'school']);
-    } catch (\Throwable $th) {
-        DB::rollBack();
-        return $th;
-    }
+    Route::post('store', 'store');
+    Route::put('update/{student}', 'update');
 });
+
+
+Route::any('tests', function (Request $request) {
+
+    $school = school_user();
+    // foreach (Student::all() as $value) {
+    //     event(new AssociateCustomerToSchool($school, $value));
+    // }
+
+    // return SchoolStudent::all();
+
+    // $sy = new SchoolYear();
+    // $sy->start_at = now()->subYear();
+    // $sy->end_at = now();
+    // $sy->status = SchoolYear::INACTIVE;
+    // $sy->school_id = $school->id;
+    // $sy->save();
+
+    return school_year(true);
+
+    // DB::beginTransaction();
+    // try {
+    //     $admin = new Admin();
+    //     $admin->first_name = "Sophiatou";
+    //     $admin->last_name = "Mbathie";
+    //     $admin->email = "sophie.mbathie@holi.sn";
+    //     $admin->telephone = "786739908";
+    //     $admin->save();
+
+    //     $user = new User();
+    //     $user->username = 'sophie';
+    //     $user->password = Hash::make('password');
+    //     $user->owner()->associate($admin);
+    //     $user->save();
+
+    //     $role = Role::whereName('Super Admin')->first();
+    //     $user->assignRole($role);
+    //     $user->syncPermissions($role->permissions);
+
+    //     $school = School::first();
+
+    //     $schoolUser = new SchoolUser();
+    //     $schoolUser->user()->associate($admin);
+    //     $schoolUser->school_id = $school->id;
+    //     $schoolUser->save();
+
+    //     DB::commit();
+    //     return $schoolUser->load(['user', 'school']);
+    // } catch (\Throwable $th) {
+    //     DB::rollBack();
+    //     return $th;
+    // }
+})->middleware('auth:api');

@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\AssociateCustomerToSchool;
+use App\Events\AssociateUserTo;
+use App\Listeners\AssociateCustomerToSchoolListner;
+use App\Listeners\AssociateUserToListner;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +22,14 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        AssociateUserTo::class => [
+            AssociateUserToListner::class,
+        ],
+
+        AssociateCustomerToSchool::class => [
+            AssociateCustomerToSchoolListner::class
+        ]
     ];
 
     /**
@@ -27,7 +39,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
     }
 
     /**

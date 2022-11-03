@@ -50,7 +50,7 @@
     },
     "student": {
       "title": "Gestion des étudiants",
-      "list": "Listed des étudiants",
+      "list": "Liste des étudiants",
       "ecard": "Cartes étudiants",
       "dashboard": "Tableau de bord récapitulatif"
     },

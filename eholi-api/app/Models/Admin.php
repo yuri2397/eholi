@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admin extends AbstractModel
 {
+    public const BASE_REFERENCE = "ad";
 }

@@ -15,7 +15,7 @@ class ProfessorController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Professor::with($request->with);
+        $data = Professor::with($request->with ?? []);
 
         if ($request->search_query) {
             $data->where('first_name', 'like', '%' . $request->search_query . '%')

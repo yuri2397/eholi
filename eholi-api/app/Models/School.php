@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class School extends AbstractModel
 {
-    public const BASE_REFERENCE = "es";
+    public const BASE_REFERENCE = "sc";
 
     protected $fillable = ['reference', 'name', 'address', 'phone', 'email'];
 

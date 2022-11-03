@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Tout utilisateur ou personne de l'école.
- */
-class SchoolUser extends AbstractModel
+class SchoolStudent extends AbstractModel
 {
-    public function user()
+    use HasFactory;
+
+    public function student()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Student::class);
     }
 
     public function school()

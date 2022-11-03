@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 abstract class AbstractModel extends Model
 {
     use UUID, HasFactory, BaseModel;
+    public const BASE_REFERENCE = "dt";
+
 
     public function school_user()
     {
