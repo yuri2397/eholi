@@ -1,3 +1,6 @@
+<div *ngIf="progressBar" class="meter">
+  <span style="width:95%;"><span class="progress"></span></span>
+</div>
 <!-- vertical-layout -->
 <ng-container *ngIf="coreConfig.layout.type === 'vertical'">
   <vertical-layout></vertical-layout>
@@ -11,16 +14,10 @@
 <!-- / horizontal-layout -->
 
 <!-- theme customizer -->
-<core-sidebar
-  name="themeCustomizer"
-  class="customizer d-none d-md-block"
-  [invisibleOverlay]="true"
-  *ngIf="coreConfig.layout.customizer"
->
-  <a
-    class="customizer-toggle d-flex align-items-center justify-content-center"
-    (click)="toggleSidebar('themeCustomizer')"
-  >
+<core-sidebar name="themeCustomizer" class="customizer d-none d-md-block" [invisibleOverlay]="true"
+  *ngIf="coreConfig.layout.customizer">
+  <a class="customizer-toggle d-flex align-items-center justify-content-center"
+    (click)="toggleSidebar('themeCustomizer')">
     <span [data-feather]="'settings'" [class]="'spinner'"></span>
   </a>
   <core-theme-customizer></core-theme-customizer>

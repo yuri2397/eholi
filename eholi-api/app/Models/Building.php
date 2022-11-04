@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Building extends AbstractModel
 {
+    protected $fillable = ['name', 'school_id'];
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
+    public function class_rooms()
+    {
+        return $this->hasMany(ClassRoom::class);
+    }
 }

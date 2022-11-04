@@ -18,4 +18,14 @@ class School extends AbstractModel
     {
         return $this->hasMany(SchoolYear::class);
     }
+
+    public function class_rooms()
+    {
+        return $this->hasMany(ClassRoom::class);
+    }
+
+    public function buildings()
+    {
+        return $this->hasMany(Building::class);
+    }
 }

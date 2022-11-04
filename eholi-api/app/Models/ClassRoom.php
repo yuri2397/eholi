@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassRoom extends AbstractModel
 {
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
+    public function building()
+    {
+        return $this->belongsTo(Building::class);
+    }
 }

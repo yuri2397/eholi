@@ -15,6 +15,9 @@ import { StudentShowComponent } from './student-show/student-show.component'
 import { EcardComponent } from '../ecard/ecard.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { StudentDashboardResolver } from './resolvers/student-dashboard.resolver'
+import { RegistrationComponent } from './registration/registration.component'
+import { AdmissionComponent } from './admission/admission.component'
+import { FeesComponent } from './fees/fees.component'
 const routes: Routes = [
   {
     path: 'students/index',
@@ -43,10 +46,28 @@ const routes: Routes = [
     },
     data: { animation: 'details' },
   },
+  {
+    path: 'registrations',
+    component: RegistrationComponent,
+  },
+  {
+    path: 'fees',
+    component: FeesComponent,
+  },
+  {
+    path: 'admissions',
+    component: AdmissionComponent,
+  },
 ]
 
 @NgModule({
-  declarations: [StudentComponent, StudentShowComponent],
+  declarations: [
+    StudentComponent,
+    StudentShowComponent,
+    RegistrationComponent,
+    AdmissionComponent,
+    FeesComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -1,3 +1,4 @@
+import { NavigationEnd, NavigationStart, Router } from '@angular/router'
 import {
   Component,
   Inject,
@@ -10,7 +11,7 @@ import { DOCUMENT } from '@angular/common'
 import { Title } from '@angular/platform-browser'
 
 import { Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { filter, takeUntil } from 'rxjs/operators'
 import { TranslateService } from '@ngx-translate/core'
 import * as Waves from 'node-waves'
 
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // Private
   private _unsubscribeAll: Subject<any>
+  progressBar: boolean
 
   /**
    * Constructor
@@ -65,6 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private _coreMenuService: CoreMenuService,
     private _coreTranslationService: CoreTranslationService,
     private _translateService: TranslateService,
+    private _router: Router,
   ) {
     // Get the application main menu
     this.menu = menu
@@ -95,6 +98,20 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set the private defaults
     this._unsubscribeAll = new Subject()
+
+    // Subscribe on route change for the loader
+    this._router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((_: NavigationEnd) => {
+        this.progressBar = false
+      })
+
+    // Subscribe on route start
+    this._router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe((_: NavigationStart) => {
+        this.progressBar = true
+      })
   }
 
   // Lifecycle hooks
