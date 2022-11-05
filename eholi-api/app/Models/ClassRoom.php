@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassRoom extends AbstractModel
 {
+    protected $fillable = ['name', 'building_id', 'school_id', 'size'];
 
     public function school()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClassRoomRequest;
 use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,14 @@ class ClassRoomController extends Controller
      */
     public function index(Request $request)
     {
-        return ClassRoom::with($request->with ?: [])
-            ->whereSchoolId(school_user()->id)
-            ->where('name', 'LIKE', '%' . $request->seach_query ?: '' . '%')
-            ->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
+        $query = ClassRoom::with($request->with ?: [])
+            ->whereSchoolId(school_user()->id);
+
+        if ($request->has('search_query')) {
+            $query->where('name', 'LIKE', "%{$request->search_query}%");
+        }
+
+        return  $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     /**
@@ -26,9 +31,9 @@ class ClassRoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClassRoomRequest $request)
     {
-        // $request->validate();
+        $request->validated();
 
         $request->merge(['school_id' => school_user()->id]);
         $class_room = ClassRoom::create($request->all());
@@ -58,7 +63,7 @@ class ClassRoomController extends Controller
         $request->merge(['school_id' => school_user()->id]);
         ClassRoom::whereId($class_room->id)->update($request->all());
 
-        return $class_room;
+        return $class_room->refresh();
     }
 
     /**
