@@ -1,0 +1,76 @@
+.meter {
+    height       : 3px;
+    border-radius: 8px;
+    position     : relative;
+    background   : #7367F0;
+    overflow     : hidden;
+}
+
+.meter span {
+    display: block;
+    height : 100%;
+}
+
+.progress {
+    background-color   : #ffffff;
+    animation          : progressBar 2s ease-in-out;
+    animation-fill-mode: both;
+}
+
+@keyframes progressBar {
+    0% {
+        width: 0;
+    }
+
+    10% {
+        width: 10%;
+    }
+
+    20% {
+        width: 20%;
+    }
+
+    40% {
+        width: 40%;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    55% {
+        width: 55%;
+    }
+
+    60% {
+        width: 60%;
+    }
+
+    70% {
+        width: 70%;
+    }
+
+    75% {
+        width: 75%;
+    }
+
+    80% {
+        width: 80%;
+    }
+
+    90% {
+        width: 90%;
+    }
+
+    95% {
+        width: 95%;
+    }
+
+    98% {
+        width: 98%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}

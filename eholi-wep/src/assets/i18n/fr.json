@@ -1,0 +1,70 @@
+{
+  "auth": {
+    "username": {
+      "text": "Nom d'utilisateur",
+      "required": "Le nom d'utilisateur est obligatoire."
+    },
+    "password": {
+      "text": "Mot de passe",
+      "required": "Le mot de passe est obligatoire"
+    },
+    "forgot_password": {
+      "text": "Mot de passe oublié?"
+    },
+    "remember": {
+      "text": "Se souvenir de moi"
+    },
+    "btn_signin": {
+      "text": "Se connecter"
+    },
+    "login": {
+      "ok": {
+        "message": "Heureux de vous revoir sur Holi ✅",
+        "title": "Connexion succès"
+      }
+    }
+  },
+
+  "menu": {
+    "dashboard": {
+      "home": "Tableaux de bord",
+      "badge": "10",
+      "analytics": "Analytique",
+      "ecommerce": "Commerce électronique"
+    },
+    "administration": {
+      "title": "Administrations",
+      "payment": "Paiements",
+      "attendance": "Gestion des présences",
+      "personal": "Personnel",
+      "finance": "Finances",
+      "school_year": "Rentrées scolaires",
+      "parent": "Parents/Tuteurs"
+    },
+    "admission": {
+      "title": "Admission",
+      "request": "Demandes d'admission",
+      "registration": "Inscription/Réinscription",
+      "school-year": "Rentrées scolaires",
+      "fees": "Frais scolaires"
+    },
+    "student": {
+      "title": "Gestion des étudiants",
+      "list": "Liste des étudiants",
+      "ecard": "Cartes étudiants",
+      "dashboard": "Tableau de bord récapitulatif"
+    },
+    "professor": {
+      "title": "Enseignants",
+      "list": "Liste d'enseignant",
+      "add": "Ajouter enseignant"
+    },
+    "schools": {
+      "title": "Établissement",
+      "classrooms": "Salle de classe",
+      "courses": "Cours",
+      "class-levels": "Classes",
+      "housing": "Logements/Campus"
+    }
+  }
+}
