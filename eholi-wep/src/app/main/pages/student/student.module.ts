@@ -69,14 +69,6 @@ const routes: Routes = [
     AdmissionComponent,
     FeesComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CoreCommonModule,
-    SharedModule,
-  ],
+  imports: [RouterModule.forChild(routes), SharedModule],
 })
 export class StudentModule {}

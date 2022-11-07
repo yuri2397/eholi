@@ -19,9 +19,13 @@ use App\Events\AssociateCustomerToSchool;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BuildingController;
+use App\Http\Controllers\ClassLevelController;
 use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SchoolYearController;
+use App\Models\ClassLevel;
 use Spatie\Permission\Contracts\Role as ContractsRole;
 
 
@@ -46,6 +50,18 @@ Route::prefix('schools')->middleware('auth:api')->controller(SchoolController::c
     Route::post('/', 'store');
     Route::put('/{school}', 'update');
     Route::delete('/{school}', 'destroy');
+});
+
+/**
+ * Courses
+ */
+Route::prefix('courses')->middleware('auth:api')->controller(CourseController::class)->group(function () {
+    // CRUD
+    Route::get('', 'index');
+    Route::get('/{course}', 'show');
+    Route::post('/', 'store');
+    Route::put('/{course}', 'update');
+    Route::delete('/{course}', 'destroy');
 });
 
 
@@ -86,9 +102,25 @@ Route::prefix('students')->middleware('auth:api')->controller(StudentController:
 /**
  * ClassRoom
  */
-Route::prefix('class_rooms')
+Route::prefix('class-rooms')
     ->middleware('auth:api')
-    ->apiResource('class_rooms', ClassRoomController::class);
+    ->apiResource('class-rooms', ClassRoomController::class);
+
+/**
+ * ClassLevel
+ */
+Route::prefix('class-levels')
+    ->middleware('auth:api')
+    ->apiResource('class-levels', ClassLevelController::class);
+
+/**
+ * Room
+ */
+Route::prefix('rooms')
+    ->middleware('auth:api')
+    ->apiResource('rooms', RoomController::class);
+
+
 
 /**
  * Building

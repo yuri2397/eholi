@@ -9,6 +9,7 @@ import {
 import { Paginate } from 'app/auth/models/base.model'
 import { Observable, of } from 'rxjs'
 import { Student } from '../student.model'
+import { Param } from 'app/auth/models/data.model'
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +21,6 @@ export class StudentListResolver implements Resolve<Paginate<Student>> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<Paginate<Student>> {
-    return this._studentService.index({
-      'columns[]': ['first_name', 'last_name', 'email'],
-      per_page: 10,
-      page: 1,
-      search_query: 'bonjour',
-    })
+    return this._studentService.index(route.queryParams)
   }
 }

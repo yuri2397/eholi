@@ -5,6 +5,9 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { HttpClient } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { CoreCommonModule } from '@core/common.module'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient)
@@ -12,7 +15,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 @NgModule({
   declarations: [],
-  exports: [TranslateModule, ToastrModule],
+  exports: [
+    TranslateModule,
+    ToastrModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CoreCommonModule,
+    CommonModule,
+  ],
   imports: [
     CommonModule,
     TranslateModule.forRoot({

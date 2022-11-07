@@ -32,7 +32,7 @@ class StudentController extends Controller
             ->orderBy($request->order_by ?: 'S.created_at', $request->order ?: 'DESC');
 
 
-        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: [], $request->page_name ?: 'page', $request->page ?: 1);
+        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     public function dashboard(Request $request)
@@ -68,7 +68,6 @@ class StudentController extends Controller
             $student = Student::create(
                 $request->all()
             );
-
 
             event(new AssociateUserTo($student));
             event(new AssociateCustomerToSchool(school_user(), $student));
