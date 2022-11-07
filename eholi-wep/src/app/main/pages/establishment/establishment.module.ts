@@ -36,7 +36,7 @@ const routes: Routes = [
     path: 'classrooms',
     component: ClassRoomsComponent,
     resolve: {
-      courses: ClassRoomsResolver,
+      class_rooms: ClassRoomsResolver,
     },
     data: {
       animation: 'list',
@@ -46,7 +46,7 @@ const routes: Routes = [
     path: 'class-levels',
     component: ClassLevelsComponent,
     resolve: {
-      courses: ClassLevelsResolver,
+      class_levels: ClassLevelsResolver,
     },
     data: {
       animation: 'list',
@@ -56,7 +56,7 @@ const routes: Routes = [
     path: 'housing',
     component: HousingComponent,
     resolve: {
-      courses: RoomResolver,
+      rooms: RoomResolver,
     },
     data: {
       animation: 'list',
@@ -66,7 +66,7 @@ const routes: Routes = [
     path: 'school-years',
     component: SchoolYearsComponent,
     resolve: {
-      courses: SchoolYearsResolver,
+      school_years: SchoolYearsResolver,
     },
     data: {
       animation: 'list',
