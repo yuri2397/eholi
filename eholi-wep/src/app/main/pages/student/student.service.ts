@@ -24,14 +24,16 @@ export class StudentService extends AbstractService {
   }
 
   public create(student: Student) {
-    return this.http.post(this.enpoint + '/store', student)
+    return this.http.post(this.enpoint, student)
   }
 
-  public show(uuid: string) {
-    return this.http.get<Student>(`${this.enpoint}/show/${uuid}`).pipe(first())
+  public show(uuid: string, params?: Param) {
+    return this.http
+      .get<Student>(`${this.enpoint}/${uuid}`, { params: params })
+      .pipe(first())
   }
 
   public ecardIndex(params?: Param) {
-    return this.http.get<any>(`${this.enpoint}/ecards`, { params: params })
+    return this.http.get<any>(`${this.enpoint}`, { params: params })
   }
 }

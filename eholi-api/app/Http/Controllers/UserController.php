@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function login(LoginRequest $request)
     {
-        // $request->validate($request->rules());
+        $request->validated();
 
         $user = User::whereUsername($request->username)->first();
 

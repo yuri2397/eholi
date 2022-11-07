@@ -20,6 +20,7 @@ class SchoolController extends Controller
             ->orWhere('reference', 'LIKE', '%' . $request->search_query ?: '' . '%')
             ->orWhere('phone', 'LIKE', '%' . $request->search_query ?: '' . '%')
             ->orWhere('email', 'LIKE', '%' . $request->search_query ?: '' . '%')
+            ->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC')
             ->simplePaginate($request->per_page ?: null, $request->columns ?: '*', $request->page_name ?: null, $request->page ?: null);
     }
 

@@ -9,11 +9,13 @@ import { ActivatedRoute } from '@angular/router'
   styleUrls: ['./student-show.component.scss'],
 })
 export class StudentShowComponent implements OnInit {
+  student: Student
+
   constructor(private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this._route.data.subscribe((data: { student: Student }) =>
-      console.log(data),
+    this._route.data.subscribe(
+      (data: { student: Student }) => (this.student = data.student),
     )
   }
 }
