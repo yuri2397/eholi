@@ -193,6 +193,7 @@ export const menu: CoreMenu[] = [
           per_page: 15,
           order_by: 'name',
           order: 'desc',
+          with: 'building',
         },
       },
       {
