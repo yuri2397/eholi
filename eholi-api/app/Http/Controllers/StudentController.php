@@ -29,11 +29,10 @@ class StudentController extends Controller
             ->where('S.first_name', 'LIKE', '%' . $request->search_query ?: '' . '%')
             ->orWhere('S.last_name', 'LIKE', '%' . $request->search_query ?: '' . '%')
             ->orWhere('S.reference', $request->search_query ?: '')
-            ->orderBy($request->order_by ?: 'S.created_at', $request->order ?: 'DESC')
-            ->select('S.*');
+            ->orderBy($request->order_by ?: 'S.created_at', $request->order ?: 'DESC');
 
 
-        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: [], $request->page_name ?: 'page', $request->page ?: 1);
+        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     public function dashboard(Request $request)

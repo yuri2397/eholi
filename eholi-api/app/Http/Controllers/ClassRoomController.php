@@ -21,6 +21,8 @@ class ClassRoomController extends Controller
         if ($request->has('search_query')) {
             $query->where('name', 'LIKE', "%{$request->search_query}%");
         }
+        $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
+
 
         return  $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }

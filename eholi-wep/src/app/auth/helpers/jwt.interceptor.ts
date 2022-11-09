@@ -22,7 +22,7 @@ export class JwtInterceptor implements HttpInterceptor {
    * Add auth header with jwt if user is logged in and request is to api url
    * @param request
    * @param next
-   */
+   */ isApiUrl
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler,

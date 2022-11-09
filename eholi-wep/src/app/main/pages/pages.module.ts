@@ -1,3 +1,4 @@
+import { EstablishmentModule } from './establishment/establishment.module'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
@@ -25,9 +26,9 @@ import { StudentModule } from './student/student.module'
     CommonModule,
     CoreCommonModule,
     ContentHeaderModule,
-    NgbModule,
     NgSelectModule,
     FormsModule,
+    NgbModule,
     AuthenticationModule,
     MiscellaneousModule,
     Ng2FlatpickrModule,
@@ -37,7 +38,10 @@ import { StudentModule } from './student/student.module'
     KbModule,
     FaqModule,
     AccountSettingsModule,
+
+    // Holi Modules
     StudentModule,
+    EstablishmentModule,
   ],
 
   providers: [],

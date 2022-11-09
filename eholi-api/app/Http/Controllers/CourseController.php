@@ -12,9 +12,18 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Course::with($request->with ?: []);
+
+        if ($request->has('search_query')) {
+            $query->where('name', 'LIKE', "%{$request->search_query}%")
+                ->orWhere("reference", $request->search_query);
+        }
+        $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
+
+
+        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     /**
@@ -25,7 +34,9 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation
+
+        return Course::create($request->all());
     }
 
     /**
@@ -36,7 +47,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        return $course;
     }
 
     /**
@@ -48,7 +59,9 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        // validation
+        $course->refresh()->update($request->all());
+        return $course->refresh();
     }
 
     /**
@@ -59,6 +72,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return $course;
     }
 }

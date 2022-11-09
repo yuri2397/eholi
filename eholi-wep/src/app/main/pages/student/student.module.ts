@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
-import { StudentComponent } from './student.component'
+import { StudentListComponent } from './student-list/student-list.component'
 import { AuthGuard } from 'app/auth/helpers/auth.guards'
-import { StudentResolver } from './resolvers/student.resolver'
+import { StudentListResolver } from './resolvers/student-list.resolver'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CoreCommonModule } from '@core/common.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
@@ -18,13 +18,14 @@ import { StudentDashboardResolver } from './resolvers/student-dashboard.resolver
 import { RegistrationComponent } from './registration/registration.component'
 import { AdmissionComponent } from './admission/admission.component'
 import { FeesComponent } from './fees/fees.component'
+
 const routes: Routes = [
   {
     path: 'students/index',
-    component: StudentComponent,
+    component: StudentListComponent,
     canActivate: [AuthGuard],
     resolve: {
-      students: StudentResolver,
+      students: StudentListResolver,
     },
     data: { animation: 'list' },
   },
@@ -62,20 +63,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    StudentComponent,
+    StudentListComponent,
     StudentShowComponent,
     RegistrationComponent,
     AdmissionComponent,
     FeesComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CoreCommonModule,
-    SharedModule,
-  ],
+  imports: [RouterModule.forChild(routes), SharedModule],
 })
 export class StudentModule {}
