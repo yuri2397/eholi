@@ -22,7 +22,8 @@ export class JwtInterceptor implements HttpInterceptor {
    * Add auth header with jwt if user is logged in and request is to api url
    * @param request
    * @param next
-   */ isApiUrl
+   */
+
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler,
@@ -32,7 +33,8 @@ export class JwtInterceptor implements HttpInterceptor {
     if (token && isApiUrl) {
       request = request.clone({
         setHeaders: {
-          Accept: '*/*',
+          Accept: 'application/json',
+          'content-type': 'application/json',
           Authorization: `Bearer ${token.accessToken}`,
         },
       })

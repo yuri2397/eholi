@@ -6,6 +6,5 @@ import { DatatablesModule } from 'app/main/tables/datatables/datatables.module'
 @NgModule({
   declarations: [],
   imports: [DatatablesModule, TableModule],
-  exports: [DatatablesModule, TableModule],
 })
 export class TablesModule {}

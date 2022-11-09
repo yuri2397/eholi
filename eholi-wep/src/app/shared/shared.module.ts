@@ -68,7 +68,6 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CoreCommonModule,
     NgbModule,
     NouisliderModule,
-
     CoreSidebarModule,
   ],
   providers: [
