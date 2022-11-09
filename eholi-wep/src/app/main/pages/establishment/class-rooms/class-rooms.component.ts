@@ -2,7 +2,7 @@ import { Param } from 'app/auth/models/data.model'
 import { TranslateService } from '@ngx-translate/core'
 import { Paginate } from 'app/auth/models/base.model'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { ClassRoom } from '../establishment.model'
 import { first, timeout } from 'rxjs/operators'
 import { SelectionType } from '@swimlane/ngx-datatable'
@@ -12,6 +12,7 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
   selector: 'app-class-rooms',
   templateUrl: './class-rooms.component.html',
   styleUrls: ['./class-rooms.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ClassRoomsComponent implements OnInit {
   public contentHeader!: any
