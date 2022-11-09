@@ -16,14 +16,14 @@ import { CoreConfig } from '@core/types'
 // prettier-ignore
 export const coreConfig: CoreConfig = {
   app: {
-    appName     : 'Eholi',                                        // App Name
+    appName     : '',                                        // App Name
     appTitle    : 'Eholi - Gérer votre établissement scolaire.', // App Title
     appLogoImage: 'assets/images/logo/holi1.svg',                  // App Logo
     appLanguage : 'fr',                                           // App Default Language (en, fr, de, pt etc..)
   },
   layout: {
     skin  : 'default',                        // default, dark, bordered, semi-dark
-    type  : 'horizontal',                       // vertical, horizontal
+    type  : 'vertical',                       // vertical, horizontal
     animation : 'fadeIn',                     // fadeInLeft, zoomIn , fadeIn, none
     menu : {
       hidden               : false,           // Boolean: true, false

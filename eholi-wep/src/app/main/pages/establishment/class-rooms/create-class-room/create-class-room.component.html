@@ -1,0 +1,23 @@
+<div class="slideout-content">
+    <!-- Modal to add new user starts-->
+    <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
+        <div class="modal-dialog">
+            <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+                <div class="modal-header mb-1">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ 'class_room.create.title'|translate }}</h5>
+                </div>
+                <div class="modal-body flex-grow-1">
+
+                    <button type="submit" class="btn btn-primary mr-1" rippleEffect>{{
+                        'class_room.create.btn.submit'|translate }}</button>
+                    <button type="reset" class="btn btn-outline-secondary" rippleEffect>
+                        {{ 'class_room.create.btn.cancel'|translate }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Modal to add new user Ends-->
+</div>

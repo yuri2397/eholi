@@ -1,3 +1,4 @@
+import { Param } from 'app/auth/models/data.model'
 // prettier-ignore
 export interface CoreMenuItem {
     id           : string;
@@ -18,9 +19,10 @@ export interface CoreMenuItem {
         translate?: string;
         classes?    : string;
     };
+  queryParams?: Param;
     children?: CoreMenuItem[];
 }
 
 export interface CoreMenu extends CoreMenuItem {
-  children?: CoreMenuItem[];
+  children?: CoreMenuItem[]
 }
