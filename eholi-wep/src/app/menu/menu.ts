@@ -148,6 +148,12 @@ export const menu: CoreMenu[] = [
         type: 'item',
         icon: 'circle',
         url: 'pages/students/index',
+        queryParams: {
+          page: 1,
+          per_page: 15,
+          order_by: 'last_name',
+          order: 'desc',
+        },
       },
       // {
       //   id: 'student.card',
@@ -182,6 +188,13 @@ export const menu: CoreMenu[] = [
         type: 'item',
         icon: 'circle',
         url: 'pages/classrooms',
+        queryParams: {
+          page: 1,
+          per_page: 15,
+          order_by: 'name',
+          order: 'desc',
+          with: 'building',
+        },
       },
       {
         id: 'courses',
@@ -190,6 +203,10 @@ export const menu: CoreMenu[] = [
         type: 'item',
         icon: 'circle',
         url: 'pages/courses',
+        queryParams: {
+          page: 1,
+          per_page: 15,
+        },
       },
       {
         id: 'class-levels',
@@ -198,6 +215,10 @@ export const menu: CoreMenu[] = [
         type: 'item',
         icon: 'circle',
         url: 'pages/class-levels',
+        queryParams: {
+          page: 1,
+          per_page: 15,
+        },
       },
       {
         id: 'housing',
@@ -206,6 +227,10 @@ export const menu: CoreMenu[] = [
         type: 'item',
         icon: 'circle',
         url: 'pages/housing',
+        queryParams: {
+          page: 1,
+          per_page: 15,
+        },
       },
       {
         id: 'admission.school-year',
@@ -214,6 +239,10 @@ export const menu: CoreMenu[] = [
         type: 'item',
         icon: 'circle',
         url: 'pages/school-years',
+        queryParams: {
+          page: 1,
+          per_page: 15,
+        },
       },
     ],
   },

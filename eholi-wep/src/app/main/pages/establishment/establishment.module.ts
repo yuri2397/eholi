@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CoreCommonModule } from '@core/common.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { SharedModule } from 'app/shared/shared.module'
+import { CreateClassRoomComponent } from './class-rooms/create-class-room/create-class-room.component'
 
 const routes: Routes = [
   // {
@@ -28,6 +29,7 @@ const routes: Routes = [
     resolve: {
       courses: CoursesResolver,
     },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     data: {
       animation: 'list',
     },
@@ -36,8 +38,9 @@ const routes: Routes = [
     path: 'classrooms',
     component: ClassRoomsComponent,
     resolve: {
-      courses: ClassRoomsResolver,
+      class_rooms: ClassRoomsResolver,
     },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     data: {
       animation: 'list',
     },
@@ -46,8 +49,10 @@ const routes: Routes = [
     path: 'class-levels',
     component: ClassLevelsComponent,
     resolve: {
-      courses: ClassLevelsResolver,
+      class_levels: ClassLevelsResolver,
     },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     data: {
       animation: 'list',
     },
@@ -55,8 +60,10 @@ const routes: Routes = [
   {
     path: 'housing',
     component: HousingComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     resolve: {
-      courses: RoomResolver,
+      rooms: RoomResolver,
     },
     data: {
       animation: 'list',
@@ -65,8 +72,10 @@ const routes: Routes = [
   {
     path: 'school-years',
     component: SchoolYearsComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     resolve: {
-      courses: SchoolYearsResolver,
+      school_years: SchoolYearsResolver,
     },
     data: {
       animation: 'list',
@@ -81,6 +90,7 @@ const routes: Routes = [
     CoursesComponent,
     HousingComponent,
     SchoolYearsComponent,
+    CreateClassRoomComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })

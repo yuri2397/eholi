@@ -25,6 +25,17 @@
     }
   },
 
+  "content": {
+    "title": {
+      "class_rooms": "Salle de classes",
+      "students": "Étudiants"
+    }
+  },
+
+  "page": {
+    "select_size": "Show"
+  },
+
   "MENU": {
     "DASHBOARD": {
       "COLLAPSIBLE": "Dashboards",

@@ -4,7 +4,6 @@ node_modules
 ./.angular
 .angular
 .angular/*
-
-.dist
-dist/*
+dist
 ./dist/*
+dist/*
