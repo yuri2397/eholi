@@ -24,6 +24,8 @@ const routes: Routes = [
     path: 'students/index',
     component: StudentListComponent,
     canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     resolve: {
       students: StudentListResolver,
     },
@@ -32,6 +34,8 @@ const routes: Routes = [
   {
     path: 'students/show/:uuid',
     component: StudentShowComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     canActivate: [AuthGuard],
     resolve: {
       student: StudentShowResolver,
@@ -41,6 +45,8 @@ const routes: Routes = [
   {
     path: 'students/dashboard',
     component: DashboardComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     canActivate: [AuthGuard],
     resolve: {
       student: StudentDashboardResolver,
@@ -50,14 +56,17 @@ const routes: Routes = [
   {
     path: 'registrations',
     component: RegistrationComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
   {
     path: 'fees',
     component: FeesComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
   {
     path: 'admissions',
     component: AdmissionComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
 ]
 

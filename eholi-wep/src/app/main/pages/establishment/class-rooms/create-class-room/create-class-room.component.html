@@ -1,23 +1,27 @@
-<div class="slideout-content">
-    <!-- Modal to add new user starts-->
-    <div class="modalsd modal-slide-in sdfade new-user-modal" id="modals-slide-in">
-        <div class="modal-dialog">
-            <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </button>
-                <div class="modal-header mb-1">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ 'class_room.create.title'|translate }}</h5>
-                </div>
-                <div class="modal-body flex-grow-1">
-
-                    <button type="submit" class="btn btn-primary mr-1" rippleEffect>{{
-                        'class_room.create.btn.submit'|translate }}</button>
-                    <button type="reset" class="btn btn-outline-secondary" rippleEffect>
-                        {{ 'class_room.create.btn.cancel'|translate }}
-                    </button>
-                </div>
-            </form>
+<div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">{{ 'class_room.create.title'|translate }}</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" tabindex="0" ngbAutofocus>
+    <form (ngSubmit)="(classRoomForm.form.valid)" #classRoomForm="ngForm">
+        <div class="form-group">
+            <label class="form-control-label" for="name">Name</label>
+            <input class="form-control input-md" ngModel #name="ngModel" required id="name" name="name" type="text"
+                placeholder="Your Name" [class.error]="!name.valid && name.touched">
+            <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                <small class="form-text text-danger danger" *ngIf="name.errors.required">This
+                    field is
+                    required!</small>
+            </span>
         </div>
-    </div>
-    <!-- Modal to add new user Ends-->
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary mr-1" rippleEffect>{{
+        'class_room.create.btn.submit'|translate }}</button>
+    <button type="reset" class="btn btn-outline-secondary" (click)="modal.close('Accept click')" rippleEffect>
+        {{ 'class_room.create.btn.cancel'|translate }}
+    </button>
 </div>
