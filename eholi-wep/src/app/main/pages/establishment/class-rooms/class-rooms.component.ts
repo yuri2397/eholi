@@ -2,40 +2,38 @@ import { Param } from 'app/auth/models/data.model'
 import { TranslateService } from '@ngx-translate/core'
 import { Paginate } from 'app/auth/models/base.model'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { ClassRoom } from '../establishment.model'
-import { first, timeout } from 'rxjs/operators'
-import { SelectionType } from '@swimlane/ngx-datatable'
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-class-rooms',
   templateUrl: './class-rooms.component.html',
   styleUrls: ['./class-rooms.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ClassRoomsComponent implements OnInit {
   public contentHeader!: any
   public queryParams: Param = {}
   class_rooms: Paginate<ClassRoom>
   public basicSelectedOption: number = 5
-  public SelectionType = SelectionType
   searchTimeout: NodeJS.Timeout
 
   constructor(
     private _route: ActivatedRoute,
     private _translateService: TranslateService,
     private _router: Router,
-    private _coreSidebarService: CoreSidebarService,
+    private _modalService: NgbModal,
   ) {}
 
-  filterUpdate(event: any) {}
-
-  onSelect(event: any) {}
-
-  onActivate(event: any) {}
-
-  toggleSidebar(name): void {
-    this._coreSidebarService.getSidebarRegistry(name).toggleOpen()
+  openModal(modal: any) {
+    this._modalService.open(modal, {
+      centered: true,
+      windowClass: 'modal modal-primary',
+      size: 'md',
+      keyboard: true,
+    })
   }
 
   ngOnInit(): void {

@@ -36,6 +36,22 @@
     "select_size": "Show"
   },
 
+  "student": {
+    "table": {
+      "first_name": "Frist Name",
+      "last_name": "Last Name",
+      "fullname": "Fullname",
+      "birth_at": "Né à",
+      "birth_in": "Date de naissance",
+      "email": "Adresse email",
+      "phone": "Phone number",
+      "cni": "CNI",
+      "adress": "Adresse",
+      "sex": "Sex",
+      "status": "Statut"
+    }
+  },
+
   "MENU": {
     "DASHBOARD": {
       "COLLAPSIBLE": "Dashboards",
