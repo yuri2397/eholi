@@ -6,6 +6,7 @@ import { Param } from 'app/auth/models/data.model'
 import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service'
 import { TranslateService } from '@ngx-translate/core'
 import { SelectionType } from '@swimlane/ngx-datatable'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'app-student',
@@ -26,18 +27,16 @@ export class StudentListComponent implements OnInit {
     private _route: ActivatedRoute,
     private _translateService: TranslateService,
     private _router: Router,
-    private _coreSidebarService: CoreSidebarService,) {}
-
-    filterUpdate(event: any) {}
-
-    onSelect(event: any) {}
+    private _modalService: NgbModal,) {}
   
-    onActivate(event: any) {}
-  
-    toggleSidebar(name): void {
-      this._coreSidebarService.getSidebarRegistry(name).toggleOpen()
+    openModal(modal: any) {
+      this._modalService.open(modal, {
+        centered: true,
+        windowClass: 'modal modal-primary',
+        size: 'md',
+        keyboard: true,
+      })
     }
-  
 
   ngOnInit(): void {
     // Get the resolver data

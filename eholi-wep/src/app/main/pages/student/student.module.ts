@@ -17,7 +17,8 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { StudentDashboardResolver } from './resolvers/student-dashboard.resolver'
 import { RegistrationComponent } from './registration/registration.component'
 import { AdmissionComponent } from './admission/admission.component'
-import { FeesComponent } from './fees/fees.component'
+import { FeesComponent } from './fees/fees.component';
+import { StudentCreateComponent } from './student-create/student-create.component'
 
 const routes: Routes = [
   {
@@ -77,6 +78,7 @@ const routes: Routes = [
     RegistrationComponent,
     AdmissionComponent,
     FeesComponent,
+    StudentCreateComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })
