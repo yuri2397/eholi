@@ -8,9 +8,28 @@ import { ToastrModule } from 'ngx-toastr'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CoreCommonModule } from '@core/common.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { TablesModule } from 'app/main/tables/tables.module'
+import {
+  SwiperConfigInterface,
+  SwiperModule,
+  SWIPER_CONFIG,
+} from 'ngx-swiper-wrapper'
+import { CoreSidebarModule } from '@core/components'
+import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module'
+import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module'
+import { NouisliderModule } from 'ng2-nouislider'
+import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module'
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+import { NgSelectModule } from '@ng-select/ng-select'
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient)
+}
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  observer: true,
 }
 
 @NgModule({
@@ -18,14 +37,23 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   exports: [
     TranslateModule,
     ToastrModule,
-    NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    CoreCommonModule,
     CommonModule,
+    ContentHeaderModule,
+    CoreCommonModule,
+    NgbModule,
+    NouisliderModule,
+    CardSnippetModule,
+    NgxDatatableModule,
+    CoreSidebarModule,
+    NgSelectModule,
+    SweetAlert2Module,
   ],
   imports: [
     CommonModule,
+    CardSnippetModule,
+    NgxDatatableModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -35,6 +63,24 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       defaultLanguage: 'fr',
     }),
     ToastrModule.forRoot(),
+    SwiperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CoreTouchspinModule,
+    ContentHeaderModule,
+    CoreSidebarModule,
+    CoreCommonModule,
+    NgbModule,
+    NouisliderModule,
+    CoreSidebarModule,
+    NgSelectModule,
+    SweetAlert2Module.forRoot(),
+  ],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG,
+    },
   ],
 })
 export class SharedModule {}

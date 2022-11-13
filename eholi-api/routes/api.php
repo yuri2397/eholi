@@ -32,8 +32,8 @@ use Spatie\Permission\Contracts\Role as ContractsRole;
 /**
  * UserController
  */
-Route::prefix('users')->middleware('auth:api')->controller(UserController::class)->group(function () {
-    Route::post('authenticate', 'login')->withoutMiddleware('auth:api');
+Route::prefix('users')->middleware(['auth:api', 'cors'])->controller(UserController::class)->group(function () {
+    Route::post('authenticate', 'login')->withoutMiddleware(['auth:api']);
     Route::put('logout', 'logout');
 
     Route::get('/', 'index');
@@ -55,7 +55,7 @@ Route::prefix('schools')->middleware('auth:api')->controller(SchoolController::c
 /**
  * Courses
  */
-Route::prefix('courses')->middleware('auth:api')->controller(CourseController::class)->group(function () {
+Route::prefix('courses')->middleware(['auth:api', 'cors'])->controller(CourseController::class)->group(function () {
     // CRUD
     Route::get('', 'index');
     Route::get('/{course}', 'show');
@@ -69,7 +69,7 @@ Route::prefix('courses')->middleware('auth:api')->controller(CourseController::c
  * SchoolYearController
  */
 
-Route::prefix('school-years')->middleware('auth:api')->controller(SchoolYearController::class)->group(function () {
+Route::prefix('school-years')->middleware(['auth:api', 'cors'])->controller(SchoolYearController::class)->group(function () {
     Route::get('', 'index');
     Route::get('show', 'show');
 });
@@ -78,7 +78,7 @@ Route::prefix('school-years')->middleware('auth:api')->controller(SchoolYearCont
  * ProfessorController
  */
 
-Route::prefix('professors')->middleware('auth:api')->controller(ProfessorController::class)->group(function () {
+Route::prefix('professors')->middleware(['auth:api', 'cors'])->controller(ProfessorController::class)->group(function () {
     Route::get('', 'index');
     Route::get('/{professor}', 'show');
 
@@ -90,7 +90,7 @@ Route::prefix('professors')->middleware('auth:api')->controller(ProfessorControl
  * StudentController
  */
 
-Route::prefix('students')->middleware('auth:api')->controller(StudentController::class)->group(function () {
+Route::prefix('students')->middleware(['auth:api', 'cors'])->controller(StudentController::class)->group(function () {
     Route::get('', 'index');
     Route::get('/dashboard', 'dashboard');
     Route::get('/{student}', 'show');
@@ -103,21 +103,21 @@ Route::prefix('students')->middleware('auth:api')->controller(StudentController:
  * ClassRoom
  */
 Route::prefix('class-rooms')
-    ->middleware('auth:api')
+    ->middleware(['auth:api', 'cors'])
     ->apiResource('class-rooms', ClassRoomController::class);
 
 /**
  * ClassLevel
  */
 Route::prefix('class-levels')
-    ->middleware('auth:api')
+    ->middleware(['auth:api', 'cors'])
     ->apiResource('class-levels', ClassLevelController::class);
 
 /**
  * Room
  */
 Route::prefix('rooms')
-    ->middleware('auth:api')
+    ->middleware(['auth:api', 'cors'])
     ->apiResource('rooms', RoomController::class);
 
 
@@ -125,7 +125,7 @@ Route::prefix('rooms')
 /**
  * Building
  */
-Route::prefix("buildings")->middleware('auth:api')
+Route::prefix("buildings")->middleware(['auth:api', 'cors'])
     ->apiResource('buildings', BuildingController::class);
 
 
@@ -183,4 +183,4 @@ Route::any('tests', function (Request $request) {
     //     DB::rollBack();
     //     return $th;
     // }
-})->middleware('auth:api');
+})->middleware(['auth:api', 'cors']);

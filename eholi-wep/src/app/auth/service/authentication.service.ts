@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import { environment } from 'environments/environment'
+import { environment as env } from 'environments/environment'
 import { User, Role } from 'app/auth/models'
 import { ToastrService } from 'ngx-toastr'
 import { LoginResponse } from '../models/response.model'
@@ -27,7 +27,7 @@ export class AuthenticationService {
    * @param {ToastrService} _toastrService
    */
   constructor(private _http: HttpClient) {
-    this._baseUrl = `${environment.api}users/`
+    this._baseUrl = `${env.api}users/`
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')),
     )

@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
   hmr: false,
-  apiUrl: 'http://localhost:4000'
-};
+  apiUrl: 'https://e-api.holi.sn',
+  api: 'https://e-api.holi.sn/api/',
+}

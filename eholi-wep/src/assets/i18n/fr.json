@@ -66,5 +66,105 @@
       "class-levels": "Classes",
       "housing": "Logements/Campus"
     }
+  },
+
+  "content": {
+    "title": {
+      "class_rooms": "Salle de classes",
+      "students": "Étudiants"
+    },
+    "undefined": "Indéfinie",
+    "table": {
+      "actions": "Actions"
+    },
+    "notifications": {
+      "title": "Notification",
+      "confirm": {
+        "delete": {
+          "title": "Attention !",
+          "text": "Êtes-vous sûr de vouloir supprimer cet élément ?"
+        }
+      }
+    },
+    "btn": {
+      "submit": "Enregistrer",
+      "cancel": "Annuler",
+      "confirm": "Confirmer"
+    },
+    "status": {
+      "inactive": "Inactive",
+      "active": "Active"
+    },
+    "field": {
+      "status": "Statut"
+    }
+  },
+
+  "page": {
+    "select_size": "Ligne par page"
+  },
+
+  "student": {
+    "table": {
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "fullname": "Prénom/Nom",
+      "birth_at": "Né à",
+      "birth_in": "Date de naissance",
+      "email": "Adresse email",
+      "phone": "Téléphone",
+      "cni": "CNI",
+      "adress": "Adresse",
+      "sex": "Sexe",
+      "status": "Statut"
+    }
+  },
+
+  "form": {
+    "validation": {
+      "errors": {
+        "required": "Le champ est obligatoire"
+      }
+    }
+  },
+
+  "class_room": {
+    "title": "Salle de classes",
+    "field": {
+      "name": "Nom de la salle",
+      "size": "Capacité",
+      "building": "Bâtiment"
+    },
+    "table": {
+      "name": "Nom de la salle",
+      "size": "Capacité",
+      "building": "Bâtiment",
+      "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter une salle"
+    },
+
+    "placeholder": {
+      "search": "Rechercher une salle"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle salle",
+      "message": {
+        "success": "La salle a été ajoutée avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une salle",
+      "message": {
+        "success": "La salle a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une salle",
+      "message": {
+        "success": "La salle a été supprimée avec succès"
+      }
+    }
   }
 }
