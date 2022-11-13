@@ -37,7 +37,7 @@ class BuildingController extends Controller
 
         $request->merge(['school_id' => school_user()->id]);
         $building = Building::create($request->all());
-        return $building;
+        return $building->refresh();
     }
 
     /**

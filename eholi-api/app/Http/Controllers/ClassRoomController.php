@@ -39,7 +39,7 @@ class ClassRoomController extends Controller
 
         $request->merge(['school_id' => school_user()->id]);
         $class_room = ClassRoom::create($request->all());
-        return $class_room;
+        return $class_room->refresh();
     }
 
     /**

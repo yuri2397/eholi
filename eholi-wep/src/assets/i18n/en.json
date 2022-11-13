@@ -36,6 +36,14 @@
     "select_size": "Show"
   },
 
+  "class_room": {
+    "create": {
+      "message": {
+        "success": "Class room created successfully"
+      }
+    }
+  },
+
   "student": {
     "table": {
       "first_name": "Frist Name",

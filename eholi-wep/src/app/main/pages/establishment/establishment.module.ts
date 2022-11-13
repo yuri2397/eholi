@@ -16,6 +16,7 @@ import { CoreCommonModule } from '@core/common.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { SharedModule } from 'app/shared/shared.module'
 import { CreateClassRoomComponent } from './class-rooms/create-class-room/create-class-room.component'
+import { EditClassRoomComponent } from './class-rooms/edit-class-room/edit-class-room.component'
 
 const routes: Routes = [
   // {
@@ -91,6 +92,7 @@ const routes: Routes = [
     HousingComponent,
     SchoolYearsComponent,
     CreateClassRoomComponent,
+    EditClassRoomComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })

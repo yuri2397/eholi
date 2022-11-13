@@ -26,7 +26,7 @@
                                     type="search" placeholder="{{ 'class_room.placeholder.search'|translate }}"
                                     [(ngModel)]="queryParams.search_query" class="form-control ml-25"
                                     (input)="onSearch($event.target.value)" /></label>
-                            <button class="btn btn-primary ml-1" rippleEffect (click)="openModal(createModal)">
+                            <button class="btn btn-primary ml-1" rippleEffect (click)="openCreateModal(createModal)">
                                 <i data-feather="plus" class="mr-0 mr-sm-1"></i><span
                                     class="d-none d-sm-inline-block">{{
                                     'class_room.btn.add'|translate }}</span>
@@ -69,8 +69,8 @@
                     }">
                                 {{
                                 status == 'active'
-                                ? ('class_room.status.active'|translate)
-                                : ('class_room.status.inactive'|translate)
+                                ? ('content.status.active'|translate)
+                                : ('content.status.inactive'|translate)
                                 }}
                             </div>
                         </ng-template>
@@ -78,9 +78,15 @@
 
                     <ngx-datatable-column name="{{ 'content.table.actions'|translate }}" [width]="50"
                         [sortable]="false">
-                        <ng-template ngx-datatable-cell-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
                             <div class="d-flex align-items-center">
-                                <i data-feather="edit" class="text-primary cursor-pointer"></i>
+                                <span (click)="openEditModal(editModal, row)" class="cursor-pointer">
+                                    <i data-feather="edit" class="text-primary "></i>
+                                </span>
+                                <span [swal]="SweetAlertConfirmText" (click)="deletedRow = row"
+                                    class=" mx-1 cursor-pointer">
+                                    <i data-feather="x-circle" class="text-danger "></i>
+                                </span>
                             </div>
                         </ng-template>
                     </ngx-datatable-column>
@@ -92,9 +98,21 @@
     </div>
 
 
+    <!-- CREATE MODAL -->
     <div class="modal-primary d-inline-block">
         <ng-template #createModal let-modal>
             <app-create-class-room [modal]="modal"></app-create-class-room>
         </ng-template>
     </div>
+
+    <!-- EDIT MODAL -->
+    <div class="modal-primary d-inline-block">
+        <ng-template #editModal let-modal>
+            <app-edit-class-room [item]="editingClassRoom" [modal]="modal"></app-edit-class-room>
+        </ng-template>
+    </div>
+
+    <!-- CONFIRM DELETE -->
+    <swal #SweetAlertConfirmText (open)="ConfirmTextOpen()"></swal>
+
 </div>

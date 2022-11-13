@@ -1,29 +1,21 @@
-import { finalize, first } from 'rxjs/operators'
-import { pipe } from 'rxjs'
-import { group } from '@angular/animations'
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms'
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service'
-import { BuildingService } from '../../services/building.service'
-import { Building } from '../../establishment.model'
-import { TranslateService } from '@ngx-translate/core'
-import { ClassRoomService } from '../../services/class-room.service'
-import { ToastrService } from 'ngx-toastr'
+import { ClassRoom } from './../../models/class-room.model'
+import { Component, Input, OnInit } from '@angular/core'
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { TranslateService } from '@ngx-translate/core'
+import { ToastrService } from 'ngx-toastr'
+import { first, finalize } from 'rxjs/operators'
+import { Building } from '../../establishment.model'
+import { BuildingService } from '../../services/building.service'
+import { ClassRoomService } from '../../services/class-room.service'
 
 @Component({
-  selector: 'app-create-class-room',
-  templateUrl: './create-class-room.component.html',
-  styleUrls: ['./create-class-room.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-edit-class-room',
+  templateUrl: './edit-class-room.component.html',
+  styleUrls: ['./edit-class-room.component.scss'],
 })
-export class CreateClassRoomComponent implements OnInit {
+export class EditClassRoomComponent implements OnInit {
+  @Input('item') item: ClassRoom
   @Input('modal') modal: any
   form: FormGroup
   selectLoading = false
@@ -43,9 +35,14 @@ export class CreateClassRoomComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      size: new FormControl('', [Validators.min(0)]),
-      building_id: new FormControl('', [Validators.required]),
+      name: new FormControl(this.item.name, [Validators.required]),
+      size: new FormControl(this.item.size ?? 0, [Validators.min(0)]),
+      status: new FormControl(this.item.status == 'active', [
+        Validators.required,
+      ]),
+      building_id: new FormControl(this.item.building_id, [
+        Validators.required,
+      ]),
     })
   }
 
@@ -82,8 +79,14 @@ export class CreateClassRoomComponent implements OnInit {
 
   submit(form: any) {
     this.createdLoad = true
+
     this._classRoomService
-      .create(form)
+      .update(this.item.id, {
+        name: this.form.value.name,
+        building_id: this.form.value.building_id,
+        status: this.form.value.status ? 'active' : 'inactive',
+        size: this.form.value.size ?? 0,
+      } as any)
       .pipe(
         first(),
         finalize(() => (this.createdLoad = false)),
@@ -92,12 +95,12 @@ export class CreateClassRoomComponent implements OnInit {
         next: (response) => {
           this._translateService
             .get([
-              'class_room.create.message.success',
+              'class_room.update.message.success',
               'content.notifications.title',
             ])
             .subscribe((data: string[]) => {
               this._toastrService.success(
-                data['class_room.create.message.success'],
+                data['class_room.update.message.success'],
                 data['content.notifications.title'],
               )
               response.building = this.buildings.find(
