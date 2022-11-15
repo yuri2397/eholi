@@ -11,7 +11,8 @@ import { AbstractService } from 'app/shared/abstract.service'
   providedIn: 'root',
 })
 export class StudentService extends AbstractService {
-  constructor(private _ch: HttpClient) {
+  constructor(
+    private _ch: HttpClient) {
     super('students', _ch)
   }
 

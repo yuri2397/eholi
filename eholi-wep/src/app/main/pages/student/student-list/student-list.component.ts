@@ -33,7 +33,7 @@ export class StudentListComponent implements OnInit {
       this._modalService.open(modal, {
         centered: true,
         windowClass: 'modal modal-primary',
-        size: 'md',
+        size: 'lg',
         keyboard: true,
       })
     }

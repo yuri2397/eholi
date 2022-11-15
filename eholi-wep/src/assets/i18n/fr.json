@@ -85,17 +85,19 @@
 
   "student": {
     "title": "Liste Etudiants",
+    "pronom": "Votre",
+    "lieuNaissance" : "lieu de naissance",
     "table": {
       "first_name": "Prénom",
       "last_name": "Nom",
       "fullname": "Prénom/Nom",
-      "birth_at": "Né à",
-      "birth_in": "Date de naissance",
+      "birth_in": "Né à",
+      "birth_at": "Date de naissance",
       "email": "Adresse email",
       "phone": "Téléphone",
       "cni": "CNI",
       "adress": "Adresse",
-      "sex": "Sexe",
+      "sexe": "Sexe",
       "status": "Statut"
     },
     "btn": {
@@ -106,6 +108,7 @@
     },
     "create": {
       "title": "Ajouter une nouvel étudiant",
+      "messageForm": "Ce champ est obligatoire!",
       "btn": {
         "submit": "Enregistrer",
         "cancel": "Annuler"

@@ -46,18 +46,19 @@
                         [width]="120">
                     </ngx-datatable-column>
                     <ngx-datatable-column name="{{ 'student.table.last_name'|translate }}" prop="last_name"
-                        [width]="80">
+                        [width]="50">
                     </ngx-datatable-column>
                     <ngx-datatable-column name="{{ 'student.table.email'|translate }}" prop="email">
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="{{ 'student.table.phone'|translate }}" prop="telephone">
+                    <ngx-datatable-column name="{{ 'student.table.phone'|translate }}" prop="telephone" [width]="40">
                     </ngx-datatable-column>
 
                     <ngx-datatable-column name="{{ 'content.table.actions'|translate }}" [width]="50"
                         [sortable]="false">
                         <ng-template ngx-datatable-cell-template>
                             <div class="d-flex align-items-center">
-                                <i data-feather="edit" class="text-primary cursor-pointer"></i>
+                                <a (click)="openModal(editModal)"><i data-feather="edit" class="text-primary cursor-pointer ml-1"></i></a>
+                                <a><i data-feather="eye" class="text-success cursor-pointer ml-1"></i></a>     
                             </div>
                         </ng-template>
                     </ngx-datatable-column>
@@ -69,6 +70,11 @@
     <div class="modal-primary d-inline-block">
         <ng-template #createModal let-modal>
             <app-student-create [modal]="modal"></app-student-create>
+        </ng-template>
+    </div>
+    <div class="modal-primary d-inline-block">
+        <ng-template #editModal let-modal>
+            <app-student-edit [modal]="modal"></app-student-edit>
         </ng-template>
     </div>
 </div>
