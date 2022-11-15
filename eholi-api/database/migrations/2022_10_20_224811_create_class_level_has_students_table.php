@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('class_level_has_students', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            // $table->string('name');
             $table->foreignUuid('student_id')->references('id')->on('students');
             $table->foreignUuid('class_level_id')->references('id')->on('class_levels');
             $table->timestamps();

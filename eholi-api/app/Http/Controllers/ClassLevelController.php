@@ -18,10 +18,15 @@ class ClassLevelController extends Controller
 
         if ($request->has('search_query')) {
             $query->where('name', 'LIKE', "%{$request->search_query}%");
+            if ($request->has('with') && in_array('level', $request->with)) {
+                $query->orWhereHas('level', function ($q) use ($request) {
+                    $q->where('name', 'LIKE', "%{$request->search_query}%");
+                });
+            }
         }
 
         $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
-        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
+        return $query->paginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     /**
@@ -33,10 +38,10 @@ class ClassLevelController extends Controller
     public function store(Request $request)
     {
         // validation
-
+        $request->merge(['school_year_id' => school_year()->id]);
         $class_level = ClassLevel::create($request->all());
 
-        return $class_level;
+        return $class_level->refresh();
     }
 
     /**
@@ -47,7 +52,7 @@ class ClassLevelController extends Controller
      */
     public function show(ClassLevel $classLevel)
     {
-        return $classLevel->with(['school_year', 'level']);
+        return $classLevel->with(['school_year', 'level'])->first();
     }
 
     /**

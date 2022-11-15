@@ -29,6 +29,10 @@ export class ClassLevelService extends AbstractService {
     return this.http.get<ClassLevel>(`${this.enpoint}/${uuid}`)
   }
 
+  update(uuid: string | number, class_level: ClassLevel) {
+    return this.http.put<ClassLevel>(`${this.enpoint}/${uuid}`, class_level)
+  }
+
   delete(uuid: string | number) {
     return this.http.delete<ClassLevel>(`${this.enpoint}/${uuid}`)
   }

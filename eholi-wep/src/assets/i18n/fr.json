@@ -71,6 +71,7 @@
   "content": {
     "title": {
       "class_rooms": "Salle de classes",
+      "class_levels": "Liste des classes",
       "students": "Étudiants"
     },
     "undefined": "Indéfinie",
@@ -165,7 +166,8 @@
     "create": {
       "title": "Ajouter une nouvelle salle",
       "message": {
-        "success": "La salle a été ajoutée avec succès"
+        "success": "La salle a été ajoutée avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
       }
     },
     "update": {
@@ -178,6 +180,46 @@
       "title": "Supprimer une salle",
       "message": {
         "success": "La salle a été supprimée avec succès"
+      }
+    }
+  },
+
+  "class_level": {
+    "title": "Salle de classes",
+    "field": {
+      "name": "Nom de la classe",
+      "level": "Niveau de la classe"
+    },
+    "table": {
+      "name": "Nom de la classe",
+      "level": "Niveau",
+      "total_students": "Nombre d'étudiants",
+      "total_courses": "Nombre de cours",
+      "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter une classe"
+    },
+
+    "placeholder": {
+      "search": "Rechercher une classe"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle classe",
+      "message": {
+        "success": "La classe a été ajoutée avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une classe",
+      "message": {
+        "success": "La classe a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une classe",
+      "message": {
+        "success": "La classe a été supprimée avec succès"
       }
     }
   }

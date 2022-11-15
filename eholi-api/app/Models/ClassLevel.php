@@ -10,6 +10,8 @@ class ClassLevel extends AbstractModel
 {
     protected $fillable = ['name', 'level_id', 'school_year_id'];
 
+    protected $appends = ['total_students', 'total_courses'];
+
     public function level()
     {
         return $this->belongsTo(Level::class);
@@ -18,5 +20,25 @@ class ClassLevel extends AbstractModel
     public function school_year()
     {
         return $this->belongsTo(SchoolYear::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'class_level_has_students');
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'class_level_has_courses');
+    }
+
+    public function getTotalStudentsAttribute()
+    {
+        return $this->students()->count();
+    }
+
+    public function getTotalCoursesAttribute()
+    {
+        return $this->courses()->count();
     }
 }

@@ -22,6 +22,7 @@ use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\ClassLevelController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SchoolYearController;
@@ -105,6 +106,13 @@ Route::prefix('students')->middleware(['auth:api', 'cors'])->controller(StudentC
 Route::prefix('class-rooms')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('class-rooms', ClassRoomController::class);
+
+/**
+ * Level
+ */
+Route::prefix('levels')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('levels', LevelController::class);
 
 /**
  * ClassLevel
