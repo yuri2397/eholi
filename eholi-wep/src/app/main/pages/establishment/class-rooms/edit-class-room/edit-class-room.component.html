@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h5 class="modal-title" id="myModalLabel160">{{ 'class_room.create.title'|translate }}</h5>
+    <h5 class="modal-title" id="myModalLabel160">{{ 'class_room.update.title'|translate }}</h5>
     <button type="button" class="close" (click)="modal.dismiss('cancel')" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -31,6 +31,15 @@
                 <small class="form-text text-danger danger" *ngIf="building_id.errors?.['required']">{{
                     'form.validation.errors.required'|translate }}</small>
             </span>
+        </div>
+        <div class="form-group">
+            <div class="custom-control custom-control-success custom-switch">
+                <label class="form-control-label" for="status">{{ "content.field.status"|translate }}</label>
+                <br>
+                <input type="checkbox" class="custom-control-input" id="status" formControlName="status" /> <label
+                    class="custom-control-label" for="status"></label>
+            </div>
+
         </div>
     </form>
 </div>

@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h5 class="modal-title" id="myModalLabel160">{{ 'class_room.create.title'|translate }}</h5>
+    <h5 class="modal-title" id="myModalLabel160">{{ 'class_level.create.title'|translate }}</h5>
     <button type="button" class="close" (click)="modal.dismiss('cancel')" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
@@ -7,28 +7,23 @@
 <div class="modal-body py-4" tabindex="0" ngbAutofocus>
     <form [formGroup]="form">
         <div class="form-group">
-            <label class="form-control-label" for="name">{{ 'class_room.field.name'|translate }}</label>
+            <label class="form-control-label" for="name">{{ 'class_level.field.name'|translate }}</label>
             <input class="form-control input-md" formControlName="name" type="text"
-                placeholder="{{ 'class_room.field.name'|translate }}" id="name"
+                placeholder="{{ 'class_level.field.name'|translate }}" id="name"
                 [class.error]="name.invalid && (name.dirty || name.touched)">
             <span *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-form">
                 <small class="form-text text-danger danger" *ngIf="name.errors?.['required']">{{
                     'form.validation.errors.required'|translate }}</small>
             </span>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" for="size">{{ "class_room.field.size"|translate }}</label>
-            <input class="form-control input-md" formControlName="size" type="number" id="size"
-                placeholder="{{ 'class_room.field.size'|translate }}">
-        </div>
 
         <div class="form-group">
-            <label class="form-control-label" for="building_id">{{ "class_room.field.building"|translate }}</label>
-            <ng-select id="building_id" [placeholder]="'class_room.field.building'|translate" [items]="buildings"
-                bindLabel="name" formControlName="building_id" bindValue="id" readonly [loading]="selectLoading">
+            <label class="form-control-label" for="level_id">{{ "class_level.field.level"|translate }}</label>
+            <ng-select id="level_id" [placeholder]="'class_level.field.level'|translate" [items]="levels"
+                bindLabel="name" formControlName="level_id" bindValue="id" readonly [loading]="selectLoading">
             </ng-select>
-            <span *ngIf="building_id.invalid && (building_id.dirty || building_id.touched)" class="invalid-form">
-                <small class="form-text text-danger danger" *ngIf="building_id.errors?.['required']">{{
+            <span *ngIf="level_id.invalid && (level_id.dirty || level_id.touched)" class="invalid-form">
+                <small class="form-text text-danger danger" *ngIf="level_id.errors?.['required']">{{
                     'form.validation.errors.required'|translate }}</small>
             </span>
         </div>

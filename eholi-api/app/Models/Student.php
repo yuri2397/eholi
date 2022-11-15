@@ -17,4 +17,9 @@ class Student extends AbstractModel
     {
         return $this->morphOne(User::class, 'owner');
     }
+
+    public function school_students()
+    {
+        return $this->hasMany(SchoolStudent::class);
+    }
 }

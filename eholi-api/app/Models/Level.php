@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Level extends AbstractModel
 {
+    public function cycle()
+    {
+        return $this->belongsTo(Cycle::class);
+    }
 }

@@ -4,5 +4,6 @@ export class ClassRoom extends BaseModel {
   name: string
   size: number
   building_id: number
-  building: Building
+  building?: Building
+  status: 'active' | 'inactive'
 }

@@ -71,11 +71,33 @@
   "content": {
     "title": {
       "class_rooms": "Salle de classes",
+      "class_levels": "Liste des classes",
       "students": "Étudiants"
     },
     "undefined": "Indéfinie",
     "table": {
       "actions": "Actions"
+    },
+    "notifications": {
+      "title": "Notification",
+      "confirm": {
+        "delete": {
+          "title": "Attention !",
+          "text": "Êtes-vous sûr de vouloir supprimer cet élément ?"
+        }
+      }
+    },
+    "btn": {
+      "submit": "Enregistrer",
+      "cancel": "Annuler",
+      "confirm": "Confirmer"
+    },
+    "status": {
+      "inactive": "Inactive",
+      "active": "Active"
+    },
+    "field": {
+      "status": "Statut"
     }
   },
 
@@ -116,8 +138,21 @@
     }
   },
 
+  "form": {
+    "validation": {
+      "errors": {
+        "required": "Le champ est obligatoire"
+      }
+    }
+  },
+
   "class_room": {
     "title": "Salle de classes",
+    "field": {
+      "name": "Nom de la salle",
+      "size": "Capacité",
+      "building": "Bâtiment"
+    },
     "table": {
       "name": "Nom de la salle",
       "size": "Capacité",
@@ -127,18 +162,67 @@
     "btn": {
       "add": "Ajouter une salle"
     },
-    "status": {
-      "inactive": "Inactive",
-      "active": "Active"
-    },
+
     "placeholder": {
       "search": "Rechercher une salle"
     },
     "create": {
       "title": "Ajouter une nouvelle salle",
-      "btn": {
-        "submit": "Enregistrer",
-        "cancel": "Annuler"
+      "message": {
+        "success": "La salle a été ajoutée avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
+      }
+    },
+    "update": {
+      "title": "Modification d'une salle",
+      "message": {
+        "success": "La salle a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une salle",
+      "message": {
+        "success": "La salle a été supprimée avec succès"
+      }
+    }
+  },
+
+  "class_level": {
+    "title": "Salle de classes",
+    "field": {
+      "name": "Nom de la classe",
+      "level": "Niveau de la classe"
+    },
+    "table": {
+      "name": "Nom de la classe",
+      "level": "Niveau",
+      "total_students": "Nombre d'étudiants",
+      "total_courses": "Nombre de cours",
+      "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter une classe"
+    },
+
+    "placeholder": {
+      "search": "Rechercher une classe"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle classe",
+      "message": {
+        "success": "La classe a été ajoutée avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une classe",
+      "message": {
+        "success": "La classe a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une classe",
+      "message": {
+        "success": "La classe a été supprimée avec succès"
       }
     }
   }

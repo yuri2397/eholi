@@ -16,6 +16,11 @@ import { CoreCommonModule } from '@core/common.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { SharedModule } from 'app/shared/shared.module'
 import { CreateClassRoomComponent } from './class-rooms/create-class-room/create-class-room.component'
+import { EditClassRoomComponent } from './class-rooms/edit-class-room/edit-class-room.component'
+import { CreateClassLevelComponent } from './class-levels/create-class-level/create-class-level.component'
+import { EditClassLevelComponent } from './class-levels/edit-class-level/edit-class-level.component'
+import { ShowClassLevelComponent } from './class-levels/show-class-level/show-class-level.component'
+import { ShowClassLevelResolver } from './resolvers/show-class-level.resolver'
 
 const routes: Routes = [
   // {
@@ -58,6 +63,17 @@ const routes: Routes = [
     },
   },
   {
+    path: 'class-levels/:uuid',
+    component: ShowClassLevelComponent,
+    resolve: {
+      class_levels: ShowClassLevelResolver,
+    },
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    data: {
+      animation: 'details',
+    },
+  },
+  {
     path: 'housing',
     component: HousingComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
@@ -91,6 +107,10 @@ const routes: Routes = [
     HousingComponent,
     SchoolYearsComponent,
     CreateClassRoomComponent,
+    EditClassRoomComponent,
+    CreateClassLevelComponent,
+    EditClassLevelComponent,
+    ShowClassLevelComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })
