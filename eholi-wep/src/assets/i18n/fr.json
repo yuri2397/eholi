@@ -105,6 +105,7 @@
   },
 
   "student": {
+    "title": "Liste Etudiants",
     "table": {
       "first_name": "Prénom",
       "last_name": "Nom",
@@ -117,6 +118,19 @@
       "adress": "Adresse",
       "sex": "Sexe",
       "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter un étudiant"
+    },
+    "placeholder": {
+      "search": "Rechercher un étudiant"
+    },
+    "create": {
+      "title": "Ajouter une nouvel étudiant",
+      "btn": {
+        "submit": "Enregistrer",
+        "cancel": "Annuler"
+      }
     }
   },
 
