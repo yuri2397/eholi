@@ -11,7 +11,8 @@ import { AbstractService } from 'app/shared/abstract.service'
   providedIn: 'root',
 })
 export class StudentService extends AbstractService {
-  constructor(private _ch: HttpClient) {
+  constructor(
+    private _ch: HttpClient) {
     super('students', _ch)
   }
 
@@ -31,6 +32,10 @@ export class StudentService extends AbstractService {
     return this.http
       .get<Student>(`${this.enpoint}/${uuid}`, { params: params })
       .pipe(first())
+  }
+
+  public update(uuid : string, student : Student){
+    return this.http.put<Student>(`${this.enpoint}/${uuid}`, student)
   }
 
   public ecardIndex(params?: Param) {

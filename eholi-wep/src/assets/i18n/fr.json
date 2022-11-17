@@ -108,17 +108,19 @@
 
   "student": {
     "title": "Liste Etudiants",
+    "pronom": "Votre",
+    "lieuNaissance" : "lieu de naissance",
     "table": {
       "first_name": "Prénom",
       "last_name": "Nom",
       "fullname": "Prénom/Nom",
-      "birth_at": "Né à",
-      "birth_in": "Date de naissance",
+      "birth_in": "Né à",
+      "birth_at": "Date de naissance",
       "email": "Adresse email",
       "phone": "Téléphone",
       "cni": "CNI",
       "adress": "Adresse",
-      "sex": "Sexe",
+      "sexe": "Sexe",
       "status": "Statut"
     },
     "btn": {
@@ -129,9 +131,22 @@
     },
     "create": {
       "title": "Ajouter une nouvel étudiant",
-      "btn": {
-        "submit": "Enregistrer",
-        "cancel": "Annuler"
+      "messageForm": "Ce champ est obligatoire!",
+      "message": {
+        "success": "L'étudiant a été ajouté avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
+      }
+    },
+    "update": {
+      "title": "Modification d'un étudiant",
+      "message": {
+        "success": "L'étudiant a été modifié avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un étudiant",
+      "message": {
+        "success": "L'étudiant a été supprimé avec succès"
       }
     }
   },

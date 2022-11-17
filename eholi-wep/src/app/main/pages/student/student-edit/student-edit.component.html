@@ -1,6 +1,6 @@
 <div class="modal-header">
-    <h5 class="modal-title" id="myModalLabel160">{{ 'student.create.title'|translate }}</h5>
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+    <h5 class="modal-title" id="myModalLabel160">{{ 'student.update.title'|translate }}</h5>
+    <button type="button" class="close" (click)="modal.dismiss('cancel')" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
@@ -13,8 +13,8 @@
                     <input class="form-control input-md" formControlName="first_name" id="first_name"
                         name="first_name" type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.first_name'|translate }}"
-                        [class.error]="!name.valid && name.touched">
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        [class.error]="!first_name.valid && first_name.touched">
+                    <span *ngIf="!first_name.valid && first_name.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
@@ -24,8 +24,8 @@
                     <input class="form-control input-md" formControlName="last_name" id="last_name"
                         name="last_name" type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.last_name'|translate }}"
-                        [class.error]="!name.valid && name.touched">
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        [class.error]="!last_name.valid && last_name.touched">
+                    <span *ngIf="!last_name.valid && last_name.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
@@ -37,8 +37,8 @@
                     <input class="form-control input-md" formControlName="birth_at" id="birth_at" name="birth_at"
                         type="date"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.birth_at'|translate }}"
-                        [class.error]="!name.valid && name.touched">
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        [class.error]="!birth_at.valid && birth_at.touched">
+                    <span *ngIf="!birth_at.valid && birth_at.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
@@ -48,8 +48,8 @@
                     <input class="form-control input-md" formControlName="birth_in" id="birth_in" name="birth_in"
                         type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.lieuNaissance'|translate }}"
-                        [class.error]="!name.valid && name.touched">
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        [class.error]="!birth_in.valid && birth_in.touched">
+                    <span *ngIf="!birth_in.valid && birth_in.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
@@ -61,8 +61,8 @@
                     <input class="form-control input-md" formControlName="email" id="email" name="email"
                         type="email"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.email'|translate }}"
-                        [class.error]="!name.valid && name.touched">
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        [class.error]="!email.valid && email.touched">
+                    <span *ngIf="!email.valid && email.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
@@ -72,8 +72,8 @@
                     <input class="form-control input-md" formControlName="telephone" id="telephone"
                         name="telephone" type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.phone'|translate }}"
-                        [class.error]="!name.valid && name.touched">
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        [class.error]="!telephone.valid && telephone.touched">
+                    <span *ngIf="!telephone.valid && telephone.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
@@ -84,8 +84,8 @@
                     <label class="form-control-label" for="cni">{{ 'student.table.cni'|translate }}</label>
                     <input class="form-control input-md" formControlName="cni" id="cni" name="cni"
                         type="text" placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.cni'|translate }}"
-                        [class.error]="!name.valid && name.touched">
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        [class.error]="!cni.valid && cni.touched">
+                    <span *ngIf="!cni.valid && cni.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
@@ -95,8 +95,8 @@
                     <input class="form-control input-md" formControlName="adress" id="adress"
                         name="adress" type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.adress'|translate }}"
-                        [class.error]="!name.valid && name.touched">
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        [class.error]="!adress.valid && adress.touched">
+                    <span *ngIf="!adress.valid && adress.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
@@ -105,15 +105,25 @@
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-control-label" for="sexe">{{ 'student.table.sexe'|translate }}</label>
-                    <select class="form-select form-control" ngModel #name="" formControlName="sexe" id="sexe" name="sexe"
-                        [class.error]="!name.valid && name.touched">
+                    <select class="form-select form-control"  formControlName="sexe" id="sexe" name="sexe"
+                        [class.error]="!sexe.valid && sexe.touched">
                         <option value="m" >Homme</option>
                         <option value="w" >Femme</option>
                     </select>
-                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                    <span *ngIf="!sexe.valid && sexe.touched" class="invalid-form">
                         <small class="form-text text-danger danger"
                             *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
                     </span>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="custom-control custom-control-success custom-switch">
+                            <label class="form-control-label" for="status">{{ "content.field.status"|translate }}</label>
+                            <br>
+                            <input type="checkbox" class="custom-control-input" id="status" formControlName="status" /> <label
+                                class="custom-control-label" for="status"></label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

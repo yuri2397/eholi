@@ -7,6 +7,9 @@ import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.s
 import { TranslateService } from '@ngx-translate/core'
 import { SelectionType } from '@swimlane/ngx-datatable'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import Swal from 'sweetalert2'
+import { StudentService } from '../student.service'
+import { first } from 'rxjs/operators'
 
 @Component({
   selector: 'app-student',
@@ -22,18 +25,59 @@ export class StudentListComponent implements OnInit {
   public basicSelectedOption: number = 5
   searchTimeout: NodeJS.Timeout
   public SelectionType = SelectionType
+  editingStudent! : Student
+  deletedRow!: Student
   
   constructor( 
     private _route: ActivatedRoute,
     private _translateService: TranslateService,
     private _router: Router,
-    private _modalService: NgbModal,) {}
+    private _modalService: NgbModal,
+    private studentService : StudentService) {}
   
+    openCreateModal(modal: any) {
+      this._modalService
+        .open(modal, {
+          centered: true,
+          windowClass: 'modal modal-primary',
+          size: 'lg',
+          keyboard: false,
+        })
+        .result.then((result) => {
+          if (result) {
+            this.students.data = [result, ...this.students.data]
+          }
+        })
+        .catch((_) => {})
+    }
+
+    openEditModal(modal: any, item: Student) {
+      this.editingStudent = item
+      this._modalService
+        .open(modal, {
+          centered: true,
+          windowClass: 'modal modal-primary',
+          size: 'lg',
+          keyboard: false,
+        })
+        .result.then((result) => {
+          if (result) {
+            this.students.data.splice(
+              this.students.data.indexOf(item),
+              1,
+              result,
+            )
+            this.students.data = [...this.students.data]
+          }
+        })
+        .catch((_) => {})
+    }
+
     openModal(modal: any) {
       this._modalService.open(modal, {
         centered: true,
         windowClass: 'modal modal-primary',
-        size: 'md',
+        size: 'lg',
         keyboard: true,
       })
     }

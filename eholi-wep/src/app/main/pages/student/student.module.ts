@@ -18,7 +18,8 @@ import { StudentDashboardResolver } from './resolvers/student-dashboard.resolver
 import { RegistrationComponent } from './registration/registration.component'
 import { AdmissionComponent } from './admission/admission.component'
 import { FeesComponent } from './fees/fees.component';
-import { StudentCreateComponent } from './student-create/student-create.component'
+import { StudentCreateComponent } from './student-create/student-create.component';
+import { StudentEditComponent } from './student-edit/student-edit.component'
 
 const routes: Routes = [
   {
@@ -79,6 +80,7 @@ const routes: Routes = [
     AdmissionComponent,
     FeesComponent,
     StudentCreateComponent,
+    StudentEditComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })
