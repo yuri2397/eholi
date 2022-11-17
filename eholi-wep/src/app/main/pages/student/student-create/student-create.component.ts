@@ -1,13 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { group } from '@angular/animations'
 import {
   FormBuilder,
   FormControl,
   FormGroup,
-  UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service'
 import { Student } from '../student.model';
 import { StudentService } from '../student.service';
 import { finalize, first } from 'rxjs/operators';
@@ -17,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-student-create',
   templateUrl: './student-create.component.html',
-  styleUrls: ['./student-create.component.scss']
+  styleUrls: ['./student-create.component.scss'],
 })
 export class StudentCreateComponent implements OnInit {
 
@@ -40,10 +37,10 @@ export class StudentCreateComponent implements OnInit {
     this.validateForm = new FormGroup({
       first_name: new FormControl ('', [Validators.required, Validators.min(2)]),
       last_name: new FormControl ('', [Validators.required, Validators.min(2)]),
-      email: new FormControl ('', [Validators.required]),
-      adress: new FormControl('', [Validators.required, Validators.min(2)]),
-      telephone: new FormControl ('', [Validators.required, Validators.min(9)]),
-      cni: new FormControl ('', [Validators.required, Validators.min(12)]),
+      email: new FormControl ('', []),
+      adress: new FormControl('', [Validators.min(2)]),
+      telephone: new FormControl ('', [Validators.min(9)]),
+      cni: new FormControl ('', [Validators.min(12)]),
       birth_at: new FormControl('', [Validators.required]),
       birth_in: new FormControl ('', [Validators.required]),
       sexe: new FormControl ('', [Validators.required]),
@@ -106,8 +103,6 @@ export class StudentCreateComponent implements OnInit {
             data['student.create.message.error'],
             data['content.notifications.title'],
           )
-          console.log(errors);
-          
           this.modal.close(errors)
       })
       },
