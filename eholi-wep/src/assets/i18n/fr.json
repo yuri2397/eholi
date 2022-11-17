@@ -141,7 +141,8 @@
     "update": {
       "title": "Modification d'un étudiant",
       "message": {
-        "success": "L'étudiant a été modifié avec succès"
+        "success": "L'étudiant a été modifié avec succès",
+        "error": "Une erreur est survenue lors de la modification"
       }
     },
     "delete": {
