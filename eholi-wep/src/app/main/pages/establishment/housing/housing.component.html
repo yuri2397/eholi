@@ -1,1 +1,96 @@
-{{ rooms?.data|json }}
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+        <section class="users-list-wrapper">
+            <div class="card ">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="d-flex justify-content-between align-items-center m-1">
+                            <label class="d-flex align-items-center">
+                                <select class="form-control mx-25" (change)="paginate()"
+                                    [(ngModel)]="queryParams.per_page">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    {{ 'page.select_size'|translate }}
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
+                        <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                            <label class="d-flex align-items-center ml-1 ml-md-0"><input name="searchValue"
+                                    type="search" placeholder="{{ 'room.placeholder.search'|translate }}"
+                                    [(ngModel)]="queryParams.search_query" class="form-control ml-25"
+                                    (input)="onSearch($event.target.value)" /></label>
+                            <button class="btn btn-primary ml-1" rippleEffect (click)="openCreateModal(createModal)">
+                                <i data-feather="plus" class="mr-0 mr-sm-1"></i><span
+                                    class="d-none d-sm-inline-block">{{
+                                    'room.btn.add'|translate }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <ngx-datatable (page)="paginate($event)" [rows]="rooms.data" [rowHeight]="50"
+                    class="bootstrap core-bootstrap" [limit]="rooms.per_page" [externalPaging]="true"
+                    [count]="rooms.total" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                    [scrollbarH]="true">
+
+                    <ngx-datatable-column name="{{ 'room.table.label'|translate }}" prop="label" [width]="280">
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="{{ 'room.table.size'|translate }}" prop="size" [width]="80">
+
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="{{ 'room.table.total_students'|translate }}" prop="total_students"
+                        [width]="80">
+
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="{{ 'room.table.building'|translate }}" prop="building.name"
+                        [width]="120">
+                    </ngx-datatable-column>
+
+
+                    <ngx-datatable-column name="{{ 'content.table.actions'|translate }}" [width]="50"
+                        [sortable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="d-flex align-items-center">
+                                <span (click)="openEditModal(editModal, row)" class="mx-2 cursor-pointer">
+                                    <i data-feather="edit" class="text-primary "></i>
+                                </span>
+                                <span [swal]="SweetAlertConfirmText" (click)="deletedRow = row" class=" cursor-pointer">
+                                    <i data-feather="trash" class="text-danger "></i>
+                                </span>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- CREATE MODAL -->
+    <div class="modal-primary d-inline-block">
+        <ng-template #createModal let-modal>
+            <app-create-room [modal]="modal"></app-create-room>
+        </ng-template>
+    </div>
+
+    <!-- EDIT MODAL -->
+    <div class="modal-primary d-inline-block">
+        <ng-template #editModal let-modal>
+            <app-edit-room [modal]="modal" [item]="selectedRow"></app-edit-room>
+        </ng-template>
+    </div>
+
+    <!-- CONFIRM DELETE -->
+    <swal #SweetAlertConfirmText (open)="ConfirmTextOpen()"></swal>
+</div>

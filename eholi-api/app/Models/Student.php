@@ -22,4 +22,14 @@ class Student extends AbstractModel
     {
         return $this->hasMany(SchoolStudent::class);
     }
+
+    public function school()
+    {
+        return $this->belongsToMany(School::class, 'school_students');
+    }
+
+    public function rooms()
+    {
+        return $this->belongsTo(Room::class, 'student_has_rooms');
+    }
 }

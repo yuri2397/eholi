@@ -25,6 +25,10 @@ export class RoomService extends AbstractService {
     return this.http.post<Room>(this.enpoint, housing)
   }
 
+  update(uuid: string | number, housing: Room) {
+    return this.http.put<Room>(`${this.enpoint}/${uuid}`, housing)
+  }
+
   show(uuid: string | number) {
     return this.http.get<Room>(`${this.enpoint}/${uuid}`)
   }

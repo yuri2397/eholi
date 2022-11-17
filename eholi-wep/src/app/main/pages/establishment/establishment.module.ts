@@ -20,7 +20,9 @@ import { EditClassRoomComponent } from './class-rooms/edit-class-room/edit-class
 import { CreateClassLevelComponent } from './class-levels/create-class-level/create-class-level.component'
 import { EditClassLevelComponent } from './class-levels/edit-class-level/edit-class-level.component'
 import { ShowClassLevelComponent } from './class-levels/show-class-level/show-class-level.component'
-import { ShowClassLevelResolver } from './resolvers/show-class-level.resolver'
+import { ShowClassLevelResolver } from './resolvers/show-class-level.resolver';
+import { CreateRoomComponent } from './housing/create-room/create-room.component';
+import { EditRoomComponent } from './housing/edit-room/edit-room.component'
 
 const routes: Routes = [
   // {
@@ -111,6 +113,8 @@ const routes: Routes = [
     CreateClassLevelComponent,
     EditClassLevelComponent,
     ShowClassLevelComponent,
+    CreateRoomComponent,
+    EditRoomComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })

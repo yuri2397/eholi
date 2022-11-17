@@ -232,6 +232,7 @@ export const menu: CoreMenu[] = [
         queryParams: {
           page: 1,
           per_page: 10,
+          'with[]': ['building'],
         },
       },
       {

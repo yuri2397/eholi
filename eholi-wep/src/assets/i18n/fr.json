@@ -73,7 +73,8 @@
       "class_rooms": "Salle de classes",
       "class_levels": "Liste des classes",
       "students": "Étudiants",
-      "detail": "Détails"
+      "detail": "Détails",
+      "buildings": "Logements / Campus"
     },
     "undefined": "Indéfinie",
     "table": {
@@ -109,7 +110,7 @@
   "student": {
     "title": "Liste Etudiants",
     "pronom": "Votre",
-    "lieuNaissance" : "lieu de naissance",
+    "lieuNaissance": "lieu de naissance",
     "table": {
       "first_name": "Prénom",
       "last_name": "Nom",
@@ -240,6 +241,47 @@
       "title": "Supprimer une classe",
       "message": {
         "success": "La classe a été supprimée avec succès"
+      }
+    }
+  },
+
+  "room": {
+    "title": "Logements",
+    "field": {
+      "label": "Nom de la chambre",
+      "size": "Capacité",
+      "building": "Bâtiment"
+    },
+    "table": {
+      "label": "Nom de la chambre",
+      "size": "Capacité",
+      "building": "Bâtiment",
+      "total_students": "Nombre d'occupants",
+      "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter une chambre"
+    },
+
+    "placeholder": {
+      "search": "Rechercher une chambre"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle chambre",
+      "message": {
+        "success": "La chambre a été ajoutée avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une chambre",
+      "message": {
+        "success": "La chambre a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une chambre",
+      "message": {
+        "success": "La chambre a été supprimée avec succès"
       }
     }
   }
