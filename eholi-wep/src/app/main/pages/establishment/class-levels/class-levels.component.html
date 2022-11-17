@@ -35,9 +35,10 @@
                     </div>
                 </div>
 
-                <ngx-datatable [rows]="class_levels.data" [rowHeight]="50" class="bootstrap core-bootstrap"
-                    [limit]="class_levels.per_page" [externalPaging]="true" [count]="class_levels.total"
-                    [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [scrollbarH]="true">
+                <ngx-datatable (page)="paginate($event)" [rows]="class_levels.data" [rowHeight]="50"
+                    class="bootstrap core-bootstrap" [limit]="class_levels.per_page" [externalPaging]="true"
+                    [count]="class_levels.total" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                    [scrollbarH]="true">
 
                     <ngx-datatable-column name="{{ 'class_level.table.name'|translate }}" prop="name" [width]="280">
                     </ngx-datatable-column>

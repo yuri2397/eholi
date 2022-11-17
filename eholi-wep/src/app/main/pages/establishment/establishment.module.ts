@@ -66,7 +66,7 @@ const routes: Routes = [
     path: 'class-levels/:uuid',
     component: ShowClassLevelComponent,
     resolve: {
-      class_levels: ShowClassLevelResolver,
+      class_level: ShowClassLevelResolver,
     },
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     data: {

@@ -52,7 +52,7 @@ class ClassLevelController extends Controller
      */
     public function show(ClassLevel $classLevel)
     {
-        return $classLevel->with(['school_year', 'level'])->first();
+        return $classLevel->load(['school_year', 'level', 'level.cycle']);
     }
 
     /**

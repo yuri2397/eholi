@@ -154,7 +154,6 @@ export class ClassLevelsComponent implements OnInit {
   ngOnInit(): void {
     this._route.data.subscribe(
       (data: { class_levels: Paginate<ClassLevel> }) => {
-        console.log(data.class_levels)
         this.class_levels = data.class_levels
       },
     )

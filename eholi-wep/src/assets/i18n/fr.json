@@ -72,7 +72,8 @@
     "title": {
       "class_rooms": "Salle de classes",
       "class_levels": "Liste des classes",
-      "students": "Étudiants"
+      "students": "Étudiants",
+      "detail": "Détails"
     },
     "undefined": "Indéfinie",
     "table": {
@@ -133,6 +134,10 @@
         "cancel": "Annuler"
       }
     }
+  },
+
+  "timestable": {
+    "text": "Emploi du temps"
   },
 
   "form": {

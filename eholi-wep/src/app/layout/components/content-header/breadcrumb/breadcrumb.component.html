@@ -12,7 +12,7 @@
       'mr-1': breadcrumb?.alignment == 'right'
     }">
     <li class="breadcrumb-item" *ngFor="let link of breadcrumb?.links">
-      <a *ngIf="link?.isLink" routerLink="{{ link.link }}">{{ link?.name }}</a>
+      <a *ngIf="link?.isLink" routerLink="{{ link.link }}" [queryParams]="link.params">{{ link?.name }}</a>
       <span *ngIf="!link?.isLink">{{ link?.name }}</span>
     </li>
   </ol>

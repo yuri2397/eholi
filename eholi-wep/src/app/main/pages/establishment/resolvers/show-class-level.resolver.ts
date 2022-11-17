@@ -18,6 +18,8 @@ export class ShowClassLevelResolver implements Resolve<ClassLevel> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<ClassLevel> {
+    console.log(route.params.uuid)
+
     return this._classLevelService.show(route.params.uuid)
   }
 }
