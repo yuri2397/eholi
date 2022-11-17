@@ -131,9 +131,21 @@
     "create": {
       "title": "Ajouter une nouvel étudiant",
       "messageForm": "Ce champ est obligatoire!",
-      "btn": {
-        "submit": "Enregistrer",
-        "cancel": "Annuler"
+      "message": {
+        "success": "L'étudiant a été ajouté avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
+      }
+    },
+    "update": {
+      "title": "Modification d'un étudiant",
+      "message": {
+        "success": "L'étudiant a été modifié avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un étudiant",
+      "message": {
+        "success": "L'étudiant a été supprimé avec succès"
       }
     }
   },

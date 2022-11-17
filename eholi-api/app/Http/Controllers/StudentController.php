@@ -103,7 +103,9 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        return $student;
+        Student::whereId($student->id)->update($request->all());
+
+        return $student->refresh();
     }
 
     /**
@@ -114,6 +116,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return $student;
     }
 }

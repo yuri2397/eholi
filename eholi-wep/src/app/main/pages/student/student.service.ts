@@ -34,6 +34,10 @@ export class StudentService extends AbstractService {
       .pipe(first())
   }
 
+  public update(uuid : string, student : Student){
+    return this.http.put<Student>(`${this.enpoint}/${uuid}`, student)
+  }
+
   public ecardIndex(params?: Param) {
     return this.http.get<any>(`${this.enpoint}`, { params: params })
   }

@@ -5,13 +5,12 @@
     </button>
 </div>
 <div class="modal-body" tabindex="0" ngbAutofocus>
-    <form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <form [formGroup]="validateForm">
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label class="form-control-label" for="first_name">{{ 'student.table.first_name'|translate
-                        }}</label>
-                    <input class="form-control input-md" [(ngModel)]="student.first_name" formControlName="first_name" required id="first_name"
+                    <label class="form-control-label" for="first_name">{{ 'student.table.first_name'|translate }}</label>
+                    <input class="form-control input-md" formControlName="first_name" id="first_name"
                         name="first_name" type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.first_name'|translate }}"
                         [class.error]="!name.valid && name.touched">
@@ -22,7 +21,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-control-label" for="last_name">{{ 'student.table.last_name'|translate }}</label>
-                    <input class="form-control input-md" [(ngModel)]="student.last_name" formControlName="last_name" required id="last_name"
+                    <input class="form-control input-md" formControlName="last_name" id="last_name"
                         name="last_name" type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.last_name'|translate }}"
                         [class.error]="!name.valid && name.touched">
@@ -35,7 +34,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-control-label" for="birth_at">{{ 'student.table.birth_at'|translate }}</label>
-                    <input class="form-control input-md" [(ngModel)]="student.birth_at" formControlName="birth_at" required id="birth_at" name="birth_at"
+                    <input class="form-control input-md" formControlName="birth_at" id="birth_at" name="birth_at"
                         type="date"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.birth_at'|translate }}"
                         [class.error]="!name.valid && name.touched">
@@ -46,7 +45,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-control-label" for="birth_in">{{ 'student.table.birth_in'|translate }}</label>
-                    <input class="form-control input-md" [(ngModel)]="student.birth_in" formControlName="birth_in" required id="birth_in" name="birth_in"
+                    <input class="form-control input-md" formControlName="birth_in" id="birth_in" name="birth_in"
                         type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.lieuNaissance'|translate }}"
                         [class.error]="!name.valid && name.touched">
@@ -59,7 +58,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-control-label" for="email">{{ 'student.table.email'|translate }}</label>
-                    <input class="form-control input-md" [(ngModel)]="student.email" formControlName="email" required id="email" name="email"
+                    <input class="form-control input-md" formControlName="email" id="email" name="email"
                         type="email"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.email'|translate }}"
                         [class.error]="!name.valid && name.touched">
@@ -70,7 +69,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-control-label" for="telephone">{{ 'student.table.phone'|translate }}</label>
-                    <input class="form-control input-md" [(ngModel)]="student.telephone" formControlName="telephone" required id="telephone"
+                    <input class="form-control input-md" formControlName="telephone" id="telephone"
                         name="telephone" type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.phone'|translate }}"
                         [class.error]="!name.valid && name.touched">
@@ -82,8 +81,8 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label class="form-control-label" for="cni">{{ 'student.table.cin'|translate }}</label>
-                    <input class="form-control input-md" [(ngModel)]="student.cni" formControlName="cni" required id="cni" name="cni"
+                    <label class="form-control-label" for="cni">{{ 'student.table.cni'|translate }}</label>
+                    <input class="form-control input-md" formControlName="cni" id="cni" name="cni"
                         type="text" placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.cni'|translate }}"
                         [class.error]="!name.valid && name.touched">
                     <span *ngIf="!name.valid && name.touched" class="invalid-form">
@@ -93,7 +92,7 @@
                 </div>
                 <div class="col-md-6">
                     <label class="form-control-label" for="adress">{{ 'student.table.adress'|translate }}</label>
-                    <input class="form-control input-md" [(ngModel)]="student.adress" formControlName="adress" required id="adress"
+                    <input class="form-control input-md" formControlName="adress" id="adress"
                         name="adress" type="text"
                         placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.adress'|translate }}"
                         [class.error]="!name.valid && name.touched">
@@ -106,7 +105,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-control-label" for="sexe">{{ 'student.table.sexe'|translate }}</label>
-                    <select class="form-select form-control" ngModel #name="" [(ngModel)]="student.sexe" formControlName="sexe"required id="sexe" name="sexe"
+                    <select class="form-select form-control" ngModel #name="" formControlName="sexe" id="sexe" name="sexe"
                         [class.error]="!name.valid && name.touched">
                         <option value="m" >Homme</option>
                         <option value="w" >Femme</option>
@@ -121,9 +120,14 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button type="reset" class="btn btn-outline-secondary" (click)="modal.close('Accept click')" rippleEffect>
-        {{ 'student.create.btn.cancel'|translate }}
-    </button>
-    <button type="submit" class="btn btn-primary mr-1" rippleEffect (click)="save()">{{
-        'student.create.btn.submit'|translate }}</button>
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <button type="reset" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')" rippleEffect>
+            {{ 'content.btn.cancel'|translate }}
+        </button>
+        <button type="submit" [disabled]="!validateForm.valid" (click)="save(validateForm.value)" class="btn btn-primary mr-1"
+            rippleEffect>
+            <span *ngIf="createdLoad" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>{{
+            'content.btn.submit'|translate }}</button>
+    </div>
 </div>

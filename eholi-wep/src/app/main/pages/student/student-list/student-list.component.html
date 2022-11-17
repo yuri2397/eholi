@@ -28,7 +28,7 @@
                                     type="search" placeholder="{{ 'student.placeholder.search'|translate }}"
                                     [(ngModel)]="queryParams.search_query" class="form-control ml-25"
                                     (input)="onSearch($event.target.value)" /></label>
-                            <button class="btn btn-primary ml-1" rippleEffect (click)="openModal(createModal)">
+                            <button class="btn btn-primary ml-1" rippleEffect (click)="openCreateModal(createModal)">
                                 <i data-feather="plus" class="mr-0 mr-sm-1"></i><span
                                     class="d-none d-sm-inline-block">{{
                                     'student.btn.add'|translate }}</span>
@@ -55,10 +55,16 @@
 
                     <ngx-datatable-column name="{{ 'content.table.actions'|translate }}" [width]="50"
                         [sortable]="false">
-                        <ng-template ngx-datatable-cell-template>
+                        <ng-template let-row="row" ngx-datatable-cell-template>
                             <div class="d-flex align-items-center">
-                                <a (click)="openModal(editModal)"><i data-feather="edit" class="text-primary cursor-pointer ml-1"></i></a>
-                                <a><i data-feather="eye" class="text-success cursor-pointer ml-1"></i></a>     
+                                <div class="d-flex align-items-center">
+                                    <span (click)="openEditModal(editModal, row)" class="cursor-pointer">
+                                        <i data-feather="edit" class="text-primary "></i>
+                                    </span>
+                                    <span class="cursor-pointer">
+                                        <i data-feather="eye" class="text-success cursor-pointer ml-1"></i>
+                                    </span>
+                                </div>    
                             </div>
                         </ng-template>
                     </ngx-datatable-column>
@@ -74,7 +80,8 @@
     </div>
     <div class="modal-primary d-inline-block">
         <ng-template #editModal let-modal>
-            <app-student-edit [modal]="modal"></app-student-edit>
+            <app-student-edit [item]="editingStudent" [modal]="modal"></app-student-edit>
         </ng-template>
     </div>
+
 </div>
