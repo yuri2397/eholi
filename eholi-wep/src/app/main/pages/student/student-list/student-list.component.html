@@ -14,6 +14,7 @@
                                     [(ngModel)]="queryParams.per_page">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
+                                    <option value="10">15</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
@@ -48,9 +49,35 @@
                     <ngx-datatable-column name="{{ 'student.table.last_name'|translate }}" prop="last_name"
                         [width]="50">
                     </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.birth_at'|translate }}" prop="birth_at">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.birth_in'|translate }}" prop="birth_in" [width]="50">
+                    </ngx-datatable-column>
                     <ngx-datatable-column name="{{ 'student.table.email'|translate }}" prop="email">
+                        <ng-template let-email="value" ngx-datatable-cell-template>
+                            <div *ngIf="!email" class="badge badge-pill" [ngClass]="{
+                                      'badge-light-danger': true
+                                    }">
+                                {{('content.undefined'|translate)
+                                }}
+                            </div>
+                            <div *ngIf="email">
+                                {{ email }}
+                            </div>
+                        </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column name="{{ 'student.table.phone'|translate }}" prop="telephone" [width]="40">
+                        <ng-template let-telephone="value" ngx-datatable-cell-template>
+                            <div *ngIf="!telephone" class="badge badge-pill" [ngClass]="{
+                                      'badge-light-danger': true
+                                    }">
+                                {{('content.undefined'|translate)
+                                }}
+                            </div>
+                            <div *ngIf="telephone">
+                                {{ telephone }}
+                            </div>
+                        </ng-template>
                     </ngx-datatable-column>
 
                     <ngx-datatable-column name="{{ 'content.table.actions'|translate }}" [width]="50"
