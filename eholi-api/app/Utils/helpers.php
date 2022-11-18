@@ -9,7 +9,7 @@ if (!function_exists('school_year')) {
     function school_year($with_school = false)
     {
         if (($user = auth()->user())) {
-            $school = school_user();
+            $school = school();
             return SchoolYear::with($with_school ? 'school' : [])->whereSchoolId($school->id)
                 ->whereStatus(SchoolYear::ACTIVE)
                 ->orderBy('created_at')
@@ -21,10 +21,13 @@ if (!function_exists('school_year')) {
 }
 
 
-if (!function_exists('school_user')) {
+if (!function_exists('school')) {
 
+    /**
+     * Get the authenticated User school instance.
+     */
 
-    function school_user()
+    function school()
     {
         if (auth()->user()) {
             $owner = User::with(['owner.school_user.school'])->find(auth()->id());

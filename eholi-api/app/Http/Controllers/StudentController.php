@@ -21,13 +21,18 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        $school = $request->school ?: school_user()->id;
+        $school = $request->school ?: school()->id;
 
         $query = SchoolStudent::with($request->with ?? [])
             ->join('students as S', 'S.id', "school_students.student_id")
             ->whereSchoolId($school)
             ->where("school_students.status", true)
             ->where('S.status', true);
+
+        if ($request->has('class_level_id') && $request->class_level_id) {
+            $query->join('class_level_has_students as CHS', 'CHS.student_id', 'S.id')
+                ->where('CHS.class_level_id', $request->class_level_id);
+        }
 
         if ($request->has('search_query') && $request->search_query) {
             $query->where(
@@ -42,19 +47,19 @@ class StudentController extends Controller
             );
         }
 
-        $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
+        $query->orderBy($request->order_by ?: 'S.created_at', $request->order ?: 'DESC');
 
         return $query->paginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     public function dashboard(Request $request)
     {
-        $data['nb_students'] = SchoolStudent::whereSchoolId(school_user()->id)
+        $data['nb_students'] = SchoolStudent::whereSchoolId(school()->id)
             ->get()
             ->count();
 
         $data['nb_active_students'] = SchoolStudent::whereStatus(true)
-            ->whereSchoolId(school_user()->id)
+            ->whereSchoolId(school()->id)
             ->get()
             ->count();
 
@@ -82,7 +87,7 @@ class StudentController extends Controller
             );
 
             event(new AssociateUserTo($student));
-            event(new AssociateCustomerToSchool(school_user(), $student));
+            event(new AssociateCustomerToSchool(school(), $student));
 
             DB::commit();
             return $student;
@@ -135,7 +140,7 @@ class StudentController extends Controller
     public function disableStudentInSchool(Student $student)
     {
         $school_student = SchoolStudent::whereStudentId($student->id)
-            ->whereSchoolId(school_user()->id)
+            ->whereSchoolId(school()->id)
             ->first();
 
         $school_student->update([

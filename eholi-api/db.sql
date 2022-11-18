@@ -31,6 +31,7 @@ select * from users;
 drop table school_users;
 
 desc school_users;
+desc rooms;
 
 desc cycles;
 
@@ -57,3 +58,11 @@ desc students;
 desc courses;
 select * from levels;
 select * from school_years;
+desc student_has_rooms;
+desc class_levels;
+select * from class_levels;
+select * from class_level_has_students;
+desc class_level_has_students;
+desc school_students;
+select * from school_students;
+select * from students;

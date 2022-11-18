@@ -14,7 +14,7 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Room::with($request->with ?: [])->whereSchoolId(school_user()->id);
+        $query = Room::with($request->with ?: [])->whereSchoolId(school()->id);
 
         if ($request->has('search_query')) {
             $query->where('label', 'LIKE', "%" . $request->search_query . "%");
@@ -39,7 +39,7 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         // validation
-        $request->merge(['school_id' => school_user()->id]);
+        $request->merge(['school_id' => school()->id]);
         $room = Room::create($request->all());
         return $room;
     }

@@ -54,52 +54,55 @@
                 <br>
                 <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
                     <label class="d-flex align-items-center ml-1 ml-md-0"><input name="searchValue" type="search"
-                            placeholder="{{ 'class_level.placeholder.search'|translate }}"
+                            placeholder="{{ 'student.placeholder.search'|translate }}"
                             [(ngModel)]="queryParams.search_query" class="form-control ml-25"
                             (input)="onSearch($event.target.value)" /></label>
-                    <button class="btn btn-primary ml-1" rippleEffect>
-                        <i data-feather="plus" class="mr-0 mr-sm-1"></i><span class="d-none d-sm-inline-block">{{
-                            'class_level.btn.add'|translate }}</span>
-                    </button>
                 </div>
                 <br>
-                <ngx-datatable [rows]="[]" [rowHeight]="50" class="bootstrap core-bootstrap" [limit]="10"
-                    [externalPaging]="true" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                <ngx-datatable (page)="paginate($event)" [rows]="students.data" [rowHeight]="50"
+                    class="bootstrap core-bootstrap" [limit]="students.per_page" [externalPaging]="true"
+                    [count]="students.total" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
                     [scrollbarH]="true">
 
-                    <ngx-datatable-column name="{{ 'class_level.table.name'|translate }}" prop="name" [width]="280">
+                    <ngx-datatable-column name="{{ 'student.table.reference'|translate }}" prop="reference">
                     </ngx-datatable-column>
-
-                    <ngx-datatable-column name="{{ 'class_level.table.level'|translate }}" prop="level.name"
-                        [width]="80">
-
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="{{ 'class_level.table.total_students'|translate }}"
-                        prop="total_students" [width]="120">
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="{{ 'class_level.table.total_courses'|translate }}" prop="total_courses"
+                    <ngx-datatable-column name="{{ 'student.table.first_name'|translate }}" prop="first_name"
                         [width]="120">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.last_name'|translate }}" prop="last_name"
+                        [width]="50">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.birth_at'|translate }}" prop="birth_at">
+                        <ng-template let-birth_at="value" ngx-datatable-cell-template>
+                            {{ birth_at | date: 'dd/MM/yyyy' }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.birth_at'|translate }}" prop="birth_in">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.phone'|translate }}" prop="telephone" [width]="40">
+
+                        <ng-template let-telephone="value" ngx-datatable-cell-template>
+                            <div *ngIf="!telephone" class="badge badge-pill" [ngClass]="{'badge-light-danger': true }">
+                                {{('content.undefined'|translate)}}
+                            </div>
+                            <div *ngIf="telephone">
+                                {{ telephone }}
+                            </div>
+                        </ng-template>
                     </ngx-datatable-column>
 
                     <ngx-datatable-column name="{{ 'content.table.actions'|translate }}" [width]="50"
                         [sortable]="false">
                         <ng-template let-row="row" ngx-datatable-cell-template>
                             <div class="d-flex align-items-center">
-                                <span [routerLink]="[row.id]" class="cursor-pointer">
-                                    <i data-feather="eye" class="text-info "></i>
-                                </span>
-                                <span (click)="openEditModal(editModal, row)" class="mx-2 cursor-pointer">
-                                    <i data-feather="edit" class="text-primary "></i>
-                                </span>
-                                <span [swal]="SweetAlertConfirmText" (click)="deletedRow = row" class=" cursor-pointer">
-                                    <i data-feather="trash" class="text-danger "></i>
-                                </span>
+                                <div class="d-flex align-items-center">
+                                    <span class="cursor-pointer">
+                                        <i data-feather="eye" class="text-success cursor-pointer ml-1"></i>
+                                    </span>
+                                </div>
                             </div>
                         </ng-template>
                     </ngx-datatable-column>
-
                 </ngx-datatable>
             </div>
 

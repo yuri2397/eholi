@@ -16,13 +16,13 @@ class BuildingController extends Controller
     public function index(Request $request)
     {
         $query = Building::with($request->with ?: [])
-            ->whereSchoolId(school_user()->id);
+            ->whereSchoolId(school()->id);
 
         if ($request->has('search_query') && $request->search_query) {
             $query->where('name', 'LIKE', "%{$request->search_query}%");
         }
 
-        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
+        return $query->paginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     /**
@@ -35,7 +35,7 @@ class BuildingController extends Controller
     {
         $request->validated();
 
-        $request->merge(['school_id' => school_user()->id]);
+        $request->merge(['school_id' => school()->id]);
         $building = Building::create($request->all());
         return $building->refresh();
     }
@@ -62,7 +62,7 @@ class BuildingController extends Controller
     {
         // $request->validate()
 
-        $request->merge(['school_id' => school_user()->id]);
+        $request->merge(['school_id' => school()->id]);
         Building::whereId($building->id)->update($request->all());
         return $building->refresh();
     }

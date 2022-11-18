@@ -13,7 +13,7 @@ abstract class AbstractModel extends Model
     public const BASE_REFERENCE = "dt";
 
 
-    public function school_user()
+    public function school()
     {
         return $this->morphOne(SchoolUser::class, 'user');
     }

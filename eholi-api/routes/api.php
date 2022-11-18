@@ -27,6 +27,8 @@ use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SchoolYearController;
 use App\Models\ClassLevel;
+use App\Models\ClassLevelHasStudent;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 use Spatie\Permission\Contracts\Role as ContractsRole;
 
 
@@ -146,7 +148,22 @@ Route::prefix("buildings")->middleware(['auth:api', 'cors'])
  */
 Route::any('tests', function (Request $request) {
 
-    $school = school_user();
+    $school = school();
+    $student  =
+        SchoolStudent::with($request->with ?? [])
+        ->join('students as S', 'S.id', "school_students.student_id")
+        ->whereSchoolId($school->id)
+        ->where("school_students.status", true)
+        ->where('S.status', true)
+        ->limit(3)
+        ->get();
+
+    foreach ($student as $value) {
+        $clhs = new ClassLevelHasStudent();
+        $clhs->student_id = $value->id;
+        $clhs->class_level_id = "005107dc-8949-4ea0-80b8-da7945dfec4a";
+        $clhs->save();
+    }
     // foreach (Student::all() as $value) {
     //     event(new AssociateCustomerToSchool($school, $value));
     // }

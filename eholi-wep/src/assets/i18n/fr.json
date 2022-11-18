@@ -74,7 +74,28 @@
       "class_levels": "Liste des classes",
       "students": "Étudiants",
       "detail": "Détails",
-      "buildings": "Logements / Campus"
+      "buildings": "Logements / Campus",
+      "admission": "Admissions"
+    },
+    "admission": {
+      "stepper": [
+        {
+          "title": "Acte de naissance",
+          "sub_title": "Informations Personnelles"
+        },
+        {
+          "title": "Parents/Tuteurs",
+          "sub_title": "Informations du tuteur"
+        },
+        {
+          "title": "Autres",
+          "sub_title": "Autres informations"
+        },
+        {
+          "title": "Orientation",
+          "sub_title": "Finaliser l'inscription"
+        }
+      ]
     },
     "undefined": "Indéfinie",
     "table": {
@@ -112,6 +133,7 @@
     "pronom": "Votre",
     "lieuNaissance": "lieu de naissance",
     "table": {
+      "reference": "Matricule",
       "first_name": "Prénom",
       "last_name": "Nom",
       "fullname": "Prénom/Nom",

@@ -16,7 +16,7 @@ class ClassRoomController extends Controller
     public function index(Request $request)
     {
         $query = ClassRoom::with($request->with ?: [])
-            ->whereSchoolId(school_user()->id);
+            ->whereSchoolId(school()->id);
 
         if ($request->has('search_query')) {
             $query->where('name', 'LIKE', "%{$request->search_query}%");
@@ -37,7 +37,7 @@ class ClassRoomController extends Controller
     {
         $request->validated();
 
-        $request->merge(['school_id' => school_user()->id]);
+        $request->merge(['school_id' => school()->id]);
         $class_room = ClassRoom::create($request->all());
         return $class_room->refresh();
     }
@@ -62,7 +62,7 @@ class ClassRoomController extends Controller
      */
     public function update(Request $request, ClassRoom $class_room)
     {
-        $request->merge(['school_id' => school_user()->id]);
+        $request->merge(['school_id' => school()->id]);
         ClassRoom::whereId($class_room->id)->update($request->all());
 
         return $class_room->refresh();

@@ -1,4 +1,6 @@
-import { ActivatedRoute } from '@angular/router'
+import { Student } from './../../../student/student.model'
+import { Paginate } from './../../../../../auth/models/base.model'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ClassLevel } from './../../models/class-level.model'
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { Param } from 'app/auth/models/data.model'
@@ -14,23 +16,43 @@ export class ShowClassLevelComponent implements OnInit {
   class_level: ClassLevel
   queryParams: Param = {}
   contentHeader: object
+  students: Paginate<Student>
 
   constructor(
     private _route: ActivatedRoute,
     private _translateService: TranslateService,
+    private _router: Router,
   ) {}
 
   onSearch(data: string) {}
 
-  ngOnInit(): void {
-    this._route.parent.parent.data.subscribe((data) => {
-      console.log(data)
-    })
+  paginate(page?: {
+    count: number
+    limit: number
+    offset: number
+    pageSize: number
+  }) {
+    if (page) {
+      this.queryParams.per_page = page.pageSize
+      this.queryParams.page = page.offset + 1
+    }
+    console.log(this.queryParams)
 
-    this._route.data.subscribe((data: { class_level: ClassLevel }) => {
-      console.log(data.class_level)
-      this.class_level = data.class_level
+    this._router.navigate(['./'], {
+      queryParams: this.queryParams,
+      relativeTo: this._route,
+      replaceUrl: true,
     })
+  }
+
+  ngOnInit(): void {
+    this._route.data.subscribe(
+      (data: { class_level: ClassLevel; students: Paginate<Student> }) => {
+        console.log(data.class_level)
+        this.class_level = data.class_level
+        this.students = data.students
+      },
+    )
 
     // get the queryParams
     this._route.queryParams.subscribe((data) => {
@@ -43,7 +65,7 @@ export class ShowClassLevelComponent implements OnInit {
       .subscribe((title: string) => {
         this.contentHeader = {
           headerTitle: title,
-          actionButton: true,
+          actionButton: false,
           breadcrumb: {
             type: '',
             links: [
