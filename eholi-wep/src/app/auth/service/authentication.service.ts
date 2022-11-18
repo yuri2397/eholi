@@ -88,8 +88,6 @@ export class AuthenticationService {
       })
       .pipe(
         map((token) => {
-          console.log(token)
-
           // login successful if there's a jwt token in the response
           if (token && token.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
