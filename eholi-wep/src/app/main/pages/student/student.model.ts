@@ -13,3 +13,9 @@ export class Student extends BaseModel {
   sexe: string
   status: true | false
 }
+
+export class SchoolStudent extends BaseModel {
+  school_id: string
+  student_id: string
+  status: true | false
+}

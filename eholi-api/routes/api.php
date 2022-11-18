@@ -98,6 +98,9 @@ Route::prefix('students')->middleware(['auth:api', 'cors'])->controller(StudentC
 
     Route::post('', 'store');
     Route::put('/{student}', 'update');
+
+    // disable student in school
+    Route::put('/{student}/disable', 'disableStudentInSchool');
 });
 
 /**

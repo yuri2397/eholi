@@ -24,13 +24,25 @@ class StudentController extends Controller
         $school = $request->school ?: school_user()->id;
 
         $query = SchoolStudent::with($request->with ?? [])
-            ->whereSchoolId($school)
             ->join('students as S', 'S.id', "school_students.student_id")
-            ->where('S.first_name', 'LIKE', '%' . $request->search_query ?: '' . '%')
-            ->orWhere('S.last_name', 'LIKE', '%' . $request->search_query ?: '' . '%')
-            ->orWhere('S.reference', $request->search_query ?: '')
-            ->orderBy($request->order_by ?: 'S.created_at', $request->order ?: 'DESC');
+            ->whereSchoolId($school)
+            ->where("school_students.status", true)
+            ->where('S.status', true);
 
+        if ($request->has('search_query') && $request->search_query) {
+            $query->where(
+                function ($q) use ($request) {
+                    $q->where('S.first_name', 'LIKE', "%{$request->search_query}%")
+                        ->orWhere('S.last_name', 'LIKE', "%{$request->search_query}%")
+                        ->orWhere('S.cni', 'LIKE', "%{$request->search_query}%")
+                        ->orWhere('S.email', 'LIKE', "%{$request->search_query}%")
+                        ->orWhere('S.telephone', 'LIKE', "%{$request->search_query}%")
+                        ->orWhere('S.reference', $request->search_query);
+                }
+            );
+        }
+
+        $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
 
         return $query->paginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
@@ -118,5 +130,18 @@ class StudentController extends Controller
     {
         $student->delete();
         return $student;
+    }
+
+    public function disableStudentInSchool(Student $student)
+    {
+        $school_student = SchoolStudent::whereStudentId($student->id)
+            ->whereSchoolId(school_user()->id)
+            ->first();
+
+        $school_student->update([
+            "status" => false
+        ]);
+
+        return $school_student->refresh();
     }
 }
