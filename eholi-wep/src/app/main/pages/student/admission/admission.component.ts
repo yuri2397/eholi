@@ -5,11 +5,11 @@ import { TranslateService } from '@ngx-translate/core'
 import Stepper from 'bs-stepper'
 import { TutorsService } from '../../school/services/tutors.service'
 import { ClassLevelService } from '../../establishment/services/class-level.service'
-import { Paginate } from '/home/tanel/Documents/holi.sn/eholi/eholi-wep/src/app/auth/models/base.model'
 import { ClassLevel } from '../../establishment/models/class-level.model'
 import Swal from 'sweetalert2'
 import { AdminissionService } from '../services/adminission.service'
 import { ToastrService } from 'ngx-toastr'
+import { Paginate } from 'app/auth/models/base.model'
 
 @Component({
   selector: 'app-admission',
