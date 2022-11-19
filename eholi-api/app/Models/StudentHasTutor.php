@@ -5,24 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SchoolStudent extends AbstractModel
+class StudentHasTutor extends AbstractModel
 {
+    public const TYPE_FATHER = 'father';
+    public const TYPE_MOTHER = 'mother';
+    public const TYPE_OTHER = 'other';
 
     protected $fillable = [
-        'school_id',
+        'id',
         'student_id',
-        'reference',
-        'status',
+        'tutor_id',
+        'type',
     ];
-
 
     public function student()
     {
         return $this->belongsTo(Student::class);
     }
 
-    public function school()
+    public function tutor()
     {
-        return $this->belongsTo(School::class);
+        return $this->belongsTo(Tutor::class);
     }
 }

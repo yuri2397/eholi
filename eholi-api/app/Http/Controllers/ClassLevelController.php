@@ -14,7 +14,8 @@ class ClassLevelController extends Controller
      */
     public function index(Request $request)
     {
-        $query = ClassLevel::with($request->with ?: []);
+        $query = ClassLevel::with($request->with ?: [])
+            ->whereSchoolYearId($request->school_yeard_id ?: school_year()->id);
 
         if ($request->has('search_query')) {
             $query->where('name', 'LIKE', "%{$request->search_query}%");

@@ -1,3 +1,4 @@
+import { SchoolModule } from './school/school.module'
 import { EstablishmentModule } from './establishment/establishment.module'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
@@ -42,6 +43,7 @@ import { StudentModule } from './student/student.module'
     // Holi Modules
     StudentModule,
     EstablishmentModule,
+    SchoolModule,
   ],
 
   providers: [],

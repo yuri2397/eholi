@@ -30,7 +30,8 @@ select * from users;
 
 drop table school_users;
 
-desc school_users;
+desc school_user;
+select * from school_users;
 desc rooms;
 
 desc cycles;
@@ -60,9 +61,22 @@ select * from levels;
 select * from school_years;
 desc student_has_rooms;
 desc class_levels;
+desc professors;
 select * from class_levels;
+desc class_levels;
 select * from class_level_has_students;
+desc class_level_has_students;
 desc class_level_has_students;
 desc school_students;
 select * from school_students;
 select * from students;
+desc students;
+desc users;
+desc school_has_professors;
+desc student_has_tutors;
+desc admins;
+
+select * from students order by created_at desc limit 1;
+select * from school_students order by created_at desc limit 1;
+select * from users order by created_at desc limit 3;
+select * from class_level_has_students join class_levels on class_levels.id =  class_level_has_students.class_level_id order by created_at desc limit 10;

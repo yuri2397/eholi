@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Events\AssociateCustomerToSchool;
+use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BuildingController;
@@ -26,8 +27,10 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SchoolYearController;
+use App\Http\Controllers\TutorController;
 use App\Models\ClassLevel;
 use App\Models\ClassLevelHasStudent;
+use App\Models\Tutor;
 use PHPUnit\Framework\MockObject\Builder\Stub;
 use Spatie\Permission\Contracts\Role as ContractsRole;
 
@@ -113,6 +116,13 @@ Route::prefix('class-rooms')
     ->apiResource('class-rooms', ClassRoomController::class);
 
 /**
+ * ClassRoom
+ */
+Route::prefix('tutors')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('tutors', TutorController::class);
+
+/**
  * Level
  */
 Route::prefix('levels')
@@ -133,6 +143,13 @@ Route::prefix('rooms')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('rooms', RoomController::class);
 
+/**
+ * Room
+ */
+Route::prefix('admissions')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('admissions', AdmissionController::class);
+
 
 
 /**
@@ -147,6 +164,8 @@ Route::prefix("buildings")->middleware(['auth:api', 'cors'])
  * TEST URL
  */
 Route::any('tests', function (Request $request) {
+
+    return Tutor::all();
 
     $school = school();
     $student  =

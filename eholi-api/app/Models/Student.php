@@ -13,6 +13,8 @@ class Student extends AbstractModel
     protected $fillable = ['first_name', 'last_name', 'birth_at', 'birth_in', 'email', 'telephone', 'cni', 'reference', 'sexe', 'adress'];
     protected $guard = [];
 
+
+
     public function user()
     {
         return $this->morphOne(User::class, 'owner');
@@ -31,5 +33,23 @@ class Student extends AbstractModel
     public function rooms()
     {
         return $this->belongsTo(Room::class, 'student_has_rooms');
+    }
+
+    # tutors
+    public function tutors()
+    {
+        return $this->belongsToMany(Tutor::class, 'student_has_tutors');
+    }
+
+    # morphto school user
+    public function school_user()
+    {
+        return $this->morphOne(SchoolUser::class, 'user');
+    }
+
+    # class level has student
+    public function class_level_has_student()
+    {
+        return $this->hasMany(ClassLevelHasStudent::class);
     }
 }

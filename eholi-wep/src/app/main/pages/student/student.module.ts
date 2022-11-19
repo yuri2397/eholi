@@ -17,8 +17,8 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { StudentDashboardResolver } from './resolvers/student-dashboard.resolver'
 import { RegistrationComponent } from './registration/registration.component'
 import { AdmissionComponent } from './admission/admission.component'
-import { FeesComponent } from './fees/fees.component';
-import { StudentCreateComponent } from './student-create/student-create.component';
+import { FeesComponent } from './fees/fees.component'
+import { StudentCreateComponent } from './student-create/student-create.component'
 import { StudentEditComponent } from './student-edit/student-edit.component'
 
 const routes: Routes = [
@@ -69,6 +69,7 @@ const routes: Routes = [
     path: 'admissions',
     component: AdmissionComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    data: { animation: 'repeater' },
   },
 ]
 

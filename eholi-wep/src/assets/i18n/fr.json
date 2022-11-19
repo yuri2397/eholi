@@ -43,7 +43,7 @@
     },
     "admission": {
       "title": "Admission",
-      "request": "Demandes d'admission",
+      "request": "Nouvelle admission",
       "registration": "Inscription/Réinscription",
       "school-year": "Rentrées scolaires",
       "fees": "Frais scolaires"
@@ -103,17 +103,46 @@
     },
     "notifications": {
       "title": "Notification",
+      "success": {
+        "title": "Succès",
+        "message": "Opération effectuée avec succès"
+      },
+      "error": {
+        "title": "Erreur",
+        "message": "Une erreur s'est produite lors de l'opération"
+      },
+      "warning": {
+        "title": "Attention",
+        "message": "Attention, une erreur s'est produite"
+      },
+      "info": {
+        "title": "Information",
+        "message": "Information"
+      },
       "confirm": {
         "delete": {
           "title": "Attention !",
           "text": "Êtes-vous sûr de vouloir supprimer cet élément ?"
+        },
+        "create": {
+          "title": "Attention !",
+          "text": "Êtes-vous sûr de vouloir continuer?"
         }
       }
     },
     "btn": {
       "submit": "Enregistrer",
       "cancel": "Annuler",
-      "confirm": "Confirmer"
+      "confirm": "Confirmer",
+      "next": "Suivant",
+      "previous": "Précédent",
+      "validate": "Valider",
+      "new_line": "Ajouter une ligne",
+      "delete": "Supprimer"
+    },
+    "sexe": {
+      "m": "Masculin",
+      "w": "Féminin"
     },
     "status": {
       "inactive": "Inactive",
@@ -144,7 +173,8 @@
       "cni": "CNI",
       "adress": "Adresse",
       "sexe": "Sexe",
-      "status": "Statut"
+      "status": "Statut",
+      "departement": "Département"
     },
     "btn": {
       "add": "Ajouter un étudiant"
@@ -239,7 +269,8 @@
       "level": "Niveau",
       "total_students": "Nombre d'étudiants",
       "total_courses": "Nombre de cours",
-      "status": "Statut"
+      "status": "Statut",
+      "school_year": "Rentrées scolaires"
     },
     "btn": {
       "add": "Ajouter une classe"
@@ -286,6 +317,53 @@
       "add": "Ajouter une chambre"
     },
 
+    "placeholder": {
+      "search": "Rechercher une chambre"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle chambre",
+      "message": {
+        "success": "La chambre a été ajoutée avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une chambre",
+      "message": {
+        "success": "La chambre a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une chambre",
+      "message": {
+        "success": "La chambre a été supprimée avec succès"
+      }
+    }
+  },
+
+  "tutor": {
+    "title": "Parents/Tuteurs",
+    "field": {
+      "phone1": "Téléphone du tuteur",
+      "name": "Prénom/Nom",
+      "type": "Relation parentale",
+      "adress": "Adresse"
+    },
+    "table": {
+      "label": "Nom de la chambre",
+      "size": "Capacité",
+      "building": "Bâtiment",
+      "total_students": "Nombre d'occupants",
+      "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter une chambre"
+    },
+    "select": {
+      "father": "Père",
+      "mother": "Mère",
+      "other": "Autre",
+      "not_found_text": "Aucun parent trouvé"
+    },
     "placeholder": {
       "search": "Rechercher une chambre"
     },
