@@ -10,13 +10,18 @@ if (!function_exists('school_year')) {
     {
         if (($user = auth()->user())) {
             $school = school();
-            return SchoolYear::with($with_school ? 'school' : [])->whereSchoolId($school->id)
+            $school_year = SchoolYear::with($with_school ? 'school' : [])->whereSchoolId($school->id)
                 ->whereStatus(SchoolYear::ACTIVE)
                 ->orderBy('created_at')
                 ->first();
+
+                if(!$school_year){
+                    throw new Exception("Any active school year is available. Start a new school year.", 409);
+                }
+                return $school_year;
         }
 
-        return throw new Exception('Unauthenticate 401', 401);
+        return throw new Exception('Unauthenticate', 401);
     }
 }
 

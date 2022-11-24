@@ -33,11 +33,11 @@ export class AdmissionComponent implements OnInit {
   classLevelSearchLoad: boolean
 
   constructor(
-    private _translateService: TranslateService,
     private _tutorsService: TutorsService,
     private _classLevelService: ClassLevelService,
     private _admissionService: AdminissionService,
     private _toastrService: ToastrService,
+    private _translateService: TranslateService,
   ) {
     // transaltion service
     this._translateService

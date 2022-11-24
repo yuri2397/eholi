@@ -13,7 +13,7 @@ class ProfessorRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,7 +31,7 @@ class ProfessorRequest extends FormRequest
             'cni' => ['string', 'size:13'],
             'sexe' => ['required', 'in:m,w'],
             'adress' => ['required', 'string'],
-            'last_degre' => ['string']
+            'last_degre' => ['string'],
         ];
     }
 }

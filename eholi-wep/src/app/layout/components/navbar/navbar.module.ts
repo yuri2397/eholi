@@ -1,26 +1,28 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core'
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import {
   PerfectScrollbarConfigInterface,
   PerfectScrollbarModule,
-  PERFECT_SCROLLBAR_CONFIG
-} from 'ngx-perfect-scrollbar';
+  PERFECT_SCROLLBAR_CONFIG,
+} from 'ngx-perfect-scrollbar'
 
-import { CoreCommonModule } from '@core/common.module';
-import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module';
+import { CoreCommonModule } from '@core/common.module'
+import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module'
 
-import { NavbarComponent } from 'app/layout/components/navbar/navbar.component';
-import { NavbarBookmarkComponent } from 'app/layout/components/navbar/navbar-bookmark/navbar-bookmark.component';
-import { NavbarSearchComponent } from 'app/layout/components/navbar/navbar-search/navbar-search.component';
-import { NavbarCartComponent } from 'app/layout/components/navbar/navbar-cart/navbar-cart.component';
-import { NavbarNotificationComponent } from 'app/layout/components/navbar/navbar-notification/navbar-notification.component';
+import { NavbarComponent } from 'app/layout/components/navbar/navbar.component'
+import { NavbarBookmarkComponent } from 'app/layout/components/navbar/navbar-bookmark/navbar-bookmark.component'
+import { NavbarSearchComponent } from 'app/layout/components/navbar/navbar-search/navbar-search.component'
+import { NavbarCartComponent } from 'app/layout/components/navbar/navbar-cart/navbar-cart.component'
+import { NavbarNotificationComponent } from 'app/layout/components/navbar/navbar-notification/navbar-notification.component'
+import { SharedModule } from 'app/shared/shared.module'
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
-  wheelPropagation: false
-};
+  wheelPropagation: false,
+}
 
 @NgModule({
   declarations: [
@@ -28,15 +30,22 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NavbarSearchComponent,
     NavbarBookmarkComponent,
     NavbarCartComponent,
-    NavbarNotificationComponent
+    NavbarNotificationComponent,
   ],
-  imports: [RouterModule, NgbModule, CoreCommonModule, PerfectScrollbarModule, CoreTouchspinModule],
+  imports: [
+    RouterModule,
+    NgbModule,
+    CoreCommonModule,
+    PerfectScrollbarModule,
+    CoreTouchspinModule,
+    TranslateModule,
+  ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
   ],
-  exports: [NavbarComponent]
+  exports: [NavbarComponent],
 })
 export class NavbarModule {}

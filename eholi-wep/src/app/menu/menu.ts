@@ -96,14 +96,14 @@ export const menu: CoreMenu[] = [
         url: 'pages/registrations',
       },
 
-      {
-        id: 'admission.fees',
-        title: 'menu.admission.fees',
-        translate: 'menu.admission.fees',
-        type: 'item',
-        icon: 'circle',
-        url: 'pages/fees',
-      },
+      // {
+      //   id: 'admission.fees',
+      //   title: 'menu.admission.fees',
+      //   translate: 'menu.admission.fees',
+      //   type: 'item',
+      //   icon: 'circle',
+      //   url: 'pages/fees',
+      // },
       {
         id: 'student.list',
         title: 'menu.student.list',
@@ -198,46 +198,51 @@ export const menu: CoreMenu[] = [
           'with[]': ['building'],
         },
       },
-      {
-        id: 'admission.school-year',
-        title: 'menu.admission.school-year',
-        translate: 'menu.admission.school-year',
-        type: 'item',
-        icon: 'circle',
-        url: 'pages/school-years',
-        queryParams: {
-          page: 1,
-          per_page: 10,
-        },
-      },
+      // {
+      //   id: 'admission.school-year',
+      //   title: 'menu.admission.school-year',
+      //   translate: 'menu.admission.school-year',
+      //   type: 'item',
+      //   icon: 'circle',
+      //   url: 'pages/school-years',
+      //   queryParams: {
+      //     page: 1,
+      //     per_page: 10,
+      //   },
+      // },
     ],
   },
 
-  // {
-  //   id: 'professors',
-  //   title: 'menu.professor.title',
-  //   translate: 'menu.professor.title',
-  //   type: 'collapsible',
-  //   icon: 'briefcase',
-  //   children: [
-  //     {
-  //       id: 'professor-list',
-  //       title: 'menu.professor.list',
-  //       translate: 'menu.professor.list',
-  //       type: 'item',
-  //       icon: 'circle',
-  //       url: 'pages/professors',
-  //     },
-  //     {
-  //       id: 'professor-add',
-  //       title: 'menu.professor.add',
-  //       translate: 'menu.professor.add',
-  //       type: 'item',
-  //       icon: 'circle',
-  //       url: 'pages/professors/create',
-  //     },
-  //   ],
-  // },
+  {
+    id: 'professors',
+    title: 'menu.professor.title',
+    translate: 'menu.professor.title',
+    type: 'collapsible',
+    icon: 'book-open',
+    children: [
+      {
+        id: 'professor-list',
+        title: 'menu.professor.list',
+        translate: 'menu.professor.list',
+        type: 'item',
+        icon: 'circle',
+        url: 'pages/professors/index',
+        queryParams: {
+          page: 1,
+          per_page: 10,
+          'with[]': ['school'],
+        },
+      },
+      {
+        id: 'professor-add',
+        title: 'menu.professor.add',
+        translate: 'menu.professor.add',
+        type: 'item',
+        icon: 'circle',
+        url: 'pages/professors/create',
+      },
+    ],
+  },
 
   // {
   //   id: 'administrations',

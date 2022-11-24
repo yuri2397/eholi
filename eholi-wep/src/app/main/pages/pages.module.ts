@@ -1,3 +1,4 @@
+import { ProfessorsModule } from './professors/professors.module'
 import { SchoolModule } from './school/school.module'
 import { EstablishmentModule } from './establishment/establishment.module'
 import { CommonModule } from '@angular/common'
@@ -44,6 +45,7 @@ import { StudentModule } from './student/student.module'
     StudentModule,
     EstablishmentModule,
     SchoolModule,
+    ProfessorsModule,
   ],
 
   providers: [],

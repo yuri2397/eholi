@@ -11,7 +11,7 @@ class SchoolHasProfessor extends AbstractModel
     public const TYPE_FULL = 'full';
     public const TYPE_LESS = 'less';
 
-    protected $fillable = ['school_id', 'professor_id', 'type', 'post'];
+    protected $fillable = ['school_id', 'professor_id', 'type', 'poste'];
 
     public function school()
     {
