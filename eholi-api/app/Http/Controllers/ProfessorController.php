@@ -30,12 +30,12 @@ class ProfessorController extends Controller
             $query->where(function ($q) use ($request) {
                 $q
                     ->where(
-                        'professors.name',
+                        'professors.first_name',
                         'LIKE',
                         "%{$request->search_query}%"
                     )
                     ->orWhere(
-                        'professors.email',
+                        'professors.last_name',
                         'LIKE',
                         "%{$request->search_query}%"
                     )
