@@ -40,7 +40,7 @@ class ProfessorController extends Controller
                         "%{$request->search_query}%"
                     )
                     ->orWhere(
-                        'professors.phone',
+                        'professors.telephone',
                         'LIKE',
                         "%{$request->search_query}%"
                     );
