@@ -2,6 +2,8 @@ import { Student } from './../student.model'
 import { Paginate } from './../../../../auth/models/base.model'
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { TranslateService } from '@ngx-translate/core'
+
 
 
 @Component({
@@ -14,7 +16,7 @@ export class StudentShowComponent implements OnInit {
   public data:any;
 
 
-  constructor(private _route: ActivatedRoute) {}
+  constructor(private _route: ActivatedRoute,private _translateService: TranslateService,) {}
 
   ngOnInit(): void {
     this._route.data.subscribe(
