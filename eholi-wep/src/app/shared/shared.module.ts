@@ -20,6 +20,9 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { NouisliderModule } from 'ng2-nouislider'
 import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+import { NgSelectModule } from '@ng-select/ng-select'
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient)
@@ -45,6 +48,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CardSnippetModule,
     NgxDatatableModule,
     CoreSidebarModule,
+    NgSelectModule,
+    SweetAlert2Module,
   ],
   imports: [
     CommonModule,
@@ -69,6 +74,8 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgbModule,
     NouisliderModule,
     CoreSidebarModule,
+    NgSelectModule,
+    SweetAlert2Module.forRoot(),
   ],
   providers: [
     {

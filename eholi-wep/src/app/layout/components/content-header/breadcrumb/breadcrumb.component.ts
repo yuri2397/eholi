@@ -1,23 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core'
+import { Param } from 'app/auth/models/data.model'
 
 // Breadcrumb component interface
 export interface Breadcrumb {
-  type?: string;
-  alignment?: string;
+  type?: string
+  alignment?: string
   links?: Array<{
-    name: string;
-    isLink: boolean;
-    link?: string;
-  }>;
+    name: string
+    isLink: boolean
+    link?: string
+    params?: Param
+  }>
 }
 
 @Component({
   selector: 'app-breadcrumb',
-  templateUrl: './breadcrumb.component.html'
+  templateUrl: './breadcrumb.component.html',
 })
 export class BreadcrumbComponent implements OnInit {
   // input variable
-  @Input() breadcrumb: Breadcrumb;
+  @Input() breadcrumb: Breadcrumb
 
   constructor() {}
 
@@ -29,6 +31,6 @@ export class BreadcrumbComponent implements OnInit {
    */
   ngOnInit() {
     // concatenate default properties with passed properties
-    this.breadcrumb = this.breadcrumb;
+    this.breadcrumb = this.breadcrumb
   }
 }

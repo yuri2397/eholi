@@ -12,9 +12,19 @@ class LevelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Level::with($request->with ?: []);
+
+        if ($request->has("search_query")) {
+            $query->where("name", "like", "%{$request->search_query}%");
+        }
+
+        if ($request->has("order")) {
+            $query->orderBy($request->order_by ?: "created_at", $request->order ?: "DESC");
+        }
+
+        return response()->json($query->paginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1));
     }
 
     /**

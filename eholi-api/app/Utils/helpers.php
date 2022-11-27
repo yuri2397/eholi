@@ -9,22 +9,30 @@ if (!function_exists('school_year')) {
     function school_year($with_school = false)
     {
         if (($user = auth()->user())) {
-            $school = school_user();
-            return SchoolYear::with($with_school ? 'school' : [])->whereSchoolId($school->id)
+            $school = school();
+            $school_year = SchoolYear::with($with_school ? 'school' : [])->whereSchoolId($school->id)
                 ->whereStatus(SchoolYear::ACTIVE)
                 ->orderBy('created_at')
                 ->first();
+
+                if(!$school_year){
+                    throw new Exception("Any active school year is available. Start a new school year.", 409);
+                }
+                return $school_year;
         }
 
-        return throw new Exception('Unauthenticate 401', 401);
+        return throw new Exception('Unauthenticate', 401);
     }
 }
 
 
-if (!function_exists('school_user')) {
+if (!function_exists('school')) {
 
+    /**
+     * Get the authenticated User school instance.
+     */
 
-    function school_user()
+    function school()
     {
         if (auth()->user()) {
             $owner = User::with(['owner.school_user.school'])->find(auth()->id());

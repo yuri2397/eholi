@@ -45,7 +45,6 @@ export class CoreLoadingScreenService {
   private _init(): void {
     // Get the loading screen element
     this.loadingScreenEl = this._document.body.querySelector('#loading-bg')
-    console.log(this.loadingScreenEl)
     // If loading screen element
     if (this.loadingScreenEl) {
       // Hide it on the first NavigationEnd event

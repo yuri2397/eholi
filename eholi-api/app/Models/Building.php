@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Building extends AbstractModel
 {
-    protected $fillable = ['name', 'school_id'];
+    protected $fillable = ['name', 'school_id', 'status'];
 
     public function school()
     {

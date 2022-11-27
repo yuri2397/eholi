@@ -7,7 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class SchoolStudent extends AbstractModel
 {
-    use HasFactory;
+
+    protected $fillable = [
+        'school_id',
+        'student_id',
+        'reference',
+        'status',
+    ];
+
 
     public function student()
     {

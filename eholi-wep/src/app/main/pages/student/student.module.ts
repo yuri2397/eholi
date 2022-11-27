@@ -18,12 +18,16 @@ import { StudentDashboardResolver } from './resolvers/student-dashboard.resolver
 import { RegistrationComponent } from './registration/registration.component'
 import { AdmissionComponent } from './admission/admission.component'
 import { FeesComponent } from './fees/fees.component'
+import { StudentCreateComponent } from './student-create/student-create.component'
+import { StudentEditComponent } from './student-edit/student-edit.component'
 
 const routes: Routes = [
   {
     path: 'students/index',
     component: StudentListComponent,
     canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     resolve: {
       students: StudentListResolver,
     },
@@ -32,6 +36,8 @@ const routes: Routes = [
   {
     path: 'students/show/:uuid',
     component: StudentShowComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     canActivate: [AuthGuard],
     resolve: {
       student: StudentShowResolver,
@@ -41,6 +47,8 @@ const routes: Routes = [
   {
     path: 'students/dashboard',
     component: DashboardComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+
     canActivate: [AuthGuard],
     resolve: {
       student: StudentDashboardResolver,
@@ -50,14 +58,18 @@ const routes: Routes = [
   {
     path: 'registrations',
     component: RegistrationComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
   {
     path: 'fees',
     component: FeesComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
   },
   {
     path: 'admissions',
     component: AdmissionComponent,
+    runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+    data: { animation: 'repeater' },
   },
 ]
 
@@ -68,6 +80,8 @@ const routes: Routes = [
     RegistrationComponent,
     AdmissionComponent,
     FeesComponent,
+    StudentCreateComponent,
+    StudentEditComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })

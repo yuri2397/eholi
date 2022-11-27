@@ -14,15 +14,20 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Room::with($request->with ?: []);
+        $query = Room::with($request->with ?: [])->whereSchoolId(school()->id);
 
         if ($request->has('search_query')) {
-            $query->where('label', 'LIKE', "%{$request->seach_query}%");
+            $query->where('label', 'LIKE', "%" . $request->search_query . "%");
+            if ($request->has('with') && in_array('building', $request->with)) {
+                $query->orWhereHas('building', function ($q) use ($request) {
+                    $q->where('name', 'LIKE', "%{$request->search_query}%");
+                });
+            }
         }
 
         $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
 
-        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
+        return $query->paginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     /**
@@ -34,7 +39,7 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         // validation
-        $request->merge(['school_id', school_user()->id]);
+        $request->merge(['school_id' => school()->id]);
         $room = Room::create($request->all());
         return $room;
     }

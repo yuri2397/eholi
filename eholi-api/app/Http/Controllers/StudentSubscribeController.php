@@ -25,7 +25,8 @@ class StudentSubscribeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation
+
     }
 
     /**

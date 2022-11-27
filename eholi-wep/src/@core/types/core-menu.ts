@@ -26,3 +26,8 @@ export interface CoreMenuItem {
 export interface CoreMenu extends CoreMenuItem {
   children?: CoreMenuItem[]
 }
+
+export interface ApiResponse<T> {
+  message: string
+  data: T
+}

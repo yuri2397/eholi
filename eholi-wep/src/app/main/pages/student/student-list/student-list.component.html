@@ -1,1 +1,114 @@
-{{ students.data|json }}
+<!-- {{ students.data|json }} -->
+
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+        <section class="users-list-wrapper">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="d-flex justify-content-between align-items-center m-1">
+                            <label class="d-flex align-items-center">
+                                <select class="form-control mx-25" (change)="paginate()"
+                                    [(ngModel)]="queryParams.per_page">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    {{ 'page.select_size'|translate }}
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
+                        <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                            <label class="d-flex align-items-center ml-1 ml-md-0"><input name="searchValue"
+                                    type="search" placeholder="{{ 'student.placeholder.search'|translate }}"
+                                    [(ngModel)]="queryParams.search_query" class="form-control ml-25"
+                                    (input)="onSearch($event.target.value)" /></label>
+                            <button class="btn btn-primary ml-1" rippleEffect (click)="openCreateModal(createModal)">
+                                <i data-feather="plus" class="mr-0 mr-sm-1"></i><span
+                                    class="d-none d-sm-inline-block">{{
+                                    'student.btn.add'|translate }}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <ngx-datatable (page)="paginate($event)" [rows]="students.data" [rowHeight]="50"
+                    class="bootstrap core-bootstrap" [limit]="students.per_page" [externalPaging]="true"
+                    [count]="students.total" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                    [scrollbarH]="true">
+
+                    <ngx-datatable-column name="{{ 'student.table.first_name'|translate }}" prop="first_name"
+                        [width]="120">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.last_name'|translate }}" prop="last_name"
+                        [width]="50">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.birth_at'|translate }}" prop="birth_at">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.birth_in'|translate }}" prop="birth_in" [width]="50">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.email'|translate }}" prop="email">
+                        <ng-template let-email="value" ngx-datatable-cell-template>
+                            <div *ngIf="!email" class="badge badge-pill" [ngClass]="{
+                                      'badge-light-danger': true
+                                    }">
+                                {{('content.undefined'|translate)
+                                }}
+                            </div>
+                            <div *ngIf="email">
+                                {{ email }}
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="{{ 'student.table.phone'|translate }}" prop="telephone" [width]="40">
+                        <ng-template let-telephone="value" ngx-datatable-cell-template>
+                            <div *ngIf="!telephone" class="badge badge-pill" [ngClass]="{
+                                      'badge-light-danger': true
+                                    }">
+                                {{('content.undefined'|translate)
+                                }}
+                            </div>
+                            <div *ngIf="telephone">
+                                {{ telephone }}
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="{{ 'content.table.actions'|translate }}" [width]="50"
+                        [sortable]="false">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <span (click)="openEditModal(editModal, row)" class="cursor-pointer">
+                                        <i data-feather="edit" class="text-primary "></i>
+                                    </span>
+                                    <span class="cursor-pointer">
+                                        <i data-feather="eye" class="text-success cursor-pointer ml-1"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal-primary d-inline-block">
+        <ng-template #createModal let-modal>
+            <app-student-create [modal]="modal"></app-student-create>
+        </ng-template>
+    </div>
+    <div class="modal-primary d-inline-block">
+        <ng-template #editModal let-modal>
+            <app-student-edit [item]="editingStudent" [modal]="modal"></app-student-edit>
+        </ng-template>
+    </div>
+
+</div>
