@@ -76,6 +76,7 @@
   "content": {
     "general": "Général",
     "change_password": "Mot de passe",
+    "search_item_not_found": "Aucun résultat trouvé",
     "title": {
       "class_rooms": "Salle de classes",
       "class_levels": "Liste des classes",
@@ -84,7 +85,9 @@
       "buildings": "Logements / Campus",
       "admission": "Admissions",
       "registration": "Inscription / Réinscription",
-      "professors": "Liste des professeurs"
+      "professors": "Liste des professeurs",
+      "courses": "Cours",
+      "timestable": "Emploi du temps"
     },
     "admission": {
       "stepper": [
@@ -220,6 +223,8 @@
 
   "professor": {
     "title": "Liste des professeurs",
+    "full": "Pérmenant",
+    "less": "Vaccataire",
     "table": {
       "reference": "Matricule",
       "first_name": "Prénom",
@@ -394,6 +399,50 @@
       "title": "Supprimer une chambre",
       "message": {
         "success": "La chambre a été supprimée avec succès"
+      }
+    }
+  },
+
+  "course": {
+    "title": "Courses",
+    "field": {
+      "name": "Nom du cours",
+      "max_note": "Note maximal",
+      "semester": "Semestre",
+      "class": "Classe",
+      "level": "Niveau",
+      "coef": "Coefficient"
+    },
+    "table": {
+      "name": "Nom du cours",
+      "max_note": "Note maximal",
+      "semester": "Semestre",
+      "class": "Classe",
+      "level": "Niveau"
+    },
+    "btn": {
+      "add": "Ajouter un cours"
+    },
+
+    "placeholder": {
+      "search": "Rechercher un cours"
+    },
+    "create": {
+      "title": "Ajouter un cours",
+      "message": {
+        "success": "Le cours a été ajouté avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une chambre",
+      "message": {
+        "success": "Le cours a été modifié avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un cours",
+      "message": {
+        "success": "Le cours a été supprimé avec succès"
       }
     }
   },

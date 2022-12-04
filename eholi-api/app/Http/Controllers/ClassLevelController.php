@@ -14,8 +14,9 @@ class ClassLevelController extends Controller
      */
     public function index(Request $request)
     {
-        $query = ClassLevel::with($request->with ?: [])
-            ->whereSchoolYearId($request->school_yeard_id ?: school_year()->id);
+        $query = ClassLevel::with($request->with ?: [])->whereSchoolYearId(
+            $request->school_yeard_id ?: school_year()->id
+        );
 
         if ($request->has('search_query')) {
             $query->where('name', 'LIKE', "%{$request->search_query}%");
@@ -26,8 +27,21 @@ class ClassLevelController extends Controller
             }
         }
 
-        $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
-        return $query->paginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
+        $query->orderBy(
+            $request->order_by ?: 'created_at',
+            $request->order ?: 'DESC'
+        );
+
+        if ($request->has('per_page') || $request->has('page')) {
+            return $query->paginate(
+                $request->per_page ?: 15,
+                $request->columns ?: '*',
+                $request->page_name ?: 'page',
+                $request->page ?: 1
+            );
+        }
+
+        return $query->get();
     }
 
     /**

@@ -11,4 +11,6 @@ export class Professor extends BaseModel {
   adress?: string
   status: boolean
   last_degre?: string
+  poste?: string
+  type?: string
 }

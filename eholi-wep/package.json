@@ -44,6 +44,7 @@
     "@sweetalert2/ngx-sweetalert2": "8.1.1",
     "@swimlane/ngx-datatable": "19.0.0",
     "angular-in-memory-web-api": "0.11.0",
+    "angular-ng-autocomplete": "^2.0.12",
     "angular-shepherd": "11.0.0",
     "animate.css": "4.1.1",
     "apexcharts": "^3.36.3",

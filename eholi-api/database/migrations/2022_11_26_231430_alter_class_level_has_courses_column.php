@@ -12,23 +12,28 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('class_level_has_courses', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->integer('coef')->default(1);
-            $table->integer('max_note')->default(20);
+        Schema::table('class_level_has_courses', function (Blueprint $table) {
             $table
                 ->foreignUuid('class_level_id')
+                ->nullable()
                 ->references('id')
                 ->on('class_levels');
             $table
                 ->foreignUuid('course_id')
+                ->nullable()
                 ->references('id')
                 ->on('courses');
+
             $table
-                ->foreignUuid('level_has_semester_id')
+                ->foreignUuid('school_id')
                 ->references('id')
-                ->on('level_has_semesters');
-            $table->timestamps();
+                ->on('schools')
+                ->cascadeOnDelete();
+            $table
+                ->foreignUuid('semester_id')
+                ->references('id')
+                ->on('semesters')
+                ->cascadeOnDelete();
         });
     }
 
@@ -39,6 +44,8 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('class_level_has_courses');
+        Schema::table('class_level_has_courses', function (
+            Blueprint $table
+        ) {});
     }
 };

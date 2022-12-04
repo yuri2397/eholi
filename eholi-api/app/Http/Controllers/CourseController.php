@@ -23,7 +23,7 @@ class CourseController extends Controller
         $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
 
 
-        return $query->simplePaginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
+        return $query->paginate($request->per_page ?: 15, $request->columns ?: '*', $request->page_name ?: 'page', $request->page ?: 1);
     }
 
     /**

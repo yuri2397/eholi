@@ -110,7 +110,17 @@ class ProfessorController extends Controller
      */
     public function show(Professor $professor)
     {
-        //
+        if (school()) {
+            return SchoolHasProfessor::where('school_id', school()->id)
+                ->join(
+                    'professors',
+                    'professors.id',
+                    '=',
+                    'school_has_professors.professor_id'
+                )
+                ->where('professors.id', $professor->id)
+                ->first();
+        }
     }
 
     /**

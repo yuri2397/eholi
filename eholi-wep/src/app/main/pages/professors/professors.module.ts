@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { SharedModule } from 'app/shared/shared.module'
 import { CreateProfessorComponent } from './create-professor/create-professor.component'
 import { ShowProfessorComponent } from './show-professor/show-professor.component'
+import { ProfessorDetailsResolver } from './resolvers/professor-details.resolver'
 
 const routes: Routes = [
   {
@@ -19,6 +20,16 @@ const routes: Routes = [
       professors: ProfessorsResolver,
     },
     data: { animation: 'list' },
+  },
+  {
+    path: 'professors/:id',
+    component: ShowProfessorComponent,
+    resolve: {
+      professor: ProfessorDetailsResolver,
+    },
+    data: {
+      animation: 'details',
+    },
   },
 ]
 

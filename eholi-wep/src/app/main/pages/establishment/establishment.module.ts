@@ -24,6 +24,11 @@ import { ShowClassLevelResolver } from './resolvers/show-class-level.resolver'
 import { CreateRoomComponent } from './housing/create-room/create-room.component'
 import { EditRoomComponent } from './housing/edit-room/edit-room.component'
 import { StudentListResolver } from '../student/resolvers/student-list.resolver'
+import { CreateClassCourseComponent } from './courses/create-class-course/create-class-course.component'
+import { SemesterResolver } from './resolvers/semester.resolver'
+import { ClassLevelCourseResolver } from './resolvers/class-level-courses.resolver'
+import { ClassLevelFullResolver } from './resolvers/class-level-full.resolver'
+import { SemesterFullResolver } from './resolvers/semester-full.resolver'
 
 const routes: Routes = [
   // {
@@ -35,7 +40,9 @@ const routes: Routes = [
     path: 'courses',
     component: CoursesComponent,
     resolve: {
-      courses: CoursesResolver,
+      courses: ClassLevelCourseResolver,
+      class_levels: ClassLevelFullResolver,
+      semesters: SemesterFullResolver,
     },
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
     data: {
@@ -117,6 +124,7 @@ const routes: Routes = [
     ShowClassLevelComponent,
     CreateRoomComponent,
     EditRoomComponent,
+    CreateClassCourseComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })

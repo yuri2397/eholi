@@ -14,6 +14,8 @@ import {
   SwiperModule,
   SWIPER_CONFIG,
 } from 'ngx-swiper-wrapper'
+import { AutocompleteLibModule } from 'angular-ng-autocomplete'
+
 import { CoreSidebarModule } from '@core/components'
 import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module'
 import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module'
@@ -49,6 +51,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgxDatatableModule,
     CoreSidebarModule,
     NgSelectModule,
+    AutocompleteLibModule,
     SweetAlert2Module,
   ],
   imports: [
@@ -75,6 +78,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NouisliderModule,
     CoreSidebarModule,
     NgSelectModule,
+    AutocompleteLibModule,
     SweetAlert2Module.forRoot(),
   ],
   providers: [

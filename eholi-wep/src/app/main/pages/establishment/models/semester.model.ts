@@ -1,5 +1,5 @@
 import { BaseModel } from 'app/auth/models/base.model'
-export class Course extends BaseModel {
+export class Semester extends BaseModel {
   name: string
-  reference: string
+  number: number
 }

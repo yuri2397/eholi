@@ -1,1 +1,117 @@
-{{ courses?.data|json }}
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <section class="users-list-wrapper">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center">
+                <select
+                  class="form-control mx-25"
+                  (change)="paginate()"
+                  [(ngModel)]="queryParams.per_page">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  {{
+                  'page.select_size' | translate
+                  }}
+                </select>
+              </label>
+            </div>
+          </div>
+          <div
+            class="col-md-6 col-12 d-flex justify-content-start
+            justify-content-md-end">
+            <div
+              class="d-flex align-items-center justify-content-end pr-1 pb-1
+              pb-md-0">
+              <label class="d-flex align-items-center ml-1 ml-md-0">
+                <input
+                  name="searchValue"
+                  type="search"
+                  placeholder="{{
+                  'class_room.placeholder.search' | translate
+                  }}"
+                  [(ngModel)]="queryParams.search_query"
+                  class="form-control ml-25"
+                  (input)="onSearch($event.target.value)"
+                  />
+              </label>
+              <button
+                class="btn btn-primary ml-1"
+                rippleEffect
+                (click)="openCreateModal(createModal)">
+                <i data-feather="plus" class="mr-0 mr-sm-1"></i>
+                <span class="d-none d-sm-inline-block">
+                  {{ 'class_room.btn.add' | translate }}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <ngx-datatable
+          (page)="paginate($event)"
+          [rows]="courses.data"
+          [rowHeight]="50"
+          class="bootstrap core-bootstrap"
+          [limit]="courses.per_page"
+          [externalPaging]="true"
+          [count]="courses.total"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [scrollbarH]="true">
+          <ngx-datatable-column
+            name="{{ 'course.table.name' | translate }}"
+            prop="course.name"
+            [width]="280"></ngx-datatable-column>
+
+          <ngx-datatable-column
+            name="{{ 'course.table.coef' | translate }}"
+            prop="coef"
+            [width]="80">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column
+            name="{{ 'course.table.max_note' | translate }}"
+            prop="max_note"></ngx-datatable-column>
+
+          <ngx-datatable-column
+            name="{{ 'course.table.class' | translate }}"
+            prop="class_level.name">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column
+            name="{{ 'course.table.semester' | translate }}"
+            [width]="50"
+            prop="semester.name">
+            [sortable]="false">
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </section>
+  </div>
+
+  <!-- CREATE MODAL -->
+  <div class="modal-primary d-inline-block">
+    <ng-template #createModal let-modal>
+      <app-create-class-course [modal]="modal"></app-create-class-course>
+    </ng-template>
+  </div>
+
+  <!-- EDIT MODAL -->
+  <div class="modal-primary d-inline-block">
+    <ng-template #editModal let-modal>
+      <!-- <app-edit-class-room [item]="editingClassRoom" [modal]="modal"></app-edit-class-room> -->
+    </ng-template>
+  </div>
+
+  <!-- CONFIRM DELETE -->
+  <!-- <swal #SweetAlertConfirmText (open)="ConfirmTextOpen()"></swal> -->
+</div>

@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends AbstractModel
 {
+    public const BASE_REFERENCE = 'cs';
+
     protected $fillable = ['name', 'reference', 'description'];
 }

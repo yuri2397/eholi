@@ -180,28 +180,33 @@
             </ng-template>
           </ngx-datatable-column>
 
-          <!-- <ngx-datatable-column name="{{
-                        'content.table.actions'|translate }}"
-                        [width]="50"
-                        [sortable]="false">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <div class="d-flex align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <span (click)="openEditModal(editModal,
-                                        row)"
-                                        class="cursor-pointer">
-                                        <i data-feather="edit"
-                                            class="text-primary "></i>
-                                    </span>
-                                    <span class="cursor-pointer">
-                                        <i data-feather="eye"
-                                            class="text-success cursor-pointer
-                                            ml-1"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </ngx-datatable-column> -->
+          <ngx-datatable-column
+            name="{{ 'content.table.actions' | translate }}"
+            [width]="50"
+            [sortable]="false"
+          >
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center">
+                  <!-- <span
+                    (click)="openEditModal(editModal, row)"
+                    class="cursor-pointer"
+                  >
+                    <i data-feather="edit" class="text-primary"></i>
+                  </span> -->
+                  <span
+                    [routerLink]="['/pages/professors', row.id]"
+                    class="cursor-pointer"
+                  >
+                    <i
+                      data-feather="eye"
+                      class="text-success cursor-pointer ml-1"
+                    ></i>
+                  </span>
+                </div>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
         </ngx-datatable>
       </div>
     </section>
