@@ -35,4 +35,10 @@ export class ProfessorsService extends AbstractService {
   public update(uuid: string, professor: Professor) {
     return this.http.put<Professor>(`${this.enpoint}/${uuid}`, professor)
   }
+
+  attachAvatar(uuid: string, file: File) {
+    const formData = new FormData()
+    formData.append('avatar', file)
+    return this.http.post(`${this.enpoint}/${uuid}/avatar`, formData)
+  }
 }

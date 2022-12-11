@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfessorRequest;
+use App\Models\Media;
 use App\Models\Professor;
 use App\Models\SchoolHasProfessor;
 use Illuminate\Http\Request;
@@ -111,14 +112,9 @@ class ProfessorController extends Controller
     public function show(Professor $professor)
     {
         if (school()) {
-            return SchoolHasProfessor::where('school_id', school()->id)
-                ->join(
-                    'professors',
-                    'professors.id',
-                    '=',
-                    'school_has_professors.professor_id'
-                )
-                ->where('professors.id', $professor->id)
+            return SchoolHasProfessor::with('professor')
+                ->where('school_id', school()->id)
+                ->where('professor_id', $professor->id)
                 ->first();
         }
         return $professor;
@@ -134,6 +130,25 @@ class ProfessorController extends Controller
     public function update(Request $request, Professor $professor)
     {
         //
+    }
+
+    public function attachAvatar(Request $request, $professor_id)
+    {
+        if ($request->hasFile('avatar')) {
+            $professor = Professor::find($professor_id);
+            foreach ($professor->media as $media) {
+                $media->delete();
+            }
+            $professor->setAvatar($request->file('avatar'));
+
+            return $professor->refresh();
+        }
+        return response()->json(
+            [
+                'message' => 'No avatar found',
+            ],
+            422
+        );
     }
 
     /**

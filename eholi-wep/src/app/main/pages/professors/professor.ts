@@ -1,4 +1,5 @@
 import { BaseModel } from 'app/auth/models/base.model'
+import { Media } from 'app/shared/models/media.model'
 
 export class Professor extends BaseModel {
   first_name: string
@@ -13,4 +14,5 @@ export class Professor extends BaseModel {
   last_degre?: string
   poste?: string
   type?: string
+  media?: Media[]
 }

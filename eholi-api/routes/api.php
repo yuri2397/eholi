@@ -106,6 +106,9 @@ Route::prefix('professors')
 
         Route::post('/', 'store');
         Route::put('/{professor}', 'update');
+        Route::post('/{professor}/avatar', 'attachAvatar')->withoutMiddleware(
+            'auth:api'
+        );
     });
 
 /**
