@@ -15,32 +15,47 @@ class ClassLevelHasCourseController extends Controller
      */
     public function index(Request $request)
     {
-        $query = ClassLevelHasCourse::with($request->with ?: []);
+        $query = ClassLevelHasCourse::with($request->with ?: [])->whereSchoolId(
+            school()->id
+        );
 
         if ($request->has('search_query') && $request->search_query) {
-            if (
-                $request->has('with') &&
-                in_array('class_level', $request->with)
-            ) {
-                $query->whereHas('class_level', function ($q) use ($request) {
+            if ($request->has('with') && in_array('course', $request->with)) {
+                $query->whereHas('course', function ($q) use ($request) {
                     $q->where('name', 'LIKE', "%{$request->search_query}%");
                 });
             }
 
+            if (
+                $request->has('with') &&
+                in_array('class_level', $request->with)
+            ) {
+                $query->orWhereHas('class_level', function ($q) use ($request) {
+                    $q->where('name', 'LIKE', "%{$request->search_query}%");
+                });
+            }
             if ($request->has('with') && in_array('semester', $request->with)) {
-                $query->orwhereHas('semester', function ($q) use ($request) {
+                $query->orWhereHas('semester', function ($q) use ($request) {
                     $q->where('name', 'LIKE', "%{$request->search_query}%");
                 });
             }
         }
 
-        #  paginate the results
-        return $query->paginate(
-            $request->per_page ?: 15,
-            $request->columns ?: '*',
-            $request->page_name ?: 'page',
-            $request->page ?: 1
-        );
+        if ($request->has('filter') && $request->filter['professor_id']) {
+            $query->where('professor_id', $request->filter['professor_id']);
+        }
+
+        if ($request->has('per_page')) {
+            #  paginate the results
+            return $query->paginate(
+                $request->per_page ?: 15,
+                $request->columns ?: '*',
+                $request->page_name ?: 'page',
+                $request->page ?: 1
+            );
+        }
+
+        return $query->get();
     }
 
     /**
@@ -88,11 +103,15 @@ class ClassLevelHasCourseController extends Controller
      * @param  \App\Models\ClassLevelHasCourse  $classLevelHasCourse
      * @return \Illuminate\Http\Response
      */
-    public function update(
-        Request $request,
-        ClassLevelHasCourse $classLevelHasCourse
-    ) {
-        //
+    public function update(Request $request, $id)
+    {
+        // update the course
+        $classLevelHasCourse = ClassLevelHasCourse::find($id);
+        $classLevelHasCourse->update($request->all());
+
+        return $classLevelHasCourse
+            ->refresh()
+            ->load(['course', 'class_level', 'semester', 'professor']);
     }
 
     /**

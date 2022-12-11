@@ -29,6 +29,7 @@ import { SemesterResolver } from './resolvers/semester.resolver'
 import { ClassLevelCourseResolver } from './resolvers/class-level-courses.resolver'
 import { ClassLevelFullResolver } from './resolvers/class-level-full.resolver'
 import { SemesterFullResolver } from './resolvers/semester-full.resolver'
+import { AttachCouresProfessorComponent } from '../professors/attach-course-professor/attach-course-professor.component'
 
 const routes: Routes = [
   // {

@@ -121,6 +121,7 @@ class ProfessorController extends Controller
                 ->where('professors.id', $professor->id)
                 ->first();
         }
+        return $professor;
     }
 
     /**

@@ -86,7 +86,24 @@
             name="{{ 'course.table.class' | translate }}"
             prop="class_level.name">
           </ngx-datatable-column>
+          <ngx-datatable-column
+            name="{{ 'course.table.professor' | translate }}"
+            prop="professor">
 
+            <ng-template let-professor="value" ngx-datatable-cell-template>
+              <div *ngIf="!professor" class="badge badge-pill" [ngClass]="{
+                'badge-light-danger': true
+                }">
+                {{('content.undefined'|translate)
+                }}
+              </div>
+              <div *ngIf="professor">
+                {{ professor.first_name + ' ' + professor.last_name}}
+              </div>
+            </ng-template>
+
+
+          </ngx-datatable-column>
           <ngx-datatable-column
             name="{{ 'course.table.semester' | translate }}"
             [width]="50"

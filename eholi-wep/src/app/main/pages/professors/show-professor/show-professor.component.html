@@ -1,102 +1,133 @@
 <div class="content-wrapper container-xxl p-0">
-  <div class="content-body">
-    <div class="row">
-      <div class="col-lg-3 col-md-5 col-12">
-        <div class="card card-profile">
-          <img
-            src="assets/images/banner/banner-12.jpg"
-            class="img-fluid card-img-top"
-            alt="Profile Cover Photo"
-          />
-          <div class="card-body">
-            <div class="profile-image-wrapper">
-              <div class="profile-image">
-                <div class="avatar">
-                  <img
-                    src="assets/images/portrait/small/avatar-s-9.jpg"
-                    alt="Profile Picture"
-                  />
+    <div class="content-body">
+        <div class="row">
+            <div class="col-lg-3 col-md-5 col-12">
+                <div class="card card-profile">
+                    <img
+                        src="assets/images/teacher.jpg"
+                        class="img-fluid card-img-top"
+                        alt="Profile Cover Photo"
+                        />
+                    <div class="card-body">
+                        <div class="profile-image-wrapper">
+                            <div class="profile-image">
+                                <div class="avatar">
+                                    <img
+                                        src="assets/images/portrait/small/avatar-s-9.jpg"
+                                        alt="Profile Picture"
+                                        />
+                                </div>
+                            </div>
+                        </div>
+                        <h3>{{ professor.first_name }} {{ professor.last_name }}</h3>
+                        <h6 class="text-muted">
+                            {{ professor.poste }}
+                        </h6>
+                        <div class="badge badge-light-primary profile-badge">
+                            {{ 'professor.' + professor.type | translate }}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex align-items-center
+                            justify-content-between">
+                            <button type="button" class="btn btn-icon
+                                btn-primary" rippleEffect>
+                                <span [data-feather]="'edit'"></span>
+                            </button>
+                            <button
+                                type="button" class="btn btn-icon btn-warning"
+                                rippleEffect>
+                                <span [data-feather]="'camera'"></span>
+                            </button>
+                            <button
+                                type="button" class="btn btn-icon
+                                btn-danger" rippleEffect>
+                                <span [data-feather]="'trash'"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <h3>{{ professor.first_name }} {{ professor.last_name }}</h3>
-            <h6 class="text-muted">
-              {{ professor.poste }}
-            </h6>
-            <div class="badge badge-light-primary profile-badge">
-              {{ 'professor.' + professor.type | translate }}
+            <div class="col-lg-9 col-md-7 col-12">
+                <div class="card card-body">
+                    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                        <li ngbNavItem>
+                            <a ngbNavLink>{{ 'content.title.courses' | translate
+                                }}</a>
+                            <ng-template ngbNavContent>
+                                <div class="d-flex mb-3">
+                                    <div><button
+                                            (click)="addCourse(attachCourse)"
+                                            class="btn
+                                            btn-primary">{{
+                                            'course.btn.add'|translate}}</button></div>
+                                </div>
+                                <ngx-datatable
+                                    [rows]="courses"
+                                    [rowHeight]="50"
+                                    class="bootstrap core-bootstrap"
+                                    [columnMode]="'force'"
+                                    [headerHeight]="50"
+                                    [footerHeight]="50"
+                                    [scrollbarH]="true">
+                                    <ngx-datatable-column
+                                        name="{{ 'course.table.name' | translate
+                                        }}"
+                                        prop="course.name"
+                                        [width]="280"></ngx-datatable-column>
+                                    <ngx-datatable-column
+                                        name="{{ 'course.table.coef' | translate
+                                        }}"
+                                        prop="coef">
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column
+                                        name="{{ 'course.table.max_note' |
+                                        translate }}"
+                                        prop="max_note"></ngx-datatable-column>
+                                    <ngx-datatable-column
+                                        name="{{ 'course.table.class' |
+                                        translate }}"
+                                        prop="class_level.name">
+                                    </ngx-datatable-column>
+                                    <ngx-datatable-column
+                                        name="{{ 'course.table.semester' |
+                                        translate }}"
+                                        [width]="50"
+                                        prop="semester.name">
+                                        [sortable]="false">
+                                    </ngx-datatable-column>
+                                </ngx-datatable>
+                            </ng-template>
+                        </li>
+
+                        <li ngbNavItem>
+                            <a href="javascript:void(0)" ngbNavLink>
+                                {{ 'content.title.timestable' | translate }}
+                            </a>
+                            <ng-template ngbNavContent>
+                                <p>
+                                    Cake croissant lemon drops gummi bears
+                                    carrot cake biscuit
+                                    cupcake croissant. Macaroon lemon drops
+                                    muffin jelly sugar
+                                    plum chocolate cupcake danish icing. Soufflé
+                                    tootsie roll
+                                    lemon drops sweet roll cake icing cookie
+                                    halvah cupcake.
+                                </p>
+                            </ng-template>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                </div>
             </div>
-            <hr class="mb-2" />
-          </div>
         </div>
-      </div>
-      <div class="col-lg-9 col-md-7 col-12">
-        <div class="card card-body">
-          <ul ngbNav #nav="ngbNav" class="nav-tabs">
-            <li ngbNavItem>
-              <a ngbNavLink>{{ 'content.title.courses' | translate }}</a>
-              <ng-template ngbNavContent>
-                <p>
-                  Candy canes donut chupa chups candy canes lemon drops oat cake
-                  wafer. Cotton candy candy canes marzipan carrot cake. Sesame
-                  snaps lemon drops candy marzipan donut brownie tootsie roll.
-                  Icing croissant bonbon biscuit gummi bears. Pudding candy
-                  canes sugar plum cookie chocolate cake powder croissant.
-                  Carrot cake tiramisu danish candy cake muffin croissant tart
-                  dessert. Tiramisu caramels candy canes chocolate cake sweet
-                  roll liquorice icing cupcake. Candy cookie sweet roll bear
-                  claw sweet roll.
-                </p>
-              </ng-template>
-            </li>
-            <li ngbNavItem>
-              <a ngbNavLink>{{ 'content.title.class_levels' | translate }}</a>
-              <ng-template ngbNavContent>
-                <p>
-                  Muffin cupcake candy chocolate cake gummi bears fruitcake
-                  donut dessert pie. Wafer toffee bonbon dragée. Jujubes cotton
-                  candy gummies chupa chups. Sweet fruitcake cheesecake biscuit
-                  cotton candy. Cookie powder marshmallow donut. Candy cookie
-                  sweet roll bear claw sweet roll. Cake tiramisu cotton candy
-                  gingerbread cheesecake toffee cake. Cookie liquorice dessert
-                  candy canes jelly. Sweet chocolate muffin fruitcake gummies
-                  jujubes pie lollipop. Brownie marshmallow caramels gingerbread
-                  jelly beans chocolate bar oat cake wafer. Chocolate bar danish
-                  icing sweet apple pie jelly-o carrot cake cookie cake.
-                </p>
-              </ng-template>
-            </li>
-            <li ngbNavItem>
-              <a href="javascript:void(0)" ngbNavLink>
-                {{ 'content.title.timestable' | translate }}
-              </a>
-              <ng-template ngbNavContent>
-                <p>
-                  Cake croissant lemon drops gummi bears carrot cake biscuit
-                  cupcake croissant. Macaroon lemon drops muffin jelly sugar
-                  plum chocolate cupcake danish icing. Soufflé tootsie roll
-                  lemon drops sweet roll cake icing cookie halvah cupcake.
-                </p>
-              </ng-template>
-            </li>
-            <li ngbNavItem>
-              <a ngbNavLink>Account</a>
-              <ng-template ngbNavContent>
-                <p>
-                  Chocolate croissant cupcake croissant jelly donut. Cheesecake
-                  toffee apple pie chocolate bar biscuit tart croissant. Lemon
-                  drops danish cookie. Oat cake macaroon icing tart lollipop
-                  cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
-                  drops ice cream wafer gummies dragée. Chocolate bar liquorice
-                  cheesecake cookie chupa chups marshmallow oat cake biscuit.
-                  Dessert toffee fruitcake ice cream powder tootsie roll cake.
-                </p>
-              </ng-template>
-            </li>
-          </ul>
-          <div [ngbNavOutlet]="nav" class="mt-2"></div>
-        </div>
-      </div>
     </div>
-  </div>
+    <div class="modal-primary d-inline-block">
+        <ng-template #attachCourse let-modal>
+            <app-attach-course-professor [professor]="professor"
+                [modal]="modal"></app-attach-course-professor>
+        </ng-template>
+    </div>
+
 </div>

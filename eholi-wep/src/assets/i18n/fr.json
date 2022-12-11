@@ -405,6 +405,12 @@
 
   "course": {
     "title": "Courses",
+    "messages": {
+      "already_taken": "Ce cours est déjà pris par un autre professeur",
+      "successfully_attached": "Le cours a été ajouté avec succès",
+      "successfully_detached": "Le cours a été supprimé avec succès",
+      "success": "Opération effectuée avec succès"
+    },
     "field": {
       "name": "Nom du cours",
       "max_note": "Note maximal",
@@ -418,7 +424,9 @@
       "max_note": "Note maximal",
       "semester": "Semestre",
       "class": "Classe",
-      "level": "Niveau"
+      "level": "Niveau",
+      "coef": "Coefficient",
+      "professor": "Professeur"
     },
     "btn": {
       "add": "Ajouter un cours"

@@ -1,0 +1,104 @@
+<!-- HEADER -->
+<div class="modal-header">
+    <h5 class="modal-title" id="attach-course-professor">
+        {{ 'course.create.title' | translate }}
+    </h5>
+    <button
+        type="button"
+        class="close"
+        (click)="modal.dismiss('cancel')"
+        aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<!-- BODY -->
+<div class="modal-body py-4" ngbAutofocus>
+    <ngb-alert *ngIf="alreadyTake" [type]="'danger'">
+        <div class="alert-body">
+            {{ message|translate }}
+        </div>
+    </ngb-alert>
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label class="form-control-label" for="class_level_id">
+                    {{ 'class_level.field.name' | translate }}
+                </label>
+                <ng-select id="course"
+                    class="form-select"
+                    (change)="onClassLevelChange($event)"
+                    [placeholder]="'course.field.name'|translate"
+                    (search)="onClassLevelSearch($event)"
+                    [loading]="courseSearchLoad">
+                    <ng-option *ngFor="let item of courses" [value]="item.id">
+                        <div class="d-flex align-items-center
+                            justify-content-between">
+                            <div>{{
+                                item.course.name }}</div>
+                            <div class="mx-2">
+                                {{ item.class_level.name }}
+                            </div>
+                        </div>
+                    </ng-option>
+                </ng-select>
+            </div>
+
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col">
+            <label class="form-control-label" for="coef">
+                {{ 'course.field.coef' | translate }}</label>
+            <input class="form-control" type="text" id="coef" disabled
+                [value]="selectedCourse?.coef"/>
+        </div>
+        <div class="col">
+            <label class="form-control-label" for="max_note">
+                {{ 'course.field.max_note' | translate }}</label>
+            <input class="form-control" type="text" id="max_note" disabled
+                [value]="selectedCourse?.max_note"/>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col">
+            <label class="form-control-label" for="class_level">
+                {{ 'course.field.class_level' | translate }}</label>
+            <input class="form-control" type="text" id="class_level" disabled
+                [value]="selectedCourse?.class_level?.name"/>
+        </div>
+        <div class="col">
+            <label class="form-control-label" for="semester">
+                {{ 'course.field.semester' | translate }}</label>
+            <input class="form-control" type="text" id="semester" disabled
+                [value]="selectedCourse?.semester?.name"/>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="modal-footer">
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <button
+            type="reset"
+            class="btn btn-outline-secondary"
+            (click)="modal.dismiss('cancel')"
+            rippleEffect>
+            {{ 'content.btn.cancel' | translate }}
+        </button>
+        <button
+            type="submit"
+            [disabled]="createdLoad || (alreadyTake && selectedCourse) ||
+            !selectedCourse"
+            (click)="save()"
+            class="btn btn-primary mr-1"
+            rippleEffect>
+            <span
+                *ngIf="createdLoad"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"></span>
+            {{ 'content.btn.submit' | translate }}
+        </button>
+    </div>
+</div>

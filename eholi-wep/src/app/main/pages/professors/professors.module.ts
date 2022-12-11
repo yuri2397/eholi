@@ -1,3 +1,4 @@
+import { CourseProfessorResolverResolver } from './resolvers/course-professor-resolver.resolver'
 import { ProfessorsResolver } from './resolvers/professors.resolver'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
@@ -8,6 +9,7 @@ import { SharedModule } from 'app/shared/shared.module'
 import { CreateProfessorComponent } from './create-professor/create-professor.component'
 import { ShowProfessorComponent } from './show-professor/show-professor.component'
 import { ProfessorDetailsResolver } from './resolvers/professor-details.resolver'
+import { AttachCouresProfessorComponent } from './attach-course-professor/attach-course-professor.component'
 
 const routes: Routes = [
   {
@@ -26,9 +28,7 @@ const routes: Routes = [
     component: ShowProfessorComponent,
     resolve: {
       professor: ProfessorDetailsResolver,
-    },
-    data: {
-      animation: 'details',
+      courses: CourseProfessorResolverResolver,
     },
   },
 ]
@@ -38,6 +38,7 @@ const routes: Routes = [
     ProfessorsComponent,
     CreateProfessorComponent,
     ShowProfessorComponent,
+    AttachCouresProfessorComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })

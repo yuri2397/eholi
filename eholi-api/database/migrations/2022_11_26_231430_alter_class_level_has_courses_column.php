@@ -12,29 +12,29 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('class_level_has_courses', function (Blueprint $table) {
-            $table
-                ->foreignUuid('class_level_id')
-                ->nullable()
-                ->references('id')
-                ->on('class_levels');
-            $table
-                ->foreignUuid('course_id')
-                ->nullable()
-                ->references('id')
-                ->on('courses');
+        // Schema::table('class_level_has_courses', function (Blueprint $table) {
+        //     $table
+        //         ->foreignUuid('class_level_id')
+        //         ->nullable()
+        //         ->references('id')
+        //         ->on('class_levels');
+        //     $table
+        //         ->foreignUuid('course_id')
+        //         ->nullable()
+        //         ->references('id')
+        //         ->on('courses');
 
-            $table
-                ->foreignUuid('school_id')
-                ->references('id')
-                ->on('schools')
-                ->cascadeOnDelete();
-            $table
-                ->foreignUuid('semester_id')
-                ->references('id')
-                ->on('semesters')
-                ->cascadeOnDelete();
-        });
+        //     $table
+        //         ->foreignUuid('school_id')
+        //         ->references('id')
+        //         ->on('schools')
+        //         ->cascadeOnDelete();
+        //     $table
+        //         ->foreignUuid('semester_id')
+        //         ->references('id')
+        //         ->on('semesters')
+        //         ->cascadeOnDelete();
+        // });
     }
 
     /**

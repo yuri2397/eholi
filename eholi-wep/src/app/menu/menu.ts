@@ -169,7 +169,7 @@ export const menu: CoreMenu[] = [
         queryParams: {
           page: 1,
           per_page: 10,
-          'with[]': ['semester', 'class_level', 'course'],
+          'with[]': ['semester', 'class_level', 'course', 'professor'],
         },
       },
       {

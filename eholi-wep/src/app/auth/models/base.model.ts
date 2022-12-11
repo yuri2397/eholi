@@ -1,8 +1,8 @@
 export abstract class BaseModel {
   id: any
 
-  created_at?: Date
-  updated_at?: Date
+  created_at?: Date | string
+  updated_at?: Date | string
 
   loading?: boolean
   created?: boolean

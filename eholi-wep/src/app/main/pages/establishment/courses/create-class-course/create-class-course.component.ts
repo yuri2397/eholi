@@ -81,17 +81,6 @@ export class CreateClassCourseComponent implements OnInit {
     this.form.patchValue({ name: item.name, course_id: item.id })
   }
 
-  onChangeSearch(val: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-    console.log(val)
-  }
-
-  onFocused(e) {
-    // do something when input is focused
-    console.log(e)
-  }
-
   onCourseSearch(data: string) {
     this.form.patchValue({ name: data })
     if (data && data.length > 2) {

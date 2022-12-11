@@ -17,6 +17,7 @@ class ClassLevelHasCourse extends AbstractModel
         'semester_id',
         'school_id',
         'semester_id',
+        'professor_id',
     ];
 
     public function class_level()
@@ -32,5 +33,10 @@ class ClassLevelHasCourse extends AbstractModel
     public function semester()
     {
         return $this->belongsTo(Semester::class);
+    }
+
+    public function professor()
+    {
+        return $this->belongsTo(Professor::class);
     }
 }

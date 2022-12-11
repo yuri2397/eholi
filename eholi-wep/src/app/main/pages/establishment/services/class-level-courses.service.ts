@@ -30,7 +30,7 @@ export class ClassLevelCourseService extends AbstractService {
     return this.http.get<ClassLevelCourse>(`${this.enpoint}/${uuid}`)
   }
 
-  update(uuid: string | number, class_level: ClassLevelCourse) {
+  update(uuid: string | number, class_level: ClassLevelCourse | any) {
     return this.http.put<ClassLevelCourse>(
       `${this.enpoint}/${uuid}`,
       class_level,
