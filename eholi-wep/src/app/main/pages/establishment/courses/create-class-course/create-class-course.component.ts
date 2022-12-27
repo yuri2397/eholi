@@ -90,7 +90,7 @@ export class CreateClassCourseComponent implements OnInit {
 
       this.waitBeforeSearch = setTimeout(() => {
         this._courseService
-          .index({
+          .index<Course>({
             search_query: data,
             per_page: 50,
             page: 1,

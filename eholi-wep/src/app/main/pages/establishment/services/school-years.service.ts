@@ -13,23 +13,4 @@ export class SchoolYearsService extends AbstractService {
     super('school-years', _ch)
   }
 
-  // ROUTES URLS AND REQUEST
-
-  index(params?: Param) {
-    return this.http.get<Paginate<SchoolYear>>(this.enpoint, {
-      params: params,
-    })
-  }
-
-  create(course: SchoolYear) {
-    return this.http.post<SchoolYear>(this.enpoint, course)
-  }
-
-  show(uuid: string | number) {
-    return this.http.get<SchoolYear>(`${this.enpoint}/${uuid}`)
-  }
-
-  delete(uuid: string | number) {
-    return this.http.delete<SchoolYear>(`${this.enpoint}/${uuid}`)
-  }
 }

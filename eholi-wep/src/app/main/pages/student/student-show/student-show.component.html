@@ -1,1 +1,118 @@
-{{ student|json }}
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <div class="card card-developer-meetup">
+      <div class="bg-light-primary rounded-top text-center">
+        <img
+          src="assets/images/illustration/email.svg"
+          alt="Meeting Pic"
+          height="170"
+        />
+      </div>
+      <div class="card-body">
+        <div class="meetup-header d-flex align-items-center">
+          <div class="meetup-day">
+            <div class="avatar bg-light-danger avatar-xl">
+              <span class="avatar-content">{{ subName() }}</span>
+            </div>
+            <div class="d-block mx-2">
+              <span class="text-dark text-uppercase"
+                >ID: {{ student.reference }}
+              </span>
+              <h3>{{ student.first_name }} {{ student.last_name }}</h3>
+            </div>
+          </div>
+
+          <div class="d-block">
+            <div>
+              <span class="text-dark bold"
+                >{{ "student.table.adress" | translate }}:
+              </span>
+              {{ student.adress }}
+            </div>
+            <br />
+            <div>
+              <span class="text-dark bold"
+                >{{ "student.table.birth_in" | translate }}:
+              </span>
+              {{ student.birth_in }}
+            </div>
+            <br />
+            <div>
+              <span class="text-dark bold"
+                >{{ "student.table.birth_at" | translate }}:
+              </span>
+              {{ student.birth_at }}
+            </div>
+          </div>
+        </div>
+        <hr>
+        <ul ngbNav #navWithIcons="ngbNav" class="nav-tabs justify-content-start">
+            <li ngbNavItem>
+              <a ngbNavLink><span [data-feather]="'layers'"></span> {{ 'student.tabs.general'|translate }}</a>
+              <ng-template ngbNavContent>
+                <p>
+                    Muffin cupcake candy chocolate cake gummi bears fruitcake donut
+                    dessert pie. Wafer toffee bonbon dragée. Jujubes cotton candy
+                    gummies chupa chups. Sweet fruitcake cheesecake biscuit cotton
+                    candy. Cookie powder marshmallow donut. Candy cookie sweet roll bear
+                    claw sweet roll. Cake tiramisu cotton candy gingerbread cheesecake
+                    toffee cake. Cookie liquorice dessert candy canes jelly. Sweet
+                    chocolate muffin fruitcake gummies jujubes pie lollipop. Brownie
+                    marshmallow caramels gingerbread jelly beans chocolate bar oat cake
+                    wafer. Chocolate bar danish icing sweet apple pie jelly-o carrot
+                    cake cookie cake.
+                </p>
+              </ng-template>
+            </li>
+            <li ngbNavItem>
+              <a ngbNavLink><span [data-feather]="'users'"></span> {{ 'student.tabs.parent'|translate }}</a>
+              <ng-template ngbNavContent>
+                <p>
+                  Muffin cupcake candy chocolate cake gummi bears fruitcake donut
+                  dessert pie. Wafer toffee bonbon dragée. Jujubes cotton candy
+                  gummies chupa chups. Sweet fruitcake cheesecake biscuit cotton
+                  candy. Cookie powder marshmallow donut. Candy cookie sweet roll bear
+                  claw sweet roll. Cake tiramisu cotton candy gingerbread cheesecake
+                  toffee cake. Cookie liquorice dessert candy canes jelly. Sweet
+                  chocolate muffin fruitcake gummies jujubes pie lollipop. Brownie
+                  marshmallow caramels gingerbread jelly beans chocolate bar oat cake
+                  wafer. Chocolate bar danish icing sweet apple pie jelly-o carrot
+                  cake cookie cake.
+                </p>
+              </ng-template>
+            </li>
+            <li ngbNavItem >
+              <a ngbNavLink><span [data-feather]="'users'"></span> {{ 'student.tabs.attendance'|translate }}</a>
+
+              <ng-template ngbNavContent>
+                <p>
+                  Cake croissant lemon drops gummi bears carrot cake biscuit cupcake
+                  croissant. Macaroon lemon drops muffin jelly sugar plum chocolate
+                  cupcake danish icing. Soufflé tootsie roll lemon drops sweet roll
+                  cake icing cookie halvah cupcake.
+                </p>
+              </ng-template>
+            </li>
+            <li ngbNavItem>
+              <a ngbNavLink><span [data-feather]="'heart'"></span> {{ 'student.tabs.medical'|translate }}</a>
+              <ng-template ngbNavContent>
+                <p>
+                  Chocolate croissant cupcake croissant jelly donut. Cheesecake toffee
+                  apple pie chocolate bar biscuit tart croissant. Lemon drops danish
+                  cookie. Oat cake macaroon icing tart lollipop cookie sweet bear
+                  claw. Carrot cake dragée chocolate. Lemon drops ice cream wafer
+                  gummies dragée. Chocolate bar liquorice cheesecake cookie chupa
+                  chups marshmallow oat cake biscuit. Dessert toffee fruitcake ice
+                  cream powder tootsie roll cake.
+                </p>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="navWithIcons" class="mt-2"></div>
+      </div>
+    </div>
+    
+
+   
+  </div>
+</div>

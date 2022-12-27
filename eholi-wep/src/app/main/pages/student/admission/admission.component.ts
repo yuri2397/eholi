@@ -82,7 +82,7 @@ export class AdmissionComponent implements OnInit {
 
   _save() {
     console.log(this.request)
-    this._admissionService.store(this.request).subscribe({
+    this._admissionService.create<any>(this.request).subscribe({
       next: (data) => {
         console.log(data)
         this._toastrService.success(
@@ -107,7 +107,7 @@ export class AdmissionComponent implements OnInit {
       (this.searchTimeout = setTimeout(() => {
         item.searched = true
         this._tutorsService
-          .index({
+          .index<Tutor>({
             search_query: data,
           })
           .pipe(finalize(() => (item.searched = false)))
@@ -134,7 +134,7 @@ export class AdmissionComponent implements OnInit {
       (this.searchTimeout = setTimeout(() => {
         this.classLevelSearchLoad = true
         this._classLevelService
-          .index({
+          .index<ClassLevel>({
             search_query: data,
             'with[]': ['level', 'school_year'],
           })

@@ -14,11 +14,4 @@ export class TutorsService extends AbstractService {
     super('tutors', _ch)
   }
 
-  // ROUTES URLS AND REQUEST
-
-  public index(params?: Param) {
-    return this.http
-      .get<Paginate<Tutor>>(this.enpoint, { params: params })
-      .pipe(first())
-  }
 }

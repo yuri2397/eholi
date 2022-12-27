@@ -17,26 +17,6 @@ export class StudentService extends AbstractService {
 
   // ROUTES URLS AND REQUEST
 
-  public index(params?: Param) {
-    return this.http
-      .get<Paginate<Student>>(this.enpoint, { params: params })
-      .pipe(first())
-  }
-
-  public create(student: Student) {
-    return this.http.post(this.enpoint, student)
-  }
-
-  public show(uuid: string, params?: Param) {
-    return this.http
-      .get<Student>(`${this.enpoint}/${uuid}`, { params: params })
-      .pipe(first())
-  }
-
-  public update(uuid: string, student: Student) {
-    return this.http.put<Student>(`${this.enpoint}/${uuid}`, student)
-  }
-
   public ecardIndex(params?: Param) {
     return this.http.get<any>(`${this.enpoint}`, { params: params })
   }

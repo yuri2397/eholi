@@ -40,7 +40,7 @@ export class CreateClassLevelComponent implements OnInit {
   getLevels() {
     this.selectLoading = true
     this._levelService
-      .index({
+      .index<Level>({
         with: ['cycle'],
       })
       .pipe(

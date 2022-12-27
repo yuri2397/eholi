@@ -16,21 +16,4 @@ export class AdminissionService extends AbstractService {
     super('admissions', _ch)
   }
 
-  // ROUTES URLS AND REQUEST
-
-  public index(params?: Param) {
-    return this.http
-      .get<Paginate<Admission>>(this.enpoint, { params: params })
-      .pipe(first())
-  }
-
-  public show(id: string) {
-    return this.http.get<Admission>(`${this.enpoint}/${id}`).pipe(first())
-  }
-
-  public store(data: AdmissionRequest) {
-    return this.http
-      .post<ApiResponse<Student>>(this.enpoint, data)
-      .pipe(first())
-  }
 }

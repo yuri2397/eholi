@@ -13,31 +13,5 @@ export class ClassLevelCourseService extends AbstractService {
   constructor(private _ch: HttpClient) {
     super('class-level-courses', _ch)
   }
-
-  // ROUTES URLS AND REQUEST
-
-  index(params?: Param) {
-    return this.http.get<Paginate<ClassLevelCourse>>(this.enpoint, {
-      params: params,
-    })
-  }
-
-  create(class_level: ClassLevelCourse) {
-    return this.http.post<ClassLevelCourse>(this.enpoint, class_level)
-  }
-
-  show(uuid: string | number) {
-    return this.http.get<ClassLevelCourse>(`${this.enpoint}/${uuid}`)
-  }
-
-  update(uuid: string | number, class_level: ClassLevelCourse | any) {
-    return this.http.put<ClassLevelCourse>(
-      `${this.enpoint}/${uuid}`,
-      class_level,
-    )
-  }
-
-  delete(uuid: string | number) {
-    return this.http.delete<ClassLevelCourse>(`${this.enpoint}/${uuid}`)
-  }
+ 
 }

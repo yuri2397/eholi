@@ -13,24 +13,4 @@ export class SemesterService extends AbstractService {
   constructor(private _ch: HttpClient) {
     super('semesters', _ch)
   }
-
-  // ROUTES URLS AND REQUEST
-
-  index(params?: Param) {
-    return this.http.get<Paginate<Semester>>(this.enpoint, {
-      params: params,
-    })
-  }
-
-  create(building: Building) {
-    return this.http.post<Semester>(this.enpoint, building)
-  }
-
-  show(uuid: string | number) {
-    return this.http.get<Semester>(`${this.enpoint}/${uuid}`)
-  }
-
-  delete(uuid: string | number) {
-    return this.http.delete<Semester>(`${this.enpoint}/${uuid}`)
-  }
 }

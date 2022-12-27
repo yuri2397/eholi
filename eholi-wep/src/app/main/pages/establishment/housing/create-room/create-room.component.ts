@@ -7,6 +7,7 @@ import { finalize, first } from 'rxjs/operators'
 import { BuildingService } from '../../services/building.service'
 import { LevelService } from '../../services/level.service'
 import { RoomService } from '../../services/room.service'
+import { Room } from '../../establishment.model'
 
 @Component({
   selector: 'app-create-room',
@@ -67,7 +68,7 @@ export class CreateRoomComponent implements OnInit {
   submit(form: any) {
     this.createdLoad = true
     this._roomService
-      .create(form)
+      .create<Room>(form)
       .pipe(
         first(),
         finalize(() => (this.createdLoad = false)),

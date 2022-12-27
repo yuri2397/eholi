@@ -177,6 +177,17 @@
     "title": "Liste Etudiants",
     "pronom": "Votre",
     "lieuNaissance": "lieu de naissance",
+    "tabs":{
+      "general": "Général",
+      "assessment": "Évaluation",
+      "attendance": "Présence",
+      "payment": "Paiement",
+      "parent": "Parents/Tuteurs",
+      "library": "Bibliothèque",
+      "medical": "Médical",
+      "alert": "Alertes",
+      "fee": "Frais scolaires"
+    },
     "table": {
       "reference": "Matricule",
       "first_name": "Prénom",
