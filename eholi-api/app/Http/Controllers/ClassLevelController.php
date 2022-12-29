@@ -53,7 +53,10 @@ class ClassLevelController extends Controller
     public function store(Request $request)
     {
         // validation
-        $request->merge(['school_year_id' => school_year()->id]);
+        $request->merge([
+            'school_year_id' => school_year()->id,
+            'school_id' => school()->id,
+        ]);
         $class_level = ClassLevel::create($request->all());
 
         return $class_level->refresh();

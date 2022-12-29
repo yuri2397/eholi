@@ -65,9 +65,10 @@ class AdmissionController extends Controller
             ]);
 
             # attach student to class level has student when class level school year is the current school year
-            $student->class_level_has_student()->create([
-                'class_level_id' => $request->class_level_id
-            ]);
+            // $student->class_level_has_student()->create([
+            //     'class_level_id' => $request->class_level_id,
+            //     'school_id' => school()->id,
+            // ]);
 
 
             # create users for student

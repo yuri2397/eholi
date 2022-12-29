@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentSubscribe extends AbstractModel
 {
+    public const BASE_REFERENCE = 'SB';
+
 }

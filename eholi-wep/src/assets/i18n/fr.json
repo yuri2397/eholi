@@ -120,7 +120,12 @@
     },
     "undefined": "Indéfinie",
     "table": {
-      "actions": "Actions"
+      "actions": "Actions",
+      "empty":{
+        "title": "Aucun élément trouvé",
+        "message": "Aucun élément trouvé dans la base de données",
+        "btn": "Ajouter"
+      }
     },
     "notifications": {
       "title": "Notification",
@@ -194,6 +199,7 @@
       "parent": "Parents/Tuteurs",
       "library": "Bibliothèque",
       "medical": "Médical",
+      "housing": "Logement",
       "alert": "Alertes",
       "fee": "Frais scolaires",
       "journey": "Parcours scolaire"
@@ -482,6 +488,8 @@
     }
   },
 
+  
+
   "tutor": {
     "title": "Parents/Tuteurs",
     "field": {
@@ -491,11 +499,10 @@
       "adress": "Adresse"
     },
     "table": {
-      "label": "Nom de la chambre",
-      "size": "Capacité",
-      "building": "Bâtiment",
-      "total_students": "Nombre d'occupants",
-      "status": "Statut"
+      "phone1": "Téléphone du tuteur",
+      "name": "Prénom/Nom",
+      "type": "Relation parentale",
+      "adress": "Adresse",      "status": "Statut"
     },
     "btn": {
       "add": "Ajouter une chambre"

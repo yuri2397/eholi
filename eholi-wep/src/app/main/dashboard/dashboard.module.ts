@@ -27,25 +27,25 @@ const routes = [
     path: '', 
     component: MainMenuComponent,
   },
-  {
-    path: 'analytics',
-    component: AnalyticsComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin], animation: 'danalytics' },
-    resolve: {
-      css: DashboardService,
-      inv: InvoiceListService
-    }
-  },
-  {
-    path: 'ecommerce',
-    component: EcommerceComponent,
-    canActivate: [AuthGuard],
-    resolve: {
-      css: DashboardService
-    },
-    data: { animation: 'decommerce' }
-  }
+  // {
+  //   path: 'analytics',
+  //   component: AnalyticsComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: [Role.Admin], animation: 'danalytics' },
+  //   resolve: {
+  //     css: DashboardService,
+  //     inv: InvoiceListService
+  //   }
+  // },
+  // {
+  //   path: 'ecommerce',
+  //   component: EcommerceComponent,
+  //   canActivate: [AuthGuard],
+  //   resolve: {
+  //     css: DashboardService
+  //   },
+  //   data: { animation: 'decommerce' }
+  // }
 ];
 
 @NgModule({

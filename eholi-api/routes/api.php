@@ -1,42 +1,43 @@
 <?php
 
+use App\Models\Room;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Tutor;
 use App\Models\School;
 use App\Models\Student;
+use App\Models\ClassLevel;
 use App\Models\SchoolUser;
 use App\Models\SchoolYear;
 use Illuminate\Http\Request;
 use App\Models\SchoolStudent;
+use App\Models\StudentHasRoom;
 use App\Events\AssociateUserTo;
 use App\Models\StudentSubscribe;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use App\Models\ClassLevelHasStudent;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Events\AssociateCustomerToSchool;
-use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\TutorController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BuildingController;
-use App\Http\Controllers\ClassLevelController;
-use App\Http\Controllers\ClassLevelHasCourseController;
-use App\Http\Controllers\ClassRoomController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\LevelController;
-use App\Http\Controllers\ProfessorController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\SchoolYearController;
 use App\Http\Controllers\SemesterController;
-use App\Http\Controllers\TutorController;
-use App\Models\ClassLevel;
-use App\Models\ClassLevelHasStudent;
-use App\Models\Room;
-use App\Models\StudentHasRoom;
-use App\Models\Tutor;
+use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\ClassLevelController;
+use App\Http\Controllers\SchoolYearController;
 use PHPUnit\Framework\MockObject\Builder\Stub;
+use App\Http\Controllers\StudentSubscribeController;
 use Spatie\Permission\Contracts\Role as ContractsRole;
+use App\Http\Controllers\ClassLevelHasCourseController;
 
 /**
  * UserController
@@ -139,6 +140,13 @@ Route::prefix('students')
 Route::prefix('class-rooms')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('class-rooms', ClassRoomController::class);
+
+/**
+ * StudentSbscribe
+ */
+Route::prefix('student-subscribes')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('student-subscribes', StudentSubscribeController::class);
 
 /**
  * ClassRoom

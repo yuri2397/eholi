@@ -26,4 +26,8 @@ export class StudentShowComponent implements OnInit {
     return this.student.first_name[0] + this.student.last_name[0];
   }
 
+  tutorType(type: string){
+    return "tutor.select" + type;
+  }
+
 }

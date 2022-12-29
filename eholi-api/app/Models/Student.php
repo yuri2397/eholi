@@ -47,6 +47,12 @@ class Student extends AbstractModel
         return $this->morphOne(SchoolUser::class, 'user');
     }
 
+    # class_level_has_student
+    public function class_level_has_student()
+    {
+        return $this->hasMany(ClassLevelHasStudent::class);
+    }
+
     /**
      * Get the class_levels for the student through class_level_has_student
      */

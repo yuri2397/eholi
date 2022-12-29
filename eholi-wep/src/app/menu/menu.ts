@@ -4,34 +4,34 @@ import { CoreMenu } from '@core/types'
 
 export const menu: CoreMenu[] = [
   // Dashboard
-  {
-    id: 'dashboard',
-    title: 'menu.dashboard.home',
-    translate: 'menu.dashboard.home',
-    type: 'collapsible',
-    // role: ['Admin'], //? To hide collapsible based on user role
-    icon: 'home',
-    children: [
-      {
-        id: 'analytics',
-        title: 'menu.dashboard.analytics',
-        translate: 'menu.dashboard.analytics',
-        type: 'item',
-        // role: ['Admin'], //? To set multiple role: ['Admin', 'Client']
-        icon: 'circle',
-        url: 'dashboard/analytics',
-      },
-      {
-        // If role is not assigned will be display to all
-        id: 'ecommerce',
-        title: 'menu.dashboard.ecommerce',
-        translate: 'menu.dashboard.ecommerce',
-        type: 'item',
-        icon: 'circle',
-        url: 'dashboard/ecommerce',
-      },
-    ],
-  },
+  // {
+  //   id: 'dashboard',
+  //   title: 'menu.dashboard.home',
+  //   translate: 'menu.dashboard.home',
+  //   type: 'collapsible',
+  //   // role: ['Admin'], //? To hide collapsible based on user role
+  //   icon: 'home',
+  //   children: [
+  //     {
+  //       id: 'analytics',
+  //       title: 'menu.dashboard.analytics',
+  //       translate: 'menu.dashboard.analytics',
+  //       type: 'item',
+  //       // role: ['Admin'], //? To set multiple role: ['Admin', 'Client']
+  //       icon: 'circle',
+  //       url: 'dashboard/analytics',
+  //     },
+  //     {
+  //       // If role is not assigned will be display to all
+  //       id: 'ecommerce',
+  //       title: 'menu.dashboard.ecommerce',
+  //       translate: 'menu.dashboard.ecommerce',
+  //       type: 'item',
+  //       icon: 'circle',
+  //       url: 'dashboard/ecommerce',
+  //     },
+  //   ],
+  // },
 
   // ADMINISTRATIONS
   {
