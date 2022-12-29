@@ -1,22 +1,15 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
     <div class="card card-developer-meetup">
-      <div class="bg-light-primary rounded-top text-center">
-        <img
-          src="assets/images/illustration/email.svg"
-          alt="Meeting Pic"
-          height="170"
-        />
-      </div>
       <div class="card-body">
         <div class="meetup-header d-flex align-items-center">
           <div class="meetup-day">
             <div class="avatar bg-light-danger avatar-xl">
               <span class="avatar-content">{{ subName() }}</span>
             </div>
-            <div class="d-block mx-2">
+            <div class="d-block mt-1">
               <span class="text-dark text-uppercase"
-                >ID: {{ student.reference }}
+                >{{ student.reference }}
               </span>
               <h3>{{ student.first_name }} {{ student.last_name }}</h3>
             </div>
@@ -50,18 +43,8 @@
             <li ngbNavItem>
               <a ngbNavLink><span [data-feather]="'layers'"></span> {{ 'student.tabs.general'|translate }}</a>
               <ng-template ngbNavContent>
-                <p>
-                    Muffin cupcake candy chocolate cake gummi bears fruitcake donut
-                    dessert pie. Wafer toffee bonbon dragée. Jujubes cotton candy
-                    gummies chupa chups. Sweet fruitcake cheesecake biscuit cotton
-                    candy. Cookie powder marshmallow donut. Candy cookie sweet roll bear
-                    claw sweet roll. Cake tiramisu cotton candy gingerbread cheesecake
-                    toffee cake. Cookie liquorice dessert candy canes jelly. Sweet
-                    chocolate muffin fruitcake gummies jujubes pie lollipop. Brownie
-                    marshmallow caramels gingerbread jelly beans chocolate bar oat cake
-                    wafer. Chocolate bar danish icing sweet apple pie jelly-o carrot
-                    cake cookie cake.
-                </p>
+                <!-- list group -->
+                 
               </ng-template>
             </li>
             <li ngbNavItem>
@@ -81,7 +64,21 @@
                 </p>
               </ng-template>
             </li>
-            <li ngbNavItem >
+            <li ngbNavItem>
+              <a ngbNavLink><span [data-feather]="'briefcase'"></span> {{ 'student.tabs.journey'|translate }}</a>
+              <ng-template ngbNavContent>
+                <p>
+                  Chocolate croissant cupcake croissant jelly donut. Cheesecake toffee
+                  apple pie chocolate bar biscuit tart croissant. Lemon drops danish
+                  cookie. Oat cake macaroon icing tart lollipop cookie sweet bear
+                  claw. Carrot cake dragée chocolate. Lemon drops ice cream wafer
+                  gummies dragée. Chocolate bar liquorice cheesecake cookie chupa
+                  chups marshmallow oat cake biscuit. Dessert toffee fruitcake ice
+                  cream powder tootsie roll cake.
+                </p>
+              </ng-template>
+            </li>
+            <li ngbNavItem [disabled]="true">
               <a ngbNavLink><span [data-feather]="'users'"></span> {{ 'student.tabs.attendance'|translate }}</a>
 
               <ng-template ngbNavContent>
@@ -93,7 +90,8 @@
                 </p>
               </ng-template>
             </li>
-            <li ngbNavItem>
+          
+            <li ngbNavItem [disabled]="true">
               <a ngbNavLink><span [data-feather]="'heart'"></span> {{ 'student.tabs.medical'|translate }}</a>
               <ng-template ngbNavContent>
                 <p>

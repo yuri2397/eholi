@@ -89,7 +89,6 @@ const routes: Routes = [
     path: 'housing',
     component: HousingComponent,
     runGuardsAndResolvers: 'paramsOrQueryParamsChange',
-
     resolve: {
       rooms: RoomResolver,
     },

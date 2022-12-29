@@ -27,8 +27,19 @@ class Tutor extends AbstractModel
         return $this->morphOne(SchoolUser::class, 'user');
     }
 
+    public function tutors_has_students()
+    {
+        return $this->belongsToMany(Student::class, 'student_has_tutors', 'tutor_id', 'student_id');
+    }
+
     public function user()
     {
         return $this->morphOne(User::class, 'owner');
+    }
+
+    # tutor type in relation with student
+    public function tutor_type()
+    {
+        return $this->hasMany(StudentHasTutor::class);
     }
 }

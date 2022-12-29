@@ -329,9 +329,9 @@
                                         aria-label="Search..." aria-describedby="basic-addon-search1" />
                                 </div>
                                 <ng-container
-                                    *ngIf="classLevelDataSources && classLevelDataSources.data.length; else elseTemplate">
-                                    <ngx-datatable [rows]="classLevelDataSources?.data" [rowHeight]="50"
-                                        class="bootstrap core-bootstrap" [limit]="classLevelDataSources?.per_page"
+                                    *ngIf="classLevelDataSources && classLevelDataSources.length; else elseTemplate">
+                                    <ngx-datatable [rows]="classLevelDataSources" [rowHeight]="50"
+                                        class="bootstrap core-bootstrap" 
                                         [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
                                         [scrollbarH]="true">
 

@@ -32,6 +32,8 @@ use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\TutorController;
 use App\Models\ClassLevel;
 use App\Models\ClassLevelHasStudent;
+use App\Models\Room;
+use App\Models\StudentHasRoom;
 use App\Models\Tutor;
 use PHPUnit\Framework\MockObject\Builder\Stub;
 use Spatie\Permission\Contracts\Role as ContractsRole;
@@ -125,6 +127,7 @@ Route::prefix('students')
 
         Route::post('', 'store');
         Route::put('/{student}', 'update');
+        Route::get('/{student}/meta-data', 'metaData');
 
         // disable student in school
         Route::put('/{student}/disable', 'disableStudentInSchool');
@@ -197,23 +200,35 @@ Route::prefix('buildings')
  * TEST URL
  */
 Route::any('tests', function (Request $request) {
-    return Tutor::all();
+    $room = Room::whereSchoolId($request->school_id)->first();
 
-    $school = school();
-    $student = SchoolStudent::with($request->with ?? [])
-        ->join('students as S', 'S.id', 'school_students.student_id')
-        ->whereSchoolId($school->id)
-        ->where('school_students.status', true)
-        ->where('S.status', true)
-        ->limit(3)
-        ->get();
+    $student = Student::find($request->student_id);
 
-    foreach ($student as $value) {
-        $clhs = new ClassLevelHasStudent();
-        $clhs->student_id = $value->id;
-        $clhs->class_level_id = '005107dc-8949-4ea0-80b8-da7945dfec4a';
-        $clhs->save();
-    }
+    // attach room to student
+    $attched_room = StudentHasRoom::create(
+        [
+            'student_id' => $student->id,
+            'room_id' => $room->id,
+            'school_id' => $room->school_id,
+        ]
+        );
+
+    return $student->refresh()->load(['rooms']);
+    // $school = school();
+    // $student = SchoolStudent::with($request->with ?? [])
+    //     ->join('students as S', 'S.id', 'school_students.student_id')
+    //     ->whereSchoolId($school->id)
+    //     ->where('school_students.status', true)
+    //     ->where('S.status', true)
+    //     ->limit(3)
+    //     ->get();
+
+    // foreach ($student as $value) {
+    //     $clhs = new ClassLevelHasStudent();
+    //     $clhs->student_id = $value->id;
+    //     $clhs->class_level_id = '005107dc-8949-4ea0-80b8-da7945dfec4a';
+    //     $clhs->save();
+    // }
     // foreach (Student::all() as $value) {
     //     event(new AssociateCustomerToSchool($school, $value));
     // }

@@ -29,7 +29,7 @@ export class AdmissionComponent implements OnInit {
   public student: Student = new Student()
 
   searchTimeout: NodeJS.Timeout
-  classLevelDataSources: Paginate<ClassLevel>
+  classLevelDataSources: ClassLevel[];
   classLevelSearchLoad: boolean
 
   constructor(
@@ -134,13 +134,13 @@ export class AdmissionComponent implements OnInit {
       (this.searchTimeout = setTimeout(() => {
         this.classLevelSearchLoad = true
         this._classLevelService
-          .index<ClassLevel>({
+          .index<any>({
             search_query: data,
             'with[]': ['level', 'school_year'],
           })
           .pipe(finalize(() => (this.classLevelSearchLoad = false)))
           .subscribe({
-            next: (response) => {
+            next: (response: any) => {
               console.log(response)
               this.classLevelDataSources = response
             },

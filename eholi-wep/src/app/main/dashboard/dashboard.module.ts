@@ -20,8 +20,13 @@ import { DashboardService } from 'app/main/dashboard/dashboard.service';
 
 import { AnalyticsComponent } from 'app/main/dashboard/analytics/analytics.component';
 import { EcommerceComponent } from 'app/main/dashboard/ecommerce/ecommerce.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 const routes = [
+  {
+    path: '', 
+    component: MainMenuComponent,
+  },
   {
     path: 'analytics',
     component: AnalyticsComponent,
@@ -44,7 +49,7 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [AnalyticsComponent, EcommerceComponent],
+  declarations: [AnalyticsComponent, EcommerceComponent, MainMenuComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -89,6 +89,15 @@
       "courses": "Cours",
       "timestable": "Emploi du temps"
     },
+    "description":{
+      "students":"Lister, profile étudiant...",
+      "professors":"Gestion des professeurs",
+      "courses":"Gestion des cours",
+      "class_rooms":"Gestion des salles de classe",
+      "class-levels":"Gestion des classes",
+      "buildings":"Gestion des logements/campus",
+      "admission":"Gestion des inscriptions/reinscriptions"
+    },
     "admission": {
       "stepper": [
         {
@@ -186,7 +195,8 @@
       "library": "Bibliothèque",
       "medical": "Médical",
       "alert": "Alertes",
-      "fee": "Frais scolaires"
+      "fee": "Frais scolaires",
+      "journey": "Parcours scolaire"
     },
     "table": {
       "reference": "Matricule",

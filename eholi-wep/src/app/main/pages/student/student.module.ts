@@ -20,6 +20,7 @@ import { AdmissionComponent } from './admission/admission.component'
 import { FeesComponent } from './fees/fees.component'
 import { StudentCreateComponent } from './student-create/student-create.component'
 import { StudentEditComponent } from './student-edit/student-edit.component'
+import { StudentShowMetaDataResolver } from './resolvers/student-show-meta-data.resolver'
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: {
       student: StudentShowResolver,
+      meta_data: StudentShowMetaDataResolver  
     },
     data: { animation: 'details' },
   },

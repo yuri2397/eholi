@@ -1,0 +1,135 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+       <div class="row">
+      <div class="col-lg-3 col-sm-6 col-12" [routerLink]="'/pages/admissions'">
+        <div class="card shadow-sm pointer">
+          <div class="card-header">
+            <div>
+              <h2 class="font-weight-bolder mb-0">
+                {{ "content.title.admission" | translate }}
+              </h2>
+              <p class="card-text">{{ 'content.description.admission'|translate }}</p>
+            </div>
+            <div class="avatar bg-light-primary p-50 m-0">
+              <div class="avatar-content">
+                <i data-feather="user-check" class="font-medium-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-lg-3 col-sm-6 col-12"
+        [routerLink]="'/pages/students/index'"
+        [queryParams]="{
+          per_page: 15,
+          page: 1,
+          order: 'desc',
+          order_by: 'last_name'
+        }"
+      >
+        <div class="card shadow-sm pointer">
+          <div class="card-header">
+            <div>
+              <h2 class="font-weight-bolder mb-0">
+                {{ "content.title.students" | translate }}
+              </h2>
+              <p class="card-text">{{ 'content.description.students'|translate }}</p>
+            </div>
+            <div class="avatar bg-light-success p-50 m-0">
+              <div class="avatar-content">
+                <i data-feather="users" class="font-medium-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-lg-3 col-sm-6 col-12"
+        [routerLink]="'/pages/classrooms'"
+        [queryParams]="{
+          per_page: 15,
+          page: 1,
+          order: 'desc',
+          order_by: 'name',
+          'with[]': 'building'
+        }"
+      >
+        <div class="card shadow-sm pointer">
+          <div class="card-header">
+            <div>
+              <h2 class="font-weight-bolder mb-0">
+                {{ "content.title.class_rooms" | translate }}
+              </h2>
+              <p class="card-text">
+                {{ "content.description.class_rooms" | translate }}
+              </p>
+            </div>
+            <div class="avatar bg-light-danger p-50 m-0">
+              <div class="avatar-content">
+                <i class="fa-duotone fa-square-root-variable"></i>              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-lg-3 col-sm-6 col-12"
+        [routerLink]="'/pages/courses'"
+        [queryParams]="{
+          per_page: 10,
+          page: 1,
+          order: 'desc',
+          order_by: 'name',
+          'with[]': ['semester', 'class_level', 'course', 'professor']
+        }"
+      >
+        <div class="card shadow-sm pointer">
+          <div class="card-header">
+            <div>
+              <h2 class="font-weight-bolder mb-0">
+                {{ "menu.schools.courses" | translate }}
+              </h2>
+              <p class="card-text">
+                {{ "content.description.courses" | translate }}
+              </p>
+            </div>
+            <div class="avatar bg-light-warning p-50 m-0">
+              <div class="avatar-content">
+                <i data-feather="alert-octagon" class="font-medium-5"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 col-12"  [routerLink]="'/pages/class-levels'"
+        [queryParams]="{
+          per_page: 10,
+          page: 1,
+          order: 'desc',
+          order_by: 'name',
+          'with[]': ['level'],
+          'columns[]': ['name', 'id', 'level_id']
+        }">
+          <div class="card  shadow-sm pointer">
+            <div class="card-header">
+              <div>
+                <h2 class="font-weight-bolder mb-0">
+                    {{ "menu.schools.class-levels" | translate }}
+                </h2>
+                <p class="card-text">
+                    {{ "content.description.class-levels" | translate }}
+                </p>
+              </div>
+              <div class="avatar bg-light-primary p-50 m-0">
+                <div class="avatar-content">
+                  <i data-feather="cpu" class="font-medium-5"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Student } from "./../student.model";
+import { Student, StudentMetaData } from "./../student.model";
 import { Paginate } from "./../../../../auth/models/base.model";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
@@ -10,13 +10,15 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class StudentShowComponent implements OnInit {
   student: Student;
+  meta_data: StudentMetaData;
 
   constructor(private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this._route.data.subscribe((data: { student: Student }) => {
+    this._route.data.subscribe((data: { student: Student, meta_data: StudentMetaData }) => {
       this.student = data.student;
-      console.log(this.student);
+      this.meta_data = data.meta_data;
+      console.log(data);
     });
   }
 

@@ -149,4 +149,46 @@ class StudentController extends Controller
 
         return $school_student->refresh();
     }
+
+    public function metaData(Student $student)
+    {
+        $metaData = [];
+
+        $room = $student->rooms()
+        ->with('room')
+        ->where('school_id', school()->id)
+        ->first();
+        $metaData['room'] = $room ? [
+            "id" => $room->room->id,
+            "name" => $room->room->name,
+        ] : null;
+
+        $class_level = $student->class_levels()
+        ->where('school_year_id', school_year()->id)
+        ->first();
+
+        $metaData['class_levels'] = $class_level ? [
+            "id" => $class_level->id,
+            "name" => $class_level->name,
+            "level_id" => $class_level->level_id
+        ] : null;
+
+
+        # tutors
+        $metaData['tutors'] =  $student->tutors()
+            ->with('tutor_type')
+            ->where('student_has_tutors.student_id', $student->id)
+            ->get()->map(
+                fn ($tutor) =>  [
+                    'id'=> $tutor->id,
+                    "name" => $tutor->name,
+                    "phone1" => $tutor->phone1,
+                    "adress" => $tutor->adress,
+                    "type" => $tutor->tutor_type[0]->type ?? null
+                ]
+                );
+
+
+        return $metaData;
+    }
 }

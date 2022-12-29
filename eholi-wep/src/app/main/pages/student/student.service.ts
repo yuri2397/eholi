@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from 'environments/environment'
 import { Injectable } from '@angular/core'
 import { Paginate } from 'app/auth/models/base.model'
-import { SchoolStudent, Student } from './student.model'
+import { SchoolStudent, Student, StudentMetaData } from './student.model'
 import { AbstractService } from 'app/shared/abstract.service'
 
 @Injectable({
@@ -15,7 +15,9 @@ export class StudentService extends AbstractService {
     super('students', _ch)
   }
 
-  // ROUTES URLS AND REQUEST
+  metaData(uuid: string) {
+    return this.http.get<StudentMetaData>(`${this.enpoint}/${uuid}/meta-data`)
+  }
 
   public ecardIndex(params?: Param) {
     return this.http.get<any>(`${this.enpoint}`, { params: params })
