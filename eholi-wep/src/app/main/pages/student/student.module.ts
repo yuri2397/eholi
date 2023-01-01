@@ -20,7 +20,8 @@ import { AdmissionComponent } from './admission/admission.component'
 import { FeesComponent } from './fees/fees.component'
 import { StudentCreateComponent } from './student-create/student-create.component'
 import { StudentEditComponent } from './student-edit/student-edit.component'
-import { StudentShowMetaDataResolver } from './resolvers/student-show-meta-data.resolver'
+import { StudentShowMetaDataResolver } from './resolvers/student-show-meta-data.resolver';
+import { NewRegistrationComponent } from './registration/new-registration/new-registration.component'
 
 const routes: Routes = [
   {
@@ -84,6 +85,7 @@ const routes: Routes = [
     FeesComponent,
     StudentCreateComponent,
     StudentEditComponent,
+    NewRegistrationComponent,
   ],
   imports: [RouterModule.forChild(routes), SharedModule],
 })

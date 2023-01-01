@@ -33,6 +33,9 @@ class StudentSubscribeController extends Controller
 
         try {
 
+            # control if student is already subscribe
+
+
             # create class level has student
             $class_level_has_student = ClassLevelHasStudent::create([
                 "class_level_id" => $request->class_level_id,

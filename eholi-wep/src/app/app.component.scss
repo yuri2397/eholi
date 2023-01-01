@@ -14,9 +14,10 @@
 }
 
 .progress {
-    background-color   : #ffffff;
-    animation          : progressBar 8s ease-in-out;
+    background-color   : #7367F0;
+    animation          : progressBar 5s ease-in-out;
     animation-fill-mode: both;
+    height: 5px;
 }
 
 @keyframes progressBar {
@@ -56,7 +57,13 @@
         width: 30%;
     }
 
+    35% {
+        width: 35%;
+    }
     40% {
+        width: 40%;
+    }
+    45% {
         width: 40%;
     }
 
@@ -65,11 +72,15 @@
     }
 
     55% {
-        width: 55%;
+        width: 50%;
     }
 
     60% {
         width: 60%;
+    }
+
+    65% {
+        width: 65%;
     }
 
     70% {
@@ -89,14 +100,14 @@
     }
 
     95% {
-        width: 95%;
+        width: 93%;
     }
 
     98% {
-        width: 98%;
+        width: 95%;
     }
 
     100% {
-        width: 100%;
+        width: 97%;
     }
 }

@@ -1,5 +1,159 @@
 <div class="content-wrapper container-xxl p-0">
-    <div class="content-body">
-        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+  <div class="content-body">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+
+    <br />
+    <div class="card card-body shadow-sm">
+      <form #addressForm="ngForm">
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon-search1"
+                  ><i data-feather="search"></i
+                ></span>
+              </div>
+              <input
+                type="text"
+                name="search_query"
+                id="search_query"
+                ngModel
+                required
+                (ngModelChange)="onSearch($event)"
+                class="form-control"
+                placeholder="{{ 'student.placeholder.search' | translate }}"
+                aria-label="Search..."
+                aria-describedby="basic-addon-search1"
+              />
+            </div>
+          </div>
+          <div class="col">
+            <a
+              class="btn btn-primary"
+              role="button"
+              rippleEffect
+              routerLink="/pages/admissions"
+              >{{ "menu.admission.request" | translate }}</a
+            >
+          </div>
+        </div>
+        <br />
+        <ng-container *ngIf="dataSource && dataSource.data; else elseTemplate">
+          <ngx-datatable
+            [rows]="dataSource.data"
+            [rowHeight]="50"
+            class="bootstrap core-bootstrap"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [scrollbarH]="true"
+          >
+            <ngx-datatable-column
+              name="{{ 'student.table.reference' | translate }}"
+              prop="reference"
+              [width]="120"
+            ></ngx-datatable-column>
+            <ngx-datatable-column
+              name="{{ 'student.table.first_name' | translate }}"
+              prop="first_name"
+              [width]="120"
+            >
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="{{ 'student.table.last_name' | translate }}"
+              prop="last_name"
+              [width]="50"
+            >
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="{{ 'student.table.birth_at' | translate }}"
+              prop="birth_at"
+            >
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="{{ 'student.table.birth_in' | translate }}"
+              prop="birth_in"
+            >
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="{{ 'student.table.email' | translate }}"
+              prop="email"
+            >
+              <ng-template let-email="value" ngx-datatable-cell-template>
+                <div
+                  *ngIf="!email"
+                  class="badge badge-pill"
+                  [ngClass]="{
+                    'badge-light-danger': true
+                  }"
+                >
+                  {{ "content.undefined" | translate }}
+                </div>
+                <div *ngIf="email">
+                  {{ email }}
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="{{ 'student.table.phone' | translate }}"
+              prop="telephone"
+            >
+              <ng-template let-telephone="value" ngx-datatable-cell-template>
+                <div
+                  *ngIf="!telephone"
+                  class="badge badge-pill"
+                  [ngClass]="{
+                    'badge-light-danger': true
+                  }"
+                >
+                  {{ "content.undefined" | translate }}
+                </div>
+                <div *ngIf="telephone">
+                  {{ telephone }}
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="{{ 'content.table.actions' | translate }}"
+              [width]="40"
+              [sortable]="false"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div class="d-flex align-items-center">
+                  <button
+                  (click)="openCreateModal(createModal, row)"
+                    type="button"
+                    class="btn btn-icon btn-warning"
+                    rippleEffect
+                  >
+                    <span [data-feather]="'link'"></span>
+                  </button>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <div class="misc-wrapper">
+            <div class="misc-inner p-2 p-sm-3">
+              <div class="w-100 text-center">
+                <img
+                  class="img-fluid"
+                  [src]="'assets/images/pages/coming-soon.svg'"
+                  alt="Coming soon page"
+                />
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </form>
     </div>
+  </div>
+</div>
+
+<div class="modal-primary d-inline-block">
+  <ng-template #createModal let-modal>
+    <app-new-registration [modal]="modal" [student]="selectedRow"></app-new-registration>
+  </ng-template>
 </div>

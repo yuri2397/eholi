@@ -16,10 +16,7 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->integer('coef')->default(1);
             $table->integer('max_note')->default(20);
-            $table
-                ->foreignUuid('class_level_id')
-                ->references('id')
-                ->on('class_levels');
+
             $table
                 ->foreignUuid('course_id')
                 ->references('id')
@@ -28,7 +25,31 @@ return new class extends Migration {
                 ->foreignUuid('level_has_semester_id')
                 ->references('id')
                 ->on('level_has_semesters');
+
+            $table
+                ->foreignUuid('class_level_id')
+                ->nullable()
+                ->references('id')
+                ->on('class_levels');
+            $table
+                ->foreignUuid('course_id')
+                ->nullable()
+                ->references('id')
+                ->on('courses');
+
+            $table
+                ->foreignUuid('school_id')
+                ->references('id')
+                ->on('schools')
+                ->cascadeOnDelete();
+            $table
+                ->foreignUuid('semester_id')
+                ->references('id')
+                ->on('semesters')
+                ->cascadeOnDelete();
+
             $table->timestamps();
+
         });
     }
 

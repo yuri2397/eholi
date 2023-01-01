@@ -80,14 +80,14 @@ export const menu: CoreMenu[] = [
     type: 'collapsible',
     icon: 'users',
     children: [
-      {
-        id: 'admission.request',
-        title: 'menu.admission.request',
-        translate: 'menu.admission.request',
-        type: 'item',
-        icon: 'circle',
-        url: 'pages/admissions',
-      },
+      // {
+      //   id: 'admission.request',
+      //   title: 'menu.admission.request',
+      //   translate: 'menu.admission.request',
+      //   type: 'item',
+      //   icon: 'circle',
+      //   url: 'pages/admissions',
+      // },
       {
         id: 'admission.registration',
         type: 'item',
