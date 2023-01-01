@@ -31,11 +31,6 @@ return new class extends Migration {
                 ->nullable()
                 ->references('id')
                 ->on('class_levels');
-            $table
-                ->foreignUuid('course_id')
-                ->nullable()
-                ->references('id')
-                ->on('courses');
 
             $table
                 ->foreignUuid('school_id')
