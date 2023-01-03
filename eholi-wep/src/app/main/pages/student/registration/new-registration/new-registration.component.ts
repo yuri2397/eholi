@@ -50,9 +50,10 @@ export class NewRegistrationComponent implements OnInit {
   get type() {
     return this.validateForm.get('type')
   }
+
   save(form:any){
     this.createdLoad = true
-    this._subscribeService.create()
+    // this._subscribeService.create()
   }
 
 }
