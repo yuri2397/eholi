@@ -38,6 +38,8 @@ use PHPUnit\Framework\MockObject\Builder\Stub;
 use App\Http\Controllers\StudentSubscribeController;
 use Spatie\Permission\Contracts\Role as ContractsRole;
 use App\Http\Controllers\ClassLevelHasCourseController;
+use App\Http\Controllers\TestController;
+use App\Models\TestResult;
 
 /**
  * UserController
@@ -183,6 +185,21 @@ Route::prefix('class-levels')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('class-levels', ClassLevelController::class);
 
+
+/**
+ * Tests
+ */
+Route::prefix('tests')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('tests', TestController::class);
+
+/**
+ * Tests Results
+ */
+Route::prefix('test-results')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('test-results', TestResult::class);
+
 /**
  * Room
  */
@@ -207,7 +224,7 @@ Route::prefix('buildings')
 /**
  * TEST URL
  */
-Route::any('tests', function (Request $request) {
+Route::any('local', function (Request $request) {
     $room = Room::whereSchoolId($request->school_id)->first();
 
     $student = Student::find($request->student_id);
@@ -219,7 +236,7 @@ Route::any('tests', function (Request $request) {
             'room_id' => $room->id,
             'school_id' => $room->school_id,
         ]
-        );
+    );
 
     return $student->refresh()->load(['rooms']);
     // $school = school();

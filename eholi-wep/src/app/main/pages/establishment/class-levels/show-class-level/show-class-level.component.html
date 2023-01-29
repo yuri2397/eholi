@@ -1,112 +1,256 @@
 <div class="content-wrapper container-xxl p-0">
-    <div class="content-body">
-        <div class="card card-developer-meetup">
-            <div class="bg-light-primary rounded-top text-center">
-                <img src="assets/images/illustration/email.svg" alt="Meeting Pic" height="170" />
-            </div>
-            <div class="card-body">
-                <div class="meetup-header d-flex align-items-center">
-                    <div class="meetup-day">
-                        <h6 class="mb-0">Niveau</h6>
-                        <h3 class="mb-0">{{ class_level.level.name }}</h3>
-                    </div>
-                    <div class="my-auto">
-                        <h4 class="card-title mb-25">{{ class_level.name }}</h4>
-                        <p class="card-text mb-0">{{ class_level.level.cycle?.name }}</p>
-                    </div>
-                </div>
-                <div class="media">
-                    <div class="avatar bg-light-primary rounded mr-1">
-                        <div class="avatar-content">
-                            <i data-feather="calendar" class="avatar-icon font-medium-3"></i>
-                        </div>
-                    </div>
-                    <div class="media-body">
-                        <h6 class="mb-0">{{ 'timestable.text'|translate }}</h6>
-                        <!-- <small>10:AM to 6:PM</small> -->
-                    </div>
-                </div>
-
-                <div class="avatar-group">
-                    <div placement="bottom" container="body" ngbTooltip="Billy Hopkins" class="avatar pull-up">
-                        <img src="assets/images/portrait/small/avatar-s-9.jpg" alt="Avatar" width="33" height="33" />
-                    </div>
-                    <div placement="bottom" container="body" ngbTooltip="Amy Carson" class="avatar pull-up">
-                        <img src="assets/images/portrait/small/avatar-s-6.jpg" alt="Avatar" width="33" height="33" />
-                    </div>
-                    <div placement="bottom" container="body" ngbTooltip="Brandon Miles" class="avatar pull-up">
-                        <img src="assets/images/portrait/small/avatar-s-8.jpg" alt="Avatar" width="33" height="33" />
-                    </div>
-                    <div placement="bottom" container="body" ngbTooltip="Daisy Weber" class="avatar pull-up">
-                        <img src="assets/images/portrait/small/avatar-s-7.jpg" alt="Avatar" width="33" height="33" />
-                    </div>
-                    <div placement="bottom" container="body" ngbTooltip="Jenny Looper" class="avatar pull-up">
-                        <img src="assets/images/portrait/small/avatar-s-20.jpg" alt="Avatar" width="33" height="33" />
-                    </div>
-                    <h6 class="align-self-center cursor-pointer ml-50 mb-0">+42</h6>
-                </div>
-            </div>
+  <div class="content-body">
+    <div class="card card-developer-meetup">
+      <div class="bg-light-primary rounded-top text-center">
+        <img
+          src="assets/images/illustration/email.svg"
+          alt="Meeting Pic"
+          height="170"
+        />
+      </div>
+      <div class="card-body">
+        <div class="meetup-header d-flex align-items-center">
+          <div class="meetup-day">
+            <h6 class="mb-0">Niveau</h6>
+            <h3 class="mb-0">{{ class_level.level.name }}</h3>
+          </div>
+          <div class="my-auto">
+            <h4 class="card-title mb-25">{{ class_level.name }}</h4>
+            <p class="card-text mb-0">{{ class_level.level.cycle?.name }}</p>
+          </div>
         </div>
-        <br>
-        <app-content-header [contentHeader]="contentHeader"></app-content-header>
-        <section class="users-list-wrapper">
-            <div class="card ">
-                <br>
-                <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
-                    <label class="d-flex align-items-center ml-1 ml-md-0"><input name="searchValue" type="search"
-                            placeholder="{{ 'student.placeholder.search'|translate }}"
-                            [(ngModel)]="queryParams.search_query" class="form-control ml-25"
-                            (input)="onSearch($event.target.value)" /></label>
-                </div>
-                <br>
-                <ngx-datatable (page)="paginate($event)" [rows]="students.data" [rowHeight]="50"
-                    class="bootstrap core-bootstrap" [limit]="students.per_page" [externalPaging]="true"
-                    [count]="students.total" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-                    [scrollbarH]="true">
 
-                    <ngx-datatable-column name="{{ 'student.table.reference'|translate }}" prop="reference">
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="{{ 'student.table.first_name'|translate }}" prop="first_name"
-                        [width]="120">
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="{{ 'student.table.last_name'|translate }}" prop="last_name"
-                        [width]="50">
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="{{ 'student.table.birth_at'|translate }}" prop="birth_at">
-                        <ng-template let-birth_at="value" ngx-datatable-cell-template>
-                            {{ birth_at | date: 'dd/MM/yyyy' }}
-                        </ng-template>
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="{{ 'student.table.birth_at'|translate }}" prop="birth_in">
-                    </ngx-datatable-column>
-                    <ngx-datatable-column name="{{ 'student.table.phone'|translate }}" prop="telephone" [width]="40">
-
-                        <ng-template let-telephone="value" ngx-datatable-cell-template>
-                            <div *ngIf="!telephone" class="badge badge-pill" [ngClass]="{'badge-light-danger': true }">
-                                {{('content.undefined'|translate)}}
-                            </div>
-                            <div *ngIf="telephone">
-                                {{ telephone }}
-                            </div>
-                        </ng-template>
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column name="{{ 'content.table.actions'|translate }}" [width]="50"
-                        [sortable]="false">
-                        <ng-template let-row="row" ngx-datatable-cell-template>
-                            <div class="d-flex align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <span class="cursor-pointer">
-                                        <i data-feather="eye" class="text-success cursor-pointer ml-1"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </ng-template>
-                    </ngx-datatable-column>
-                </ngx-datatable>
-            </div>
-
-        </section>
-
+        <span class="lead text-primary">Liste des enseignants</span>
+        <div class="avatar-group">
+          <div
+            placement="bottom"
+            container="body"
+            ngbTooltip="Billy Hopkins"
+            class="avatar pull-up"
+          >
+            <img
+              src="assets/images/portrait/small/avatar-s-9.jpg"
+              alt="Avatar"
+              width="33"
+              height="33"
+            />
+          </div>
+          <div
+            placement="bottom"
+            container="body"
+            ngbTooltip="Amy Carson"
+            class="avatar pull-up"
+          >
+            <img
+              src="assets/images/portrait/small/avatar-s-6.jpg"
+              alt="Avatar"
+              width="33"
+              height="33"
+            />
+          </div>
+          <div
+            placement="bottom"
+            container="body"
+            ngbTooltip="Brandon Miles"
+            class="avatar pull-up"
+          >
+            <img
+              src="assets/images/portrait/small/avatar-s-8.jpg"
+              alt="Avatar"
+              width="33"
+              height="33"
+            />
+          </div>
+          <div
+            placement="bottom"
+            container="body"
+            ngbTooltip="Daisy Weber"
+            class="avatar pull-up"
+          >
+            <img
+              src="assets/images/portrait/small/avatar-s-7.jpg"
+              alt="Avatar"
+              width="33"
+              height="33"
+            />
+          </div>
+          <div
+            placement="bottom"
+            container="body"
+            ngbTooltip="Jenny Looper"
+            class="avatar pull-up"
+          >
+            <img
+              src="assets/images/portrait/small/avatar-s-20.jpg"
+              alt="Avatar"
+              width="33"
+              height="33"
+            />
+          </div>
+          <h6 class="align-self-center cursor-pointer ml-50 mb-0">+42</h6>
+        </div>
+      </div>
     </div>
+    <br />
+
+    <section class="users-list-wrapper">
+      <div class="card card-body">
+        <ul
+          ngbNav
+          #navWithIcons="ngbNav"
+          class="nav-tabs justify-content-start"
+        >
+          <li ngbNavItem>
+            <a ngbNavLink
+              ><span [data-feather]="'users'"></span>
+              {{ "content.title.students" | translate }}</a
+            >
+            <ng-template ngbNavContent>
+              <div
+                class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0"
+              >
+                <label class="d-flex align-items-center ml-1 ml-md-0"
+                  ><input
+                    name="searchValue"
+                    type="search"
+                    placeholder="{{ 'student.placeholder.search' | translate }}"
+                    [(ngModel)]="queryParams.search_query"
+                    class="form-control ml-25"
+                    (input)="onSearch($event.target.value)"
+                /></label>
+              </div>
+              <br />
+              <ngx-datatable
+                (page)="paginate($event)"
+                [rows]="students.data"
+                [rowHeight]="50"
+                class="bootstrap core-bootstrap"
+                [limit]="students.per_page"
+                [externalPaging]="true"
+                [count]="students.total"
+                [columnMode]="'force'"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [scrollbarH]="true"
+              >
+                <ngx-datatable-column
+                  name="{{ 'student.table.reference' | translate }}"
+                  prop="reference"
+                >
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="{{ 'student.table.first_name' | translate }}"
+                  prop="first_name"
+                  [width]="120"
+                >
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="{{ 'student.table.last_name' | translate }}"
+                  prop="last_name"
+                  [width]="50"
+                >
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="{{ 'student.table.birth_at' | translate }}"
+                  prop="birth_at"
+                >
+                  <ng-template let-birth_at="value" ngx-datatable-cell-template>
+                    {{ birth_at | date : "dd/MM/yyyy" }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="{{ 'student.table.birth_at' | translate }}"
+                  prop="birth_in"
+                >
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="{{ 'student.table.phone' | translate }}"
+                  prop="telephone"
+                  [width]="40"
+                >
+                  <ng-template
+                    let-telephone="value"
+                    ngx-datatable-cell-template
+                  >
+                    <div
+                      *ngIf="!telephone"
+                      class="badge badge-pill"
+                      [ngClass]="{ 'badge-light-danger': true }"
+                    >
+                      {{ "content.undefined" | translate }}
+                    </div>
+                    <div *ngIf="telephone">
+                      {{ telephone }}
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column
+                  name="{{ 'content.table.actions' | translate }}"
+                  [width]="50"
+                  [sortable]="false"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <div class="d-flex align-items-center">
+                      <div class="d-flex align-items-center">
+                        <span class="cursor-pointer">
+                          <i
+                            data-feather="eye"
+                            class="text-success cursor-pointer ml-1"
+                          ></i>
+                        </span>
+                      </div>
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </ng-template>
+          </li>
+          <li ngbNavItem>
+            <a ngbNavLink (click)="paginateCourse()"
+              ><span [data-feather]="'book'"></span>
+              {{ "content.title.courses" | translate }}</a
+            >
+            <ng-template ngbNavContent>
+              <app-courses [classLevelId]="class_level?.id"></app-courses>
+            </ng-template>
+          </li>
+          <li ngbNavItem>
+            <a ngbNavLink
+              ><span [data-feather]="'calendar'"></span>
+              {{ "content.title.timestable" | translate }}</a
+            >
+            <ng-template ngbNavContent>
+              <p>List des tests</p>
+            </ng-template>
+          </li>
+          <li ngbNavItem>
+            <a ngbNavLink
+              ><span [data-feather]="'code'"></span>
+              {{ "content.title.tests" | translate }}</a
+            >
+            <ng-template ngbNavContent>
+              <p>List des tests</p>
+            </ng-template>
+          </li>
+          <li ngbNavItem [disabled]="true">
+            <a ngbNavLink
+              ><span [data-feather]="'users'"></span>
+              {{ "student.tabs.attendance" | translate }}</a
+            >
+
+            <ng-template ngbNavContent>
+              <p>
+                Cake croissant lemon drops gummi bears carrot cake biscuit
+                cupcake croissant. Macaroon lemon drops muffin jelly sugar plum
+                chocolate cupcake danish icing. Soufflé tootsie roll lemon drops
+                sweet roll cake icing cookie halvah cupcake.
+              </p>
+            </ng-template>
+          </li>
+        </ul>
+        <div [ngbNavOutlet]="navWithIcons" class="mt-2"></div>
+      </div>
+    </section>
+  </div>
 </div>

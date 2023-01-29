@@ -22,15 +22,15 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         $school = $request->school ?: school()->id;
-
         $query = SchoolStudent::with($request->with ?? [])
             ->join('students as S', 'S.id', "school_students.student_id")
-            ->whereSchoolId($school)
+            ->where('school_students.school_id', $school)
             ->where("school_students.status", true)
             ->where('S.status', true);
 
         if ($request->has('class_level_id') && $request->class_level_id) {
             $query->join('class_level_has_students as CHS', 'CHS.student_id', 'S.id')
+                ->where('CHS.school_id', $school)
                 ->where('CHS.class_level_id', $request->class_level_id);
         }
 
@@ -155,17 +155,17 @@ class StudentController extends Controller
         $metaData = [];
 
         $room = $student->rooms()
-        ->with('room')
-        ->where('school_id', school()->id)
-        ->first();
+            ->with('room')
+            ->where('school_id', school()->id)
+            ->first();
         $metaData['room'] = $room ? [
             "id" => $room->room->id,
             "name" => $room->room->name,
         ] : null;
 
         $class_level = $student->class_levels()
-        ->where('school_year_id', school_year()->id)
-        ->first();
+            ->where('school_year_id', school_year()->id)
+            ->first();
 
         $metaData['class_levels'] = $class_level ? [
             "id" => $class_level->id,
@@ -180,13 +180,13 @@ class StudentController extends Controller
             ->where('student_has_tutors.student_id', $student->id)
             ->get()->map(
                 fn ($tutor) =>  [
-                    'id'=> $tutor->id,
+                    'id' => $tutor->id,
                     "name" => $tutor->name,
                     "phone1" => $tutor->phone1,
                     "adress" => $tutor->adress,
                     "type" => $tutor->tutor_type[0]->type ?? null
                 ]
-                );
+            );
 
 
         return $metaData;

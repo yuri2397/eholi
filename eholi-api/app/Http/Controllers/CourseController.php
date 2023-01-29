@@ -20,6 +20,7 @@ class CourseController extends Controller
             $query->where('name', 'LIKE', "%{$request->search_query}%")
                 ->orWhere("reference", $request->search_query);
         }
+
         $query->orderBy($request->order_by ?: 'created_at', $request->order ?: 'DESC');
 
 

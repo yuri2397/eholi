@@ -87,7 +87,8 @@
       "registration": "Inscription / Réinscription",
       "professors": "Liste des professeurs",
       "courses": "Cours",
-      "timestable": "Emploi du temps"
+      "timestable": "Emploi du temps",
+      "tests" : "Examen/Devoir"
     },
     "description":{
       "students":"Lister, profile étudiant...",

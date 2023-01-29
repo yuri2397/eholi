@@ -15,6 +15,8 @@ class ClassLevelHasCourseController extends Controller
      */
     public function index(Request $request)
     {
+        $filter = array_keys($request->input('filter')) ?? null;
+        
         $query = ClassLevelHasCourse::with($request->with ?: [])->whereSchoolId(
             school()->id
         );
@@ -41,8 +43,12 @@ class ClassLevelHasCourseController extends Controller
             }
         }
 
-        if ($request->has('filter') && $request->filter['professor_id']) {
+        if ($filter && in_array('professor_id', $filter)) {
             $query->where('professor_id', $request->filter['professor_id']);
+        }
+
+        if ($filter && in_array('class_level_id', $filter)) {
+            $query->where('class_level_id', $request->filter['class_level_id']);
         }
 
         if ($request->has('per_page')) {

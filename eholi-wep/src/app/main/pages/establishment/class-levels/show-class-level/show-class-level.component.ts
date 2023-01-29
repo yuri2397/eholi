@@ -5,6 +5,7 @@ import { ClassLevel } from './../../models/class-level.model'
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { Param } from 'app/auth/models/data.model'
 import { TranslateService } from '@ngx-translate/core'
+import { Course } from '../../establishment.model'
 
 @Component({
   selector: 'app-show-class-level',
@@ -17,6 +18,7 @@ export class ShowClassLevelComponent implements OnInit {
   queryParams: Param = {}
   contentHeader: object
   students: Paginate<Student>
+  courses: Paginate<Course>;
 
   constructor(
     private _route: ActivatedRoute,
@@ -43,6 +45,18 @@ export class ShowClassLevelComponent implements OnInit {
       relativeTo: this._route,
       replaceUrl: true,
     })
+  }
+
+  openAddCourseModal(modal: any){
+
+  }
+
+  onCourseSearch(data: any){
+
+  }
+
+  paginateCourse(page?: any){
+
   }
 
   ngOnInit(): void {

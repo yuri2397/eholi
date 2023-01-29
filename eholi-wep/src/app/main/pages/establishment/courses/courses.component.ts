@@ -1,32 +1,46 @@
-import { Paginate } from 'app/auth/models/base.model'
-import { ActivatedRoute, Router } from '@angular/router'
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
-import { ClassRoom, Course } from '../establishment.model'
-import { Param } from 'app/auth/models/data.model'
-import { TranslateService } from '@ngx-translate/core'
-import { NgbModal, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap'
-import { Subject } from 'rxjs'
+import { CourseService } from "./../services/course.service";
+import { ClassLevel } from "./../models/class-level.model";
+import { first, finalize } from "rxjs/operators";
+import { ClassLevelService } from "./../services/class-level.service";
+import { Paginate } from "app/auth/models/base.model";
+import { ActivatedRoute, Router } from "@angular/router";
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from "@angular/core";
+import { ClassRoom, Course } from "../establishment.model";
+import { Param } from "app/auth/models/data.model";
+import { TranslateService } from "@ngx-translate/core";
+import { NgbModal, NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
+import { Subject } from "rxjs";
+import { ClassLevelCourseService } from "../services/class-level-courses.service";
 
 @Component({
-  selector: 'app-courses',
-  templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss'],
+  selector: "app-courses",
+  templateUrl: "./courses.component.html",
+  styleUrls: ["./courses.component.scss"],
   encapsulation: ViewEncapsulation.None,
 })
 export class CoursesComponent implements OnInit {
-  courses: Paginate<Course>
-  public contentHeader!: any
-  public queryParams: Param = {}
-  public basicSelectedOption: number = 5
-  searchTimeout: NodeJS.Timeout
-  editingClassRoom!: Course
-  deletedRow!: Course
+  @Input() classLevelId: string;
+  courses: Paginate<Course>;
+  public contentHeader!: any;
+  public queryParams: Param = {};
+  public basicSelectedOption: number = 5;
+  searchTimeout: NodeJS.Timeout;
+  editingClassRoom!: Course;
+  deletedRow!: Course;
+  load: boolean = true;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _translateService: TranslateService,
     private _modalService: NgbModal,
+    private _classLevelCourseService: ClassLevelCourseService
   ) {}
 
   // MODAL
@@ -34,56 +48,85 @@ export class CoursesComponent implements OnInit {
     this._modalService
       .open(modal, {
         centered: true,
-        windowClass: 'modal modal-primary',
-        size: 'lg',
+        windowClass: "modal modal-primary",
+        size: "lg",
         keyboard: false,
       })
       .result.then((result) => {
-        console.log(result)
-
+        console.log(result);
         if (result) {
-          this.courses.data = [result, ...this.courses.data]
-          this.courses.data = [...this.courses.data]
+          this.courses.data = [result, ...this.courses.data];
+          this.courses.data = [...this.courses.data];
         }
       })
-      .catch((_) => {})
+      .catch((_) => {});
   }
 
   paginate(page?: {
-    count: number
-    limit: number
-    offset: number
-    pageSize: number
+    count: number;
+    limit: number;
+    offset: number;
+    pageSize: number;
   }) {
     if (page) {
-      this.queryParams.per_page = page.pageSize
-      this.queryParams.page = page.offset + 1
+      this.queryParams.per_page = page.pageSize;
+      this.queryParams.page = page.offset + 1;
     }
-    console.log(this.queryParams)
+    console.log(this.queryParams);
 
-    this._router.navigate(['./'], {
+    this._router.navigate(["./"], {
       queryParams: this.queryParams,
       relativeTo: this._route,
       replaceUrl: true,
-    })
+    });
   }
 
   onSearch(_: string) {
-    if (this.searchTimeout) clearTimeout(this.searchTimeout)
+    if (this.searchTimeout) clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
-      this.paginate()
-    }, 500)
+      this.paginate();
+    }, 500);
   }
 
   ngOnInit(): void {
-    this._route.data.subscribe((data: { courses: Paginate<Course> }) => {
-      this.courses = data.courses
-      console.log(this.courses)
-    })
+    if (!this.classLevelId) {
+      this._route.data.subscribe((data: { courses: Paginate<Course> }) => {
+        this.courses = data.courses;
+        console.log(this.courses);
+      });
 
-    // get the queryParams
-    this._route.queryParams.subscribe((data) => {
-      this.queryParams = JSON.parse(JSON.stringify(data))
-    })
+      // get the queryParams
+      this._route.queryParams.subscribe((data) => {
+        this.queryParams = JSON.parse(JSON.stringify(data));
+      });
+      this.load = false;
+    } else {
+      this.fetchData({
+        "filter[class_level_id]": this.classLevelId,
+        "filter[prenom]": 11 ,
+        "filter[test]": 11 ,
+        per_page: 15,
+        page: 1,
+        "with[]": ["class_level", "course", "semester", "professor"],
+      });
+    }
+  }
+
+  fetchData(filter: any) {
+    this._classLevelCourseService
+      .index<Course>(filter)
+      .pipe(
+        first(),
+        finalize(() => (this.load = false))
+      )
+      .subscribe({
+        next: (response) => {
+          console.log("FETCH ", response);
+          this.courses = response;
+        },
+        error: (error) => {
+          console.log("ERROR ", error);
+        },
+      });
   }
 }
