@@ -88,7 +88,9 @@
       "professors": "Liste des professeurs",
       "courses": "Cours",
       "timestable": "Emploi du temps",
-      "tests" : "Examen/Devoir"
+      "list": "Liste",
+      "tests" : "Examen/Devoir",
+      "professeur": "Professeurs"
     },
     "description":{
       "students":"Lister, profile étudiant...",
@@ -303,7 +305,15 @@
   },
 
   "timestable": {
-    "text": "Emploi du temps"
+    "title": "Emploi du temps",
+    "btn_update": "Modifier",
+    "empty": "Emploie du temps vide",
+    "message": {
+      "success": "L'emploi du temps a été mis à jour avec succès",
+      "error": "Une erreur s'est produite lors de la mise à jour de l'emploi du temps"
+    },
+    "empty_description":  "Aucun emploi du temps disponible pour cette classe",
+    "bnt_add": "Ajouter un emploi du temps"
   },
 
   "form": {

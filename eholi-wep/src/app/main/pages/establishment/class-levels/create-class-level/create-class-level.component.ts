@@ -27,10 +27,11 @@ export class CreateClassLevelComponent implements OnInit {
     private _translateService: TranslateService,
     private _classLevelService: ClassLevelService,
   ) {
-    this.getLevels()
+    
   }
 
   ngOnInit(): void {
+    this.getLevels()
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       level_id: new FormControl('', [Validators.required]),
@@ -40,7 +41,7 @@ export class CreateClassLevelComponent implements OnInit {
   getLevels() {
     this.selectLoading = true
     this._levelService
-      .index<Level>({
+      .index<any>({
         with: ['cycle'],
       })
       .pipe(
@@ -48,7 +49,7 @@ export class CreateClassLevelComponent implements OnInit {
         finalize(() => (this.selectLoading = false)),
       )
       .subscribe({
-        next: (response) => (this.levels = response.data),
+        next: (response: any) => (this.levels = response),
       })
   }
 

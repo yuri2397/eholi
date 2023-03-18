@@ -4,8 +4,14 @@ export class EventRef {
   title: string = '';
   start: string;
   end: string;
+  classLevelId: string;
   allDay = false;
+  courseId: string;
+
+  professorId: string;
+  isRepead = false;
   calendar: '';
+  classRoomId: string;
   extendedProps = {
     location: '',
     description: '',

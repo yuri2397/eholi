@@ -11,8 +11,8 @@
       <div class="card-body">
         <div class="meetup-header d-flex align-items-center">
           <div class="meetup-day">
-            <h6 class="mb-0">Niveau</h6>
-            <h3 class="mb-0">{{ class_level.level.name }}</h3>
+            <h5 class="mb-0">Niveau</h5>
+            <h4 class="mb-0 lead">{{ class_level.level.name }}</h4>
           </div>
           <div class="my-auto">
             <h4 class="card-title mb-25">{{ class_level.name }}</h4>
@@ -21,73 +21,37 @@
         </div>
 
         <span class="lead text-primary">Liste des enseignants</span>
-        <div class="avatar-group">
-          <div
-            placement="bottom"
-            container="body"
-            ngbTooltip="Billy Hopkins"
-            class="avatar pull-up"
-          >
-            <img
-              src="assets/images/portrait/small/avatar-s-9.jpg"
-              alt="Avatar"
-              width="33"
-              height="33"
-            />
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="avatar-group">
+            <div
+                    placement="bottom"
+                    container="body"
+                    ngbTooltip="Billy Hopkins"
+                    class="avatar pull-up"
+            >
+              <img
+                      src="assets/images/portrait/small/avatar-s-9.jpg"
+                      alt="Avatar"
+                      width="33"
+                      height="33"
+              />
+            </div>
+            <div
+                    placement="bottom"
+                    container="body"
+                    ngbTooltip="Amy Carson"
+                    class="avatar pull-up"
+            >
+              <img
+                      src="assets/images/portrait/small/avatar-s-6.jpg"
+                      alt="Avatar"
+                      width="33"
+                      height="33"
+              />
+            </div>
+            <h6 class="align-self-center cursor-pointer ml-50 mb-0">+42</h6>
           </div>
-          <div
-            placement="bottom"
-            container="body"
-            ngbTooltip="Amy Carson"
-            class="avatar pull-up"
-          >
-            <img
-              src="assets/images/portrait/small/avatar-s-6.jpg"
-              alt="Avatar"
-              width="33"
-              height="33"
-            />
-          </div>
-          <div
-            placement="bottom"
-            container="body"
-            ngbTooltip="Brandon Miles"
-            class="avatar pull-up"
-          >
-            <img
-              src="assets/images/portrait/small/avatar-s-8.jpg"
-              alt="Avatar"
-              width="33"
-              height="33"
-            />
-          </div>
-          <div
-            placement="bottom"
-            container="body"
-            ngbTooltip="Daisy Weber"
-            class="avatar pull-up"
-          >
-            <img
-              src="assets/images/portrait/small/avatar-s-7.jpg"
-              alt="Avatar"
-              width="33"
-              height="33"
-            />
-          </div>
-          <div
-            placement="bottom"
-            container="body"
-            ngbTooltip="Jenny Looper"
-            class="avatar pull-up"
-          >
-            <img
-              src="assets/images/portrait/small/avatar-s-20.jpg"
-              alt="Avatar"
-              width="33"
-              height="33"
-            />
-          </div>
-          <h6 class="align-self-center cursor-pointer ml-50 mb-0">+42</h6>
+          <button [routerLink]="['/pages/times-tables/add', this.class_level.times_table?.id]" [queryParams]="{'class_level': class_level.id}" class="btn btn-primary">{{ "timestable.title" | translate }}</button>
         </div>
       </div>
     </div>
@@ -106,6 +70,8 @@
               {{ "content.title.students" | translate }}</a
             >
             <ng-template ngbNavContent>
+              <app-content-header [contentHeader]="contentHeader0"></app-content-header>
+
               <div
                 class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0"
               >
@@ -116,7 +82,7 @@
                     placeholder="{{ 'student.placeholder.search' | translate }}"
                     [(ngModel)]="queryParams.search_query"
                     class="form-control ml-25"
-                    (input)="onSearch($event.target.value)"
+                    (input)="onSearch($event.target['value'])"
                 /></label>
               </div>
               <br />
@@ -192,14 +158,20 @@
                 >
                   <ng-template let-row="row" ngx-datatable-cell-template>
                     <div class="d-flex align-items-center">
-                      <div class="d-flex align-items-center">
-                        <span class="cursor-pointer">
-                          <i
-                            data-feather="eye"
-                            class="text-success cursor-pointer ml-1"
-                          ></i>
-                        </span>
-                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-primary"
+                        rippleEffect
+                      >
+                        <span [data-feather]="'eye'"></span>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-icon btn-warning mx-2"
+                        rippleEffect
+                      >
+                        <span [data-feather]="'edit'"></span>
+                      </button>
                     </div>
                   </ng-template>
                 </ngx-datatable-column>
@@ -215,15 +187,19 @@
               <app-courses [classLevelId]="class_level?.id"></app-courses>
             </ng-template>
           </li>
-          <li ngbNavItem>
+          <!--<li ngbNavItem>
             <a ngbNavLink
               ><span [data-feather]="'calendar'"></span>
               {{ "content.title.timestable" | translate }}</a
             >
             <ng-template ngbNavContent>
-              <p>List des tests</p>
+              <div class="d-flex align-items-center justify-content-between">
+                <app-content-header [contentHeader]="contentHeader2"></app-content-header>
+                <button class="btn btn-primary">{{'timestable.btn_update'|translate}}</button>
+              </div>
+              <ng-container *ngIf="times_table; else noTimesTables"></ng-container>
             </ng-template>
-          </li>
+          </li>-->
           <li ngbNavItem>
             <a ngbNavLink
               ><span [data-feather]="'code'"></span>
@@ -254,3 +230,21 @@
     </section>
   </div>
 </div>
+
+<ng-template #noTimesTables>
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="text-center">
+        <img
+            src="assets/images/svg/empty.svg"
+            alt="empty"
+            class="img-fluid mb-1"
+            width="300"
+        />
+        <h4 class="mb-0">{{ "timestable.empty" | translate }}</h4>
+        <p class="mb-2">
+            {{ "timestable.empty_description" | translate }}
+        </p>
+        <button [routerLink]="['/pages/times-tables/add', this.class_level.times_table?.id]" [queryParams]="{'class_level': class_level.id}" class="btn btn-primary">{{ "timestable.bnt_add" | translate }}</button>
+        </div>
+    </div>
+</ng-template>
