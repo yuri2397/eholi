@@ -72,6 +72,10 @@ export class ShowClassLevelComponent implements OnInit {
                 this.class_level = data.class_level;
                 this.students = data.students;
                 this.times_table = data.class_level?.times_table;
+                this.contentHeader0 = {
+                    headerTitle: this.class_level.name,
+                    actionButton: false,
+                };
             },
         );
 
@@ -84,19 +88,6 @@ export class ShowClassLevelComponent implements OnInit {
         this._translateService
             .get(['content.title.students', 'content.title.courses', 'content.title.timestable'])
             .subscribe((title: string[]) => {
-                this.contentHeader0 = {
-                    headerTitle: title['content.title.students'],
-                    actionButton: false,
-                    breadcrumb: {
-                        type: '',
-                        links: [
-                            {
-                                name: this._translateService.instant('content.title.list'),
-                                isLink: false,
-                            },
-                        ],
-                    },
-                };
                 this.contentHeader1 = {
                     headerTitle: title['content.title.courses'],
                     actionButton: false,

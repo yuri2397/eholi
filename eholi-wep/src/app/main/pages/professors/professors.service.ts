@@ -18,6 +18,6 @@ export class ProfessorsService extends AbstractService {
   attachAvatar(uuid: string, file: File) {
     const formData = new FormData()
     formData.append('avatar', file)
-    return this.http.post(`${this.enpoint}/${uuid}/avatar`, formData)
+    return this.http.post(`${this.endpoint}/${uuid}/avatar`, formData)
   }
 }

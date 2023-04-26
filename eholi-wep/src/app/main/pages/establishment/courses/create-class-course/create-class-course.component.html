@@ -27,7 +27,7 @@
               [data]="coursesList"
               [searchKeyword]="'name'"
               class="form-control"
-              placeholder="Select country"
+              placeholder="Rechercher le cours"
               (selected)="selectEvent($event)"
               (inputChanged)="onCourseSearch($event)"
               [isLoading]="courseSearchLoad"
@@ -153,6 +153,7 @@
             [loading]="selectLoading"
           >
           </ng-select>
+
           <span
             *ngIf="
               semester_id.invalid && (semester_id.dirty || semester_id.touched)
@@ -177,15 +178,16 @@
           </label>
           <ng-select
             id="professor_id"
-            [placeholder]="'professor.placeholder.search' | translate"
-            [items]="professorList"
-            bindLabel="name"
-            formControlName="professor_id"
-            bindValue="id"
             readonly
+            formControlName="professor_id"
+            [placeholder]="'professor.placeholder.search' | translate"
             [loading]="professorSearchLoad"
           >
+            <ng-option *ngFor="let item of professorList" [value]="item.id"
+              >{{ item.first_name }} {{ item.last_name }}</ng-option
+            >
           </ng-select>
+
           <span
             *ngIf="
               professor_id.invalid &&

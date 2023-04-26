@@ -7,11 +7,13 @@ export class EventRef {
   classLevelId: string;
   allDay = false;
   courseId: string;
+  timesTable: string;
 
   professorId: string;
   isRepead = false;
   calendar: '';
   classRoomId: string;
+  
   extendedProps = {
     location: '',
     description: '',

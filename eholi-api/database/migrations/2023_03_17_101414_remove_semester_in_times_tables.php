@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('times_tables', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('level_has_semester_id');
-            $table->dropColumn('level_has_semester_id');
-        });
+        // Schema::table('times_tables', function (Blueprint $table) {
+        //     $table->dropConstrainedForeignId('level_has_semester_id');
+        //     $table->dropColumn('level_has_semester_id');
+        // });
     }
 
     /**

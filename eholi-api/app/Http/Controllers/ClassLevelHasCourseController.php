@@ -20,6 +20,7 @@ class ClassLevelHasCourseController extends Controller
         $query = ClassLevelHasCourse::with($request->with ?: [])->whereSchoolId(
             school()->id
         );
+       
 
         if ($request->has('search_query') && $request->search_query) {
             if ($request->has('with') && in_array('course', $request->with)) {
@@ -37,13 +38,7 @@ class ClassLevelHasCourseController extends Controller
                 });
             }
 
-            if (
-                $request->has('class_level_id')
-            ) {
-                $query->whereHas('class_level_id', function ($q) use ($request) {
-                    $q->where('id', "%{$request->class_level_id}%");
-                });
-            }
+            
 
             if ($request->has('with') && in_array('semester', $request->with)) {
                 $query->orWhereHas('semester', function ($q) use ($request) {

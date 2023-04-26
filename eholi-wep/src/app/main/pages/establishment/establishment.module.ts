@@ -27,6 +27,8 @@ import {SemesterFullResolver} from './resolvers/semester-full.resolver';
 import {UpdateClassCourseComponent} from './courses/update-class-course/update-class-course.component';
 import {DetailCourseComponent} from './courses/detail-course/detail-course.component';
 import {TimesTablesModule} from './times-tables/times-tables.module';
+import {ClassLevelTestExamModule} from './test-exam/class-level-test-exam/class-level-test-exam.module';
+import {ClassLevelTestsResolver} from './resolvers/class-level-tests.resolver';
 
 const routes: Routes = [
     // {
@@ -88,6 +90,7 @@ const routes: Routes = [
         resolve: {
             class_level: ShowClassLevelResolver,
             students: StudentListResolver,
+            test_exams: ClassLevelTestsResolver
         },
         runGuardsAndResolvers: 'paramsOrQueryParamsChange',
         data: {
@@ -121,6 +124,10 @@ const routes: Routes = [
     {
         path: 'times-tables',
         loadChildren: () => import('./times-tables/times-tables.module').then(m => m.TimesTablesModule),
+    },
+    {
+        path: 'test-exams',
+        loadChildren: () => import('./test-exam/test-exam.module').then(m => m.TestExamModule),
     }
 ];
 
@@ -141,7 +148,7 @@ const routes: Routes = [
         CreateClassCourseComponent,
         UpdateClassCourseComponent,
     ],
-    imports: [RouterModule.forChild(routes), SharedModule, TimesTablesModule],
+    imports: [RouterModule.forChild(routes), SharedModule, TimesTablesModule, ClassLevelTestExamModule],
 })
 export class EstablishmentModule {
 }

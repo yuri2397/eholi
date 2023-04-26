@@ -29,7 +29,6 @@
       }
     }
   },
-
   "menu": {
     "dashboard": {
       "home": "Tableaux de bord",
@@ -72,7 +71,6 @@
       "housing": "Logements/Campus"
     }
   },
-
   "content": {
     "general": "Général",
     "change_password": "Mot de passe",
@@ -89,17 +87,17 @@
       "courses": "Cours",
       "timestable": "Emploi du temps",
       "list": "Liste",
-      "tests" : "Examen/Devoir",
+      "tests": "Examen/Devoir",
       "professeur": "Professeurs"
     },
-    "description":{
-      "students":"Lister, profile étudiant...",
-      "professors":"Gestion des professeurs",
-      "courses":"Gestion des cours",
-      "class_rooms":"Gestion des salles de classe",
-      "class-levels":"Gestion des classes",
-      "buildings":"Gestion des logements/campus",
-      "admission":"Gestion des inscriptions/reinscriptions"
+    "description": {
+      "students": "Lister, profile étudiant...",
+      "professors": "Gestion des professeurs",
+      "courses": "Gestion des cours",
+      "class_rooms": "Gestion des salles de classe",
+      "class-levels": "Gestion des classes",
+      "buildings": "Gestion des logements/campus",
+      "admission": "Gestion des inscriptions/reinscriptions"
     },
     "admission": {
       "stepper": [
@@ -124,7 +122,7 @@
     "undefined": "Indéfinie",
     "table": {
       "actions": "Actions",
-      "empty":{
+      "empty": {
         "title": "Aucun élément trouvé",
         "message": "Aucun élément trouvé dans la base de données",
         "btn": "Ajouter"
@@ -167,7 +165,8 @@
       "previous": "Précédent",
       "validate": "Valider",
       "new_line": "Ajouter une ligne",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "close": "Fermer"
     },
     "sexe": {
       "m": "Masculin",
@@ -185,16 +184,14 @@
       "logout": "Déconnexion"
     }
   },
-
   "page": {
     "select_size": "Ligne par page"
   },
-
   "student": {
     "title": "Liste Etudiants",
     "pronom": "Votre",
     "lieuNaissance": "lieu de naissance",
-    "tabs":{
+    "tabs": {
       "general": "Général",
       "assessment": "Évaluation",
       "attendance": "Présence",
@@ -250,7 +247,6 @@
       }
     }
   },
-
   "professor": {
     "title": "Liste des professeurs",
     "full": "Pérmenant",
@@ -303,7 +299,6 @@
       }
     }
   },
-
   "timestable": {
     "title": "Emploi du temps",
     "btn_update": "Modifier",
@@ -312,18 +307,20 @@
       "success": "L'emploi du temps a été mis à jour avec succès",
       "error": "Une erreur s'est produite lors de la mise à jour de l'emploi du temps"
     },
-    "empty_description":  "Aucun emploi du temps disponible pour cette classe",
+    "empty_description": "Aucun emploi du temps disponible pour cette classe",
     "bnt_add": "Ajouter un emploi du temps"
   },
-
   "form": {
     "validation": {
       "errors": {
-        "required": "Le champ est obligatoire"
+        "required": "Le champ est obligatoire",
+        "min": "Le champ doit contenir au moins {min} caractères",
+        "max": "Le champ doit contenir au plus {max} caractères",
+        "min_value": "La valeur doit être supérieure ou égale à {{min}}",
+        "max_value": "La valeur doit être inférieure ou égale à {{max}}"
       }
     }
   },
-
   "class_room": {
     "title": "Salle de classes",
     "field": {
@@ -340,7 +337,6 @@
     "btn": {
       "add": "Ajouter une salle"
     },
-
     "placeholder": {
       "search": "Rechercher une salle"
     },
@@ -364,7 +360,84 @@
       }
     }
   },
-
+  "test_exams": {
+    "title": "Examens/Dévoirs",
+    "add_title": "Ajouter un examen/devoir",
+    "field": {
+      "title": "Titre",
+      "date": "Date",
+      "percent": "Pourcentage",
+      "course": "Cours",
+      "type": {
+        "select_title": "Sélectionner le type",
+        "exam": "Examen",
+        "duty": "Devoir",
+        "tp": "TP",
+        "td": "TD"
+      }
+    },
+    "table": {
+      "title": "Titre",
+      "date": "Date",
+      "percent": "Pourcentage",
+      "course": "Cours",
+      "type": "Type",
+      "exam": "Examen",
+      "duty": "Devoir",
+      "status": "Statut",
+      "professor": "Professeur",
+      "max_note": "Note maximale"
+    },
+    "btn": {
+      "add": "Ajouter un examen/devoir"
+    },
+    "placeholder": {
+      "search": "Rechercher un examen/devoir"
+    },
+    "create": {
+      "title": "Ajouter un nouvel examen/devoir",
+      "message": {
+        "success": "L'examen/devoir a été ajouté avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
+      }
+    },
+    "update": {
+      "title": "Modification d'un examen/devoir",
+      "message": {
+        "success": "L'examen/devoir a été modifié avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un examen/devoir",
+      "message": {
+        "success": "L'examen/devoir a été supprimé avec succès"
+      }
+    }
+  },
+  "test_results": {
+    "title": "Résultats",
+    "edit_note": "Activer la modification des notes",
+    "btn_delete": "Supprimer l'examen/devoir",
+    "delete": {
+      "title": "Supprimer un examen/devoir",
+      "alert_message": "Êtes-vous sûr de vouloir supprimer cet examen/devoir?",
+      "btn_cancel": "Non, j'annule",
+      "btn_confirm": "Oui, je veux le supprimer",
+      "alert_explain": "Si vous supprimer cet examen/devoir, vous ne pourrez plus le récupérer. En plus de cela, tous les résultats de cet examen/devoir seront supprimés."
+    },
+    "note_error": "La note doit être comprise entre 0 et {{max_note}}",
+    "field": {
+      "test_exam": "Examen/Devoir",
+      "note": "Note",
+      "date": "Date",
+      "course": "Cours"
+    }
+  },
+  "deliberation": {
+    "title": "Deliberation",
+    "start": "Commencer la deliberation",
+    "end": "Terminer la deliberation"
+  },
   "class_level": {
     "title": "Salle de classes",
     "field": {
@@ -382,7 +455,6 @@
     "btn": {
       "add": "Ajouter une classe"
     },
-
     "placeholder": {
       "search": "Rechercher une classe"
     },
@@ -405,7 +477,6 @@
       }
     }
   },
-
   "room": {
     "title": "Logements",
     "field": {
@@ -423,7 +494,6 @@
     "btn": {
       "add": "Ajouter une chambre"
     },
-
     "placeholder": {
       "search": "Rechercher une chambre"
     },
@@ -446,7 +516,6 @@
       }
     }
   },
-
   "course": {
     "title": "Courses",
     "messages": {
@@ -475,7 +544,6 @@
     "btn": {
       "add": "Ajouter un cours"
     },
-
     "placeholder": {
       "search": "Rechercher un cours"
     },
@@ -486,7 +554,7 @@
       }
     },
     "update": {
-      "title": "Modification d'une chambre",
+      "title": "Modification le cours",
       "message": {
         "success": "Le cours a été modifié avec succès"
       }
@@ -498,9 +566,47 @@
       }
     }
   },
-
-  
-
+  "times_tables": {
+    "title": "Emplois du temps",
+    "messages": {
+      "successfully_attached": "L'emploi du temps a été ajouté avec succès",
+      "successfully_detached": "L'emploi du temps a été supprimé avec succès",
+      "success": "Opération effectuée avec succès"
+    },
+    "field": {
+      "start": "Débute",
+      "end": "Termine"
+    },
+    "btn": {
+      "add": "Ajouter un emploi du temps"
+    },
+    "placeholder": {
+      "search": "Rechercher un emploi du temps",
+      "choose_room": "Choisir une salle de classe",
+      "choose_course": "Choisir un cours",
+      "choose_professor": "Choisir un professeur",
+      "choose_start": "Choisir une heure de début",
+      "choose_end": "Choisir une heure de fin"
+    },
+    "create": {
+      "title": "Ajouter un emploi du temps",
+      "message": {
+        "success": "L'emploi du temps a été ajouté avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification de l'emploi du temps",
+      "message": {
+        "success": "L'emploi du temps a été modifié avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un emploi du temps",
+      "message": {
+        "success": "L'emploi du temps a été supprimé avec succès"
+      }
+    }
+  },
   "tutor": {
     "title": "Parents/Tuteurs",
     "field": {
@@ -513,7 +619,8 @@
       "phone1": "Téléphone du tuteur",
       "name": "Prénom/Nom",
       "type": "Relation parentale",
-      "adress": "Adresse",      "status": "Statut"
+      "adress": "Adresse",
+      "status": "Statut"
     },
     "btn": {
       "add": "Ajouter une chambre"

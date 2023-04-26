@@ -12,8 +12,8 @@ export class EcardService extends AbstractService {
   }
 
   index(params?: Param) {
-    console.log(this.enpoint)
+    console.log(this.endpoint)
 
-    return this.http.get<any>(this.enpoint, { params: params })
+    return this.http.get<any>(this.endpoint, { params: params })
   }
 }

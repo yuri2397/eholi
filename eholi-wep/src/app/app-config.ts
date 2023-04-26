@@ -19,7 +19,7 @@ export const coreConfig: CoreConfig = {
     appName     : 'Eholi',                                        // App Name
     appTitle    : 'Eholi - Gérer votre établissement scolaire.', // App Title
     appLogoImage: 'assets/images/logo/holi1.svg',                  // App Logo
-    appLanguage : 'fr',                                           // App Default Language (en, fr, de, pt etc..)
+    appLanguage : 'ar',                                           // App Default Language (en, fr, de, pt etc..)
   },
   layout: {
     skin  : 'bordered',                        // default, dark, bordered, semi-dark

@@ -28,6 +28,14 @@ class ClassLevelController extends Controller
             }
         }
 
+        if($request->has('class_level_id')){
+            $query->where('id', $request->class_level_id);
+        }
+
+        if($request->has('school_id')){
+            $query->where('school_id', $request->school_id);
+        }
+
         $query->orderBy(
             $request->order_by ?: 'created_at',
             $request->order ?: 'DESC'
@@ -102,6 +110,9 @@ class ClassLevelController extends Controller
      */
     public function destroy(ClassLevel $classLevel)
     {
+        $times_tables = TimesTable::where('class_level_id', $classLevel->id)->first();
+        if($times_tables) 
+            $times_tables->delete();
         $classLevel->delete();
         return $classLevel;
     }

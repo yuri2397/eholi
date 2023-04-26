@@ -126,9 +126,9 @@ Route::prefix('students')
     ->middleware(['auth:api', 'cors'])
     ->controller(StudentController::class)
     ->group(function () {
-        Route::get('', 'index');
-        Route::get('/dashboard', 'dashboard');
-        Route::get('/{student}', 'show');
+        Route::get('/', 'index');
+        Route::get('{id}', 'show');
+        Route::get('dashboard', 'dashboard');
 
         Route::post('', 'store');
         Route::put('/{student}', 'update');
@@ -149,8 +149,8 @@ Route::prefix('class-rooms')
  * ClassRoom
  */
 Route::prefix('times-tables')
-->middleware(['auth:api', 'cors'])
-->apiResource('times-tables', TimesTableController::class);
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('times-tables', TimesTableController::class);
 
 /**
  * StudentSbscribe
@@ -200,7 +200,15 @@ Route::prefix('class-levels')
  */
 Route::prefix('tests')
     ->middleware(['auth:api', 'cors'])
-    ->apiResource('tests', TestController::class);
+    ->controller(TestController::class)
+    ->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{test}', 'show');
+        Route::post('/', 'store');
+        Route::put('/{test}', 'update');
+        Route::delete('/{test}', 'destroy');
+        Route::put('/update-test-result/{testResult}', 'updateTestResult');
+    });
 
 /**
  * Tests Results
@@ -233,70 +241,72 @@ Route::prefix('buildings')
 /**
  * TEST URL
  */
-Route::any('local', function (Request $request) {
-    $timesTable = TimesTable::find('cd249943-76fc-49ab-b4ec-23cb35a43171');
+Route::any(
+    'local',
+    function (Request $request) {
+        $timesTable = TimesTable::find('cd249943-76fc-49ab-b4ec-23cb35a43171');
 
-    // $school = school();
-    // $student = SchoolStudent::with($request->with ?? [])
-    //     ->join('students as S', 'S.id', 'school_students.student_id')
-    //     ->whereSchoolId($school->id)
-    //     ->where('school_students.status', true)
-    //     ->where('S.status', true)
-    //     ->limit(3)
-    //     ->get();
+        // $school = school();
+        // $student = SchoolStudent::with($request->with ?? [])
+        //     ->join('students as S', 'S.id', 'school_students.student_id')
+        //     ->whereSchoolId($school->id)
+        //     ->where('school_students.status', true)
+        //     ->where('S.status', true)
+        //     ->limit(3)
+        //     ->get();
 
-    // foreach ($student as $value) {
-    //     $clhs = new ClassLevelHasStudent();
-    //     $clhs->student_id = $value->id;
-    //     $clhs->class_level_id = '005107dc-8949-4ea0-80b8-da7945dfec4a';
-    //     $clhs->save();
-    // }
-    // foreach (Student::all() as $value) {
-    //     event(new AssociateCustomerToSchool($school, $value));
-    // }
+        // foreach ($student as $value) {
+        //     $clhs = new ClassLevelHasStudent();
+        //     $clhs->student_id = $value->id;
+        //     $clhs->class_level_id = '005107dc-8949-4ea0-80b8-da7945dfec4a';
+        //     $clhs->save();
+        // }
+        // foreach (Student::all() as $value) {
+        //     event(new AssociateCustomerToSchool($school, $value));
+        // }
 
-    // return SchoolStudent::all();
+        // return SchoolStudent::all();
 
-    // $sy = new SchoolYear();
-    // $sy->start_at = now()->subYear();
-    // $sy->end_at = now();
-    // $sy->status = SchoolYear::INACTIVE;
-    // $sy->school_id = $school->id;
-    // $sy->save();
+        // $sy = new SchoolYear();
+        // $sy->start_at = now()->subYear();
+        // $sy->end_at = now();
+        // $sy->status = SchoolYear::INACTIVE;
+        // $sy->school_id = $school->id;
+        // $sy->save();
 
-    return school_year(true);
+        return school_year(true);
 
-    // DB::beginTransaction();
-    // try {
-    //     $admin = new Admin();
-    //     $admin->first_name = "Sophiatou";
-    //     $admin->last_name = "Mbathie";
-    //     $admin->email = "sophie.mbathie@holi.sn";
-    //     $admin->telephone = "786739908";
-    //     $admin->save();
+        // DB::beginTransaction();
+        // try {
+        //     $admin = new Admin();
+        //     $admin->first_name = "Sophiatou";
+        //     $admin->last_name = "Mbathie";
+        //     $admin->email = "sophie.mbathie@holi.sn";
+        //     $admin->telephone = "786739908";
+        //     $admin->save();
 
-    //     $user = new User();
-    //     $user->username = 'sophie';
-    //     $user->password = Hash::make('password');
-    //     $user->owner()->associate($admin);
-    //     $user->save();
+        //     $user = new User();
+        //     $user->username = 'sophie';
+        //     $user->password = Hash::make('password');
+        //     $user->owner()->associate($admin);
+        //     $user->save();
 
-    //     $role = Role::whereName('Super Admin')->first();
-    //     $user->assignRole($role);
-    //     $user->syncPermissions($role->permissions);
+        //     $role = Role::whereName('Super Admin')->first();
+        //     $user->assignRole($role);
+        //     $user->syncPermissions($role->permissions);
 
-    //     $school = School::first();
+        //     $school = School::first();
 
-    //     $schoolUser = new SchoolUser();
-    //     $schoolUser->user()->associate($admin);
-    //     $schoolUser->school_id = $school->id;
-    //     $schoolUser->save();
+        //     $schoolUser = new SchoolUser();
+        //     $schoolUser->user()->associate($admin);
+        //     $schoolUser->school_id = $school->id;
+        //     $schoolUser->save();
 
-    //     DB::commit();
-    //     return $schoolUser->load(['user', 'school']);
-    // } catch (\Throwable $th) {
-    //     DB::rollBack();
-    //     return $th;
-    // }
-}
+        //     DB::commit();
+        //     return $schoolUser->load(['user', 'school']);
+        // } catch (\Throwable $th) {
+        //     DB::rollBack();
+        //     return $th;
+        // }
+    }
 )->middleware(['auth:api', 'cors']);

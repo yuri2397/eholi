@@ -12,6 +12,7 @@ import {first} from 'rxjs/operators';
 import {Course} from '../../../../pages/establishment/models/course.model';
 import {ClassRoomService} from '../../../../pages/establishment/services/class-room.service';
 import {ClassRoom} from '../../../../pages/establishment/models/class-room.model';
+import {ClassLevelCourseService} from '../../../../pages/establishment/services/class-level-courses.service';
 
 @Component({
     selector: 'app-calendar-event-sidebar',
@@ -29,7 +30,6 @@ export class CalendarEventSidebarComponent implements OnInit {
     public selectLabel: Course[] = [];
     classRooms: ClassRoom[] = [];
     public selectGuest: any[] = [
-        {name: 'Jane Foster', avatar: 'assets/images/avatars/1-small.png'}
     ];
     public startDateOptions = {
         altInput: true,
@@ -45,12 +45,17 @@ export class CalendarEventSidebarComponent implements OnInit {
     };
 
     classLevelId: string;
+    private selectClassLevelId: any;
+    private timesTableId: any;
 
-    constructor(private _classRoomServices: ClassRoomService, private _route: ActivatedRoute, private _coreSidebarService: CoreSidebarService, private _calendarService: CalendarService, private _professorService: ProfessorsService, private _courseService: CourseService) {
-    }
+    constructor(
+        private _classRoomServices: ClassRoomService,
+        private _route: ActivatedRoute,
+        private _coreSidebarService: CoreSidebarService,
+        private _calendarService: CalendarService,
+        private _professorService: ProfessorsService,
+        private _courseService: ClassLevelCourseService) {}
 
-    // Public Methods
-    // -----------------------------------------------------------------------------------------------------
 
     /**
      * Toggle Event Sidebar
@@ -64,9 +69,11 @@ export class CalendarEventSidebarComponent implements OnInit {
         if (eventForm.valid) {
             eventForm.form.value.start = this.startDatePicker.flatpickrElement.nativeElement.children[0].value;
             eventForm.form.value.end = this.endDatePicker.flatpickrElement.nativeElement.children[0].value;
-
+            console.log(eventForm.form.value);
+            eventForm.form.value['classLevelId'] = this.selectClassLevelId;
+            eventForm.form.value['timesTableId'] = this.timesTableId;
             this._calendarService.addEvent(eventForm.form.value);
-            this.toggleEventSidebar();
+            //this.toggleEventSidebar();
         }
     }
 
@@ -74,6 +81,7 @@ export class CalendarEventSidebarComponent implements OnInit {
      * Update Event
      */
     updateEvent() {
+        console.log(this.event);
         this.toggleEventSidebar();
         this.event.start = this.startDatePicker.flatpickrElement.nativeElement.children[0].value;
         this.event.end = this.endDatePicker.flatpickrElement.nativeElement.children[0].value;
@@ -107,7 +115,6 @@ export class CalendarEventSidebarComponent implements OnInit {
                     this.isDataEmpty = true;
                 }
             }
-            // else Create New Event
             else {
                 this.event = new EventRef();
 
@@ -135,18 +142,19 @@ export class CalendarEventSidebarComponent implements OnInit {
                 ;
             }
         });
-
+        this._route.params.subscribe((data) => this.timesTableId = data['id']);
         this._route.queryParams.subscribe(data => {
             console.log(data);
+            this.selectClassLevelId = data['class_level'];
             this._courseService.index<Course>({
-                'class_level_id': data['class_level']
+                'filter[class_level_id]': data['class_level'],
+                'with[]': 'course'
             }).pipe(first()).subscribe({
-                next: response => {
-                    console.log('COURSES', response);
-                    this.selectLabel = response.data;
+                next: (response: any) => {
+                    this.selectLabel = response;
                 },
-                error: erros => {
-                    console.log(erros);
+                error: (errors: any) => {
+                    console.log(errors);
                 }
             });
         });

@@ -43,7 +43,7 @@ export class ClassLevelsComponent implements OnInit {
           this.class_levels.data = [result, ...this.class_levels.data]
         }
       })
-      .catch((_) => {})
+      .catch((_) => {});
   }
 
   openEditModal(modal: any, row: ClassLevel) {

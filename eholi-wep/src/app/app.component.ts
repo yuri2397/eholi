@@ -64,14 +64,14 @@ export class AppComponent implements OnInit, OnDestroy {
         this._coreMenuService.setCurrentMenu('main');
 
         // Add languages to the translation service
-        this._translateService.addLangs(['en', 'fr', 'de', 'pt']);
+        this._translateService.addLangs(['en', 'fr', 'de', 'pt', 'ar']);
 
         // This language will be used as a fallback when a translation isn't found in the current language
-        this._translateService.setDefaultLang('fr');
+        this._translateService.setDefaultLang('ar');
 
         const browserLang = this._translateService.getBrowserLang();
 
-        this._translateService.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+        this._translateService.use(browserLang.match(/en|ar/) ? browserLang : 'en');
 
         // Set the translations for the menu
         this._coreTranslationService.translate(

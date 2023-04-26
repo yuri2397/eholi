@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SchoolHasProfessor;
 use App\Models\TimesTable;
 use App\Models\TimesTableRow;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TimesTableController extends Controller
@@ -44,15 +46,30 @@ class TimesTableController extends Controller
             "start" => 'required',
             'end' => 'required',
             'class_level_has_course_id' => 'required',
-            'school_has_professor_id' => 'required',
             'class_room_id' => 'required',
-            'class_level_id' => 'required',
+            'is_repeated' => 'required',
+            'professor_id' => 'required',
             'times_table_id' => 'required'
         ]);
 
-        $row = TimesTableRow::create($request->all());
 
-        return response()->json($row);
+        $school_has_professor_id = SchoolHasProfessor::where('professor_id', $request->professor_id)->where('school_id', school()->id)->first()->id;
+        $request->merge(['school_has_professor_id' => $school_has_professor_id]);
+        
+
+        $data = [
+            'start' => $this->parseTimeToCurrentDate($request->day_number, $request->start),
+            'end' => $this->parseTimeToCurrentDate($request->day_number, $request->end),
+            'class_level_has_course_id' => $request->class_level_has_course_id,
+            'class_room_id' => $request->class_room_id,
+            'is_repeated' => $request->is_repeated,
+            'school_has_professor_id' => $request->school_has_professor_id,
+            'times_table_id' => $request->times_table_id
+        ];
+
+        $row = TimesTableRow::create($data);
+
+        return response()->json($row->refresh());
     }
 
     /**
@@ -87,5 +104,20 @@ class TimesTableController extends Controller
     public function destroy(TimesTable $timesTable)
     {
         //
+    }
+
+    private function parseTimeToCurrentDate($dayOfWeek, $time)    
+    {
+        $date = Carbon::now();
+
+        $date->setDay($dayOfWeek);
+
+        $newDate = $date->setTime(Carbon::parse($time)->hour, Carbon::parse($time)->minute, Carbon::parse($time)->second);
+
+        return $newDate;
+    }
+
+    public function repeatTimesTable(TimesTable $timesTable)
+    {
     }
 }

@@ -27,6 +27,11 @@ class ClassLevel extends AbstractModel
         return $this->belongsToMany(Student::class, 'class_level_has_students');
     }
 
+    public function class_level_has_students()
+    {
+        return $this->hasMany(ClassLevelHasStudent::class);
+    }
+
     public function courses()
     {
         return $this->belongsToMany(Course::class, 'class_level_has_courses');

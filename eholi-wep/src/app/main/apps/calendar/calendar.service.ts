@@ -118,7 +118,7 @@ export class CalendarService implements Resolve<any> {
         newEvent.extendedProps.addGuest = eventForm.addGuest;
         this.currentEvent = newEvent;
         this.onCurrentEventChange.next(this.currentEvent);
-        this.postNewEvent();
+        this.postNewEvent(eventForm);
     }
 
     updateCurrentEvent(eventRef) {
@@ -141,17 +141,17 @@ export class CalendarService implements Resolve<any> {
     /**
      * Post New Event
      */
-    postNewEvent() {
+    postNewEvent(eventForm: any) {
         return new Promise((resolve, reject) => {
             let data = {
-                'start': this.currentEvent.start,
-                'end': this.currentEvent.end,
-                'class_level_has_course_id': this.currentEvent.courseId,
-                'school_has_professor_id': this.currentEvent.professorId,
-                'class_room_id': this.currentEvent.classRoomId,
-                'class_level_id' : this.classLevelId,
-                'times_table_id' => 'required'
-            }
+                'start': eventForm.start,
+                'end': eventForm.end,
+                'class_level_has_course_id': eventForm.courses,
+                'school_has_professor_id': eventForm.selectGuest?.professor_id,
+                'class_room_id': eventForm.location,
+                'times_table_id': eventForm.timesTableId
+            };
+            console.log(data);
             this._timeTableService.create(data).subscribe(response => {
                 this.getEvents();
                 resolve(response);

@@ -16,11 +16,11 @@ export class StudentService extends AbstractService {
   }
 
   metaData(uuid: string) {
-    return this.http.get<StudentMetaData>(`${this.enpoint}/${uuid}/meta-data`)
+    return this.http.get<StudentMetaData>(`${this.endpoint}/${uuid}/meta-data`)
   }
 
   public ecardIndex(params?: Param) {
-    return this.http.get<any>(`${this.enpoint}`, { params: params })
+    return this.http.get<any>(`${this.endpoint}`, { params: params })
   }
 
   /**
@@ -29,6 +29,6 @@ export class StudentService extends AbstractService {
    * @returns result
    */
   public disableStudentInSchool(uuid: string) {
-    return this.http.put<SchoolStudent>(`${this.enpoint}/${uuid}/disable`, {})
+    return this.http.put<SchoolStudent>(`${this.endpoint}/${uuid}/disable`, {})
   }
 }
