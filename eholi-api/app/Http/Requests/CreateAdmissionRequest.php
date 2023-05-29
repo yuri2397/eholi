@@ -31,7 +31,6 @@ class CreateAdmissionRequest extends FormRequest
             'student.birth_in' => 'required|string',
             'student.departement' => 'string',
             'tutors' => 'required|array',
-            'tutors.*.reference' => 'string',
             'tutors.*.name' => 'required|string',
             'tutors.*.email' => 'email',
             'tutors.*.phone1' => 'required|string',

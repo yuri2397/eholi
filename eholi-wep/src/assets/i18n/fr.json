@@ -29,6 +29,9 @@
       }
     }
   },
+  "placeholder": {
+    "search": "Rechercher..."
+  },
   "menu": {
     "dashboard": {
       "home": "Tableaux de bord",
@@ -389,7 +392,8 @@
       "max_note": "Note maximale"
     },
     "btn": {
-      "add": "Ajouter un examen/devoir"
+      "add": "Ajouter un examen/devoir",
+      "deliberation": "Délibération"
     },
     "placeholder": {
       "search": "Rechercher un examen/devoir"

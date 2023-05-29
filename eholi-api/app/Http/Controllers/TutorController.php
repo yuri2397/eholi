@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tutor;
 use Illuminate\Http\Request;
+use App\Models\SchoolStudent;
 
 class TutorController extends Controller
 {
@@ -14,8 +15,14 @@ class TutorController extends Controller
      */
     public function index(Request $request)
     {
-        // get all tutors with search from request
-        $tutors = Tutor::with($request->with ?: []);
+
+        $school = school()->id;
+        $tutors = Tutor::select('tutors.*')
+            ->distinct()
+            ->join('student_has_tutors', 'tutors.id', '=', 'student_has_tutors.tutor_id')
+            ->join('students', 'student_has_tutors.student_id', '=', 'students.id')
+            ->join('school_students', 'students.id', '=', 'school_students.student_id')
+            ->where('school_students.school_id', '=', $school);
 
         if ($request->has('search_query') && $request->search_query) {
 

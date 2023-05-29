@@ -32,7 +32,6 @@ export class LoginGuard implements CanActivate {
     | boolean
     | UrlTree {
     const isLogin = this._authenticationService.isLogin
-    console.log(isLogin)
 
     if (isLogin) {
       this._router.navigate(['/dashboard'])

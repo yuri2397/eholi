@@ -70,4 +70,6 @@ class SchoolController extends Controller
     public function destroy(School $school)
     {
     }
+
+    
 }

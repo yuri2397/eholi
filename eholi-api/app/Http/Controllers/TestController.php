@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClassLevel;
-use App\Models\SchoolHasProfessor;
 use App\Models\Test;
+use App\Models\ClassLevel;
 use App\Models\TestResult;
 use App\Models\TimesTable;
-use App\Models\TimesTableRow;
 use Illuminate\Http\Request;
+use App\Models\TimesTableRow;
+use App\Models\SchoolHasProfessor;
 use Illuminate\Support\Facades\DB;
+use App\Models\ClassLevelHasCourse;
 
 class TestController extends Controller
 {
@@ -68,8 +69,11 @@ class TestController extends Controller
             "class_level_has_course_id" => ['required', 'exists:class_level_has_courses,id'],
         ]);
         // merge school_id 
+        $course = ClassLevelHasCourse::find($request->class_level_has_course_id);
         $request->merge([
             'school_id' => school()->id,
+            'max_note' => $course->max_note,
+            'semester_id' => $course->semester_id,
             'school_has_professor_id' => SchoolHasProfessor::whereProfessorId($request->school_has_professor_id)->first()->id,
         ]);
 
@@ -78,6 +82,7 @@ class TestController extends Controller
         try {
             $test = Test::create($request->all());
 
+            // Ajouter le test dans l'emploi du temps
             $timesTable = TimesTable::where('class_level_id', $request->class_level_id)->first();
             if ($timesTable) {
                 $timesTable->rows()->create(

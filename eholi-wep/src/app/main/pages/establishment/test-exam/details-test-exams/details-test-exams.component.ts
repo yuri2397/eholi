@@ -50,7 +50,7 @@ export class DetailsTestExamsComponent implements OnInit {
 
   updateResult(result: TestResult) {
     result.loading = true;
-    console.log(result);
+    result.status = "ok";
     this._testExamService
       .updateTestResult(result.id, result)
       .pipe(first())

@@ -3,6 +3,8 @@ import { ClassLevel } from "./class-level.model";
 import { Professor } from "../../professors/professor";
 import { Semester } from "./semester.model";
 import { ClassLevelCourse } from "./class-level-course.model";
+import { Level } from "./level.model";
+import { SchoolYear } from "./school-year.model";
 
 export class TestExam extends BaseModel {
   title: string;
@@ -31,6 +33,7 @@ export class TestResult extends BaseModel{
     class_level_has_student_id?: string;
     test?:                      TestExam;
     class_level_has_student?:   any;
+    class_level_has_course: ClassLevelCourse;
     student?:                    LocalStudent;
 }
 
@@ -51,4 +54,32 @@ interface LocalStudent {
     updated_at?:          Date;
     departement?:         null;
     laravel_through_key?: string;
+}
+
+
+export interface ClassLevelSemester {
+  id?:             string;
+  school_id?:      null;
+  name?:           string;
+  level_id?:       string;
+  school_year_id?: string;
+  created_at?:     Date;
+  updated_at?:     Date;
+  total_students?: number;
+  total_courses?:  number;
+  semesters?:      Semester[];
+  level?:          Level;
+  school_year?:    SchoolYear;
+}
+
+export interface Deliberation {
+  id?:             string;
+  school_year_id?: string;
+  semester_id?:    string;
+  class_level_id?: string;
+  created_at?:     Date;
+  updated_at?:     Date;
+  semester?:       Semester;
+  class_level:     ClassLevel;
+  deliberation_item_results: any[]
 }

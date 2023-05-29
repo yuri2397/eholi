@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TestResult extends AbstractModel
 {
+
+    public const OK = 'ok';
+    public const PENDING = 'pending';
+    public const CANCEL = 'cancel';
     protected $fillable = ['status', 'class_level_has_student_id', 'note', 'test_id', 'explanations'];
 
     protected $with = ['student'];

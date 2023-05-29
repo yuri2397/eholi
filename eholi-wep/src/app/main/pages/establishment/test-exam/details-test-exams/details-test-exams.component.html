@@ -20,7 +20,7 @@
                     </div>
                     <div class="my-auto"><h4
                             class="card-title mb-25">{{ test?.class_level_has_course?.semester?.name}}</h4>
-                        <p class="card-text mb-0">{{ test?.title }} ({{test?.percent}}%)</p></div>
+                        <p class="card-text mb-0">{{ test?.title }} ({{ test.type == 'exam' ? test?.class_level_has_course?.exam_percent:  test?.class_level_has_course?.duty_percent }}%)</p></div>
                 </div>
                 <div class="media">
                     <div class="avatar bg-light-primary rounded mr-1">
@@ -191,15 +191,15 @@
                                 {{ ('content.sexe.' + result.student.sexe )| translate }}
                             </td>
                             <td>
-                                <span class="badge badge-pill badge-{{ result.student.status == 1 ? 'primary' : 'danger' }}">
-                                    {{ ( result.student.status  == 1 ? 'content.status.active' : 'content.status.inactive')|translate}}
+                                <span class="badge badge-pill badge-{{ result.status == 'ok' ? 'primary' : 'danger' }}">
+                                    {{ ( result.status  == 'ok' ? 'Noté' : 'Pas de note')|translate}}
                                 </span>
                             </td>
                             <td style="width: 5em">
                                 <div *ngIf="!editResult" class="blur">Modifier</div>
                                 <div *ngIf="editResult">
                                     <div class="d-flex align-items-center">
-                                        <div (click)="(result.active = true)" class="input-group has-validation">
+                                        <div (click)="(result.active = true)" class="input-group pointer has-validation">
                                             <input [disabled]="!result.active" [(ngModel)]="result.note" type="number" class="form-control col-12 {{ result.note < 0 || result.note > test.max_note  ? 'is-invalid' :  ''}} " id="noteValidation" required>
                                             <div id="noteValidationError" class="invalid-feedback">
                                                 {{ 'test_results.note_error'|translate: {max_note: test.max_note} }}

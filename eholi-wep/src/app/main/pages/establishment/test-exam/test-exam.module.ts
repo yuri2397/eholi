@@ -1,3 +1,6 @@
+import { DeliberationDetailsResolver } from './../resolvers/deliberation-details.resolver';
+import { DeliberationResolver } from './../resolvers/deliberation.resolver';
+import { ClassLevelSemesterResolver } from '../resolvers/class_level_semester.resolver';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
@@ -10,6 +13,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ContentHeaderModule} from '../../../../layout/components/content-header/content-header.module';
 import {SharedModule} from '../../../../shared/shared.module';
 import {ClassLevelDeliberationComponent} from './class-level-deliberation/class-level-deliberation.component';
+import { ClassLevelDeliberationResultatsComponent } from './class-level-deliberation-resultats/class-level-deliberation-resultats.component';
 
 const routes: Routes = [
     {
@@ -32,7 +36,18 @@ const routes: Routes = [
     },
     {
         path: 'deliberation',
-        component: ClassLevelDeliberationComponent
+        component: ClassLevelDeliberationComponent,
+        resolve: {
+            semester: ClassLevelSemesterResolver,
+            deliberation: DeliberationResolver
+        }
+    },
+    {
+        path: 'deliberation/:uuid',
+        component: ClassLevelDeliberationResultatsComponent,
+        resolve: {
+            deliberation: DeliberationDetailsResolver,
+        }
     }
 ];
 
@@ -41,7 +56,8 @@ const routes: Routes = [
         DetailsTestExamsComponent,
         SetTestExamResultsComponent,
         ListTestExamsComponent,
-        ClassLevelDeliberationComponent
+        ClassLevelDeliberationComponent,
+        ClassLevelDeliberationResultatsComponent
     ],
     imports: [
         CommonModule,

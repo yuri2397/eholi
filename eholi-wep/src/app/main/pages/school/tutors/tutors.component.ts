@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TutorsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _router: Router,
+    private _route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this._route.data.subscribe((data) => {
+      console.log(data);
+    })
   }
 
 }

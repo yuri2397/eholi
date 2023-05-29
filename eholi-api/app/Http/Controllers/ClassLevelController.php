@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ClassLevel;
+use App\Models\Level;
 use App\Models\TimesTable;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,11 @@ class ClassLevelController extends Controller
             }
         }
 
-        if($request->has('class_level_id')){
+        if ($request->has('class_level_id')) {
             $query->where('id', $request->class_level_id);
         }
 
-        if($request->has('school_id')){
+        if ($request->has('school_id')) {
             $query->where('school_id', $request->school_id);
         }
 
@@ -61,12 +62,26 @@ class ClassLevelController extends Controller
      */
     public function store(Request $request)
     {
-        // validation
+        $request->validate([
+            'level_id' => 'required',
+            'name' => 'required',
+        ]);
+
         $request->merge([
             'school_year_id' => school_year()->id,
             'school_id' => school()->id,
         ]);
+
         $class_level = ClassLevel::create($request->all());
+
+        // add semester from level
+        $semesters = Level::find($request->level_id)->semesters;
+        foreach ($semesters as $semester) {
+            $class_level->semesters()->create([
+                'semester_id' => $semester->id,
+            ]);
+        }
+
         $timesTable = new TimesTable();
 
         $timesTable->class_level_id = $class_level->id;
@@ -111,9 +126,16 @@ class ClassLevelController extends Controller
     public function destroy(ClassLevel $classLevel)
     {
         $times_tables = TimesTable::where('class_level_id', $classLevel->id)->first();
-        if($times_tables) 
+        if ($times_tables)
             $times_tables->delete();
         $classLevel->delete();
         return $classLevel;
+    }
+
+    // get semester
+
+    public function getSemester(Request $request, ClassLevel $classLevel)
+    {
+        return $classLevel->load($request->with ?: ['level_has_semesters.semester']);
     }
 }

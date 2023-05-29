@@ -38,6 +38,8 @@ use PHPUnit\Framework\MockObject\Builder\Stub;
 use App\Http\Controllers\StudentSubscribeController;
 use Spatie\Permission\Contracts\Role as ContractsRole;
 use App\Http\Controllers\ClassLevelHasCourseController;
+use App\Http\Controllers\DeliberationController;
+use App\Http\Controllers\LevelHasSemesterController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TimesTableController;
 use App\Models\TestResult;
@@ -98,6 +100,7 @@ Route::prefix('school-years')
     ->group(function () {
         Route::get('', 'index');
         Route::get('show', 'show');
+        Route::get('/current-school-year', 'currentSchoolYear');
     });
 
 /**
@@ -216,6 +219,24 @@ Route::prefix('tests')
 Route::prefix('test-results')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('test-results', TestResult::class);
+
+Route::prefix('level-semesters')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('level-semesters', LevelHasSemesterController::class);
+/**
+ * Tests Results
+ */
+Route::prefix('deliberations')
+    ->middleware(['auth:api', 'cors'])->controller(DeliberationController::class)->group(function () {
+        // crud 
+        Route::get('/', 'index');
+        Route::get('/{deliberation}', 'show');
+        Route::post('/', 'store');
+        Route::put('/{deliberation}', 'update');
+        Route::delete('/{deliberation}', 'destroy');
+        Route::post('/check-deliberation', 'checkIfDeliberationIsPossible');
+        Route::post('/download-results/{deliberation}', 'downloadResults');
+    });
 
 /**
  * Room

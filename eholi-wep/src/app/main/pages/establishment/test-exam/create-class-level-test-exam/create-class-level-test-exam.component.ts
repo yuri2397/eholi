@@ -59,9 +59,9 @@ export class CreateClassLevelTestExamComponent implements OnInit {
         return this.form.get('type');
     }
 
-    get percent() {
-        return this.form.get('percent');
-    }
+    // get percent() {
+    //     return this.form.get('percent');
+    // }
 
     get class_level_id() {
         return this.form.get('class_level_id');
@@ -90,7 +90,7 @@ export class CreateClassLevelTestExamComponent implements OnInit {
             class_level_has_course_id: new FormControl(null, [Validators.required]),
             type: new FormControl(null, [Validators.required]),
             date: new FormControl(null, [Validators.required]),
-            percent: new FormControl(null, [Validators.min(0), Validators.max(100)]),
+            // percent: new FormControl(null, [Validators.min(0), Validators.max(100)]),
             class_level_id: new FormControl(this.classLevel, [Validators.required]),
             max_note: new FormControl(null, [Validators.required]),
             title: new FormControl(null, [Validators.required]),

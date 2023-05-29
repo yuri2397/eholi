@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassLevel extends AbstractModel
 {
-    protected $fillable = ['name', 'level_id', 'school_year_id'];
+    protected $fillable = ['name', 'level_id', 'school_year_id', 'semester_id'];
 
     protected $appends = ['total_students', 'total_courses'];
+
 
     public function level()
     {
@@ -50,5 +51,11 @@ class ClassLevel extends AbstractModel
     public function times_table()
     {
         return $this->hasOne(TimesTable::class, 'class_level_id');
+    }
+
+    // get semesters from level
+    public function semesters()
+    {
+        return $this->belongsToMany(Semester::class, 'class_level_has_semesters');
     }
 }

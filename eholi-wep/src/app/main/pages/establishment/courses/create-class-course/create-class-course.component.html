@@ -173,6 +173,62 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
+          <label class="form-control-label" for="duty_percent">
+            Pourcentage devoir
+          </label>
+          <input
+            id="duty_percent"
+            class="form-control input-md"
+            placeholder="Pourcentage devoir"
+            formControlName="duty_percent"
+          />
+          <span
+            *ngIf="
+              duty_percent.invalid &&
+              (duty_percent.dirty || duty_percent.touched)
+            "
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="duty_percent.errors?.['required']"
+              >{{ "form.validation.errors.required" | translate }}</small
+            >
+          </span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="exam_percent">
+            Pourcentage d'examen
+          </label>
+          <input
+            id="exam_percent"
+            class="form-control input-md"
+            [placeholder]="'Pourcentage d\'examen'"
+            formControlName="exam_percent"
+          />
+
+          <span
+            *ngIf="
+              exam_percent.invalid &&
+              (exam_percent.dirty || exam_percent.touched)
+            "
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="exam_percent.errors?.['required']"
+              >{{ "form.validation.errors.required" | translate }}</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
           <label class="form-control-label" for="class_level_id">
             {{ "content.title.professeur" | translate }}
           </label>

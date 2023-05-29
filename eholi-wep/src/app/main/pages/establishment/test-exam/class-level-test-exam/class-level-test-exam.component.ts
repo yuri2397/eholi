@@ -45,7 +45,7 @@ export class ClassLevelTestExamComponent implements OnInit {
         .open(createModal, {
           centered: true,
           windowClass: 'modal modal-primary',
-          size: 'lg',
+          size: 'md',
           keyboard: false,
         })
         .result.then((result) => {
