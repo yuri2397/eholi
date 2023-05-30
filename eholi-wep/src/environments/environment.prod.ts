@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   hmr: false,
-  apiUrl: 'http://192.168.1.100:8000/api',
-  api: 'http://192.168.1.100:8000/api',
+  apiUrl: 'https://e-api.holi.sn/api',
+  api: 'https://e-api.holi.sn/api',
 }

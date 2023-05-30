@@ -206,6 +206,7 @@ Route::prefix('tests')
     ->controller(TestController::class)
     ->group(function () {
         Route::get('/', 'index');
+        Route::get('/student-tests-result','studentTests' );
         Route::get('/{test}', 'show');
         Route::post('/', 'store');
         Route::put('/{test}', 'update');
@@ -230,6 +231,8 @@ Route::prefix('deliberations')
     ->middleware(['auth:api', 'cors'])->controller(DeliberationController::class)->group(function () {
         // crud 
         Route::get('/', 'index');
+        Route::get('/student-results', 'studentDeliberation');
+        Route::post('/download-builtin', 'downloadStudentBultin');
         Route::get('/{deliberation}', 'show');
         Route::post('/', 'store');
         Route::put('/{deliberation}', 'update');

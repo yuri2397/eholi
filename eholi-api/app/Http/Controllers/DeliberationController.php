@@ -14,6 +14,8 @@ use App\Models\ClassLevelHasCourse;
 use App\Models\DeliberationItemResult;
 use App\Models\School;
 
+use function PHPUnit\Framework\isEmpty;
+
 class DeliberationController extends Controller
 {
     // index
@@ -202,7 +204,9 @@ class DeliberationController extends Controller
                 }
 
                 DeliberationItem::create([
-                    'average' => $average / $coefs,
+                    'average' => $student_results->map(function ($item) {
+                        return $item->average * $item->coef;
+                    })->sum() / $student_results->sum('coef'),
                     'status' => DeliberationItem::SUCCESS,
                     'mention' => $this->getMention(($average / $coefs), 10),
                     'class_level_has_student_id' => $student->class_level_has_students[0]->id,
@@ -246,17 +250,56 @@ class DeliberationController extends Controller
         ]);
     }
 
+    public function downloadStudentBultin(Request $request)
+    {
+        $data = $request->validate([
+            "student_id" => "required",
+            "semester_id" => "required",
+            "deliberation_id" => "required"
+        ]);
+        $deliberation = Deliberation::find($data['deliberation_id']);
+        $results = DeliberationItemResult::join('class_level_has_students as CLS', 'CLS.id', 'deliberation_item_results.class_level_has_student_id')
+            ->join('class_level_has_courses', 'class_level_has_courses.id', 'deliberation_item_results.class_level_has_course_id')
+            // join course and select the course and alias it course
+            ->join('courses as C', 'C.id', 'class_level_has_courses.course_id')
+            ->where('CLS.student_id', $data['student_id'])
+            ->get();
+        // return $results;
+        // return DeliberationItem::whereDeliberationId($deliberation->id)->whereClassLevelHasStudentId($results[0]->class_level_has_student_id)->first();
+        $base_note =
+            ClassLevelHasCourse::whereId($results[0]->class_level_has_course_id)->first()->max_note;
+        $headers = ['Matière', 'Dévoirs', 'Comp.', 'Moy/' . $base_note, 'Coef', 'Moy (coef)', 'Rang', 'Mention'];
+        return view('deliberation.bultin')->with([
+            "results" => $results,
+            "deliberation" => $deliberation,
+            "school" => school(),
+            "base_note" => $base_note,
+            "semester" => $deliberation->semester,
+            "student" => Student::find($data['student_id']),
+            "class_level" => $deliberation->classLevel,
+            "deliberation_item" => DeliberationItem::whereDeliberationId($deliberation->id)->whereClassLevelHasStudentId($results[0]->class_level_has_student_id)->first(),
+            "school_year" => $deliberation->schoolYear,
+            "headers" => $headers,
+            "total_coef" => $results->sum('coef'),
+            "total_average" => $results->sum('average'),
+            "total_average_coef" => $results->map(function ($item) {
+                return $item->average * $item->coef;
+            })->sum(),
+            "nb_students" => DeliberationItemResult::whereDeliberationId($deliberation->id)->distinct()->get(['class_level_has_student_id'])->count(),
+        ]);
+    }
+
     public function downloadResults(Deliberation $deliberation)
     {
         $deliberation = $deliberation->load(['classLevel', 'semester', 'schoolYear']);
         $rows = [];
         // return DeliberationItemResult::whereDeliberationId($deliberation->id)->distinct()->orderBy('class_level_has_course_id', 'ASC')->get(['class_level_has_course_id'])->toArray();
         $courses = DeliberationItemResult::whereDeliberationId($deliberation->id)->distinct()->orderBy('class_level_has_course_id', 'ASC')->get(['class_level_has_course_id'])->toArray();
-        $headers = array_merge(['Matricule','Prénom/Nom'], array_map(fn ($item) => $item['class_level_has_course']["course"]['name'], $courses), ['Moyenne', 'Rang', 'Appréciations']);
+        $headers = array_merge(['Matricule', 'Prénom/Nom'], array_map(fn ($item) => $item['class_level_has_course']["course"]['name'], $courses), ['Moyenne', 'Rang', 'Appréciations']);
 
         $dels = DeliberationItemResult::whereDeliberationId($deliberation->id)->orderBy('average', 'DESC')->get();
         $del_items = DeliberationItem::with('student')->whereDeliberationId($deliberation->id)->orderBy('average', 'DESC')->get();
-        
+
         foreach ($del_items as $value) {
             $dels = DeliberationItemResult::whereClassLevelHasStudentId($value->class_level_has_student_id)->whereDeliberationId($deliberation->id)->orderBy('class_level_has_course_id', 'ASC')->get();
             $rows[] = [
@@ -276,6 +319,45 @@ class DeliberationController extends Controller
             'headers' => $headers,
             'rows' => $rows
         ]);
+    }
+
+    public function studentDeliberation(Request $request)
+    {
+        $data = $this->validate($request, [
+            "student_id" => "required|uuid|exists:students,id",
+            "class_level_id" => "required|uuid|exists:class_levels,id",
+        ]);
+
+        $deliberation = Deliberation::whereClassLevelId($data['class_level_id'])->first();
+
+        if (!$deliberation) {
+            return response()->json([
+                'message' => 'Il faut faire la délibération avant de consulter les résultats',
+            ], 422);
+        }
+        $semesters = ClassLevel::find($data['class_level_id'])->semesters;
+        $result = [];
+        foreach ($semesters as $key => $sem) {
+            $res['semester'] = $sem;
+            $res['data'] =  DeliberationItemResult::join('class_level_has_students as CLS', 'CLS.id', 'deliberation_item_results.class_level_has_student_id')
+                ->join('deliberations as D', 'D.id', 'deliberation_item_results.deliberation_id')
+                ->where('D.semester_id', $sem->id)
+                ->where('CLS.student_id', $data['student_id'])
+                ->where('deliberation_id', $deliberation->id)
+                ->orderBy('class_level_has_course_id', 'ASC')
+                ->get();
+
+            if (count($res['data']) == 0) {
+                continue;
+            }
+
+            $result[] = $res;
+        }
+
+        return [
+            "deliberation" => $deliberation,
+            "results" => $result
+        ];
     }
 
     private function checkCNTPDeliberation($courses)

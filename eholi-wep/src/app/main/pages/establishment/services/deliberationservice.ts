@@ -28,4 +28,18 @@ export class DeliberationService extends AbstractService {
       })
       .pipe(tap(() => console.log(`chiffre d'affaire fiche`)));
   }
+
+  studentDeliberation(data: any) {
+    let url = `${this.endpoint}/student-results`;
+    return this._ch.get(url, { params: data });
+  }
+
+  downloadBT(data: any) {
+    let url = `${this.endpoint}/download-builtin`;
+    return this._ch
+      .post<Blob>(url, data, {
+        responseType: "html" as "json",
+      })
+      .pipe(tap(() => console.log(`chiffre d'affaire fiche`)));
+  }
 }

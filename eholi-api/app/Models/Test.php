@@ -34,7 +34,7 @@ class Test extends AbstractModel
 
     public function class_level()
     {
-        return $this->belongsTo(ClassLevel::class);
+        return $this->belongsTo(ClassLevel::class, );
     }
 
     public function school_has_professor()

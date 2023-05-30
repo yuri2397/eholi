@@ -12,18 +12,14 @@ abstract class AbstractModel extends Model
     use UUID, HasFactory, BaseModel;
     public const BASE_REFERENCE = 'dt';
 
-    # generate reference
+    # generate reference of 6 characters number 
     public static function generateReference()
     {
-        $last = static::latest()->first();
-        $lastReference = $last
-            ? $last->reference
-            : static::BASE_REFERENCE . '00000';
-        $lastNumber = (int) substr($lastReference, -7);
-        $newNumber = $lastNumber + 1;
-        $newReference =
-            static::BASE_REFERENCE . str_pad($newNumber, 7, '0', STR_PAD_LEFT);
-        return $newReference;
+        $reference = self::BASE_REFERENCE . '-' . rand(100000, 999999);
+        if (self::where('reference', $reference)->exists()) {
+            return self::generateReference();
+        }
+        return $reference;
     }
 
     public function school()

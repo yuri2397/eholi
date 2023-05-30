@@ -11,6 +11,8 @@ use App\Models\TimesTableRow;
 use App\Models\SchoolHasProfessor;
 use Illuminate\Support\Facades\DB;
 use App\Models\ClassLevelHasCourse;
+use App\Models\ClassLevelHasStudent;
+use App\Models\Student;
 
 class TestController extends Controller
 {
@@ -134,6 +136,35 @@ class TestController extends Controller
         return $test->load(['class_level.school_year', 'class_level_has_course.semester', 'class_level_has_course.course', 'class_level_has_course.professor', 'test_results', 'class_level']);
     }
 
+    public function studentTests(Request $request)
+    {
+        $data = $request->validate([
+            "student_id" => "required",
+            "class_level_id" => "required"
+        ]);
+
+        // $tests = Test::with(['class_level_has_course', 'semester'])->get();
+        // return $tests;
+        // foreach ($tests as $test) {
+        //     $test->semester_id = $test->class_level_has_course->semester->id;
+        //     $test->save();
+        // }
+
+        $semesters = ClassLevel::whereId($data['class_level_id'])->first()->semesters;
+        $resutl = [];
+        foreach ($semesters as $semester) {
+            $res['semester'] = $semester;
+            $res['result'] = TestResult::join('tests', 'tests.id', 'test_results.test_id')
+                ->where('tests.semester_id', $semester->id)
+                ->join('class_level_has_courses as CLC', 'tests.class_level_has_course_id', 'CLC.id')
+                ->join('class_level_has_students as CLS', 'CLS.id', "test_results.class_level_has_student_id")
+                ->where('CLS.student_id', $data['student_id'])->orderBy('tests.type', 'DESC')->select('test_results.*', 'tests.title', 'tests.type', 'tests.date', 'tests.max_note', 'CLC.coef')->get();
+                $resutl[] = $res;
+        }
+
+        return $resutl;
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -153,7 +184,7 @@ class TestController extends Controller
      */
     public function destroy(Test $test)
     {
-        
+
         $testResult = TestResult::whereTestId($test->id)->get();
         $testResult->each(function ($item) {
             $item->delete();
