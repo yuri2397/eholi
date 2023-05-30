@@ -64,4 +64,9 @@ class SchoolYearController extends Controller
     {
         //
     }
+
+    public function currentSchoolYear(Request $request)
+    {
+        return school_year();
+    }
 }

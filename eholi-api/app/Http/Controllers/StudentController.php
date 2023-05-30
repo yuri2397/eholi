@@ -103,12 +103,11 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show(Request $request,$id)
     {
-        return $student;
+        return Student::find($id);
     }
 
     /**

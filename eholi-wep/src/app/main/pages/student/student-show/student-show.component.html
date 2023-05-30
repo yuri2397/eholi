@@ -51,7 +51,13 @@
             >
             <ng-template ngbNavContent>
               <!-- list of tutors -->
-              <div *ngIf="(meta_data.tutors && meta_data.tutors.length != 0); else emptyTable" class="table-responsive">
+              <div
+                *ngIf="
+                  meta_data.tutors && meta_data.tutors.length != 0;
+                  else emptyTable
+                "
+                class="table-responsive"
+              >
                 <table class="table table-hover">
                   <thead>
                     <tr>
@@ -77,36 +83,99 @@
               </div>
             </ng-template>
           </li>
-          <li ngbNavItem>
+          <li ngbNavItem (shown)="getTests($event)">
             <a ngbNavLink
-              ><span [data-feather]="'briefcase'"></span>
-              {{ "student.tabs.journey" | translate }}</a
+              ><span [data-feather]="'bar-chart'"></span>Examens/Devoirs</a
             >
             <ng-template ngbNavContent>
-              <p>
-                Chocolate croissant cupcake croissant jelly donut. Cheesecake
-                toffee apple pie chocolate bar biscuit tart croissant. Lemon
-                drops danish cookie. Oat cake macaroon icing tart lollipop
-                cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
-                drops ice cream wafer gummies dragée. Chocolate bar liquorice
-                cheesecake cookie chupa chups marshmallow oat cake biscuit.
-                Dessert toffee fruitcake ice cream powder tootsie roll cake.
-              </p>
+              <ngb-accordion [closeOthers]="true">
+                <ngb-panel *ngFor="let item of results">
+                  <ng-template ngbPanelTitle>
+                    <span class="lead collapse-title h2 bold">{{
+                      item.semester.name | uppercase
+                    }}</span>
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                    <ngx-datatable
+                      [rows]="item.result"
+                      [rowHeight]="50"
+                      class="bootstrap core-bootstrap"
+                      [columnMode]="'force'"
+                      [headerHeight]="50"
+                      [footerHeight]="50"
+                    >
+                      <ngx-datatable-column name="Examens/Devois" prop="title">
+                      </ngx-datatable-column>
+
+                      <ngx-datatable-column name="Coéf" prop="coef">
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Type" prop="type">
+                        <ng-template
+                          let-type="value"
+                          ngx-datatable-cell-template
+                        >
+                          <span
+                            class="badge badge-pill badge-{{
+                              type == 'exam' ? 'primary' : 'warning'
+                            }}"
+                          >
+                            {{
+                              (type == "exam" ? "Examen" : "Devoir") | translate
+                            }}
+                          </span>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Note" prop="note">
+                        <ng-template
+                          let-note="value"
+                          ngx-datatable-cell-template
+                        >
+                          {{ note }}
+                        </ng-template>
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Etat" prop="status">
+                        <ng-template
+                          let-status="value"
+                          ngx-datatable-cell-template
+                        >
+                          <span
+                            class="badge badge-pill badge-{{
+                              status == 'ok' ? 'success' : 'danger'
+                            }}"
+                          >
+                            {{
+                              (status == "ok" ? "Déjà corrigé" : "Non corrigé")
+                                | translate
+                            }}
+                          </span>
+                        </ng-template>
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                  </ng-template>
+                </ngb-panel>
+              </ngb-accordion>
             </ng-template>
           </li>
-          <li ngbNavItem [disabled]="true">
+
+          <li ngbNavItem (shown)="getDeliberation($event)" >
             <a ngbNavLink
-              ><span [data-feather]="'users'"></span>
-              {{ "student.tabs.attendance" | translate }}</a
+              ><span [data-feather]="'life-buoy'"></span>
+              {{ "Déliberation" | translate }}</a
             >
 
             <ng-template ngbNavContent>
-              <p>
-                Cake croissant lemon drops gummi bears carrot cake biscuit
-                cupcake croissant. Macaroon lemon drops muffin jelly sugar plum
-                chocolate cupcake danish icing. Soufflé tootsie roll lemon drops
-                sweet roll cake icing cookie halvah cupcake.
-              </p>
+              <div class="row">
+                <div *ngFor="let deli of deliberations?.results ?? []" class="col-md-4">
+                  <div class="card shadow">
+                    
+                    <div class="card-body text-center">
+                      <span class="lead text-center text-dark d-block">{{ deli.semester.name }}</span>
+                      <br>
+                      <button (click)="downloadBT(deli.semester)" class="btn btn-primary mx-3"  rippleEffect>{{ 'Télécharger le builtin'|translate }}</button>      
+                    </div>
+                  </div>
+                </div>
+              </div>
             </ng-template>
           </li>
 
@@ -127,7 +196,7 @@
               </p>
             </ng-template>
           </li>
-           <li ngbNavItem [disabled]="true">
+          <li ngbNavItem [disabled]="true">
             <a ngbNavLink
               ><span [data-feather]="'dollar-sign'"></span>
               {{ "student.tabs.fee" | translate }}</a
@@ -160,6 +229,8 @@
                 Dessert toffee fruitcake ice cream powder tootsie roll cake.
               </p>
             </ng-template>
+          </li>
+
           <li ngbNavItem [disabled]="true">
             <a ngbNavLink
               ><span [data-feather]="'heart'"></span>
@@ -201,19 +272,16 @@
   </div>
 </div>
 
-
 <ng-template #emptyTable>
   <div class="alert alert-warning p-3" role="alert">
-    <h4 >{{ 'content.table.empty.title' | translate }}</h4>
-    <p>{{ 'content.table.empty.message' | translate }}</p>
+    <h4>{{ "content.table.empty.title" | translate }}</h4>
+    <p>{{ "content.table.empty.message" | translate }}</p>
     <hr />
-    <button
-    class="btn btn-primary ml-1"
-    rippleEffect
-    disabled
-  >
-    <i data-feather="plus" class="mr-0 mr-sm-1"></i
-    ><span class="d-none d-sm-inline-block">{{ 'content.table.empty.btn'|translate }}</span>
-  </button>
+    <button class="btn btn-primary ml-1" rippleEffect disabled>
+      <i data-feather="plus" class="mr-0 mr-sm-1"></i
+      ><span class="d-none d-sm-inline-block">{{
+        "content.table.empty.btn" | translate
+      }}</span>
+    </button>
   </div>
 </ng-template>

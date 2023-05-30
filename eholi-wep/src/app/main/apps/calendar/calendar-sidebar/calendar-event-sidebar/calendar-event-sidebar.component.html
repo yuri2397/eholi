@@ -5,7 +5,7 @@
       ×
     </button>
     <div class="modal-header mb-1">
-      <h5 class="modal-title">{{ isDataEmpty === true ? 'Add' : 'Update' }} Event</h5>
+      <h5 class="modal-title">{{ isDataEmpty === true ? 'Ajouter' : 'Modifier' }} l'évenement</h5>
     </div>
     <div class="modal-body flex-grow-1 pb-sm-0 pb-3">
       <form
@@ -14,42 +14,22 @@
         #eventForm="ngForm"
       >
         <div class="form-group">
-          <label for="title" class="form-label">Title</label>
-          <input
-            type="text"
-            class="form-control"
-            id="title"
-            name="title"
-            placeholder="Event Title"
-            required
-            [(ngModel)]="event.title"
-            [class.error]="eventForm.submitted && formNameRef.invalid"
-            #formNameRef="ngModel"
-          />
-          <span *ngIf="eventForm.submitted && formNameRef.invalid" class="invalid-form">
-            <small class="form-text text-danger" *ngIf="formNameRef.errors.required">This field is required!</small>
-          </span>
-        </div>
-        <div class="form-group">
-          <label for="select-label" class="form-label">Label</label>
+          <label for="courses" class="form-label">Rechercher un cours</label>
           <ng-select
-            [items]="selectLabel"
-            name="selectlabel"
-            [(ngModel)]="event.calendar"
-            bindLabel="label"
-            bindValue="label"
-            required
-            [class.error]="eventForm.submitted && formLabelRef.invalid"
-            #formLabelRef="ngModel"
+                  [items]="selectLabel"
+                  name="courses"
+                  [(ngModel)]="event.courseId"
+                  bindLabel="name"
+                  bindValue="id"
+                  required
+                  [class.error]="eventForm.submitted && formLabelRef.invalid"
+                  #formLabelRef="ngModel"
           >
             <ng-template ng-option-tmp ng-label-tmp let-item="item">
-              <span class="bullet bullet-sm mr-50 bullet-{{ item.bullet }}"></span>
-              {{ item.label }}
+              {{ item.course.name }}
             </ng-template>
           </ng-select>
-          <span *ngIf="eventForm.submitted && formLabelRef.invalid" class="invalid-form">
-            <small class="form-text text-danger" *ngIf="formLabelRef.errors.required">Label is required!</small>
-          </span>
+
         </div>
         <div class="form-group position-relative">
           <label for="start-date" class="form-label">Start Date</label>
@@ -73,46 +53,17 @@
             [class.error]="eventForm.submitted"
           ></ng2-flatpickr>
         </div>
-        <div class="form-group">
-          <div class="custom-control custom-switch">
-            <input
-              type="checkbox"
-              class="custom-control-input allDay-switch"
-              id="customSwitch3"
-              [(ngModel)]="event.allDay"
-              name="allDay"
-            />
-            <label class="custom-control-label" for="customSwitch3">All Day</label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="event-url" class="form-label">Event URL</label>
-          <input
-            type="url"
-            [(ngModel)]="event.url"
-            name="url"
-            class="form-control"
-            id="event-url"
-            placeholder="https://www.google.com"
-          />
-        </div>
+
         <div class="form-group select2-primary">
-          <label for="event-guests" class="form-label">Add Guests</label>
+          <label for="event-guests" class="form-label">Choissir professeur</label>
           <ng-select
             [items]="selectGuest"
             name="selectGuest"
-            [(ngModel)]="event.extendedProps.addGuest"
+            [(ngModel)]="event.professorId"
             bindLabel="name"
           >
             <ng-template ng-option-tmp ng-label-tmp let-item="item">
               <div class="media align-items-center">
-                <img
-                  class="d-block rounded-circle mr-50"
-                  [src]="item.avatar"
-                  height="26"
-                  width="26"
-                  [alt]="item.name"
-                />
                 <div class="media-body">
                   <p class="mb-0">{{ item.name }}</p>
                 </div>
@@ -121,26 +72,23 @@
           </ng-select>
         </div>
         <div class="form-group">
-          <label for="event-location" class="form-label">Location</label>
-          <input
-            type="text"
-            class="form-control"
-            id="event-location"
-            placeholder="Enter Location"
-            [(ngModel)]="event.extendedProps.location"
-            name="location"
-          />
+          <label for="event-location" class="form-label">Salle</label>
+          <ng-select
+                  [items]="classRooms"
+                  name="location"
+                  [(ngModel)]="event.classRoomId"
+                  bindLabel="name"
+                  bindValue="id"
+                  required
+                  [class.error]="eventForm.submitted && formLabelRef.invalid"
+                  #formLabelRef="ngModel"
+          >
+            <ng-template ng-option-tmp ng-label-tmp let-item="item">
+              {{ item.name }}
+            </ng-template>
+          </ng-select>
         </div>
-        <div class="form-group">
-          <label class="form-label">Description</label>
-          <textarea
-            name="event-description-editor"
-            id="event-description-editor"
-            class="form-control"
-            [(ngModel)]="event.extendedProps.description"
-            name="description"
-          ></textarea>
-        </div>
+
         <div class="form-group d-flex">
           <button
             type="submit"
@@ -149,7 +97,7 @@
             (click)="addEvent(eventForm)"
             rippleEffect
           >
-            Add
+            Ajouter
           </button>
           <button
             type="button"
@@ -159,15 +107,15 @@
             *ngIf="isDataEmpty !== false; else deleteEventRef"
             rippleEffect
           >
-            Cancel
+            Annuler
           </button>
           <ng-template #addEventRef>
             <button type="submit" class="btn btn-primary update-event-btn mr-1" (click)="updateEvent()" rippleEffect>
-              Update
+              Modifier
             </button>
           </ng-template>
           <ng-template #deleteEventRef>
-            <button class="btn btn-outline-danger btn-delete-event" (click)="deleteEvent()" rippleEffect>Delete</button>
+            <button class="btn btn-outline-danger btn-delete-event" (click)="deleteEvent()" rippleEffect>Supprimer</button>
           </ng-template>
         </div>
       </form>

@@ -11,6 +11,6 @@ import { Course } from '../establishment.model'
 })
 export class CourseService extends AbstractService {
   constructor(private _ch: HttpClient) {
-    super('courses', _ch)
+    super('courses', _ch);
   }
 }

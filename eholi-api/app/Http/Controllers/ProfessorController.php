@@ -21,12 +21,11 @@ class ProfessorController extends Controller
         $query = SchoolHasProfessor::with($request->with ?: [])
             ->where('school_id', school()->id)
             ->join(
-                'professors',
-                'professors.id',
+                'professors as P',
+                'P.id',
                 '=',
                 'school_has_professors.professor_id'
             );
-
         if ($request->has('search_query') && $request->search_query) {
             $query->where(function ($q) use ($request) {
                 $q

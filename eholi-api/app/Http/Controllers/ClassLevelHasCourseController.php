@@ -15,11 +15,12 @@ class ClassLevelHasCourseController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = array_keys($request->input('filter')) ?? null;
+        $filter = $request->filter ? array_keys($request->input('filter')) : null;
         
         $query = ClassLevelHasCourse::with($request->with ?: [])->whereSchoolId(
             school()->id
         );
+       
 
         if ($request->has('search_query') && $request->search_query) {
             if ($request->has('with') && in_array('course', $request->with)) {
@@ -36,6 +37,9 @@ class ClassLevelHasCourseController extends Controller
                     $q->where('name', 'LIKE', "%{$request->search_query}%");
                 });
             }
+
+            
+
             if ($request->has('with') && in_array('semester', $request->with)) {
                 $query->orWhereHas('semester', function ($q) use ($request) {
                     $q->where('name', 'LIKE', "%{$request->search_query}%");
@@ -97,9 +101,9 @@ class ClassLevelHasCourseController extends Controller
      * @param  \App\Models\ClassLevelHasCourse  $classLevelHasCourse
      * @return \Illuminate\Http\Response
      */
-    public function show(ClassLevelHasCourse $classLevelHasCourse)
+    public function show(Request $request, $id)
     {
-        //
+        return ClassLevelHasCourse::with($request->with ?? [])->find($id);
     }
 
     /**

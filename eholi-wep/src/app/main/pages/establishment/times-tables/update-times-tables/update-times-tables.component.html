@@ -1,0 +1,174 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">{{ 'times_tables.create.title'|translate }}</h5>
+    <button type="button" class="close" (click)="modal.dismiss('cancel')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body py-4" tabindex="0" ngbAutofocus>
+    <form
+            [formGroup]="form"
+            class="event-form needs-validation"
+            (ngSubmit)="(eventForm.form.valid); eventForm.reset()"
+            #eventForm="ngForm"
+    >
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="class_level_has_course_id" class="form-label">{{ 'course.placeholder.search'|translate }}</label>
+                    <ng-select
+                            [items]="selectLabel"
+                            id="class_level_has_course_id"
+                            name="courses"
+                            formControlName="class_level_has_course_id"
+                            bindValue="id"
+                            placeholder="{{ 'courses.placeholder.search'|translate }}"
+                            ngModel
+                            (ngModelChange)="onCourseChange($event)"
+                            [class.error]="class_level_has_course_id.invalid && (class_level_has_course_id.dirty || class_level_has_course_id.touched)"
+                            required
+                    >
+                        <ng-template ng-option-tmp ng-label-tmp let-item="item">
+                            {{ item.course?.name }}
+                        </ng-template>
+                    </ng-select>
+                    <span *ngIf="class_level_has_course_id.invalid && (class_level_has_course_id.dirty || class_level_has_course_id.touched)"
+                          class="invalid-form">
+                <small class="form-text text-danger danger" *ngIf="class_level_has_course_id.errors?.['required']">{{
+                    'form.validation.errors.required'|translate }}</small>
+            </span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="day_number" class="form-label">{{ 'times_tables.placeholder.day_number'|translate }}</label>
+                    <ng-select
+                            [items]="days"
+                            name="day_number"
+                            id="day_number"
+                            formControlName="day_number"
+                            placeholder="{{ 'times_tables.placeholder.day_number'|translate }}"
+                            bindLabel="name"
+                            bindValue="id"
+                            required
+                            [class.error]="day_number.invalid && (day_number.dirty || day_number.touched)"
+                    >
+                    </ng-select>
+                    <span *ngIf="day_number.invalid && (day_number.dirty || day_number.touched)"
+                          class="invalid-form">
+                <small class="form-text text-danger danger" *ngIf="day_number.errors?.['required']">{{
+                    'form.validation.errors.required'|translate }}</small>
+            </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="class_room_id" class="form-label">{{ 'times_tables.placeholder.choose_room'|translate }}</label>
+                    <ng-select
+                            [items]="classRooms"
+                            name="class_room_id"
+                            id="class_room_id"
+                            formControlName="class_room_id"
+                            placeholder="{{ 'times_tables.placeholder.choose_room'|translate }}"
+                            bindLabel="name"
+                            bindValue="id"
+                            required
+                            [class.error]="class_room_id.invalid && (class_room_id.dirty || class_room_id.touched)"
+                    >
+                        <ng-template ng-option-tmp ng-label-tmp let-item="item">
+                            {{ item.name }}
+                        </ng-template>
+                    </ng-select>
+                    <span *ngIf="class_room_id.invalid && (class_room_id.dirty || class_room_id.touched)"
+                          class="invalid-form">
+                <small class="form-text text-danger danger" *ngIf="class_room_id.errors?.['required']">{{
+                    'form.validation.errors.required'|translate }}</small>
+            </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group position-relative">
+                    <label for="start" class="form-label">{{ 'times_tables.placeholder.choose_start'|translate }}</label>
+                    <input
+                            id="start"
+                            type="time"
+                            name="start"
+                            class="form-control"
+                            formControlName="start"
+                            required
+                            placeholder="{{ 'times_tables.placeholder.choose_start'|translate }}}}"
+                            [class.error]="start.invalid && (start.dirty || start.touched)"
+                    />
+                    <span *ngIf="start.invalid && (start.dirty || start.touched)" class="invalid-form">
+                        <small class="form-text text-danger danger" *ngIf="start.errors?.['required']">{{
+                            'form.validation.errors.required'|translate }}
+                        </small>
+                     </span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group position-relative">
+                    <label for="end" class="form-label">{{ 'times_tables.placeholder.choose_end'|translate }}</label>
+                    <input
+                            id="end"
+                            name="end"
+                            formControlName="end"
+                            required
+                            type="time"
+                            class="form-control"
+                            placeholder="{{ 'times_tables.placeholder.choose_end'|translate }}"
+                            [class.error]="end.invalid && (end.dirty || end.touched)"
+                    >
+                    <span *ngIf="end.invalid && (end.dirty || end.touched)" class="invalid-form">
+                <small class="form-text text-danger danger" *ngIf="end.errors?.['required']">{{
+                    'form.validation.errors.required'|translate }}</small>
+            </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="custom-control custom-control-primary custom-switch">
+                    <p class="mb-50">is_repeated</p>
+                    <input
+                            id="is_repeated"
+                            role="switch"
+                            name="is_repeated"
+                            formControlName="is_repeated"
+                            required
+                            placeholder="is_repeated"
+                            [class.error]="is_repeated.invalid && (is_repeated.dirty || is_repeated.touched)"
+                            type="checkbox" checked class="custom-control-input"/>
+                    <span *ngIf="is_repeated.invalid && (is_repeated.dirty || is_repeated.touched)"
+                          class="invalid-form">
+                <small class="form-text text-danger danger" *ngIf="is_repeated.errors?.['required']">{{
+                    'form.validation.errors.required'|translate }}</small>
+            </span>
+                    <label class="custom-control-label" for="is_repeated"></label>
+
+                </div>
+
+            </div>
+            <div class="col"></div>
+        </div>
+
+    </form>
+</div>
+<div class="modal-footer">
+
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <button type="reset" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')" rippleEffect>
+            {{ 'content.btn.cancel'|translate }}
+        </button>
+        <button type="submit" [disabled]="!form.valid" (click)="submit(form.value)" class="btn btn-primary mr-1"
+                rippleEffect>
+            <span *ngIf="createdLoad" class="spinner-border spinner-border-sm" role="status"
+                  aria-hidden="true"></span>{{
+            'content.btn.submit'|translate }}</button>
+    </div>
+</div>

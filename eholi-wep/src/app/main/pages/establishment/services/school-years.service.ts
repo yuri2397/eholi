@@ -13,4 +13,8 @@ export class SchoolYearsService extends AbstractService {
     super('school-years', _ch)
   }
 
+  currentSchoolYear(){
+    return this._ch.get(`${this.endpoint}/current-school-year`)
+  }
+
 }

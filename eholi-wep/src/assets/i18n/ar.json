@@ -1,0 +1,578 @@
+{
+  "auth": {
+    "username": {
+      "text": "اسم المستخدم",
+      "required": "اسم المستخدم مطلوب."
+    },
+    "password": {
+      "text": "كلمة المرور",
+      "required": "كلمة المرور مطلوبة."
+    },
+    "change_password": {
+      "old_password": "كلمة المرور القديمة",
+      "new_password": "كلمة المرور الجديدة",
+      "conf_password": "تأكيد كلمة المرور"
+    },
+    "forgot_password": {
+      "text": "هل نسيت كلمة المرور؟"
+    },
+    "remember": {
+      "text": "تذكرني"
+    },
+    "btn_signin": {
+      "text": "تسجيل الدخول"
+    },
+    "login": {
+      "ok": {
+        "message": "سعداء بعودتك إلى Holi ✅",
+        "title": "تم تسجيل الدخول بنجاح"
+      }
+    }
+  },
+  "menu": {
+    "dashboard": {
+      "home": "لوحات القيادة",
+      "badge": "10",
+      "analytics": "تحليلات",
+      "ecommerce": "التجارة الإلكترونية"
+    },
+    "administration": {
+      "title": "الإدارة",
+      "payment": "المدفوعات",
+      "attendance": "إدارة الحضور",
+      "personal": "الموظفين",
+      "finance": "الشؤون المالية",
+      "school_year": "السنوات الدراسية",
+      "parent": "أولياء الأمور/المربين"
+    },
+    "admission": {
+      "title": "القبول",
+      "request": "طلب قبول جديد",
+      "registration": "تسجيل/إعادة تسجيل",
+      "school-year": "السنوات الدراسية",
+      "fees": "رسوم الدراسة"
+    },
+    "student": {
+      "title": "إدارة الطلاب",
+      "list": "قائمة الطلاب",
+      "ecard": "بطاقات الطلاب",
+      "dashboard": "ملخص لوحة القيادة"
+    },
+    "professor": {
+      "title": "الأساتذة",
+      "list": "قائمة الأساتذة",
+      "add": "إضافة أستاذ"
+    },
+    "schools": {
+      "title": "المدارس",
+      "classrooms": "غرف الصف",
+      "courses": "المقررات",
+      "class-levels": "الصفوف",
+      "housing": "السكن/الحرم الجامعي"
+    }
+  },
+  "content": {
+    "general": "عام",
+    "change_password": "تغيير كلمة المرور",
+    "search_item_not_found": "لم يتم العثور على نتائج",
+    "title": {
+      "class_rooms": "غرف الصف",
+      "class_levels": "قائمة الصفوف",
+      "students": "الطلاب",
+      "detail": "تفاصيل",
+      "buildings": "الإسكان / الحرم الجامعي",
+      "admission": "القبول",
+      "registration": "التسجيل / إعادة التسجيل",
+      "professors": "قائمة الأساتذة",
+      "courses": "المقررات الدراسية",
+      "timestable": "جدول الأوقات",
+      "list": "قائمة",
+      "tests": "الامتحانات / الواجبات",
+      "professeur": "الأساتذة"
+    },
+    "description": {
+      "students": "عرض قائمة الطلاب وملفاتهم",
+      "professors": "إدارة الأساتذة",
+      "courses": "إدارة المقررات الدراسية",
+      "class_rooms": "إدارة غرف الصف",
+      "class-levels": "إدارة الصفوف",
+      "buildings": "إدارة الإسكان / الحرم الجامعي",
+      "admission": "إدارة التسجيل / إعادة التسجيل"
+    },
+    "admission": {
+      "stepper": [
+        {
+          "title": "شهادة ميلاد",
+          "sub_title": "المعلومات الشخصية"
+        },
+        {
+          "title": "الآباء / الأوصياء",
+          "sub_title": "معلومات الوصي"
+        },
+        {
+          "title": "أخرى",
+          "sub_title": "معلومات أخرى"
+        },
+        {
+          "title": "التوجيه",
+          "sub_title": "إتمام عملية التسجيل"
+        }
+      ]
+    },
+    "undefined": "غير معرف",
+    "table": {
+      "actions": "الإجراءات",
+      "empty": {
+        "title": "لم يتم العثور على أي عنصر",
+        "message": "لم يتم العثور على أي عنصر في قاعدة البيانات",
+        "btn": "إضافة"
+      }
+    },
+    "notifications": {
+      "title": "الإشعارات",
+      "success": {
+        "title": "نجاح",
+        "message": "تمت العملية بنجاح"
+      },
+      "error": {
+        "title": "خطأ",
+        "message": "حدث خطأ أثناء العملية"
+      },
+      "confirm": {
+        "delete": {
+          "title": "Attention !",
+          "text": "Êtes-vous sûr de vouloir supprimer cet élément ?"
+        },
+        "create": {
+          "title": "Attention !",
+          "text": "Êtes-vous sûr de vouloir continuer?"
+        }
+      }
+    },
+    "btn": {
+      "submit": "Enregistrer",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "next": "Suivant",
+      "previous": "Précédent",
+      "validate": "Valider",
+      "new_line": "Ajouter une ligne",
+      "delete": "Supprimer"
+    },
+    "sexe": {
+      "m": "Masculin",
+      "w": "Féminin"
+    },
+    "status": {
+      "inactive": "Inactive",
+      "active": "Active"
+    },
+    "field": {
+      "status": "Statut"
+    },
+    "navbar": {
+      "settings": "Parametres",
+      "logout": "Déconnexion"
+    }
+  },
+  "page": {
+    "select_size": "Ligne par page"
+  },
+  "student": {
+    "title": "Liste Etudiants",
+    "pronom": "Votre",
+    "lieuNaissance": "lieu de naissance",
+    "tabs": {
+      "general": "Général",
+      "assessment": "Évaluation",
+      "attendance": "Présence",
+      "payment": "Paiement",
+      "parent": "Parents/Tuteurs",
+      "library": "Bibliothèque",
+      "medical": "Médical",
+      "housing": "Logement",
+      "alert": "Alertes",
+      "fee": "Frais scolaires",
+      "journey": "Parcours scolaire"
+    },
+    "table": {
+      "reference": "Matricule",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "fullname": "Prénom/Nom",
+      "birth_in": "Né à",
+      "birth_at": "Date de naissance",
+      "email": "Adresse email",
+      "phone": "Téléphone",
+      "cni": "CNI",
+      "adress": "Adresse",
+      "sexe": "Sexe",
+      "status": "Statut",
+      "departement": "Département"
+    },
+    "btn": {
+      "add": "Ajouter un étudiant"
+    },
+    "placeholder": {
+      "search": "Rechercher un étudiant"
+    },
+    "create": {
+      "title": "Ajouter une nouvel étudiant",
+      "messageForm": "Ce champ est obligatoire!",
+      "message": {
+        "success": "L'étudiant a été ajouté avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
+      }
+    },
+    "update": {
+      "title": "Modification d'un étudiant",
+      "message": {
+        "success": "L'étudiant a été modifié avec succès",
+        "error": "Une erreur est survenue lors de la modification"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un étudiant",
+      "message": {
+        "success": "L'étudiant a été supprimé avec succès"
+      }
+    }
+  },
+  "professor": {
+    "title": "Liste des professeurs",
+    "full": "Pérmenant",
+    "less": "Vaccataire",
+    "messages": {
+      "success": "Le professeur a été ajouté avec succès",
+      "error": "Une erreur s'est produite. Veuillez réessayer",
+      "avatar_updated": "L'avatar a été mis à jour avec succès",
+      "avatar_error": "Une erreur s'est produite lors de la mise à jour de l'avatar"
+    },
+    "table": {
+      "reference": "Matricule",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "fullname": "Prénom/Nom",
+      "email": "Adresse email",
+      "phone": "Téléphone",
+      "cni": "CNI",
+      "adress": "Adresse",
+      "sexe": "Sexe",
+      "status": "Statut",
+      "last_degre": "Dernier diplôme",
+      "poste": "Poste"
+    },
+    "btn": {
+      "add": "Ajouter un professeur"
+    },
+    "placeholder": {
+      "search": "Rechercher un professeur"
+    },
+    "create": {
+      "title": "Ajouter une nouvel professeur",
+      "messageForm": "Ce champ est obligatoire!",
+      "message": {
+        "success": "Le professeur a été ajouté avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
+      }
+    },
+    "update": {
+      "title": "Modification d'un étudiant",
+      "message": {
+        "success": "L'étudiant a été modifié avec succès",
+        "error": "Une erreur est survenue lors de la modification"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un étudiant",
+      "message": {
+        "success": "L'étudiant a été supprimé avec succès"
+      }
+    }
+  },
+  "timestable": {
+    "title": "Emploi du temps",
+    "btn_update": "Modifier",
+    "empty": "Emploie du temps vide",
+    "message": {
+      "success": "L'emploi du temps a été mis à jour avec succès",
+      "error": "Une erreur s'est produite lors de la mise à jour de l'emploi du temps"
+    },
+    "empty_description": "Aucun emploi du temps disponible pour cette classe",
+    "bnt_add": "Ajouter un emploi du temps"
+  },
+  "form": {
+    "validation": {
+      "errors": {
+        "required": "Le champ est obligatoire",
+        "min": "Le champ doit contenir au moins {min} caractères",
+        "max": "Le champ doit contenir au plus {max} caractères",
+        "min_value": "La valeur doit être supérieure ou égale à {{min}}",
+        "max_value": "La valeur doit être inférieure ou égale à {{max}}"
+      }
+    }
+  },
+  "class_room": {
+    "title": "Salle de classes",
+    "field": {
+      "name": "Nom de la salle",
+      "size": "Capacité",
+      "building": "Bâtiment"
+    },
+    "table": {
+      "name": "Nom de la salle",
+      "size": "Capacité",
+      "building": "Bâtiment",
+      "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter une salle"
+    },
+    "placeholder": {
+      "search": "Rechercher une salle"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle salle",
+      "message": {
+        "success": "La salle a été ajoutée avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
+      }
+    },
+    "update": {
+      "title": "Modification d'une salle",
+      "message": {
+        "success": "La salle a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une salle",
+      "message": {
+        "success": "La salle a été supprimée avec succès"
+      }
+    }
+  },
+  "test_exams": {
+    "title": "Examens/Dévoirs",
+    "add_title": "Ajouter un examen/devoir",
+    "field": {
+      "title": "Titre",
+      "date": "Date",
+      "percent": "Pourcentage",
+      "course": "Cours",
+      "type": {
+        "select_title": "Sélectionner le type",
+        "exam": "Examen",
+        "duty": "Devoir",
+        "tp": "TP",
+        "td": "TD"
+      }
+    },
+    "table": {
+      "title": "Titre",
+        "date": "Date",
+        "percent": "Pourcentage",
+        "course": "Cours",
+        "type": "Type",
+        "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter un examen/devoir"
+    },
+    "placeholder": {
+      "search": "Rechercher un examen/devoir"
+    },
+    "create": {
+      "title": "Ajouter un nouvel examen/devoir",
+      "message": {
+        "success": "L'examen/devoir a été ajouté avec succès",
+        "error": "Une erreur s'est produite. Veuillez réessayer"
+      }
+    },
+    "update": {
+      "title":  "Modification d'un examen/devoir",
+      "message": {
+        "success":"L'examen/devoir a été modifié avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un examen/devoir",
+      "message": {
+        "success": "L'examen/devoir a été supprimé avec succès"
+      }
+    }
+  },
+  "class_level": {
+    "title": "Salle de classes",
+    "field": {
+      "name": "Nom de la classe",
+      "level": "Niveau de la classe"
+    },
+    "table": {
+      "name": "Nom de la classe",
+      "level": "Niveau",
+      "total_students": "Nombre d'étudiants",
+      "total_courses": "Nombre de cours",
+      "status": "Statut",
+      "school_year": "Rentrées scolaires"
+    },
+    "btn": {
+      "add": "Ajouter une classe"
+    },
+    "placeholder": {
+      "search": "Rechercher une classe"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle classe",
+      "message": {
+        "success": "La classe a été ajoutée avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une classe",
+      "message": {
+        "success": "La classe a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une classe",
+      "message": {
+        "success": "La classe a été supprimée avec succès"
+      }
+    }
+  },
+  "room": {
+    "title": "Logements",
+    "field": {
+      "label": "Nom de la chambre",
+      "size": "Capacité",
+      "building": "Bâtiment"
+    },
+    "table": {
+      "label": "Nom de la chambre",
+      "size": "Capacité",
+      "building": "Bâtiment",
+      "total_students": "Nombre d'occupants",
+      "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter une chambre"
+    },
+    "placeholder": {
+      "search": "Rechercher une chambre"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle chambre",
+      "message": {
+        "success": "La chambre a été ajoutée avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une chambre",
+      "message": {
+        "success": "La chambre a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une chambre",
+      "message": {
+        "success": "La chambre a été supprimée avec succès"
+      }
+    }
+  },
+  "course": {
+    "title": "Courses",
+    "messages": {
+      "already_taken": "Ce cours est déjà pris par un autre professeur",
+      "successfully_attached": "Le cours a été ajouté avec succès",
+      "successfully_detached": "Le cours a été supprimé avec succès",
+      "success": "Opération effectuée avec succès"
+    },
+    "field": {
+      "name": "Nom du cours",
+      "max_note": "Note maximal",
+      "semester": "Semestre",
+      "class": "Classe",
+      "level": "Niveau",
+      "coef": "Coefficient"
+    },
+    "table": {
+      "name": "Nom du cours",
+      "max_note": "Note maximal",
+      "semester": "Semestre",
+      "class": "Classe",
+      "level": "Niveau",
+      "coef": "Coefficient",
+      "professor": "Professeur"
+    },
+    "btn": {
+      "add": "Ajouter un cours"
+    },
+    "placeholder": {
+      "search": "Rechercher un cours"
+    },
+    "create": {
+      "title": "Ajouter un cours",
+      "message": {
+        "success": "Le cours a été ajouté avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification le cours",
+      "message": {
+        "success": "Le cours a été modifié avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer un cours",
+      "message": {
+        "success": "Le cours a été supprimé avec succès"
+      }
+    }
+  },
+  "tutor": {
+    "title": "Parents/Tuteurs",
+    "field": {
+      "phone1": "Téléphone du tuteur",
+      "name": "Prénom/Nom",
+      "type": "Relation parentale",
+      "adress": "Adresse"
+    },
+    "table": {
+      "phone1": "Téléphone du tuteur",
+      "name": "Prénom/Nom",
+      "type": "Relation parentale",
+      "adress": "Adresse",
+      "status": "Statut"
+    },
+    "btn": {
+      "add": "Ajouter une chambre"
+    },
+    "select": {
+      "father": "Père",
+      "mother": "Mère",
+      "other": "Autre",
+      "not_found_text": "Aucun parent trouvé"
+    },
+    "placeholder": {
+      "search": "Rechercher une chambre"
+    },
+    "create": {
+      "title": "Ajouter une nouvelle chambre",
+      "message": {
+        "success": "La chambre a été ajoutée avec succès"
+      }
+    },
+    "update": {
+      "title": "Modification d'une chambre",
+      "message": {
+        "success": "La chambre a été modifiée avec succès"
+      }
+    },
+    "delete": {
+      "title": "Supprimer une chambre",
+      "message": {
+        "success": "La chambre a été supprimée avec succès"
+      }
+    }
+  }
+}

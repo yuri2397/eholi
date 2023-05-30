@@ -36,4 +36,6 @@ class Semester extends AbstractModel
         }
         return $query->get();
     }
+
+    # filter by name
 }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Tutor;
 use App\Models\Student;
+use App\Models\ClassLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\ClassLevelHasStudent;
 use App\Http\Requests\CreateAdmissionRequest;
 
 class AdmissionController extends Controller
@@ -42,7 +44,7 @@ class AdmissionController extends Controller
             $tutors = collect($request->tutors)->map(function ($tutor) use ($student) {
                 # check if tutor already exists
                 # update tutor if exists or create new
-                $newTutor = Tutor::updateOrCreate(['reference' => $tutor['reference'] ?? ''], $tutor);
+                $newTutor = Tutor::updateOrCreate(['phone1' => $tutor['phone1'] ?? ''], $tutor);
 
                 // $newTutor->user()->create([
                 //     'username' => $newTutor->reference,
@@ -64,21 +66,23 @@ class AdmissionController extends Controller
                 'school_id' => school()->id,
             ]);
 
-            # attach student to class level has student when class level school year is the current school year
-            // $student->class_level_has_student()->create([
-            //     'class_level_id' => $request->class_level_id,
-            //     'school_id' => school()->id,
-            // ]);
-
-
+            $class_level_has_student = new ClassLevelHasStudent();
+            $class_level_has_student->class_level_id = $request->class_level_id;
+            $class_level_has_student->student_id = $student->id;
+            $class_level_has_student->school_id = school()->id;
+            $class_level_has_student->save();
+            
             # create users for student
             $student->user()->create([
                 'username' => $student->reference,
                 'password' => bcrypt($student->reference),
             ]);
 
+            
             # commit transaction
             DB::commit();
+
+            
 
             return response()->json([
                 'message' => 'Admission created successfully',

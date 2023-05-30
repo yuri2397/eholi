@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\DeliberationController;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Deliberation;
 use App\Models\School;
 use App\Models\SchoolUser;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +17,13 @@ use Illuminate\Support\Facades\Route;
  * ROUTE TESTES
  */
 
+ Route::get('/deli/{deliberation}',[ DeliberationController::class, 'downloadResults']);
+
 Route::any('/', function () {
+
+    
+
+
     // DB::beginTransaction();
     // try {
     //     $admin = new Admin();
@@ -59,7 +67,7 @@ Route::any('/', function () {
     // $school->save();
     // return $school;
 
-    return SchoolUser::with(['user'])->where('school_id', '78b4e080-3771-48aa-bffc-275899c3e65a')->get(['user_id', 'user_type']);
+    // return SchoolUser::with(['user'])->where('school_id', '78b4e080-3771-48aa-bffc-275899c3e65a')->get(['user_id', 'user_type']);
 
     // $user = User::create([]);
 

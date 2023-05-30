@@ -37,10 +37,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [CalendarComponent, CalendarEventSidebarComponent, CalendarMainSidebarComponent],
+  exports: [CalendarComponent, CalendarEventSidebarComponent, CalendarMainSidebarComponent],
   imports: [
     CommonModule,
     FullCalendarModule,
-    RouterModule.forChild(routes),
+    //RouterModule.forChild(routes),
     CoreCommonModule,
     CoreSidebarModule,
     FormsModule,

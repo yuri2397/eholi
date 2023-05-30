@@ -38,8 +38,12 @@ use PHPUnit\Framework\MockObject\Builder\Stub;
 use App\Http\Controllers\StudentSubscribeController;
 use Spatie\Permission\Contracts\Role as ContractsRole;
 use App\Http\Controllers\ClassLevelHasCourseController;
+use App\Http\Controllers\DeliberationController;
+use App\Http\Controllers\LevelHasSemesterController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\TimesTableController;
 use App\Models\TestResult;
+use App\Models\TimesTable;
 
 /**
  * UserController
@@ -96,6 +100,7 @@ Route::prefix('school-years')
     ->group(function () {
         Route::get('', 'index');
         Route::get('show', 'show');
+        Route::get('/current-school-year', 'currentSchoolYear');
     });
 
 /**
@@ -124,9 +129,9 @@ Route::prefix('students')
     ->middleware(['auth:api', 'cors'])
     ->controller(StudentController::class)
     ->group(function () {
-        Route::get('', 'index');
-        Route::get('/dashboard', 'dashboard');
-        Route::get('/{student}', 'show');
+        Route::get('/', 'index');
+        Route::get('{id}', 'show');
+        Route::get('dashboard', 'dashboard');
 
         Route::post('', 'store');
         Route::put('/{student}', 'update');
@@ -142,6 +147,13 @@ Route::prefix('students')
 Route::prefix('class-rooms')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('class-rooms', ClassRoomController::class);
+
+/**
+ * ClassRoom
+ */
+Route::prefix('times-tables')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('times-tables', TimesTableController::class);
 
 /**
  * StudentSbscribe
@@ -191,7 +203,16 @@ Route::prefix('class-levels')
  */
 Route::prefix('tests')
     ->middleware(['auth:api', 'cors'])
-    ->apiResource('tests', TestController::class);
+    ->controller(TestController::class)
+    ->group(function () {
+        Route::get('/', 'index');
+        Route::get('/student-tests-result','studentTests' );
+        Route::get('/{test}', 'show');
+        Route::post('/', 'store');
+        Route::put('/{test}', 'update');
+        Route::delete('/{test}', 'destroy');
+        Route::put('/update-test-result/{testResult}', 'updateTestResult');
+    });
 
 /**
  * Tests Results
@@ -199,6 +220,26 @@ Route::prefix('tests')
 Route::prefix('test-results')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('test-results', TestResult::class);
+
+Route::prefix('level-semesters')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('level-semesters', LevelHasSemesterController::class);
+/**
+ * Tests Results
+ */
+Route::prefix('deliberations')
+    ->middleware(['auth:api', 'cors'])->controller(DeliberationController::class)->group(function () {
+        // crud 
+        Route::get('/', 'index');
+        Route::get('/student-results', 'studentDeliberation');
+        Route::post('/download-builtin', 'downloadStudentBultin');
+        Route::get('/{deliberation}', 'show');
+        Route::post('/', 'store');
+        Route::put('/{deliberation}', 'update');
+        Route::delete('/{deliberation}', 'destroy');
+        Route::post('/check-deliberation', 'checkIfDeliberationIsPossible');
+        Route::post('/download-results/{deliberation}', 'downloadResults');
+    });
 
 /**
  * Room
@@ -224,81 +265,72 @@ Route::prefix('buildings')
 /**
  * TEST URL
  */
-Route::any('local', function (Request $request) {
-    $room = Room::whereSchoolId($request->school_id)->first();
+Route::any(
+    'local',
+    function (Request $request) {
+        $timesTable = TimesTable::find('cd249943-76fc-49ab-b4ec-23cb35a43171');
 
-    $student = Student::find($request->student_id);
+        // $school = school();
+        // $student = SchoolStudent::with($request->with ?? [])
+        //     ->join('students as S', 'S.id', 'school_students.student_id')
+        //     ->whereSchoolId($school->id)
+        //     ->where('school_students.status', true)
+        //     ->where('S.status', true)
+        //     ->limit(3)
+        //     ->get();
 
-    // attach room to student
-    $attched_room = StudentHasRoom::create(
-        [
-            'student_id' => $student->id,
-            'room_id' => $room->id,
-            'school_id' => $room->school_id,
-        ]
-    );
+        // foreach ($student as $value) {
+        //     $clhs = new ClassLevelHasStudent();
+        //     $clhs->student_id = $value->id;
+        //     $clhs->class_level_id = '005107dc-8949-4ea0-80b8-da7945dfec4a';
+        //     $clhs->save();
+        // }
+        // foreach (Student::all() as $value) {
+        //     event(new AssociateCustomerToSchool($school, $value));
+        // }
 
-    return $student->refresh()->load(['rooms']);
-    // $school = school();
-    // $student = SchoolStudent::with($request->with ?? [])
-    //     ->join('students as S', 'S.id', 'school_students.student_id')
-    //     ->whereSchoolId($school->id)
-    //     ->where('school_students.status', true)
-    //     ->where('S.status', true)
-    //     ->limit(3)
-    //     ->get();
+        // return SchoolStudent::all();
 
-    // foreach ($student as $value) {
-    //     $clhs = new ClassLevelHasStudent();
-    //     $clhs->student_id = $value->id;
-    //     $clhs->class_level_id = '005107dc-8949-4ea0-80b8-da7945dfec4a';
-    //     $clhs->save();
-    // }
-    // foreach (Student::all() as $value) {
-    //     event(new AssociateCustomerToSchool($school, $value));
-    // }
+        // $sy = new SchoolYear();
+        // $sy->start_at = now()->subYear();
+        // $sy->end_at = now();
+        // $sy->status = SchoolYear::INACTIVE;
+        // $sy->school_id = $school->id;
+        // $sy->save();
 
-    // return SchoolStudent::all();
+        return school_year(true);
 
-    // $sy = new SchoolYear();
-    // $sy->start_at = now()->subYear();
-    // $sy->end_at = now();
-    // $sy->status = SchoolYear::INACTIVE;
-    // $sy->school_id = $school->id;
-    // $sy->save();
+        // DB::beginTransaction();
+        // try {
+        //     $admin = new Admin();
+        //     $admin->first_name = "Sophiatou";
+        //     $admin->last_name = "Mbathie";
+        //     $admin->email = "sophie.mbathie@holi.sn";
+        //     $admin->telephone = "786739908";
+        //     $admin->save();
 
-    return school_year(true);
+        //     $user = new User();
+        //     $user->username = 'sophie';
+        //     $user->password = Hash::make('password');
+        //     $user->owner()->associate($admin);
+        //     $user->save();
 
-    // DB::beginTransaction();
-    // try {
-    //     $admin = new Admin();
-    //     $admin->first_name = "Sophiatou";
-    //     $admin->last_name = "Mbathie";
-    //     $admin->email = "sophie.mbathie@holi.sn";
-    //     $admin->telephone = "786739908";
-    //     $admin->save();
+        //     $role = Role::whereName('Super Admin')->first();
+        //     $user->assignRole($role);
+        //     $user->syncPermissions($role->permissions);
 
-    //     $user = new User();
-    //     $user->username = 'sophie';
-    //     $user->password = Hash::make('password');
-    //     $user->owner()->associate($admin);
-    //     $user->save();
+        //     $school = School::first();
 
-    //     $role = Role::whereName('Super Admin')->first();
-    //     $user->assignRole($role);
-    //     $user->syncPermissions($role->permissions);
+        //     $schoolUser = new SchoolUser();
+        //     $schoolUser->user()->associate($admin);
+        //     $schoolUser->school_id = $school->id;
+        //     $schoolUser->save();
 
-    //     $school = School::first();
-
-    //     $schoolUser = new SchoolUser();
-    //     $schoolUser->user()->associate($admin);
-    //     $schoolUser->school_id = $school->id;
-    //     $schoolUser->save();
-
-    //     DB::commit();
-    //     return $schoolUser->load(['user', 'school']);
-    // } catch (\Throwable $th) {
-    //     DB::rollBack();
-    //     return $th;
-    // }
-})->middleware(['auth:api', 'cors']);
+        //     DB::commit();
+        //     return $schoolUser->load(['user', 'school']);
+        // } catch (\Throwable $th) {
+        //     DB::rollBack();
+        //     return $th;
+        // }
+    }
+)->middleware(['auth:api', 'cors']);

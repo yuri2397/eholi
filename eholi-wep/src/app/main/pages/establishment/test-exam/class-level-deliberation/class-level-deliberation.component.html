@@ -1,0 +1,120 @@
+<app-content-header [contentHeader]="contentHeader"></app-content-header>
+<div class="card card-developer-meetup">
+  <div class="bg-light-primary rounded-top text-center">
+    <img
+      src="assets/images/illustration/email.svg"
+      alt="Meeting Pic"
+      height="170"
+    />
+  </div>
+  <div class="card-body">
+    <div class="meetup-header d-flex align-items-center">
+      <div class="meetup-day">
+        <h6 class="mb-0">Année scolaire</h6>
+        <h3 class="mb-0">{{ classLevelSemester.school_year.start_end }}</h3>
+      </div>
+      <div class="my-auto">
+        <h4 class="card-title mb-25">Classe</h4>
+        <p class="card-text mb-0 lead">{{ classLevelSemester.name }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<!-- <h2 class="text-dark">Semestre délibére</h2> -->
+<br />
+
+<ng-container>
+  <div class="row">
+    <div
+      *ngFor="let item of classLevelSemester.semesters"
+      class="card shadow-sm col mx-2 pointer"
+    >
+      <div class="card-body text-center">
+        <h2 class="h3 bold">SEMESTRE {{ item.number }}</h2>
+        <span class="lead badge badge-{{  item.created ? 'success' : 'danger' }}">{{
+          item.created ? "Déjà déliberé" : "Non délibéré"
+        }}</span>
+      </div>
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <button
+            class="btn btn-info ml-1"
+            rippleEffect
+            (click)="startDeliberation(item)"
+            *ngIf="!item.created"
+          >
+            <i data-feather="check" class="mr-0 mr-sm-1"></i>
+            <span class="d-none d-sm-inline-block"
+              >Démarer la délibération</span
+            >
+          </button>
+          <button
+            class="btn btn-warning ml-1"
+            rippleEffect
+            (click)="routerToDetails(item)"
+            *ngIf="item.created"
+
+          >
+            <i data-feather="list" class="mr-0 mr-sm-1"></i>
+            <span class="d-none d-sm-inline-block">Vérifier les résultats</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<!-- <ng-template #elseTemplate>
+  <div class="text-center w-100">
+     <img width="80" height="80" src="/assets/empty.svg" />
+      <br>
+      <span class="lead text-dark d-block">Aucune delibération</span>
+      <br> 
+     <button
+            class="btn btn-info ml-1"
+            rippleEffect
+            [queryParams]="{ class_level_id: classLevel }"
+          >
+            <i data-feather="plus" class="mr-0 mr-sm-1"></i
+            ><span class="d-none d-sm-inline-block">Démarer la délibération</span>
+          </button> 
+
+    <div class="row">
+      <div
+        *ngFor="let item of classLevelSemester.semesters"
+        class="card shadow-sm col mx-2 pointer"
+      >
+        <div class="card-body text-center">
+          <h2 class="h3 bold">SEMESTRE {{ item.number }}</h2>
+          <span class="lead">Non délibéré</span>
+        </div>
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <button
+              class="btn btn-info ml-1"
+              rippleEffect
+              (click)="startDeliberation(item)"
+              [disabled]="item.created"
+            >
+              <i data-feather="check" class="mr-0 mr-sm-1"></i>
+              <span class="d-none d-sm-inline-block"
+                >Démarer la délibération</span
+              >
+            </button>
+            <button
+              class="btn btn-warning ml-1"
+              rippleEffect
+              (click)="_sta(item)"
+            >
+              <i data-feather="list" class="mr-0 mr-sm-1"></i>
+              <span class="d-none d-sm-inline-block"
+                >Vérifier les notes</span
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template> -->

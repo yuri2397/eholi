@@ -3,7 +3,7 @@
     <app-content-header [contentHeader]="contentHeader"></app-content-header>
     <section class="users-list-wrapper">
       <div class="card">
-        <div class="row">
+        <div *ngIf="!classLevelId" class="row">
           <div class="col-md-6 col-12">
             <div class="d-flex justify-content-between align-items-center m-1">
               <label class="d-flex align-items-center">
@@ -35,9 +35,7 @@
                 <input
                   name="searchValue"
                   type="search"
-                  placeholder="{{
-                    'class_room.placeholder.search' | translate
-                  }}"
+                  placeholder="{{ 'course.placeholder.search' | translate }}"
                   [(ngModel)]="queryParams.search_query"
                   class="form-control ml-25"
                   (input)="onSearch($event.target.value)"
@@ -50,7 +48,7 @@
               >
                 <i data-feather="plus" class="mr-0 mr-sm-1"></i>
                 <span class="d-none d-sm-inline-block">
-                  {{ "class_room.btn.add" | translate }}
+                  {{ "course.btn.add" | translate }}
                 </span>
               </button>
             </div>
@@ -115,10 +113,35 @@
           </ngx-datatable-column>
           <ngx-datatable-column
             name="{{ 'course.table.semester' | translate }}"
-            [width]="50"
             prop="semester.name"
           >
             [sortable]="false">
+          </ngx-datatable-column>
+
+          <ngx-datatable-column *ngIf="!classLevelId"
+            name="{{ 'content.table.actions' | translate }}"
+            [sortable]="false"
+          >
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div class="d-flex align-items-center">
+                <button
+                (click)="openEditModal(editModal, row)" 
+                  type="button"
+                  class="btn btn-icon btn-warning mx-2"
+                  rippleEffect
+                >
+                  <span [data-feather]="'edit'"></span>
+                </button>
+                <button
+                  [routerLink]="['/pages/courses/', row.id]"
+                  type="button"
+                  class="btn btn-icon btn-info"
+                  rippleEffect
+                >
+                  <span [data-feather]="'eye'"></span>
+                </button>
+              </div>
+            </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
       </div>
@@ -135,7 +158,7 @@
   <!-- EDIT MODAL -->
   <div class="modal-primary d-inline-block">
     <ng-template #editModal let-modal>
-      <!-- <app-edit-class-room [item]="editingClassRoom" [modal]="modal"></app-edit-class-room> -->
+      <app-update-class-course [item]="selectedRow" [modal]="modal"></app-update-class-course>
     </ng-template>
   </div>
 

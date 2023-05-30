@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends AbstractModel
 {
+    const ACTITE = 'active';
+    const INACTIVE = 'inactive';
     public const BASE_REFERENCE = "ST-";
 
     protected $fillable = ['first_name', 'last_name', 'birth_at', 'birth_in', 'email', 'telephone', 'cni', 'reference', 'sexe', 'adress'];
@@ -48,7 +50,7 @@ class Student extends AbstractModel
     }
 
     # class_level_has_student
-    public function class_level_has_student()
+    public function class_level_has_students()
     {
         return $this->hasMany(ClassLevelHasStudent::class);
     }
@@ -72,5 +74,4 @@ class Student extends AbstractModel
     {
         return $this->rooms()->whereSchoolId(school()->id)->first();
     }
-
 }
