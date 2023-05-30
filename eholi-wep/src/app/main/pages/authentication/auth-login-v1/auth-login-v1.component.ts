@@ -98,9 +98,18 @@ export class AuthLoginV1Component implements OnInit {
       .pipe(first())
       .subscribe({
         next: (response) => {
-          console.log(response)
-
-          this.loading = false
+          this._authService
+            .getCurrentUser({
+              'with[]': [
+                'owner',
+                'roles',
+                'permissions',
+                'owner.school_user.school',
+              ],
+            })
+            .subscribe({
+              next: (user: any) => {
+                this.loading = false
           let m = ''
           let t = ''
           this.translate
@@ -114,18 +123,6 @@ export class AuthLoginV1Component implements OnInit {
             closeButton: true,
           })
 
-          this._authService
-            .getCurrentUser({
-              'with[]': [
-                'owner',
-                'roles',
-                'permissions',
-                'owner.school_user.school',
-              ],
-            })
-            .subscribe({
-              next: (user: any) => {
-                console.log(user)
                 this._router.navigate([this.returnUrl])
               },
             })

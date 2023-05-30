@@ -25,8 +25,7 @@ export class StudentShowResolver implements Resolve<Student> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<Student> | any {
-    let uuid = <string>route.paramMap.get('uuid')
-    return this._studentService.show(uuid)
+    return this._studentService.show(route.params.uuid)
   }
 
   handleError(route: ActivatedRouteSnapshot, errorResponse: HttpErrorResponse) {

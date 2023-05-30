@@ -61,7 +61,7 @@ export class EditClassRoomComponent implements OnInit {
   getListOfBuildings() {
     this.selectLoading = true
     this._buildingService
-      .index()
+      .index<Building>()
       .pipe(
         first(),
         finalize(() => (this.selectLoading = false)),

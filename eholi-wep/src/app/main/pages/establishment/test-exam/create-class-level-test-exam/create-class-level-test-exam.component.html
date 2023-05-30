@@ -1,0 +1,212 @@
+<!-- HEADER -->
+<div class="modal-header">
+  <h5 class="modal-title" id="myModalLabel160">
+    {{ "test_exams.add_title" | translate }}
+  </h5>
+  <button
+    type="button"
+    class="close"
+    (click)="modal.dismiss('cancel')"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- BODY -->
+<div class="modal-body py-4" tabindex="0" ngbAutofocus>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="class_level_has_course_id">
+            {{ "test_exams.field.course" | translate }}
+          </label>
+          <ng-select
+            id="class_level_has_course_id"
+            [placeholder]="'test_exams.field.course' | translate"
+            [items]="coursesList"
+            bindLabel="course.name"
+            bindValue="id"
+            ngModel
+            (ngModelChange)="courseModelChange($event)"
+            formControlName="class_level_has_course_id"
+          >
+          </ng-select>
+          <span
+            *ngIf="
+              class_level_has_course_id.invalid &&
+              (class_level_has_course_id.dirty ||
+                class_level_has_course_id.touched)
+            "
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="class_level_has_course_id.errors?.['required']"
+              >{{ "form.validation.errors.required" | translate }}</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="type">
+            {{ "test_exams.field.type.select_title" | translate }}
+          </label>
+          <ng-select
+            id="type"
+            [placeholder]="'test_exams.field.type.select_title' | translate"
+            [items]="types"
+            bindLabel="label"
+            bindValue="value"
+            formControlName="type"
+          >
+          </ng-select>
+          <span
+            *ngIf="type.invalid && (type.dirty || type.touched)"
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="type.errors?.['required']"
+              >{{ "form.validation.errors.required" | translate }}</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="date">
+            {{ "test_exams.field.date" | translate }}
+          </label>
+
+          <input
+            class="form-control input-md"
+            formControlName="date"
+            type="datetime-local"
+            id="date"
+            placeholder="{{ 'test_exams.field.date' | translate }}"
+            [class.error]="date.invalid && (date.dirty || date.touched)"
+          />
+          <span
+            *ngIf="date.invalid && (date.dirty || date.touched)"
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="date.errors?.['required']"
+              >{{ "form.validation.errors.required" | translate }}</small
+            >
+          </span>
+        </div>
+      </div>
+
+      <!-- <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="percent">
+            {{ "test_exams.field.percent" | translate }}
+          </label>
+          <input
+            class="form-control input-md"
+            formControlName="percent"
+            type="number"
+            id="percent"
+            placeholder="{{ 'test_exams.field.percent' | translate }}"
+            [class.error]="
+              percent.invalid && (percent.dirty || percent.touched)
+            "
+          />
+          <span
+            *ngIf="percent.invalid && (percent.dirty || percent.touched)"
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="percent.errors?.['required']"
+            >
+              {{ "form.validation.errors.required" | translate }}
+            </small>
+            <small
+              class="form-text text-danger danger"
+              *ngIf="percent.errors?.['min']"
+            >
+              {{ "form.validation.errors.min_value" | translate : { min: 0 } }}
+            </small>
+            <small
+              class="form-text text-danger danger"
+              *ngIf="percent.errors?.['max']"
+            >
+              {{
+                "form.validation.errors.max_value" | translate : { max: 100 }
+              }}
+            </small>
+          </span>
+        </div>
+      </div> -->
+    </div>
+
+    <div *ngIf="selectedCourse" class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="percent">
+            {{ "course.table.professor" | translate }}
+          </label>
+          <input
+            class="form-control input-md"
+            disabled
+            [value]="
+              selectedCourse?.professor?.first_name +
+              ' ' +
+              selectedCourse?.professor?.last_name
+            "
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="type">
+            {{ "course.table.semester" | translate }}
+          </label>
+          <input
+            class="form-control input-md"
+            disabled
+            [value]="selectedCourse?.semester?.name"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<div class="modal-footer">
+  <div class="w-100 d-flex align-items-center justify-content-between">
+    <button
+      type="reset"
+      class="btn btn-outline-secondary"
+      (click)="modal.dismiss('cancel')"
+      rippleEffect
+    >
+      {{ "content.btn.cancel" | translate }}
+    </button>
+    <button
+      type="submit"
+      [disabled]="!form.valid || createdLoad"
+      (click)="submit(form.value)"
+      class="btn btn-primary mr-1"
+      rippleEffect
+    >
+      <span
+        *ngIf="createdLoad"
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      {{ "content.btn.submit" | translate }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,235 @@
+<!-- HEADER -->
+<div class="modal-header">
+  <h5 class="modal-title" id="myModalLabel160">
+    {{ "course.update.title" | translate }}
+  </h5>
+  <button
+    type="button"
+    class="close"
+    (click)="modal.dismiss('cancel')"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- BODY -->
+<div class="modal-body py-4" tabindex="0" ngbAutofocus>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group">
+          <label class="form-control-label" for="name">
+            {{ "course.field.name" | translate }}
+          </label>
+
+          <div class="ng-autocomplete">
+            <ng-autocomplete
+              [data]="coursesList"
+              [searchKeyword]="'name'"
+              class="form-control"
+              placeholder="{{ 'course.field.name' | translate }}"
+              (selected)="selectEvent($event)"
+              (inputChanged)="onCourseSearch($event)"
+              [isLoading]="courseSearchLoad"
+              [itemTemplate]="itemTemplate"
+              [notFoundTemplate]="notFoundTemplate"
+            ></ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div>
+                {{ "content.search_item_not_found" | translate }}
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="max_note">
+            {{ "course.field.max_note" | translate }}
+          </label>
+          <input
+            class="form-control input-md"
+            formControlName="max_note"
+            type="text"
+            placeholder="{{ 'course.field.max_note' | translate }}"
+            id="max_note"
+            [class.error]="
+              max_note.invalid && (max_note.dirty || max_note.touched)
+            "
+          />
+          <span
+            *ngIf="max_note.invalid && (max_note.dirty || max_note.touched)"
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="max_note.errors?.['required']"
+            >
+              {{ "form.validation.errors.required" | translate }}
+            </small>
+          </span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="coef">
+            {{ "course.field.coef" | translate }}
+          </label>
+          <input
+            class="form-control input-md"
+            formControlName="coef"
+            type="number"
+            id="coef"
+            placeholder="{{ 'course.field.coef' | translate }}"
+            [class.error]="coef.invalid && (coef.dirty || coef.touched)"
+          />
+          <span
+            *ngIf="coef.invalid && (coef.dirty || coef.touched)"
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="coef.errors?.['required']"
+            >
+              {{ "form.validation.errors.required" | translate }}
+            </small>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="class_level_id">
+            {{ "class_level.field.name" | translate }}
+          </label>
+          <ng-select
+            id="class_level_id"
+            [placeholder]="'class_level.field.name' | translate"
+            [items]="classList"
+            bindLabel="name"
+            formControlName="class_level_id"
+            bindValue="id"
+            readonly
+            [loading]="selectLoading"
+          >
+          </ng-select>
+          <span
+            *ngIf="
+              class_level_id.invalid &&
+              (class_level_id.dirty || class_level_id.touched)
+            "
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="class_level_id.errors?.['required']"
+              >{{ "form.validation.errors.required" | translate }}</small
+            >
+          </span>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="coef">
+            {{ "semester.field.name" | translate }}
+          </label>
+          <ng-select
+            id="semester_id"
+            [placeholder]="'semester.field.name' | translate"
+            [items]="semesterList"
+            bindLabel="name"
+            formControlName="semester_id"
+            bindValue="id"
+            [searchable]="true"
+            [loading]="selectLoading"
+          >
+          </ng-select>
+          <span
+            *ngIf="
+              semester_id.invalid && (semester_id.dirty || semester_id.touched)
+            "
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="semester_id.errors?.['required']"
+              >{{ "form.validation.errors.required" | translate }}</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label class="form-control-label" for="class_level_id">
+            {{ "content.title.professeur" | translate }}
+          </label>
+          <ng-select
+            id="professor_id"
+            readonly
+            formControlName="professor_id"
+            [placeholder]="'professor.placeholder.search' | translate"
+            [loading]="professorSearchLoad"
+          >
+            <ng-option *ngFor="let item of professorList" [value]="item.id"
+              >{{ item.first_name }} {{ item.last_name }}</ng-option
+            >
+          </ng-select>
+          <span
+            *ngIf="
+              professor_id.invalid &&
+              (professor_id.dirty || professor_id.touched)
+            "
+            class="invalid-form"
+          >
+            <small
+              class="form-text text-danger danger"
+              *ngIf="professor_id.errors?.['required']"
+              >{{ "form.validation.errors.required" | translate }}</small
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<div class="modal-footer">
+  <div class="w-100 d-flex align-items-center justify-content-between">
+    <button
+      type="reset"
+      class="btn btn-outline-secondary"
+      (click)="modal.dismiss('cancel')"
+      rippleEffect
+    >
+      {{ "content.btn.cancel" | translate }}
+    </button>
+    <button
+      type="submit"
+      [disabled]="!form.valid || createdLoad"
+      (click)="submit(form.value)"
+      class="btn btn-primary mr-1"
+      rippleEffect
+    >
+      <span
+        *ngIf="createdLoad"
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      {{ "content.btn.submit" | translate }}
+    </button>
+  </div>
+</div>

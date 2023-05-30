@@ -20,31 +20,36 @@ import { DashboardService } from 'app/main/dashboard/dashboard.service';
 
 import { AnalyticsComponent } from 'app/main/dashboard/analytics/analytics.component';
 import { EcommerceComponent } from 'app/main/dashboard/ecommerce/ecommerce.component';
+import { MainMenuComponent } from './main-menu/main-menu.component';
 
 const routes = [
   {
-    path: 'analytics',
-    component: AnalyticsComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [Role.Admin], animation: 'danalytics' },
-    resolve: {
-      css: DashboardService,
-      inv: InvoiceListService
-    }
+    path: '', 
+    component: MainMenuComponent,
   },
-  {
-    path: 'ecommerce',
-    component: EcommerceComponent,
-    canActivate: [AuthGuard],
-    resolve: {
-      css: DashboardService
-    },
-    data: { animation: 'decommerce' }
-  }
+  // {
+  //   path: 'analytics',
+  //   component: AnalyticsComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { roles: [Role.Admin], animation: 'danalytics' },
+  //   resolve: {
+  //     css: DashboardService,
+  //     inv: InvoiceListService
+  //   }
+  // },
+  // {
+  //   path: 'ecommerce',
+  //   component: EcommerceComponent,
+  //   canActivate: [AuthGuard],
+  //   resolve: {
+  //     css: DashboardService
+  //   },
+  //   data: { animation: 'decommerce' }
+  // }
 ];
 
 @NgModule({
-  declarations: [AnalyticsComponent, EcommerceComponent],
+  declarations: [AnalyticsComponent, EcommerceComponent, MainMenuComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

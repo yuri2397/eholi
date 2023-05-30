@@ -1,5 +1,5 @@
 export interface Param {
-  [param: string]: string | number | boolean | (string | number | boolean)[]
+  [param: string]: any
 }
 
 export interface Role {

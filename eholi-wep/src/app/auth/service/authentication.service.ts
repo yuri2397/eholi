@@ -1,57 +1,63 @@
-import { Injectable } from '@angular/core'
-import { HttpClient } from '@angular/common/http'
-import { BehaviorSubject, Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { SchoolYearsService } from "./../../main/pages/establishment/services/school-years.service";
+import { inject, Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject, Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
-import { environment as env } from 'environments/environment'
-import { User, Role } from 'app/auth/models'
-import { ToastrService } from 'ngx-toastr'
-import { LoginResponse } from '../models/response.model'
-import { Token } from '../models/token'
-import { Param, Permission } from '../models/data.model'
+import { environment as env } from "environments/environment";
+import { User, Role } from "app/auth/models";
+import { ToastrService } from "ngx-toastr";
+import { LoginResponse } from "../models/response.model";
+import { Token } from "../models/token";
+import { Param, Permission } from "../models/data.model";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class AuthenticationService {
-  private _baseUrl!: string
-  private _token_key = '_enkot_ye'
-  private _current_user_key = 'currentUser'
+  private _baseUrl!: string;
+  private _token_key = "_enkot_ye";
+  private _current_user_key = "currentUser";
   //public
-  public currentUser: Observable<User>
+  public currentUser: Observable<User>;
 
   //private
-  private currentUserSubject: BehaviorSubject<User>
+  private currentUserSubject: BehaviorSubject<User>;
 
   /**
    *
    * @param {HttpClient} _http
    * @param {ToastrService} _toastrService
    */
-  constructor(private _http: HttpClient) {
-    this._baseUrl = `${env.api}users/`
+  constructor(
+    private _http: HttpClient,
+    private _syService: SchoolYearsService
+  ) {
+    this._baseUrl = `${env.api}users/`;
     this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('currentUser')),
-    )
-    this.currentUser = this.currentUserSubject.asObservable()
+      JSON.parse(localStorage.getItem("currentUser"))
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   // getter: currentUserValue
   public get currentUserValue(): User {
-    return this.currentUserSubject.value
+    return this.currentUserSubject.value;
   }
 
   public get isLogin() {
-    return JSON.parse(localStorage.getItem(this._token_key)) && true
+    return JSON.parse(localStorage.getItem(this._token_key)) && true;
   }
 
   public get token(): LoginResponse {
-    return JSON.parse(localStorage.getItem(this._token_key)) as LoginResponse
+    return JSON.parse(localStorage.getItem(this._token_key)) as LoginResponse;
   }
 
   /**
    *  Confirms if user is admin
    */
   get isAdmin() {
-    return this.currentUser && this.currentUserSubject.value.role === Role.Admin
+    return (
+      this.currentUser && this.currentUserSubject.value.role === Role.Admin
+    );
   }
 
   /**
@@ -60,17 +66,21 @@ export class AuthenticationService {
   get isClient() {
     return (
       this.currentUser && this.currentUserSubject.value.role === Role.Client
-    )
+    );
   }
 
   get permissions(): Permission[] {
     return (
       (JSON.parse(this._current_user_key)?.permissions as Permission[]) ?? []
-    )
+    );
+  }
+
+  get school() {
+    return JSON.parse(localStorage.getItem("school_data"));
   }
 
   get roles() {
-    return (JSON.parse(this._current_user_key)?.roles as Permission[]) ?? []
+    return (JSON.parse(this._current_user_key)?.roles as Permission[]) ?? [];
   }
 
   /**
@@ -91,11 +101,11 @@ export class AuthenticationService {
           // login successful if there's a jwt token in the response
           if (token && token.token) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem(this._token_key, JSON.stringify(token))
+            localStorage.setItem(this._token_key, JSON.stringify(token));
           }
-          return token
-        }),
-      )
+          return token;
+        })
+      );
   }
 
   getCurrentUser(params?: Param) {
@@ -104,12 +114,20 @@ export class AuthenticationService {
       .pipe(
         map((user: any) => {
           if (user) {
-            localStorage.setItem(this._current_user_key, JSON.stringify(user))
-            this.currentUserSubject.next(user)
+            this._syService.currentSchoolYear().subscribe((res: any) => {
+              console.log(res);
+              localStorage.setItem("school_year", JSON.stringify(res));
+            });
+            localStorage.setItem(this._current_user_key, JSON.stringify(user));
+            localStorage.setItem(
+              "school_data",
+              JSON.stringify(user.owner.school_user.school)
+            );
+            this.currentUserSubject.next(user);
           }
-          return user
-        }),
-      )
+          return user;
+        })
+      );
   }
 
   /**
@@ -118,9 +136,9 @@ export class AuthenticationService {
    */
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser')
-    localStorage.removeItem(this._token_key)
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem(this._token_key);
     // notify
-    this.currentUserSubject.next(null)
+    this.currentUserSubject.next(null);
   }
 }

@@ -1,3 +1,4 @@
+import { first } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Paginate } from 'app/auth/models/base.model'
@@ -10,26 +11,6 @@ import { Course } from '../establishment.model'
 })
 export class CourseService extends AbstractService {
   constructor(private _ch: HttpClient) {
-    super('courses', _ch)
-  }
-
-  // ROUTES URLS AND REQUEST
-
-  index(params?: Param) {
-    return this.http.get<Paginate<Course>>(this.enpoint, {
-      params: params,
-    })
-  }
-
-  create(course: Course) {
-    return this.http.post<Course>(this.enpoint, course)
-  }
-
-  show(uuid: string | number) {
-    return this.http.get<Course>(`${this.enpoint}/${uuid}`)
-  }
-
-  delete(uuid: string | number) {
-    return this.http.delete<Course>(`${this.enpoint}/${uuid}`)
+    super('courses', _ch);
   }
 }

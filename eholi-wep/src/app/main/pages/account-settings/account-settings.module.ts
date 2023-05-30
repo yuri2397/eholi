@@ -1,15 +1,16 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
-import { AuthGuard } from 'app/auth/helpers/auth.guards';
-import { CoreCommonModule } from '@core/common.module';
-import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module';
-import { Ng2FlatpickrModule } from 'ng2-flatpickr';
-import { AccountSettingsComponent } from 'app/main/pages/account-settings/account-settings.component';
-import { AccountSettingsService } from 'app/main/pages/account-settings/account-settings.service';
+import { AuthGuard } from 'app/auth/helpers/auth.guards'
+import { CoreCommonModule } from '@core/common.module'
+import { ContentHeaderModule } from 'app/layout/components/content-header/content-header.module'
+import { Ng2FlatpickrModule } from 'ng2-flatpickr'
+import { AccountSettingsComponent } from 'app/main/pages/account-settings/account-settings.component'
+import { AccountSettingsService } from 'app/main/pages/account-settings/account-settings.service'
+import { TranslateModule } from '@ngx-translate/core'
 
 const routes: Routes = [
   {
@@ -17,11 +18,11 @@ const routes: Routes = [
     component: AccountSettingsComponent,
     canActivate: [AuthGuard],
     resolve: {
-      accountSetting: AccountSettingsService
+      accountSetting: AccountSettingsService,
     },
-    data: { animation: 'account-settings' }
-  }
-];
+    data: { animation: 'account-settings' },
+  },
+]
 
 @NgModule({
   declarations: [AccountSettingsComponent],
@@ -31,9 +32,10 @@ const routes: Routes = [
     NgbModule,
     CoreCommonModule,
     ContentHeaderModule,
-    Ng2FlatpickrModule
+    Ng2FlatpickrModule,
+    TranslateModule,
   ],
 
-  providers: [AccountSettingsService]
+  providers: [AccountSettingsService],
 })
 export class AccountSettingsModule {}

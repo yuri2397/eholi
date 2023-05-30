@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { environment } from 'environments/environment'
 import { Injectable } from '@angular/core'
 import { Paginate } from 'app/auth/models/base.model'
-import { Student } from './student.model'
+import { SchoolStudent, Student, StudentMetaData } from './student.model'
 import { AbstractService } from 'app/shared/abstract.service'
 
 @Injectable({
@@ -15,25 +15,20 @@ export class StudentService extends AbstractService {
     super('students', _ch)
   }
 
-  // ROUTES URLS AND REQUEST
-
-  public index(params?: Param) {
-    return this.http
-      .get<Paginate<Student>>(this.enpoint, { params: params })
-      .pipe(first())
-  }
-
-  public create(student: Student) {
-    return this.http.post(this.enpoint, student)
-  }
-
-  public show(uuid: string, params?: Param) {
-    return this.http
-      .get<Student>(`${this.enpoint}/${uuid}`, { params: params })
-      .pipe(first())
+  metaData(uuid: string) {
+    return this.http.get<StudentMetaData>(`${this.endpoint}/${uuid}/meta-data`)
   }
 
   public ecardIndex(params?: Param) {
-    return this.http.get<any>(`${this.enpoint}`, { params: params })
+    return this.http.get<any>(`${this.endpoint}`, { params: params })
+  }
+
+  /**
+   *  Disable the student by setting the status to false
+   * @param uuid student_id
+   * @returns result
+   */
+  public disableStudentInSchool(uuid: string) {
+    return this.http.put<SchoolStudent>(`${this.endpoint}/${uuid}/disable`, {})
   }
 }

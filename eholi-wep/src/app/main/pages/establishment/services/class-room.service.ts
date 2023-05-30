@@ -13,27 +13,4 @@ export class ClassRoomService extends AbstractService {
     super('class-rooms', _ch)
   }
 
-  // ROUTES URLS AND REQUEST
-
-  index(params?: Param) {
-    return this.http.get<Paginate<ClassRoom>>(this.enpoint, {
-      params: params,
-    })
-  }
-
-  create(class_room: ClassRoom) {
-    return this.http.post<ClassRoom>(this.enpoint, class_room)
-  }
-
-  update(uuid: string, class_room: ClassRoom) {
-    return this.http.put<ClassRoom>(`${this.enpoint}/${uuid}`, class_room)
-  }
-
-  show(uuid: string | number) {
-    return this.http.get<ClassRoom>(`${this.enpoint}/${uuid}`)
-  }
-
-  delete(uuid: string | number) {
-    return this.http.delete<ClassRoom>(`${this.enpoint}/${uuid}`)
-  }
 }

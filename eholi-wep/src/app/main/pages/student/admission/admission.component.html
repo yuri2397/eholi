@@ -1,1 +1,401 @@
-<p>admission works!</p>
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <app-content-header [contentHeader]="contentHeader"></app-content-header>
+        <!-- Horizontal Wizard -->
+        <section class="horizontal-wizard">
+            <div id="stepper1" class="bs-stepper horizontal-wizard-example">
+                <div class="bs-stepper-header">
+                    <div class="step" data-target="#account-details">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">1</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">{{ translateObject[0]?.title }}</span>
+                                <span class="bs-stepper-subtitle">{{ translateObject[0]?.sub_title }}</span>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+                    <div class="step" data-target="#parent-details">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">2</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">{{ translateObject[1]?.title }}</span>
+                                <span class="bs-stepper-subtitle">{{ translateObject[1]?.sub_title }}</span>
+                            </span>
+                        </button>
+                    </div>
+                    <!-- <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+                    <div class="step" data-target="#others-details">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">3</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">{{ translateObject[2]?.title }}</span>
+                                <span class="bs-stepper-subtitle">{{ translateObject[2]?.sub_title }}</span>
+                            </span>
+                        </button>
+                    </div> -->
+                    <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+                    <div class="step" data-target="#finalize">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">3</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">{{ translateObject[3]?.title }}</span>
+                                <span class="bs-stepper-subtitle">{{ translateObject[3]?.sub_title }}</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bs-stepper-content">
+                    <form (ngSubmit)="(HWForm.form.valid)" #HWForm="ngForm">
+                        <div id="account-details" class="content">
+                            <form #accountDetailsForm="ngForm">
+                                <div class="content-header">
+                                    <h5 class="mb-0">{{ translateObject[0]?.title }}</h5>
+                                    <small class="text-muted">{{ translateObject[0]?.sub_title }}</small>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="first_name">{{
+                                            'student.table.first_name'|translate
+                                            }}</label>
+                                        <input [(ngModel)]="request.student.first_name" #first_name="ngModel" required
+                                            type="text" name="first_name" id="first_name" class="form-control"
+                                            [class.error]="!first_name.valid && accountDetailsForm.submitted"
+                                            placeholder="{{ 'student.table.first_name'|translate }}" />
+                                        <span *ngIf="accountDetailsForm.submitted && first_name.invalid"
+                                            class="invalid-form">
+                                            <small class="form-text text-danger" *ngIf="first_name.errors.required">{{
+                                                'form.validation.errors.required'|translate }}</small>
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="last_name">{{
+                                            'student.table.last_name'|translate
+                                            }}</label>
+                                        <input [(ngModel)]="request.student.last_name" #last_name="ngModel" required
+                                            type="text" name="last_name" id="last_name" class="form-control"
+                                            [class.error]="!last_name.valid && accountDetailsForm.submitted"
+                                            placeholder="{{ 'student.table.last_name'|translate }}" />
+                                        <span *ngIf="accountDetailsForm.submitted && last_name.invalid"
+                                            class="invalid-form">
+                                            <small class="form-text text-danger" *ngIf="last_name.errors.required">{{
+                                                'form.validation.errors.required'|translate }}</small>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="birth_in">{{
+                                            'student.table.birth_in'|translate
+                                            }}</label>
+                                        <input [(ngModel)]="request.student.birth_in" #birth_in="ngModel" required
+                                            type="text" name="birth_in" id="birth_in" class="form-control"
+                                            [class.error]="!birth_in.valid && accountDetailsForm.submitted"
+                                            placeholder="{{ 'student.table.birth_in'|translate }}" />
+                                        <span *ngIf="accountDetailsForm.submitted && birth_in.invalid"
+                                            class="invalid-form">
+                                            <small class="form-text text-danger" *ngIf="birth_in.errors.required">{{
+                                                'form.validation.errors.required'|translate }}</small>
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="birth_at">{{
+                                            'student.table.birth_at'|translate
+                                            }}</label>
+                                        <input [(ngModel)]="request.student.birth_at" #birth_at="ngModel" required
+                                            type="date" name="birth_at" id="birth_at" class="form-control"
+                                            [class.error]="!birth_at.valid && accountDetailsForm.submitted"
+                                            placeholder="{{ 'student.table.first_name'|translate }}" />
+                                        <span *ngIf="accountDetailsForm.submitted && birth_at.invalid"
+                                            class="invalid-form">
+                                            <small class="form-text text-danger" *ngIf="birth_at.errors.required">{{
+                                                'form.validation.errors.required'|translate }}</small>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="adress">{{
+                                            'student.table.adress'|translate
+                                            }}</label>
+                                        <input [(ngModel)]="request.student.adress" #adress="ngModel" type="text"
+                                            name="adress" id="adress" class="form-control"
+                                            [class.error]="!adress.valid && accountDetailsForm.submitted"
+                                            placeholder="{{ 'student.table.adress'|translate }}" />
+                                        <span *ngIf="accountDetailsForm.submitted && adress.invalid"
+                                            class="invalid-form">
+                                            <small class="form-text text-danger" *ngIf="adress.errors.required">{{
+                                                'form.validation.errors.required'|translate }}</small>
+                                        </span>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label" for="departement">{{
+                                            'student.table.departement'|translate
+                                            }}</label>
+                                        <input [(ngModel)]="request.student.departement" #departement="ngModel"
+                                            type="text" name="departement" id="departement" class="form-control"
+                                            [class.error]="!departement.valid && accountDetailsForm.submitted"
+                                            placeholder="{{ 'student.table.departement'|translate }}" />
+                                        <span *ngIf="accountDetailsForm.submitted && departement.invalid"
+                                            class="invalid-form">
+                                            <small class="form-text text-danger" *ngIf="departement.errors.required">{{
+                                                'form.validation.errors.required'|translate }}</small>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+
+                                        <label class="form-label" for="adress">{{
+                                            'student.table.sexe'|translate
+                                            }}</label>
+                                        <select [(ngModel)]="request.student.sexe" #sexe="ngModel" required name="sexe"
+                                            id="sexe" class="form-control"
+                                            [class.error]="!adress.valid && accountDetailsForm.submitted" id="sexe">
+                                            <option value="m">{{ 'content.sexe.m'|translate}}</option>
+                                            <option value="w">{{ 'content.sexe.w'|translate }}</option>
+                                        </select>
+                                        <span *ngIf="accountDetailsForm.submitted && sexe.invalid" class="invalid-form">
+                                            <small class="form-text text-danger" *ngIf="sexe.errors.required">{{
+                                                'form.validation.errors.required'|translate }}</small>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- BUTTON -->
+                                <div class="d-flex mt-3 justify-content-between">
+                                    <button (click)="horizontalWizardStepperPrevious()"
+                                        class="btn btn-outline-secondary btn-prev" disabled rippleEffect>
+                                        <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                                        <span class="align-middle d-sm-inline-block d-none">{{
+                                            'content.btn.previous'|translate }}</span>
+                                    </button>
+                                    <button (click)="horizontalWizardStepperNext(accountDetailsForm)" type="submit"
+                                        class="btn btn-primary btn-next" rippleEffect>
+                                        <span class="align-middle d-sm-inline-block d-none">{{
+                                            'content.btn.next'|translate }}</span>
+                                        <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="parent-details" class="content">
+                            <form #tutorForm="ngForm">
+                                <div class="content-header d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <h5 class="mb-0">{{ translateObject[1]?.title }}</h5>
+                                        <small>{{ translateObject[1]?.sub_title }}</small>
+                                    </div>
+                                    <div *ngIf="request.tutors.length <= 2" class="row">
+                                        <div class="col-12">
+                                            <button class="btn btn-icon btn-primary" type="button" (click)="addItem()"
+                                                rippleEffect>
+                                                <i data-feather="plus" class="mr-25"></i>
+                                                <span>{{ 'content.btn.new_line'|translate }}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="invoice-repeater">
+                                    <div *ngFor="let item of request.tutors; let i = index">
+                                        <div class="row d-flex align-items-end">
+                                            <div class="col-md-4 col-12">
+                                                <div class="form-group">
+                                                    <label class="form-label" for=" phone1{{ i }}">{{
+                                                        'tutor.field.phone1'|translate
+                                                        }}</label>
+                                                    <input #phone1="ngModel" required type="text" name="phone1{{ i }}"
+                                                        id="phone1{{ i }}" [(ngModel)]="item.phone1" required
+                                                        minlength="9" maxlength="9"
+                                                        (ngModelChange)="onsearchTutors(item, $event)"
+                                                        [class.error]="!phone1.valid && tutorForm.submitted"
+                                                        class="form-control">
+                                                    <span *ngIf="tutorForm.submitted && phone1.invalid"
+                                                        class="invalid-form">
+                                                        <small class="form-text text-danger"
+                                                            *ngIf="phone1.errors.required">{{
+                                                            'form.validation.errors.required'|translate }}</small>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-12">
+                                                <div class="form-group">
+                                                    <label for="name{{ i }}">{{ 'tutor.field.name'|translate }}</label>
+                                                    <input #name="ngModel" required type="text" class="form-control"
+                                                        id="name{{ i }}" [(ngModel)]="item.name" name="name{{ i }}"
+                                                        placeholder="{{ 'tutor.field.name'|translate }}"
+                                                        [class.error]="!name.valid && tutorForm.submitted" />
+                                                    <span *ngIf="tutorForm.submitted && name.invalid"
+                                                        class="invalid-form">
+                                                        <small class="form-text text-danger"
+                                                            *ngIf="name.errors.required">{{
+                                                            'form.validation.errors.required'|translate }}</small>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 col-12">
+                                                <div class="form-group">
+                                                    <label for="adress{{ i }}">{{ 'tutor.field.adress'|translate
+                                                        }}</label>
+                                                    <input #adress="ngModel" required type="text" class="form-control"
+                                                        id="adress{{ i }}" [(ngModel)]="item.adress"
+                                                        name="adress{{ i }}"
+                                                        [class.error]="!adress.valid && tutorForm.submitted"
+                                                        placeholder="{{ 'tutor.field.adress'|translate }}" />
+                                                    <span *ngIf="tutorForm.submitted && adress.invalid"
+                                                        class="invalid-form">
+                                                        <small class="form-text text-danger"
+                                                            *ngIf="adress.errors.required">{{
+                                                            'form.validation.errors.required'|translate }}</small>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 col-12">
+                                                <div class="form-group">
+                                                    <label for="type{{ i }}">{{ 'tutor.field.type'|translate
+                                                        }}</label>
+
+                                                    <ng-select #type="ngModel" required [(ngModel)]="item.type"
+                                                        name="type{{ i }}" id="type{{ i }}" bindLabel="label"
+                                                        [class.error]="!type.valid && tutorForm.submitted"
+                                                        bindValue="id" placeholder="{{ 'tutor.field.type'|translate }}"
+                                                        [items]="[{id: 'father', 'label': 'tutor.select.father'|translate}, {id: 'mother', 'label': 'tutor.select.mother'|translate}, {id: 'other', 'label': 'tutor.select.other'|translate}]">
+                                                    </ng-select>
+                                                    <span *ngIf="tutorForm.submitted && type.invalid"
+                                                        class="invalid-form">
+                                                        <small class="form-text text-danger"
+                                                            *ngIf="type.errors.required">{{
+                                                            'form.validation.errors.required'|translate }}</small>
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 col-12 mb-50">
+                                                <div class="form-group">
+                                                    <button [disabled]="!(request.tutors.length == 1)"
+                                                        class="btn btn-outline-danger text-nowrap px-1"
+                                                        (click)="deleteItem(i)" rippleEffect>
+                                                        <i data-feather="x" class="mr-25"></i>
+                                                        <span>{{ 'content.btn.delete'|translate }}</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!-- BUTTON -->
+                            <div class="d-flex mt-3 justify-content-between">
+                                <button (click)="horizontalWizardStepperPrevious()"
+                                    class="btn btn-outline-secondary btn-prev" rippleEffect>
+                                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                                    <span class="align-middle d-sm-inline-block d-none">{{
+                                        'content.btn.previous'|translate }}</span>
+                                </button>
+                                <button [disabled]="!tutorForm.valid" (click)="horizontalWizardStepperNext(tutorForm)"
+                                    type="submit" class="btn btn-primary btn-next" rippleEffect>
+                                    <span class="align-middle d-sm-inline-block d-none">{{
+                                        'content.btn.next'|translate }}</span>
+                                    <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div id="finalize" class="content">
+                            <form #addressForm="ngForm">
+                                <div class="content-header">
+                                    <h5 class="mb-0">{{ translateObject[3]?.title }}</h5>
+                                    <small>{{ translateObject[3]?.sub_title }}</small>
+                                </div>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon-search1"><i
+                                                data-feather="search"></i></span>
+                                    </div>
+                                    <input type="text" name="class_level_id" id="class_level_id" ngModel required
+                                        (ngModelChange)="onsearchClassLevel($event)" class="form-control"
+                                        placeholder="{{ 'class_level.placeholder.search'|translate }}"
+                                        aria-label="Search..." aria-describedby="basic-addon-search1" />
+                                </div>
+                                <ng-container
+                                    *ngIf="classLevelDataSources && classLevelDataSources.length; else elseTemplate">
+                                    <ngx-datatable [rows]="classLevelDataSources" [rowHeight]="50"
+                                        class="bootstrap core-bootstrap" 
+                                        [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+                                        [scrollbarH]="true">
+
+                                        <ngx-datatable-column name="{{ 'class_level.table.name'|translate }}"
+                                            prop="name" [width]="120">
+                                        </ngx-datatable-column>
+                                        <ngx-datatable-column name="{{ 'class_level.table.level'|translate }}"
+                                            prop="level.name" [width]="50">
+                                        </ngx-datatable-column>
+                                        <ngx-datatable-column name="{{ 'class_level.table.school_year'|translate }}"
+                                            prop="school_year">
+                                            <ng-template let-school_year="value" ngx-datatable-cell-template>
+                                                {{ school_year.start_at|date:'yyyy' }} - {{
+                                                school_year.end_at|date:'yyyy' }}
+                                            </ng-template>
+
+                                        </ngx-datatable-column>
+                                        <ngx-datatable-column name="{{ 'class_level.table.total_students'|translate }}"
+                                            prop="total_students" [width]="40">
+                                        </ngx-datatable-column>
+
+                                        <ngx-datatable-column>
+                                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                                <button [disabled]="!tutorForm.valid"
+                                                    (click)="request.class_level_id = row.id; confirmAdmission(row)"
+                                                    type="submit" class="btn btn-success btn-next" rippleEffect>
+                                                    <span class="align-middle d-sm-inline-block d-none">{{
+                                                        'content.btn.validate'|translate }}</span>
+                                                    <i data-feather="check-circle"
+                                                        class="align-middle ml-sm-25 ml-0"></i>
+                                                </button>
+                                            </ng-template>
+
+                                        </ngx-datatable-column>
+
+                                    </ngx-datatable>
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                    <div class="misc-wrapper">
+                                        <div class="misc-inner p-2 p-sm-3">
+                                            <div class="w-100 text-center">
+                                                <img class="img-fluid" [src]="'assets/images/pages/coming-soon.svg'"
+                                                    alt="Coming soon page" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+
+
+                            </form>
+                            <!-- BUTTON -->
+                            <div class="d-flex mt-3 justify-content-between">
+                                <button (click)="horizontalWizardStepperPrevious()"
+                                    class="btn btn-outline-secondary btn-prev" rippleEffect>
+                                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                                    <span class="align-middle d-sm-inline-block d-none">{{
+                                        'content.btn.previous'|translate }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!--/ Horizontal Wizard -->
+    </div>
+</div>

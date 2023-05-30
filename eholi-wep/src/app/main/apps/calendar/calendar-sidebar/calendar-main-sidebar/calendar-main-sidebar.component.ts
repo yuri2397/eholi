@@ -15,12 +15,7 @@ export class CalendarMainSidebarComponent implements OnInit {
   public tempRef = [];
   public checkAll = true;
 
-  /**
-   * Constructor
-   *
-   * @param {CoreSidebarService} _coreSidebarService
-   * @param {CalendarService} _calendarService
-   */
+
   constructor(private _coreSidebarService: CoreSidebarService, private _calendarService: CalendarService) {}
 
   // Public Methods
@@ -50,12 +45,6 @@ export class CalendarMainSidebarComponent implements OnInit {
     return this.calendarRef.every(v => v.checked === true);
   }
 
-  /**
-   * Checkbox Change
-   *
-   * @param event
-   * @param id
-   */
   checkboxChange(event, id) {
     const index = this.calendarRef.findIndex(r => {
       if (r.id === id) {
@@ -67,11 +56,6 @@ export class CalendarMainSidebarComponent implements OnInit {
     this.checkAll = this.allChecked();
   }
 
-  /**
-   * Toggle All Checkbox
-   *
-   * @param event
-   */
   toggleCheckboxAll(event) {
     this.checkAll = event.target.checked;
     if (this.checkAll) {

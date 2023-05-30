@@ -19,6 +19,7 @@ export class CoursesResolver implements Resolve<Paginate<Course>> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<Paginate<Course>> {
-    return this._courseService.index(route.queryParams)
+    console.log(route.queryParams['coursesParams']);
+    return this._courseService.index(route.queryParams['coursesParams'])
   }
 }

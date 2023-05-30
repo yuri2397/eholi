@@ -1,0 +1,191 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <section class="users-list-wrapper">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center">
+                <select
+                  class="form-control mx-25"
+                  (change)="paginate()"
+                  [(ngModel)]="queryParams.per_page">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                  {{
+                  'page.select_size' | translate
+                  }}
+                </select>
+              </label>
+            </div>
+          </div>
+          <div
+            class="col-md-6 col-12 d-flex justify-content-start
+            justify-content-md-end">
+            <div
+              class="d-flex align-items-center justify-content-end pr-1 pb-1
+              pb-md-0">
+              <label class="d-flex align-items-center ml-1 ml-md-0">
+                <input
+                  name="searchValue"
+                  type="search"
+                  placeholder="{{ 'professor.placeholder.search' | translate }}"
+                  [(ngModel)]="queryParams.search_query"
+                  class="form-control ml-25"
+                  (input)="onSearch($event.target.value)"
+                  />
+              </label>
+              <button
+                class="btn btn-primary ml-1"
+                rippleEffect
+                (click)="openCreateModal(createModal)">
+                <i data-feather="plus" class="mr-0 mr-sm-1"></i>
+                <span class="d-none d-sm-inline-block">
+                  {{ 'professor.btn.add' | translate }}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <ngx-datatable
+          (page)="paginate($event)"
+          [rows]="professors.data"
+          [rowHeight]="50"
+          class="bootstrap core-bootstrap"
+          [limit]="professors.per_page"
+          [externalPaging]="true"
+          [count]="professors.total"
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [scrollbarH]="true">
+          <ngx-datatable-column
+            name="{{ 'professor.table.reference' | translate }}"
+            prop="reference">
+            <ng-template let-reference="value" ngx-datatable-cell-template>
+              {{ reference | uppercase }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column
+            name="{{ 'professor.table.first_name' | translate }}"
+            prop="first_name"></ngx-datatable-column>
+          <ngx-datatable-column
+            name="{{ 'professor.table.last_name' | translate }}"
+            prop="last_name"></ngx-datatable-column>
+          <ngx-datatable-column
+            name="{{ 'professor.table.email' | translate }}"
+            prop="email">
+            <ng-template let-email="value" ngx-datatable-cell-template>
+              <div
+                *ngIf="!email"
+                class="badge badge-pill"
+                [ngClass]="{
+                'badge-light-danger': true
+                }">
+                {{ 'content.undefined' | translate }}
+              </div>
+              <div *ngIf="email">
+                {{ email }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column
+            name="{{ 'professor.table.last_degre' | translate }}"
+            prop="last_degre">
+            <ng-template let-last_degre="value" ngx-datatable-cell-template>
+              <div
+                *ngIf="!last_degre"
+                class="badge badge-pill"
+                [ngClass]="{
+                'badge-light-danger': true
+                }">
+                {{ 'content.undefined' | translate }}
+              </div>
+              <div *ngIf="last_degre">
+                {{ last_degre }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column
+            name="{{ 'professor.table.poste' | translate }}"
+            prop="poste">
+            <ng-template let-last_degre="value" ngx-datatable-cell-template>
+              <div
+                *ngIf="!last_degre"
+                class="badge badge-pill"
+                [ngClass]="{
+                'badge-light-danger': true
+                }">
+                {{ 'content.undefined' | translate }}
+              </div>
+              <div *ngIf="last_degre">
+                {{ last_degre }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column
+            name="{{ 'professor.table.phone' | translate }}"
+            prop="telephone">
+            <ng-template let-telephone="value" ngx-datatable-cell-template>
+              <div
+                *ngIf="!telephone"
+                class="badge badge-pill"
+                [ngClass]="{
+                'badge-light-danger': true
+                }">
+                {{ 'content.undefined' | translate }}
+              </div>
+              <div *ngIf="telephone">
+                {{ telephone }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column
+            name="{{ 'professor.table.adress' | translate }}"
+            prop="adress">
+            <ng-template let-adress="value" ngx-datatable-cell-template>
+              <div
+                *ngIf="!adress"
+                class="badge badge-pill"
+                [ngClass]="{
+                'badge-light-danger': true
+                }">
+                {{ 'content.undefined' | translate }}
+              </div>
+              <div *ngIf="adress">
+                {{ adress }}
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column
+            name="{{ 'content.table.actions' | translate }}"
+            [width]="50"
+            [sortable]="false">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <div class="d-flex align-items-center">
+                <button [routerLink]="['/pages/professors', row.id]"
+                  type="button" class="btn btn-icon
+                  btn-primary" rippleEffect>
+                  <span [data-feather]="'eye'"></span>
+                </button>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-primary d-inline-block">
+    <ng-template #createModal let-modal>
+      <app-create-professor [modal]="modal"></app-create-professor>
+    </ng-template>
+  </div>
+</div>

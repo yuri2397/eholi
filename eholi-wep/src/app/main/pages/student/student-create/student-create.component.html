@@ -1,0 +1,117 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">{{ 'student.create.title'|translate }}</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" tabindex="0" ngbAutofocus>
+    <form [formGroup]="validateForm">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-control-label" for="first_name">{{ 'student.table.first_name'|translate }}</label>
+                    <input class="form-control input-md" formControlName="first_name" id="first_name"
+                        name="first_name" type="text"
+                        placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.first_name'|translate }}"
+                        [class.error]="!name.valid && name.touched">
+                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        <small class="form-text text-danger danger"
+                            *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-control-label" for="last_name">{{ 'student.table.last_name'|translate }}</label>
+                    <input class="form-control input-md" formControlName="last_name" id="last_name"
+                        name="last_name" type="text"
+                        placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.last_name'|translate }}"
+                        [class.error]="!name.valid && name.touched">
+                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        <small class="form-text text-danger danger"
+                            *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-control-label" for="birth_at">{{ 'student.table.birth_at'|translate }}</label>
+                    <input class="form-control input-md" formControlName="birth_at" id="birth_at" name="birth_at"
+                        type="date"
+                        placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.birth_at'|translate }}"
+                        [class.error]="!name.valid && name.touched">
+                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        <small class="form-text text-danger danger"
+                            *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-control-label" for="birth_in">{{ 'student.table.birth_in'|translate }}</label>
+                    <input class="form-control input-md" formControlName="birth_in" id="birth_in" name="birth_in"
+                        type="text"
+                        placeholder="{{ 'student.pronom'|translate }} {{ 'student.lieuNaissance'|translate }}"
+                        [class.error]="!name.valid && name.touched">
+                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        <small class="form-text text-danger danger"
+                            *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-control-label" for="email">{{ 'student.table.email'|translate }}</label>
+                    <input class="form-control input-md" formControlName="email" id="email" name="email"
+                        type="email"
+                        placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.email'|translate }}"
+                    >
+                </div>
+                <div class="col-md-6">
+                    <label class="form-control-label" for="telephone">{{ 'student.table.phone'|translate }}</label>
+                    <input class="form-control input-md" formControlName="telephone" id="telephone"
+                        name="telephone" type="text"
+                        placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.phone'|translate }}"
+                    >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-control-label" for="cni">{{ 'student.table.cni'|translate }}</label>
+                    <input class="form-control input-md" formControlName="cni" id="cni" name="cni"
+                        type="text" placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.cni'|translate }}"
+                    >
+                </div>
+                <div class="col-md-6">
+                    <label class="form-control-label" for="adress">{{ 'student.table.adress'|translate }}</label>
+                    <input class="form-control input-md" formControlName="adress" id="adress"
+                        name="adress" type="text"
+                        placeholder="{{ 'student.pronom'|translate }} {{ 'student.table.adress'|translate }}"
+                    >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-control-label" for="sexe">{{ 'student.table.sexe'|translate }}</label>
+                    <select class="form-select form-control" ngModel #name="" formControlName="sexe" id="sexe" name="sexe"
+                        [class.error]="!name.valid && name.touched">
+                        <option value="m" >Homme</option>
+                        <option value="w" >Femme</option>
+                    </select>
+                    <span *ngIf="!name.valid && name.touched" class="invalid-form">
+                        <small class="form-text text-danger danger"
+                            *ngIf="name.errors.required">{{'student.create.messageForm'|translate}}</small>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <button type="reset" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')" rippleEffect>
+            {{ 'content.btn.cancel'|translate }}
+        </button>
+        <button type="submit" [disabled]="!validateForm.valid" (click)="save(validateForm.value)" class="btn btn-primary mr-1"
+            rippleEffect>
+            <span *ngIf="createdLoad" class="spinner-border spinner-border-sm" role="status"
+                aria-hidden="true"></span>{{
+            'content.btn.submit'|translate }}</button>
+    </div>
+</div>
