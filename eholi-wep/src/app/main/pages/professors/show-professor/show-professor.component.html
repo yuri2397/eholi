@@ -7,57 +7,76 @@
             src="assets/images/teacher.jpg"
             class="img-fluid card-img-top"
             alt="Profile Cover Photo"
-            />
+          />
           <div class="card-body">
             <div class="profile-image-wrapper">
               <div class="profile-image">
                 <div class="avatar">
                   <img
-                    [src]="data.professor.media && data.professor.media.length ?
-                    data.professor.media[0].original_url :
-                    'assets/images/portrait/small/avatar-s-9.jpg'"
+                    [src]="
+                      data?.professor?.media && data?.professor?.media?.length
+                        ? data.professor.media[0].original_url
+                        : 'assets/images/portrait/small/avatar-s-9.jpg'
+                    "
                     alt="Profile Picture"
-                    />
+                  />
                 </div>
               </div>
             </div>
-            <h3>{{ data.professor.first_name }} {{ data.professor.last_name }}</h3>
+            <h3>
+              {{ data?.professor?.first_name }} {{ data?.professor?.last_name }}
+            </h3>
             <h6 class="text-muted">
-              {{ data.poste }}
+              {{ data?.poste }}
             </h6>
             <div class="badge badge-light-primary profile-badge">
-              {{ 'professor.' + data.type | translate }}
+              {{ "professor." + data?.type | translate }}
             </div>
           </div>
           <div class="card-footer">
-            <div class="d-flex align-items-center
-              justify-content-between">
-              <button type="button" class="btn btn-icon
-                btn-primary" rippleEffect>
+            <div class="d-flex align-items-center justify-content-between">
+              <button
+                type="button"
+                class="btn btn-icon btn-primary"
+                rippleEffect
+              >
                 <span [data-feather]="'edit'"></span>
               </button>
 
-              <button (click)="image.click()" class="btn btn-icon btn-warning"
-                type="button" [disabled]="avatarLoad"
-                rippleEffect>
-                <span *ngIf="avatarLoad" class="spinner-border
-                  spinner-border-sm" role="status"
-                  aria-hidden="true"></span>
+              <button
+                (click)="image.click()"
+                class="btn btn-icon btn-warning"
+                type="button"
+                [disabled]="avatarLoad"
+                rippleEffect
+              >
+                <span
+                  *ngIf="avatarLoad"
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
                 <span [data-feather]="'camera'"></span>
               </button>
 
               <button
-                type="button" class="btn btn-icon
-                btn-danger" rippleEffect>
+                type="button"
+                class="btn btn-icon btn-danger"
+                rippleEffect
+              >
                 <span [data-feather]="'trash'"></span>
               </button>
               <form enctype="multipart/form-data">
                 <form enctype="multipart/form-data">
-                  <input #image type="file" nz-input hidden
-                    (change)="uploadImage($event)" />
+                  <input
+                    #image
+                    type="file"
+                    nz-input
+                    hidden
+                    (change)="uploadImage($event)"
+                  />
                 </form>
               </form>
-
             </div>
           </div>
         </div>
@@ -66,15 +85,15 @@
         <div class="card card-body">
           <ul ngbNav #nav="ngbNav" class="nav-tabs">
             <li ngbNavItem>
-              <a ngbNavLink>{{ 'content.title.courses' | translate
-                }}</a>
+              <a ngbNavLink>{{ "content.title.courses" | translate }}</a>
               <ng-template ngbNavContent>
-                <div class="d-flex mb-3">
-                  <div><button
+                <div class="d-flex justify-content-end">
+                    <button
                       (click)="addCourse(attachCourse)"
-                      class="btn
-                      btn-primary">{{
-                      'course.btn.add'|translate}}</button></div>
+                      class="btn btn-primary mb-2"
+                    >
+                      {{ "course.btn.add" | translate }}
+                    </button>
                 </div>
                 <ngx-datatable
                   [rows]="courses"
@@ -83,31 +102,32 @@
                   [columnMode]="'force'"
                   [headerHeight]="50"
                   [footerHeight]="50"
-                  [scrollbarH]="true">
+                  [scrollbarH]="true"
+                >
                   <ngx-datatable-column
-                    name="{{ 'course.table.name' | translate
-                    }}"
+                    name="{{ 'course.table.name' | translate }}"
                     prop="course.name"
-                    [width]="280"></ngx-datatable-column>
+                    [width]="280"
+                  ></ngx-datatable-column>
                   <ngx-datatable-column
-                    name="{{ 'course.table.coef' | translate
-                    }}"
-                    prop="coef">
+                    name="{{ 'course.table.coef' | translate }}"
+                    prop="coef"
+                  >
                   </ngx-datatable-column>
                   <ngx-datatable-column
-                    name="{{ 'course.table.max_note' |
-                    translate }}"
-                    prop="max_note"></ngx-datatable-column>
+                    name="{{ 'course.table.max_note' | translate }}"
+                    prop="max_note"
+                  ></ngx-datatable-column>
                   <ngx-datatable-column
-                    name="{{ 'course.table.class' |
-                    translate }}"
-                    prop="class_level.name">
+                    name="{{ 'course.table.class' | translate }}"
+                    prop="class_level.name"
+                  >
                   </ngx-datatable-column>
                   <ngx-datatable-column
-                    name="{{ 'course.table.semester' |
-                    translate }}"
+                    name="{{ 'course.table.semester' | translate }}"
                     [width]="50"
-                    prop="semester.name">
+                    prop="semester.name"
+                  >
                     [sortable]="false">
                   </ngx-datatable-column>
                 </ngx-datatable>
@@ -116,18 +136,14 @@
 
             <li ngbNavItem>
               <a href="javascript:void(0)" ngbNavLink>
-                {{ 'content.title.timestable' | translate }}
+                {{ "content.title.timestable" | translate }}
               </a>
               <ng-template ngbNavContent>
                 <p>
-                  Cake croissant lemon drops gummi bears
-                  carrot cake biscuit
-                  cupcake croissant. Macaroon lemon drops
-                  muffin jelly sugar
-                  plum chocolate cupcake danish icing. Soufflé
-                  tootsie roll
-                  lemon drops sweet roll cake icing cookie
-                  halvah cupcake.
+                  Cake croissant lemon drops gummi bears carrot cake biscuit
+                  cupcake croissant. Macaroon lemon drops muffin jelly sugar
+                  plum chocolate cupcake danish icing. Soufflé tootsie roll
+                  lemon drops sweet roll cake icing cookie halvah cupcake.
                 </p>
               </ng-template>
             </li>
@@ -139,9 +155,10 @@
   </div>
   <div class="modal-primary d-inline-block">
     <ng-template #attachCourse let-modal>
-      <app-attach-course-professor [professor]="data.professor"
-        [modal]="modal"></app-attach-course-professor>
+      <app-attach-course-professor
+        [professor]="data.professor"
+        [modal]="modal"
+      ></app-attach-course-professor>
     </ng-template>
   </div>
-
 </div>

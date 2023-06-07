@@ -18,6 +18,8 @@
     animation          : progressBar 5s ease-in-out;
     animation-fill-mode: both;
     height: 5px;
+    position: absolute;
+    width: 100% !important;
 }
 
 @keyframes progressBar {

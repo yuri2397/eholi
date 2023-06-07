@@ -81,5 +81,7 @@ export interface Deliberation {
   updated_at?:     Date;
   semester?:       Semester;
   class_level:     ClassLevel;
+  status: 'append'|'finish'|'cancel';
+  school_year?: SchoolYear;
   deliberation_item_results: any[]
 }

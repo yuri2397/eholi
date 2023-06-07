@@ -23,7 +23,7 @@
             >
             <ng-template ngbNavContent>
               <div
-                class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0"
+                class="d-flex align-items-center justify-content-between pr-1 pb-1 pb-md-0"
               >
                 <label class="d-flex align-items-center ml-1 ml-md-0"
                   ><input
@@ -31,9 +31,11 @@
                     type="search"
                     placeholder="{{ 'student.placeholder.search' | translate }}"
                     [(ngModel)]="queryParams.search_query"
-                    class="form-control ml-25"
+                    class="form-control ml-50"
                     (input)="onSearch($event.target['value'])"
                 /></label>
+
+                <button class="btn btn-primary" (click)="ecard()">Cartes des étudiants</button>
               </div>
               <br />
               <ngx-datatable

@@ -61,6 +61,7 @@
             [items]="types"
             bindLabel="label"
             bindValue="value"
+            class="lead bold"
             formControlName="type"
           >
           </ng-select>
@@ -85,7 +86,7 @@
           </label>
 
           <input
-            class="form-control input-md"
+            class="form-control input-md lead bold"
             formControlName="date"
             type="datetime-local"
             id="date"
@@ -97,7 +98,7 @@
             class="invalid-form"
           >
             <small
-              class="form-text text-danger danger"
+              class="form-text text-danger danger lead bold"
               *ngIf="date.errors?.['required']"
               >{{ "form.validation.errors.required" | translate }}</small
             >
@@ -156,7 +157,7 @@
             {{ "course.table.professor" | translate }}
           </label>
           <input
-            class="form-control input-md"
+            class="form-control input-md  lead bold"
             disabled
             [value]="
               selectedCourse?.professor?.first_name +
@@ -172,13 +173,15 @@
             {{ "course.table.semester" | translate }}
           </label>
           <input
-            class="form-control input-md"
+            class="form-control input-md lead bold"
             disabled
+            
             [value]="selectedCourse?.semester?.name"
           />
         </div>
       </div>
     </div>
+   
   </form>
 </div>
 

@@ -5,16 +5,20 @@ namespace App\Models;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Student extends AbstractModel
+class Student extends AbstractModel implements HasMedia
 {
+    use InteractsWithMedia;
+
     const ACTITE = 'active';
     const INACTIVE = 'inactive';
     public const BASE_REFERENCE = "ST-";
 
     protected $fillable = ['first_name', 'last_name', 'birth_at', 'birth_in', 'email', 'telephone', 'cni', 'reference', 'sexe', 'adress'];
     protected $guard = [];
-
+    protected $with = ['media'];
 
 
     public function user()

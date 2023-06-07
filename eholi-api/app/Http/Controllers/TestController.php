@@ -12,7 +12,9 @@ use App\Models\SchoolHasProfessor;
 use Illuminate\Support\Facades\DB;
 use App\Models\ClassLevelHasCourse;
 use App\Models\ClassLevelHasStudent;
+use App\Models\Deliberation;
 use App\Models\Student;
+use Illuminate\Support\Facades\URL;
 
 class TestController extends Controller
 {
@@ -70,8 +72,17 @@ class TestController extends Controller
             "school_has_professor_id" => ['required', 'exists:school_has_professors,professor_id'],
             "class_level_has_course_id" => ['required', 'exists:class_level_has_courses,id'],
         ]);
+
         // merge school_id 
         $course = ClassLevelHasCourse::find($request->class_level_has_course_id);
+        $deliberation = Deliberation::whereClassLevelId($request->class_level_id)->whereSemesterId($course->semester_id)->first();
+
+        if($deliberation){
+            return response()->json([
+                "message" => "Vous ne pouvez pas ajouter un nouveau test pour le semestre {$course->semester->number}. Le semestre {$course->semester->number} est déjà délibérer."
+            ], 422);
+        }
+
         $request->merge([
             'school_id' => school()->id,
             'max_note' => $course->max_note,
@@ -212,6 +223,23 @@ class TestController extends Controller
         return response()->json([
             "message" => "Test result updated successfully",
             "data" => $testResult
+        ]);
+    }
+
+    public function downloadResults(Test $test)
+    {
+        if(!$test->isFinish){
+            return response()->json([
+                "message" => "Veuillez corriger les copies et ajouter les notes pour pouvoir les télécharger."
+            ], 422);
+        }
+
+        return view('tests.test_results')->with([
+            "test" => $test,
+            "results" => $test->test_results,
+            "school_year" => school_year(),
+            "school" => school(),
+            "appUrl" => URL::to('/')
         ]);
     }
 }

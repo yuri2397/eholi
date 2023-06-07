@@ -40,14 +40,16 @@ const routes: Routes = [
         resolve: {
             semester: ClassLevelSemesterResolver,
             deliberation: DeliberationResolver
-        }
+        },
+        runGuardsAndResolvers: 'always'
     },
     {
         path: 'deliberation/:uuid',
         component: ClassLevelDeliberationResultatsComponent,
         resolve: {
             deliberation: DeliberationDetailsResolver,
-        }
+        },
+        runGuardsAndResolvers: 'always'
     }
 ];
 

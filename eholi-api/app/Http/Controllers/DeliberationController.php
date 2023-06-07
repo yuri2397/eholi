@@ -11,8 +11,12 @@ use Illuminate\Http\Request;
 use App\Models\DeliberationItem;
 use Illuminate\Support\Facades\DB;
 use App\Models\ClassLevelHasCourse;
+use App\Models\Cycle;
 use App\Models\DeliberationItemResult;
+use App\Models\Level;
+use App\Models\PostSubscribtion;
 use App\Models\School;
+use Illuminate\Support\Facades\URL;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -78,14 +82,6 @@ class DeliberationController extends Controller
         $data = $request->validate([
             'semester_id' => 'required|uuid|exists:semesters,id',
             'class_level_id' => 'required|uuid|exists:class_levels,id',
-            // 'school_year_id' => 'required|uuid|exists:school_years,id',
-            // 'deliberation_items' => 'required|array',
-            // 'deliberation_items.*.class_level_has_student_id' => 'required|uuid|exists:class_level_has_students,id',
-            // 'deliberation_items.*.class_level_has_course_id' => 'required|uuid|exists:class_level_has_courses,id',
-            // 'deliberation_items.*.average' => 'required|numeric|min:0|max:20',
-            // 'deliberation_items.*.status' => 'required|in:success,append,cancel,remove',
-            // 'deliberation_items.*.rang' => 'required|numeric|min:1',
-            // 'deliberation_items.*.mention' => 'required|in:any,excellent,very_good,good,passable,mediocre,weak,very_weak',
         ]);
 
         // test if a deliberation with the class_level_id and semester_id exists
@@ -105,6 +101,7 @@ class DeliberationController extends Controller
                 'school_year_id' => ClassLevel::find($request->class_level_id)->school_year_id,
             ]);
 
+            $class_level = ClassLevel::find($request->class_level_id);
             // get all course of this class
             $courses = ClassLevelHasCourse::with(['tests'])->whereClassLevelId($data['class_level_id'])->whereSemesterId($data['semester_id'])->get();
             if ($checker = $this->checkCNTPDeliberation($courses)) {
@@ -137,7 +134,6 @@ class DeliberationController extends Controller
                         )->first()?->note ?? 0;
                     }
                     // moyen de l'etudiant pour les devoirs id duty != 0
-
                     if ($duties->count() != 0) {
                         $duties_average = $duties_average / $duties->count();
                     } else {
@@ -163,7 +159,6 @@ class DeliberationController extends Controller
 
                     // get mention
                     $mention = $this->getMention($total_average, $course->max_note);
-
 
                     // create deliberation item resultat without deliberation_item_id
                     $deliberation_item_result = DeliberationItemResult::create([
@@ -193,24 +188,17 @@ class DeliberationController extends Controller
             foreach ($students as $student) {
                 $student_results = DeliberationItemResult::whereDeliberationId($deliberation->id)->whereClassLevelHasStudentId($student->class_level_has_students[0]->id)->get();
 
-                $average = 0;
-                foreach ($student_results as $student_result) {
-                    $average += $student_result->average;
-                }
-
-                $coefs = 0;
-                foreach ($student_results as $student_result) {
-                    $coefs += $student_result->coef;
-                }
+                $st_av = $student_results->map(function ($item) {
+                    return $item->average * $item->coef;
+                })->sum() / $student_results->sum('coef');
 
                 DeliberationItem::create([
-                    'average' => $student_results->map(function ($item) {
-                        return $item->average * $item->coef;
-                    })->sum() / $student_results->sum('coef'),
-                    'status' => DeliberationItem::SUCCESS,
-                    'mention' => $this->getMention(($average / $coefs), 10),
+                    'average' => $st_av,
+                    'status' => DeliberationItem::APPEND,
+                    'mention' => $this->getMention($st_av, $class_level->class_level_has_course[0]->max_note),
                     'class_level_has_student_id' => $student->class_level_has_students[0]->id,
                     'deliberation_id' => $deliberation->id,
+                    'decision' => $this->getDecision($st_av, $class_level->class_level_has_course[0]->max_note)
                 ]);
             }
 
@@ -229,6 +217,80 @@ class DeliberationController extends Controller
             DB::rollBack();
             throw $th;
         }
+    }
+
+    public function confirmDeliberation(Deliberation $deliberation)
+    {
+        DB::beginTransaction();
+        try {
+            $deliberation->status = Deliberation::FINISH;
+            $deliberation->save();
+
+            $class_level = $deliberation->classLevel;
+            $level = $class_level->level;
+            $next_level = Level::whereNumber($level->number + 1)->first();
+
+            if (!$next_level) {
+                // fin de cycle
+                $new_cycle = Cycle::whereNumber($level->cycle->number + 1)->first();
+                if ($new_cycle) {
+                    $next_level = Level::whereCycleId($new_cycle->id)->whereNumber(1)->first();
+                }
+            }
+            $is_last_semester = $deliberation->classLevel->semesters()->orderBy('number', 'desc')->first()->id == $deliberation->semester->id;
+
+
+            foreach ($deliberation->deliberationItems as $item) {
+
+                $item->status = DeliberationItem::SUCCESS;
+                if ($item->decision != DeliberationItem::REDOUBLER && $next_level && $is_last_semester) {
+                    $sub = new PostSubscribtion();
+                    $sub->amount = 0;
+                    $sub->reference = PostSubscribtion::generateReference();
+                    $sub->student_id = $item->student->student_id;
+                    $sub->level_id = $next_level->id;
+                    $sub->deliberation_id = $deliberation->id;
+                    $sub->deliberation_item_id = $item->id;
+                    $sub->save();
+                }
+
+                $item->save();
+            }
+            DB::commit();
+            return $deliberation->refresh()->load([
+                "schoolYear",
+                "semester",
+                "classLevel",
+                "deliberationItemResults",
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                "message" => $th->getMessage()
+            ], 500);
+        }
+    }
+
+    public function reCreateDeliberation(Request $request, Deliberation $deliberation)
+    {
+        if ($deliberation->status != Deliberation::FINISH) {
+            $deliberation->delete();
+            return $this->store($request);
+        }
+        return response()->json([
+            "message" => "Cette déliberation est maintenant définitive. Impossible de le relancer.",
+        ], 422);
+    }
+
+    public function destroy(Deliberation $deliberation)
+    {
+        if ($deliberation->status == Deliberation::FINISH) {
+            return response()->json([
+                "message" => "Vous ne pouvez pas supprimer une déliberation qui est définitive.",
+            ], 409);
+        }
+        $deliberation->delete();
+        return $deliberation;
     }
 
     public function checkIfDeliberationIsPossible(Request $request)
@@ -269,10 +331,17 @@ class DeliberationController extends Controller
         $base_note =
             ClassLevelHasCourse::whereId($results[0]->class_level_has_course_id)->first()->max_note;
         $headers = ['Matière', 'Dévoirs', 'Comp.', 'Moy/' . $base_note, 'Coef', 'Moy (coef)', 'Rang', 'Mention'];
+
+        $is_last_semester = $deliberation->classLevel->semesters()->orderBy('number', 'desc')->first()->id == $deliberation->semester->id;
+        if($is_last_semester){
+            // $all_semeters = Deliberation::whereSemesterId($data['semester_id'])->whereClassLevelId($)
+        }
+
         return view('deliberation.bultin')->with([
             "results" => $results,
             "deliberation" => $deliberation,
             "school" => school(),
+            "is_last_semester" => $is_last_semester,
             "base_note" => $base_note,
             "semester" => $deliberation->semester,
             "student" => Student::find($data['student_id']),
@@ -280,6 +349,7 @@ class DeliberationController extends Controller
             "deliberation_item" => DeliberationItem::whereDeliberationId($deliberation->id)->whereClassLevelHasStudentId($results[0]->class_level_has_student_id)->first(),
             "school_year" => $deliberation->schoolYear,
             "headers" => $headers,
+            "appUrl" => URL::to('/'),
             "total_coef" => $results->sum('coef'),
             "total_average" => $results->sum('average'),
             "total_average_coef" => $results->map(function ($item) {
@@ -289,13 +359,14 @@ class DeliberationController extends Controller
         ]);
     }
 
+
     public function downloadResults(Deliberation $deliberation)
     {
         $deliberation = $deliberation->load(['classLevel', 'semester', 'schoolYear']);
         $rows = [];
         // return DeliberationItemResult::whereDeliberationId($deliberation->id)->distinct()->orderBy('class_level_has_course_id', 'ASC')->get(['class_level_has_course_id'])->toArray();
         $courses = DeliberationItemResult::whereDeliberationId($deliberation->id)->distinct()->orderBy('class_level_has_course_id', 'ASC')->get(['class_level_has_course_id'])->toArray();
-        $headers = array_merge(['Matricule', 'Prénom/Nom'], array_map(fn ($item) => $item['class_level_has_course']["course"]['name'], $courses), ['Moyenne', 'Rang', 'Appréciations']);
+        $headers = array_merge(['Prénom et Nom'], array_map(fn ($item) => $item['class_level_has_course']["course"]['name'], $courses), ['Moyenne', 'Rang', 'Appréciations']);
 
         $dels = DeliberationItemResult::whereDeliberationId($deliberation->id)->orderBy('average', 'DESC')->get();
         $del_items = DeliberationItem::with('student')->whereDeliberationId($deliberation->id)->orderBy('average', 'DESC')->get();
@@ -317,7 +388,8 @@ class DeliberationController extends Controller
             'semester' => $deliberation->semester,
             'class_level' => $deliberation->classLevel,
             'headers' => $headers,
-            'rows' => $rows
+            'rows' => $rows,
+            "appUrl" => URL::to('/')
         ]);
     }
 
@@ -407,5 +479,16 @@ class DeliberationController extends Controller
             return DeliberationItem::WEAK;
         }
         return DeliberationItem::VERY_WEAK;
+    }
+
+    public function getDecision($average, $maxNote)
+    {
+        if ($average >= $maxNote / 2) {
+            return DeliberationItem::PASSER;
+        } elseif ($average >= ($maxNote / 2) - (0.5)) {
+            return DeliberationItem::REPECHER;
+        } else {
+            return DeliberationItem::REDOUBLER;
+        }
     }
 }

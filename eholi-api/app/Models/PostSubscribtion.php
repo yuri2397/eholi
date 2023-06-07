@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Deliexit extends Model
+class PostSubscribtion extends AbstractModel
 {
-    use HasFactory;
+    public const BASE_REFERENCE = 'PS';
+
 }

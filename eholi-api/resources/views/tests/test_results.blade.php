@@ -7,6 +7,10 @@
     <title>Déliration - {{ $class_level->name }} - {{ $semester->name }}</title>
     <link rel="stylesheet" href="{{ $appUrl }}/css/bootstrap.min.css">
     <style>
+        * {
+            font-family: "Helvetica", sans-serif;
+        }
+
         td {
             font-size: 12px;
         }
@@ -17,9 +21,25 @@
             text-transform: capitalize;
         }
 
+        .bold {
+            font-weight: bold;
+        }
+
+        .line {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            height: 4px;
+            width: 100%;
+            display: block;
+        }
+
+        .lead {
+            font-size: 14px;
+        }
+
     </style>
 </head>
-<body class="p-3">
+<body>
     <header class="d-flex align-items-center justify-content-between ">
         <div>
             <span class="lead d-block">IA DIOURBEL</span>
@@ -32,33 +52,5 @@
             <span class="lead d-block">Classe: {{ $class_level->name }}</span>
         </div>
     </header>
-    <main>
-        <br>
-        <h5 class="text-center">{{ $school->name }}</h5>
-        <br>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    @foreach ($headers as $head)
-                    <th> {{ $head }} </th>
-                    @endforeach
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($rows as $row)
-                <tr>
-                    <td class="text-uppercase">{{ $row['student']['first_name'] }} {{ $row['student']['last_name'] }}</td>
-                    @foreach ($row['notes'] as $note)
-                    <td class="text-center"> {{ $note['average'] }} </td>
-                    @endforeach
-                    <td class="text-center">{{ $row['final_note']['average'] }}</td>
-                    <td class="text-center">{{ $row['final_note']['rang'] }}</td>
-                    <td class="text-center">{{ $row['final_note']['mention'] }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </main>
-    <footer></footer>
 </body>
 </html>

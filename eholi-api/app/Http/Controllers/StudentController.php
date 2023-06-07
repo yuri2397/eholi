@@ -105,7 +105,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show(Request $request, $id)
     {
         return Student::find($id);
     }
@@ -133,7 +133,23 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
+
         return $student;
+    }
+
+    public function updateAvatar(Request $request, Student $student)
+    {
+        if ($request->hasFile('image')) {
+            foreach ($student->media as $value) {
+                $value->delete();
+            }
+            $student->addMedia($request->file('image'))->toMediaCollection('students');
+            return $student->load(['media']);
+        }
+
+        return response()->json([
+            'message' => "Veuillez choisir une image."
+        ], 422);
     }
 
     public function disableStudentInSchool(Student $student)

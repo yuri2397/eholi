@@ -34,43 +34,43 @@ export const menu: CoreMenu[] = [
   // },
 
   // ADMINISTRATIONS
-  {
-    id: 'schools',
-    title: 'menu.administration.title',
-    translate: 'menu.administration.title',
-    type: 'collapsible',
-    icon: 'paperclip',
-    children: [
-      {
-        id: 'parent',
-        title: 'menu.administration.parent',
-        translate: 'menu.administration.parent',
-        type: 'item',
-        icon: 'circle',
-        url: 'pages/tutors/index',
-        queryParams: {
-          per_page: 15,
-          page: 1,
-        },
-      },
-      {
-        id: 'personal',
-        title: 'menu.administration.personal',
-        translate: 'menu.administration.personal',
-        type: 'item',
-        icon: 'circle',
-        url: 'pages/personals',
-      },
-      {
-        id: 'attendance',
-        title: 'menu.administration.attendance',
-        translate: 'menu.administration.attendance',
-        type: 'item',
-        icon: 'circle',
-        url: 'pages/attendances',
-      },
-    ],
-  },
+  // {
+  //   id: 'schools',
+  //   title: 'menu.administration.title',
+  //   translate: 'menu.administration.title',
+  //   type: 'collapsible',
+  //   icon: 'paperclip',
+  //   children: [
+  //     {
+  //       id: 'parent',
+  //       title: 'menu.administration.parent',
+  //       translate: 'menu.administration.parent',
+  //       type: 'item',
+  //       icon: 'circle',
+  //       url: 'pages/tutors/index',
+  //       queryParams: {
+  //         per_page: 15,
+  //         page: 1,
+  //       },
+  //     },
+  //     {
+  //       id: 'personal',
+  //       title: 'menu.administration.personal',
+  //       translate: 'menu.administration.personal',
+  //       type: 'item',
+  //       icon: 'circle',
+  //       url: 'pages/personals',
+  //     },
+  //     {
+  //       id: 'attendance',
+  //       title: 'menu.administration.attendance',
+  //       translate: 'menu.administration.attendance',
+  //       type: 'item',
+  //       icon: 'circle',
+  //       url: 'pages/attendances',
+  //     },
+  //   ],
+  // },
 
   // STUDENT MANAGEMENT
   {
@@ -234,14 +234,14 @@ export const menu: CoreMenu[] = [
           'with[]': ['school'],
         },
       },
-      {
-        id: 'professor-add',
-        title: 'menu.professor.add',
-        translate: 'menu.professor.add',
-        type: 'item',
-        icon: 'circle',
-        url: 'pages/professors/create',
-      },
+      // {
+      //   id: 'professor-add',
+      //   title: 'menu.professor.add',
+      //   translate: 'menu.professor.add',
+      //   type: 'item',
+      //   icon: 'circle',
+      //   url: 'pages/professors/create',
+      // },
     ],
   },
 

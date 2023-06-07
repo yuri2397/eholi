@@ -38,6 +38,11 @@ class ClassLevel extends AbstractModel
         return $this->belongsToMany(Course::class, 'class_level_has_courses');
     }
 
+    public function class_level_has_course()
+    {
+        return $this->hasMany(ClassLevelHasCourse::class);
+    }
+
     public function getTotalStudentsAttribute()
     {
         return $this->students()->count();

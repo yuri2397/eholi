@@ -2,41 +2,76 @@
   <div class="content-body">
     <div class="card card-developer-meetup">
       <div class="card-body">
-        <div class="meetup-header d-flex align-items-center">
-          <div class="meetup-day">
-            <div class="avatar bg-light-danger avatar-xl">
-              <span class="avatar-content">{{ subName() }}</span>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="meetup-header d-flex align-items-center">
+            <div class="meetup-day">
+              <div
+                class="avatar bg-light-danger avatar-xl"
+                (click)="img.click()"
+              >
+                <input
+                  type="file"
+                  id="image"
+                  name="image"
+                  hidden
+                  #img
+                  (change)="onFileChosed($event)"
+                />
+                <span class="avatar-content">
+                  <ng-container
+                    *ngIf="
+                      student?.media && student.media.length;
+                      else elseTemplate
+                    "
+                  >
+                    <img [src]="student.media[0].original_url" />
+                  </ng-container>
+                  <ng-template #elseTemplate>
+                    {{ subName() }}
+                  </ng-template>
+                </span>
+              </div>
+              <div class="d-block mt-1">
+                <span class="text-dark text-uppercase"
+                  >{{ student.reference }}
+                </span>
+                <h2 class="bold">
+                  {{ student.first_name }} {{ student.last_name }}
+                </h2>
+              </div>
             </div>
-            <div class="d-block mt-1">
-              <span class="text-dark text-uppercase"
-                >{{ student.reference }}
-              </span>
-              <h3>{{ student.first_name }} {{ student.last_name }}</h3>
+            <div class="d-block lead">
+              <div>
+                <span class="text-dark bold"
+                  >{{ "student.table.adress" | translate }}:
+                </span>
+                {{ student.adress }}
+              </div>
+              <br />
+              <div>
+                <span class="text-dark bold"
+                  >{{ "student.table.birth_in" | translate }}:
+                </span>
+                {{ student.birth_in }}
+              </div>
+              <br />
+              <div>
+                <span class="text-dark bold"
+                  >{{ "student.table.birth_at" | translate }}:
+                </span>
+                {{ student.birth_at }}
+              </div>
+              <br />
+              <div>
+                <span class="text-dark bold">Classe: </span>
+                {{ meta_data["class_levels"].name }}
+              </div>
             </div>
           </div>
-
-          <div class="d-block">
-            <div>
-              <span class="text-dark bold"
-                >{{ "student.table.adress" | translate }}:
-              </span>
-              {{ student.adress }}
-            </div>
-            <br />
-            <div>
-              <span class="text-dark bold"
-                >{{ "student.table.birth_in" | translate }}:
-              </span>
-              {{ student.birth_in }}
-            </div>
-            <br />
-            <div>
-              <span class="text-dark bold"
-                >{{ "student.table.birth_at" | translate }}:
-              </span>
-              {{ student.birth_at }}
-            </div>
-          </div>
+          <button (click)="myEcard()" rippleEffect class="btn btn-primary">
+            <i data-feather="download" class="mr-0 mr-sm-1"></i
+              ><span class="d-none d-sm-inline-block">Carte de l'étudiant</span>
+          </button>
         </div>
         <hr />
         <ul
@@ -157,7 +192,7 @@
             </ng-template>
           </li>
 
-          <li ngbNavItem (shown)="getDeliberation($event)" >
+          <li ngbNavItem (shown)="getDeliberation($event)">
             <a ngbNavLink
               ><span [data-feather]="'life-buoy'"></span>
               {{ "Déliberation" | translate }}</a
@@ -165,13 +200,23 @@
 
             <ng-template ngbNavContent>
               <div class="row">
-                <div *ngFor="let deli of deliberations?.results ?? []" class="col-md-4">
+                <div
+                  *ngFor="let deli of deliberations?.results ?? []"
+                  class="col-md-4"
+                >
                   <div class="card shadow">
-                    
                     <div class="card-body text-center">
-                      <span class="lead text-center text-dark d-block">{{ deli.semester.name }}</span>
-                      <br>
-                      <button (click)="downloadBT(deli.semester)" class="btn btn-primary mx-3"  rippleEffect>{{ 'Télécharger le builtin'|translate }}</button>      
+                      <span class="lead text-center text-dark d-block">{{
+                        deli.semester.name
+                      }}</span>
+                      <br />
+                      <button
+                        (click)="downloadBT(deli.semester)"
+                        class="btn btn-primary mx-3"
+                        rippleEffect
+                      >
+                        {{ "Télécharger le builtin" | translate }}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -186,7 +231,7 @@
             >
             <ng-template ngbNavContent>
               <p>
-                Chocolate croissant cupcake croissant jelly donut. Cheesecake
+                Chocolate croissant cupcake croissant jelly donut. Cheesecakeœ
                 toffee apple pie chocolate bar biscuit tart croissant. Lemon
                 drops danish cookie. Oat cake macaroon icing tart lollipop
                 cookie sweet bear claw. Carrot cake dragée chocolate. Lemon

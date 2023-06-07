@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeliberationController;
+use App\Http\Controllers\StudentSubscribeController;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Deliberation;
@@ -17,11 +18,12 @@ use Illuminate\Support\Facades\Route;
  * ROUTE TESTES
  */
 
- Route::get('/deli/{deliberation}',[ DeliberationController::class, 'downloadResults']);
+Route::get('/deli/{deliberation}', [DeliberationController::class, 'downloadResults']);
+Route::get('student-subscribes/class-level-ecard/{classLevel}', [StudentSubscribeController::class, "classLevelEcard"]);
 
 Route::any('/', function () {
 
-    
+
 
 
     // DB::beginTransaction();
