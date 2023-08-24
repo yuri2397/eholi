@@ -16,11 +16,11 @@ class ClassLevelHasCourseController extends Controller
     public function index(Request $request)
     {
         $filter = $request->filter ? array_keys($request->input('filter')) : null;
-        
+
         $query = ClassLevelHasCourse::with($request->with ?: [])->whereSchoolId(
             school()->id
         );
-       
+
 
         if ($request->has('search_query') && $request->search_query) {
             if ($request->has('with') && in_array('course', $request->with)) {
@@ -38,7 +38,7 @@ class ClassLevelHasCourseController extends Controller
                 });
             }
 
-            
+
 
             if ($request->has('with') && in_array('semester', $request->with)) {
                 $query->orWhereHas('semester', function ($q) use ($request) {

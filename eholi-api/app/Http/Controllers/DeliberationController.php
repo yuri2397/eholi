@@ -313,7 +313,7 @@ class DeliberationController extends Controller
             'semester' => $deliberation->semester,
             'deliberation' => $deliberation,
             'school_year' => $deliberation->schoolYear,
-            'school' => School::find("78b4e080-3771-48aa-bffc-275899c3e65a"),
+            'school' => school(),
             'semester' => $deliberation->semester,
             'class_level' => $deliberation->classLevel,
             'headers' => $headers,

@@ -3,9 +3,11 @@
 use App\Http\Controllers\DeliberationController;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\ClassLevel;
 use App\Models\Deliberation;
 use App\Models\School;
 use App\Models\SchoolUser;
+use App\Models\Semester;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -20,9 +22,29 @@ use Illuminate\Support\Facades\Route;
  Route::get('/deli/{deliberation}',[ DeliberationController::class, 'downloadResults']);
 
 Route::any('/', function () {
+    $semesters = Semester::find(["b8a70299-ff6f-4d8e-a70f-62daffa74afc","4d03f0e5-594a-4905-a8a8-cd493a404e55"]);
 
+    $classes = ClassLevel::all();
+    foreach ($classes as $class_level) {
+            $class_level->semesters()->saveMany($semesters);
+    }
+
+    return $classes;
     
+    // $sem = [
+    //     "Semestre 1",
+    //     "Semestre 2",
+    //     "Semestre 3",
+    // ];
 
+    // foreach ($sem as $key => $value) {
+    //     $s = new Semester();
+    //     $s->name = $value;
+    //     $s->number = $key + 1;
+    //     $s->save();
+    // }
+
+    // return Semester::all();
 
     // DB::beginTransaction();
     // try {

@@ -61,10 +61,10 @@ export class DetailsTestExamsComponent implements OnInit {
           result.success = true;
           setTimeout(() => {
             result.success = false;
+            result.active = false;
           }, 2000);
         },
         error: (error) => {
-          console.log(error);
           result.loading = false;
         },
       });
@@ -74,6 +74,11 @@ export class DetailsTestExamsComponent implements OnInit {
     if (!this.editResult) {
       this.results.forEach((e) => (e.active = false));
     }
+  }
+
+  activeInput(result: any){
+    console.log(result)
+    result.active = true
   }
 
   confirmDeleteModal() {

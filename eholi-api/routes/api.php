@@ -265,72 +265,81 @@ Route::prefix('buildings')
 /**
  * TEST URL
  */
-Route::any(
-    'local',
-    function (Request $request) {
-        $timesTable = TimesTable::find('cd249943-76fc-49ab-b4ec-23cb35a43171');
+// Route::any(
+//     'local',
+//     function (Request $request) {
+//         // $timesTable = TimesTable::find('cd249943-76fc-49ab-b4ec-23cb35a43171');
 
-        // $school = school();
-        // $student = SchoolStudent::with($request->with ?? [])
-        //     ->join('students as S', 'S.id', 'school_students.student_id')
-        //     ->whereSchoolId($school->id)
-        //     ->where('school_students.status', true)
-        //     ->where('S.status', true)
-        //     ->limit(3)
-        //     ->get();
+//         $school = School::first();
+//         // $student = SchoolStudent::with($request->with ?? [])
+//         //     ->join('students as S', 'S.id', 'school_students.student_id')
+//         //     ->whereSchoolId($school->id)
+//         //     ->where('school_students.status', true)
+//         //     ->where('S.status', true)
+//         //     ->limit(3)
+//         //     ->get();
 
-        // foreach ($student as $value) {
-        //     $clhs = new ClassLevelHasStudent();
-        //     $clhs->student_id = $value->id;
-        //     $clhs->class_level_id = '005107dc-8949-4ea0-80b8-da7945dfec4a';
-        //     $clhs->save();
-        // }
-        // foreach (Student::all() as $value) {
-        //     event(new AssociateCustomerToSchool($school, $value));
-        // }
+//         // foreach ($student as $value) {
+//         //     $clhs = new ClassLevelHasStudent();
+//         //     $clhs->student_id = $value->id;
+//         //     $clhs->class_level_id = '005107dc-8949-4ea0-80b8-da7945dfec4a';
+//         //     $clhs->save();
+//         // }
+//         // foreach (Student::all() as $value) {
+//         //     event(new AssociateCustomerToSchool($school, $value));
+//         // }
 
-        // return SchoolStudent::all();
+//         // return SchoolStudent::all();
 
-        // $sy = new SchoolYear();
-        // $sy->start_at = now()->subYear();
-        // $sy->end_at = now();
-        // $sy->status = SchoolYear::INACTIVE;
-        // $sy->school_id = $school->id;
-        // $sy->save();
+//         // $sy = new SchoolYear();
+//         // $sy->start_at = now()->subYear();
+//         // $sy->end_at = now();
+//         // $sy->status = SchoolYear::INACTIVE;
+//         // $sy->school_id = $school->id;
+//         // $sy->save();
 
-        return school_year(true);
+//         // return school_year(true);
 
-        // DB::beginTransaction();
-        // try {
-        //     $admin = new Admin();
-        //     $admin->first_name = "Sophiatou";
-        //     $admin->last_name = "Mbathie";
-        //     $admin->email = "sophie.mbathie@holi.sn";
-        //     $admin->telephone = "786739908";
-        //     $admin->save();
+//     //     $school = new School();
 
-        //     $user = new User();
-        //     $user->username = 'sophie';
-        //     $user->password = Hash::make('password');
-        //     $user->owner()->associate($admin);
-        //     $user->save();
+//     // $school->reference = time();
+//     // $school->name = "Cours Privé Seydi Jamil";
+//     // $school->address = "Yeumbeul Nord, Route de Boune";
+//     // $school->email = "seydijamil.cp@digita.com";
+//     // $school->phone = "338340405";
+//     // $school->save();
 
-        //     $role = Role::whereName('Super Admin')->first();
-        //     $user->assignRole($role);
-        //     $user->syncPermissions($role->permissions);
+//     //     DB::beginTransaction();
+//     //     try {
+//     //         $admin = new Admin();
+//     //         $admin->first_name = "Sophiatou";
+//     //         $admin->last_name = "Mbathie";
+//     //         $admin->email = "sophie.mbathie@holi.sn";
+//     //         $admin->telephone = "786739908";
+//     //         $admin->save();
 
-        //     $school = School::first();
+//     //         $user = new User();
+//     //         $user->username = 'sophie';
+//     //         $user->password = Hash::make('password');
+//     //         $user->owner()->associate($admin);
+//     //         $user->save();
 
-        //     $schoolUser = new SchoolUser();
-        //     $schoolUser->user()->associate($admin);
-        //     $schoolUser->school_id = $school->id;
-        //     $schoolUser->save();
+//     //         $role = Role::whereName('Super Admin')->first();
+//     //         $user->assignRole($role);
+//     //         $user->syncPermissions($role->permissions);
 
-        //     DB::commit();
-        //     return $schoolUser->load(['user', 'school']);
-        // } catch (\Throwable $th) {
-        //     DB::rollBack();
-        //     return $th;
-        // }
-    }
-)->middleware(['auth:api', 'cors']);
+//     //         $school = School::first();
+
+//     //         $schoolUser = new SchoolUser();
+//     //         $schoolUser->user()->associate($admin);
+//     //         $schoolUser->school_id = $school->id;
+//     //         $schoolUser->save();
+
+//     //         DB::commit();
+//     //         return $schoolUser->load(['user', 'school']);
+//     //     } catch (\Throwable $th) {
+//     //         DB::rollBack();
+//     //         return $th;
+//     //     }
+//     }
+// )->middleware(['cors']);

@@ -5,6 +5,7 @@ import { Student, StudentMetaData } from "./../student.model";
 import { Paginate } from "./../../../../auth/models/base.model";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { ClassLevel } from '../../establishment/establishment.model';
 
 @Component({
   selector: "app-student-show",
@@ -16,6 +17,7 @@ export class StudentShowComponent implements OnInit {
   meta_data: StudentMetaData;
   results: any[] = [];
   deliberations: any;
+  class_level: ClassLevel;
   constructor(
     private _route: ActivatedRoute,
     private testService: ClassLevelTestExamService,
@@ -27,6 +29,7 @@ export class StudentShowComponent implements OnInit {
       (data: { student: Student; meta_data: StudentMetaData }) => {
         this.student = data.student;
         this.meta_data = data.meta_data;
+        this.class_level = this.meta_data.class_levels as any;
         console.log(data);
       }
     );
@@ -37,7 +40,7 @@ export class StudentShowComponent implements OnInit {
   }
 
   tutorType(type: string) {
-    return "tutor.select" + type;
+    return "tutor.select." + type;
   }
 
   downloadBT(semester: any){

@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClassLevelHasSemester extends AbstractModel
 {
+
     protected $fillable = ['class_level_id', 'semester_id'];
+    protected $timesTable = false;
 
     public function class_level()
     {

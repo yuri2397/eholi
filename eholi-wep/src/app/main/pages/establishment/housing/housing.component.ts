@@ -74,7 +74,7 @@ export class HousingComponent implements OnInit {
             console.log(result);
 
             if (result) {
-                this.rooms.data = [...[result, ...this.rooms.data]];
+                this._router.navigate([], { relativeTo: this._route, queryParams: this._route.queryParams, })
             }
         })
             .catch((_) => {

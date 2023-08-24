@@ -40,7 +40,7 @@ export class ClassLevelsComponent implements OnInit {
       })
       .result.then((result) => {
         if (result) {
-          this.class_levels.data = [result, ...this.class_levels.data]
+          this._router.navigate([], { relativeTo: this._route, queryParams: this._route.queryParams, queryParamsHandling: 'preserve' });
         }
       })
       .catch((_) => {});

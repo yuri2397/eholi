@@ -58,8 +58,7 @@ export class CoursesComponent implements OnInit {
             .result.then((result) => {
             console.log(result);
             if (result) {
-                this.courses.data = [result, ...this.courses.data];
-                this.courses.data = [...this.courses.data];
+                this._router.navigate([], { relativeTo: this._route, queryParams: this._route.queryParams, queryParamsHandling: 'merge' })
             }
         })
             .catch((_) => {

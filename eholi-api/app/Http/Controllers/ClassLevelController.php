@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ClassLevel;
 use App\Models\Level;
+use App\Models\Semester;
 use App\Models\TimesTable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClassLevelController extends Controller
 {
@@ -65,30 +67,35 @@ class ClassLevelController extends Controller
         $request->validate([
             'level_id' => 'required',
             'name' => 'required',
+            'ids' => ['required', 'array']
         ]);
 
-        $request->merge([
-            'school_year_id' => school_year()->id,
-            'school_id' => school()->id,
-        ]);
-
-        $class_level = ClassLevel::create($request->all());
-
-        // add semester from level
-        $semesters = Level::find($request->level_id)->semesters;
-        foreach ($semesters as $semester) {
-            $class_level->semesters()->create([
-                'semester_id' => $semester->id,
+        DB::beginTransaction();
+        try {
+            $request->merge([
+                'school_year_id' => school_year()->id,
+                'school_id' => school()->id,
             ]);
+
+            $class_level = ClassLevel::create($request->all());
+
+            // add semester from level
+            $semesters = Semester::find($request->ids);
+            $class_level->semesters()->saveManyQuietly($semesters);
+
+            $timesTable = new TimesTable();
+            $timesTable->class_level_id = $class_level->id;
+            $timesTable->school_year_id = school_year()->id;
+            $timesTable->save();
+
+            DB::commit();
+            return $class_level->refresh();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                "message" => $th->getMessage(),
+            ], 500);
         }
-
-        $timesTable = new TimesTable();
-
-        $timesTable->class_level_id = $class_level->id;
-        $timesTable->school_year_id = school_year()->id;
-        $timesTable->save();
-
-        return $class_level->refresh();
     }
 
     /**

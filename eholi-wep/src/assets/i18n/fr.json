@@ -570,6 +570,9 @@
       }
     }
   },
+  "school_year":{
+    "title": "Année Scolaire"
+  },
   "times_tables": {
     "title": "Emplois du temps",
     "messages": {

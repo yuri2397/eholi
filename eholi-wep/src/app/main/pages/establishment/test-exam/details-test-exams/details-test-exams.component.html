@@ -199,14 +199,17 @@
                                 <div *ngIf="!editResult" class="blur">Modifier</div>
                                 <div *ngIf="editResult">
                                     <div class="d-flex align-items-center">
-                                        <div (click)="(result.active = true)" class="input-group pointer has-validation">
+                                        <div  class="input-group pointer has-validation">
                                             <input [disabled]="!result.active" [(ngModel)]="result.note" type="number" class="form-control col-12 {{ result.note < 0 || result.note > test.max_note  ? 'is-invalid' :  ''}} " id="noteValidation" required>
                                             <div id="noteValidationError" class="invalid-feedback">
                                                 {{ 'test_results.note_error'|translate: {max_note: test.max_note} }}
                                             </div>
                                         </div>
+                                        <button (click)="activeInput(result)" *ngIf="!result.active" class="btn btn-danger btn-sm mx-2" >
+                                          <i  class="fa fa-edit"></i>
+                                        </button>
 
-                                        <button [disabled]="result.loading || !result.active" rippleEffect (click)="updateResult(result)" class="btn btn-{{ result.success ? 'success' : 'primary' }} btn-sm ml-2">
+                                        <button [disabled]="result.loading || !result.active" rippleEffect (click)="updateResult(result)" class="btn btn-{{ result.success ? 'success' : 'primary' }} btn-sm mx-1">
                                             <span
                                                     *ngIf="result.loading"
                                                     class="spinner-border spinner-border-sm"

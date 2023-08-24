@@ -42,7 +42,7 @@ export class ProfessorsComponent implements OnInit {
         console.log(result, 'result')
 
         if (result) {
-          this.professors.data = [result, ...this.professors.data]
+          this._router.navigate([], { relativeTo: this._route, queryParams: this._route.queryParams, queryParamsHandling: 'merge', })
         }
       })
       .catch((_) => {})

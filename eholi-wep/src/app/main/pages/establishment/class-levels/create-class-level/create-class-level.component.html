@@ -6,27 +6,47 @@
 </div>
 <div class="modal-body py-4" tabindex="0" ngbAutofocus>
     <form [formGroup]="form">
-        <div class="form-group">
-            <label class="form-control-label" for="name">{{ 'class_level.field.name'|translate }}</label>
-            <input class="form-control input-md" formControlName="name" type="text"
-                placeholder="{{ 'class_level.field.name'|translate }}" id="name"
-                [class.error]="name.invalid && (name.dirty || name.touched)">
-            <span *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-form">
-                <small class="form-text text-danger danger" *ngIf="name.errors?.['required']">{{
-                    'form.validation.errors.required'|translate }}</small>
-            </span>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label class="form-control-label" for="name">{{ 'class_level.field.name'|translate }}</label>
+                    <input class="form-control input-md" formControlName="name" type="text"
+                        placeholder="{{ 'class_level.field.name'|translate }}" id="name"
+                        [class.error]="name.invalid && (name.dirty || name.touched)">
+                    <span *ngIf="name.invalid && (name.dirty || name.touched)" class="invalid-form">
+                        <small class="form-text text-danger danger" *ngIf="name.errors?.['required']">{{
+                            'form.validation.errors.required'|translate }}</small>
+                    </span>
+                </div>
+        
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label class="form-control-label" for="level_id">{{ "class_level.field.level"|translate }}</label>
+                    <ng-select id="level_id" [placeholder]="'class_level.field.level'|translate" [items]="levels"
+                        bindLabel="name" formControlName="level_id" bindValue="id" readonly [loading]="selectLoading">
+                    </ng-select>
+                    <span *ngIf="level_id.invalid && (level_id.dirty || level_id.touched)" class="invalid-form">
+                        <small class="form-text text-danger danger" *ngIf="level_id.errors?.['required']">{{
+                            'form.validation.errors.required'|translate }}</small>
+                    </span>
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" for="level_id">{{ "class_level.field.level"|translate }}</label>
-            <ng-select id="level_id" [placeholder]="'class_level.field.level'|translate" [items]="levels"
-                bindLabel="name" formControlName="level_id" bindValue="id" readonly [loading]="selectLoading">
+            <label class="form-control-label" for="level_id">{{ "Selectionner les semestres"|translate }}</label>
+            <ng-select [items]="semesters" [multiple]="true" [closeOnSelect]="false"
+              [searchable]="true" bindLabel="name" placeholder="Selectionner les semestres"
+              formControlName="ids"
+              [(ngModel)]="selectMultiSelected">
+              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                <span class="ng-value-label"> {{ item.name }}</span>
+                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+              </ng-template>
             </ng-select>
-            <span *ngIf="level_id.invalid && (level_id.dirty || level_id.touched)" class="invalid-form">
-                <small class="form-text text-danger danger" *ngIf="level_id.errors?.['required']">{{
-                    'form.validation.errors.required'|translate }}</small>
-            </span>
-        </div>
+            <!--/ Basic Multi select -->
+          </div>
     </form>
 </div>
 <div class="modal-footer">

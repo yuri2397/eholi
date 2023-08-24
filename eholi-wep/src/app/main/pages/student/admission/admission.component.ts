@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 import { AdminissionService } from '../services/adminission.service'
 import { ToastrService } from 'ngx-toastr'
 import { Paginate } from 'app/auth/models/base.model'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-admission',
@@ -38,6 +39,7 @@ export class AdmissionComponent implements OnInit {
     private _admissionService: AdminissionService,
     private _toastrService: ToastrService,
     private _translateService: TranslateService,
+    private _localtion: Location
   ) {
     // transaltion service
     this._translateService
@@ -58,8 +60,6 @@ export class AdmissionComponent implements OnInit {
       .get(['content.notifications.confirm.create', 'content.btn'])
       .subscribe({
         next: (data: string[]) => {
-          console.log(data)
-
           let text = data['content.notifications.confirm.create']
           let btn = data['content.btn']
           Swal.fire({
@@ -84,13 +84,13 @@ export class AdmissionComponent implements OnInit {
     console.log(this.request)
     this._admissionService.create<any>(this.request).subscribe({
       next: (data) => {
-        console.log(data)
         this._toastrService.success(
           this._translateService.instant('content.notifications.success.title'),
           this._translateService.instant(
             'content.notifications.success.message',
           ),
-        )
+        );
+            this._localtion.back();
       },
       error: (error) => {
         this._toastrService.error(

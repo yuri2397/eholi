@@ -44,7 +44,7 @@ const routes: Routes = [
             class_levels: ClassLevelFullResolver,
             semesters: SemesterFullResolver,
         },
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        runGuardsAndResolvers: 'always',
         data: {
             animation: 'list',
         },
@@ -55,7 +55,7 @@ const routes: Routes = [
         resolve: {
             course: DetailCourseResolver
         },
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        runGuardsAndResolvers: 'always',
 
         data: {
             animation: 'details',
@@ -67,7 +67,7 @@ const routes: Routes = [
         resolve: {
             class_rooms: ClassRoomsResolver,
         },
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        runGuardsAndResolvers: 'always',
         data: {
             animation: 'list',
         },
@@ -78,7 +78,7 @@ const routes: Routes = [
         resolve: {
             class_levels: ClassLevelsResolver,
         },
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        runGuardsAndResolvers: 'always',
 
         data: {
             animation: 'list',
@@ -92,7 +92,7 @@ const routes: Routes = [
             students: StudentListResolver,
             test_exams: ClassLevelTestsResolver
         },
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        runGuardsAndResolvers: 'always',
         data: {
             animation: 'details',
         },
@@ -100,7 +100,7 @@ const routes: Routes = [
     {
         path: 'housing',
         component: HousingComponent,
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        runGuardsAndResolvers: 'always',
         resolve: {
             rooms: RoomResolver,
         },
@@ -111,7 +111,7 @@ const routes: Routes = [
     {
         path: 'school-years',
         component: SchoolYearsComponent,
-        runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+        runGuardsAndResolvers: 'always',
 
         resolve: {
             school_years: SchoolYearsResolver,

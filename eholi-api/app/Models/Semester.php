@@ -37,5 +37,7 @@ class Semester extends AbstractModel
         return $query->get();
     }
 
-    # filter by name
+    public function class_levels()  {
+        return $this->belongsToMany(ClassLevel::class, "class_level_has_semesters");
+    }
 }

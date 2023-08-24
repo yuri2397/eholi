@@ -43,7 +43,7 @@ export class ClassRoomsComponent implements OnInit {
       })
       .result.then((result) => {
         if (result) {
-          this.class_rooms.data = [result, ...this.class_rooms.data]
+          this._router.navigate([], { relativeTo: this._route, queryParams: this._route.queryParams, queryParamsHandling: 'merge' })
         }
       })
       .catch((_) => {})

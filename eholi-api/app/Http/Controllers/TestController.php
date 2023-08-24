@@ -33,9 +33,9 @@ class TestController extends Controller
             $query->where('school_has_professor_id', $request->school_has_professor_id);
         }
 
-        if ($request->has('level_has_semester_id')) {
-            $query->where('level_has_semester_id', $request->level_has_semester_id);
-        }
+        // if ($request->has('level_has_semester_id')) {
+        //     $query->where('level_has_semester_id', $request->level_has_semester_id);
+        // }
 
         if ($request->has('type')) {
             $query->where('type', $request->type);
