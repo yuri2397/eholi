@@ -56,6 +56,7 @@
         <ngx-datatable-column
           name="{{ 'test_exams.table.title' | translate }}"
           prop="title"
+          [minWidth]="250"
         >
         </ngx-datatable-column>
 
@@ -75,16 +76,14 @@
         </ngx-datatable-column>
 
         <ngx-datatable-column
-          name="{{ 'test_exams.table.max_note' | translate }}"
-          [maxWidth]="120"
-          prop="max_note"
+          name="{{ 'test_exams.table.semester' | translate }}"
+          prop="semester.name"
         >
         </ngx-datatable-column>
 
         <ngx-datatable-column
           name="{{ 'test_exams.table.type' | translate }}"
           prop="type"
-          [maxWidth]="120"
         >
           <ng-template let-type="value" ngx-datatable-cell-template>
             <ng-container *ngIf="type == 'exam'; else dutyTpl">
@@ -103,16 +102,15 @@
         <ngx-datatable-column
           name="{{ 'test_exams.table.status' | translate }}"
           prop="isFinish"
-          [maxWidth]="120"
         >
           <ng-template let-isFinish="value" ngx-datatable-cell-template>
             <ng-container *ngIf="isFinish; else isFinishTpl">
-              <span class="badge badge-pill badge-primary">
+              <span class="badge badge-pill badge-success">
                 Corrigé
               </span>
             </ng-container>
             <ng-template #isFinishTpl>
-              <span class="badge badge-pill badge-warning">
+              <span class="badge badge-pill badge-danger">
                 Non corrigé
               </span>
             </ng-template>
@@ -130,8 +128,8 @@
 
         <ngx-datatable-column
           name="{{ 'content.table.actions' | translate }}"
-          [maxWidth]="120"
           [sortable]="false"
+          [maxWidth]="100"
         >
           <ng-template let-row="row" ngx-datatable-cell-template>
             <div class="d-flex align-items-center">

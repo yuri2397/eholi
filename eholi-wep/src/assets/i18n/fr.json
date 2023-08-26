@@ -388,6 +388,7 @@
       "exam": "Examen",
       "duty": "Devoir",
       "status": "Statut",
+      "semester":"Semestre",
       "professor": "Professeur",
       "max_note": "Note maximale"
     },

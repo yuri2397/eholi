@@ -12,6 +12,7 @@ use App\Models\SchoolHasProfessor;
 use Illuminate\Support\Facades\DB;
 use App\Models\ClassLevelHasCourse;
 use App\Models\ClassLevelHasStudent;
+use App\Models\Deliberation;
 use App\Models\Student;
 
 class TestController extends Controller
@@ -79,7 +80,19 @@ class TestController extends Controller
             'school_has_professor_id' => SchoolHasProfessor::whereProfessorId($request->school_has_professor_id)->first()->id,
         ]);
 
+        $deliberation = Deliberation::whereSemesterId($request->semester_id)
+            ->whereClassLevelId($request->class_level_id)
+            ->whereSchoolYearId(school_year()->id)
+            ->first();
+
+        if ($deliberation) {
+            return response()->json([
+                "message" => "Imposible de programmer un nouveau test pour le semestre " . $deliberation->semester->number . ". Le semestre " . $deliberation->semester->number . " est déjà délibérer."
+            ], 422);
+        }
+
         DB::beginTransaction();
+
 
         try {
             $test = Test::create($request->all());
@@ -159,7 +172,7 @@ class TestController extends Controller
                 ->join('class_level_has_courses as CLC', 'tests.class_level_has_course_id', 'CLC.id')
                 ->join('class_level_has_students as CLS', 'CLS.id', "test_results.class_level_has_student_id")
                 ->where('CLS.student_id', $data['student_id'])->orderBy('tests.type', 'DESC')->select('test_results.*', 'tests.title', 'tests.type', 'tests.date', 'tests.max_note', 'CLC.coef')->get();
-                $resutl[] = $res;
+            $resutl[] = $res;
         }
 
         return $resutl;

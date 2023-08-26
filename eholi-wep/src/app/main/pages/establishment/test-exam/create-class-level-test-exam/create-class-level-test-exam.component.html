@@ -7,8 +7,7 @@
     type="button"
     class="close"
     (click)="modal.dismiss('cancel')"
-    aria-label="Close"
-  >
+    aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -29,8 +28,20 @@
             bindValue="id"
             ngModel
             (ngModelChange)="courseModelChange($event)"
-            formControlName="class_level_has_course_id"
-          >
+            formControlName="class_level_has_course_id">
+            <ng-template ng-option-tmp let-item="item" let-index="index"
+              let-search="searchTerm">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="d-inline-block">
+                  <span class="text-dark">{{ item?.course?.name }}</span>
+                </div>
+                <div class="d-inline-block">
+                  <span class="badge badge-info">{{ item?.professor?.first_name
+                    }} {{ item?.professor?.last_name }}</span> - <span
+                    class="badge badge-warning">{{ item?.semester?.name }}</span>
+                </div>
+              </div>
+            </ng-template>
           </ng-select>
           <span
             *ngIf="
@@ -38,13 +49,11 @@
               (class_level_has_course_id.dirty ||
                 class_level_has_course_id.touched)
             "
-            class="invalid-form"
-          >
+            class="invalid-form">
             <small
               class="form-text text-danger danger"
-              *ngIf="class_level_has_course_id.errors?.['required']"
-              >{{ "form.validation.errors.required" | translate }}</small
-            >
+              *ngIf="class_level_has_course_id.errors?.['required']">{{
+              "form.validation.errors.required" | translate }}</small>
           </span>
         </div>
       </div>
@@ -61,18 +70,15 @@
             [items]="types"
             bindLabel="label"
             bindValue="value"
-            formControlName="type"
-          >
+            formControlName="type">
           </ng-select>
           <span
             *ngIf="type.invalid && (type.dirty || type.touched)"
-            class="invalid-form"
-          >
+            class="invalid-form">
             <small
               class="form-text text-danger danger"
-              *ngIf="type.errors?.['required']"
-              >{{ "form.validation.errors.required" | translate }}</small
-            >
+              *ngIf="type.errors?.['required']">{{
+              "form.validation.errors.required" | translate }}</small>
           </span>
         </div>
       </div>
@@ -90,17 +96,14 @@
             type="datetime-local"
             id="date"
             placeholder="{{ 'test_exams.field.date' | translate }}"
-            [class.error]="date.invalid && (date.dirty || date.touched)"
-          />
+            [class.error]="date.invalid && (date.dirty || date.touched)" />
           <span
             *ngIf="date.invalid && (date.dirty || date.touched)"
-            class="invalid-form"
-          >
+            class="invalid-form">
             <small
               class="form-text text-danger danger"
-              *ngIf="date.errors?.['required']"
-              >{{ "form.validation.errors.required" | translate }}</small
-            >
+              *ngIf="date.errors?.['required']">{{
+              "form.validation.errors.required" | translate }}</small>
           </span>
         </div>
       </div>
@@ -162,8 +165,7 @@
               selectedCourse?.professor?.first_name +
               ' ' +
               selectedCourse?.professor?.last_name
-            "
-          />
+            " />
         </div>
       </div>
       <div class="col">
@@ -174,8 +176,7 @@
           <input
             class="form-control input-md"
             disabled
-            [value]="selectedCourse?.semester?.name"
-          />
+            [value]="selectedCourse?.semester?.name" />
         </div>
       </div>
     </div>
@@ -189,8 +190,7 @@
       type="reset"
       class="btn btn-outline-secondary"
       (click)="modal.dismiss('cancel')"
-      rippleEffect
-    >
+      rippleEffect>
       {{ "content.btn.cancel" | translate }}
     </button>
     <button
@@ -198,14 +198,12 @@
       [disabled]="!form.valid || createdLoad"
       (click)="submit(form.value)"
       class="btn btn-primary mr-1"
-      rippleEffect
-    >
+      rippleEffect>
       <span
         *ngIf="createdLoad"
         class="spinner-border spinner-border-sm"
         role="status"
-        aria-hidden="true"
-      ></span>
+        aria-hidden="true"></span>
       {{ "content.btn.submit" | translate }}
     </button>
   </div>

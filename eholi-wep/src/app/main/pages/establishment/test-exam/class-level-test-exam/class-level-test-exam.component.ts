@@ -37,6 +37,7 @@ export class ClassLevelTestExamComponent implements OnInit {
     this._route.data.subscribe(data => {
       console.log(data);
         this.tests = data.test_exams;
+        this.tests = this.tests.sort((a, b) => a.semester.number - b.semester.number)
     });
   }
 
@@ -51,8 +52,7 @@ export class ClassLevelTestExamComponent implements OnInit {
         .result.then((result) => {
       console.log(result);
       if (result) {
-        this.tests = [result, ...this.tests];
-        this.tests = [...this.tests];
+        this._router.navigate([], { relativeTo: this._route, queryParams: this._route.queryParams })
       }
     }).catch((_) => {});
   }

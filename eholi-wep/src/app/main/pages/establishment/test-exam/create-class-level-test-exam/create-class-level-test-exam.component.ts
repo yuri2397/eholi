@@ -14,6 +14,7 @@ import {ProfessorsService} from '../../../professors/professors.service';
 import {finalize, first} from 'rxjs/operators';
 import {ClassLevelTestExamService} from '../../services/class-level-test-exam.service';
 import {ClassLevelCourse} from '../../models/class-level-course.model';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-create-class-level-test-exam',
@@ -127,8 +128,7 @@ export class CreateClassLevelTestExamComponent implements OnInit {
             .pipe(finalize(() => (this.courseSearchLoad = false)))
             .subscribe({
                 next: (response: any) => {
-                    console.log(response);
-                    this.coursesList = response;
+                    this.coursesList = (response as ClassLevelCourse[]).sort((a, b) => a.semester.number - b.semester.number)
                 },
                 error: (errors) => {
                     console.log(errors);
@@ -138,13 +138,11 @@ export class CreateClassLevelTestExamComponent implements OnInit {
 
     submit(form: any) {
         this.createdLoad = true;
-        console.log(form);
         this._examService
             .create(form)
             .pipe(finalize(() => (this.createdLoad = false)))
             .subscribe({
                 next: (response) => {
-                    console.log(response);
                     this._toastrService.success(
                         this._translateService.instant('test_exams.create.message.success'),
                         this._translateService.instant('content.notifications.title')
@@ -153,20 +151,21 @@ export class CreateClassLevelTestExamComponent implements OnInit {
                 },
                 error: (errors) => {
                     console.log(errors);
-                    this._toastrService.error(
-                        this._translateService.instant('test_exams.create.message.error'),
-                        this._translateService.instant('content.notifications.title')
-                    );
+                    Swal.fire({
+                        title: this._translateService.instant('content.notifications.title'),
+                        text: errors,
+                        icon: "error",
+                        showCancelButton: false,
+                      });
                 },
             });
     }
 
     courseModelChange(change: any) {
-        console.log('courseModelChange', change);
         this.selectedCourse = this.coursesList.find((course) => course.id === change) ;
         this.form.patchValue({
             max_note: this.selectedCourse?.max_note,
-            title: `Teste - ${this.selectedCourse?.course?.name}`,
+            title:`Teste - ${this.selectedCourse?.course?.name}`,
             school_has_professor_id: this.selectedCourse?.professor?.id,
         });
     }

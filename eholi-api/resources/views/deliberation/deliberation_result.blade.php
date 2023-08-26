@@ -34,7 +34,7 @@
     </header>
     <main>
         <br>
-        <h5 class="text-center">{{ $school->name }}</h5>
+        <h5 class="text-center">Résultats de la délibération</h5>
         <br>
         <table class="table table-bordered table-striped">
             <thead>

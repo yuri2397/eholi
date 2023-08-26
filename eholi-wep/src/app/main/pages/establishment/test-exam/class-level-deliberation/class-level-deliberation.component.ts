@@ -1,3 +1,4 @@
+import { finalize } from "rxjs/operators";
 import { Semester } from "./../../models/semester.model";
 import {
   ClassLevelSemester,
@@ -53,7 +54,7 @@ export class ClassLevelDeliberationComponent implements OnInit {
     let deliberation = this.deliberations.find(
       (del) => del.semester_id === semester.id
     );
-    this._router.navigate(['/pages/test-exams/deliberation',deliberation.id], {
+    this._router.navigate(["/pages/test-exams/deliberation", deliberation.id], {
       relativeTo: this._route,
       queryParams: {
         semester_id: semester.id,
@@ -70,7 +71,7 @@ export class ClassLevelDeliberationComponent implements OnInit {
           this._storeDeliberation(semester);
         },
         error: (errors) => {
-          console.log(errors);
+          semester.loading = false;
           Swal.fire({
             title: "Attention !!!",
             text: errors,
@@ -88,12 +89,19 @@ export class ClassLevelDeliberationComponent implements OnInit {
         class_level_id: this.classLevelId,
         semester_id: semester.id,
       })
+      .pipe(finalize(() => (semester.loading = false)))
       .subscribe({
         next: (data) => {
-          console.log(data);
+          this.routerToDetails(semester);
         },
         error: (errors) => {
           console.log(errors);
+          Swal.fire({
+            title: "Oups !!!",
+            text: errors,
+            icon: "error",
+            showCancelButton: false,
+          });
         },
       });
   }

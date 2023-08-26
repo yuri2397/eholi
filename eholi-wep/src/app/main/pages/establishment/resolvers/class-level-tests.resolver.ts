@@ -18,7 +18,7 @@ export class ClassLevelTestsResolver implements Resolve<TestExam[]> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<TestExam[]> {
     return this._testExamService.index({
       class_level_id: route.queryParams.class_level_id,
-      'with[]': ['class_level_has_course.professor', 'class_level_has_course.course']
+      'with[]': ['class_level_has_course.professor', 'class_level_has_course.course', 'semester']
     }).pipe(first()) as Observable<TestExam[]>;
   }
 }

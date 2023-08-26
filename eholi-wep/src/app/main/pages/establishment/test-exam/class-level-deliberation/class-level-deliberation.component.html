@@ -4,8 +4,7 @@
     <img
       src="assets/images/illustration/email.svg"
       alt="Meeting Pic"
-      height="170"
-    />
+      height="170" />
   </div>
   <div class="card-body">
     <div class="meetup-header d-flex align-items-center">
@@ -28,36 +27,34 @@
   <div class="row">
     <div
       *ngFor="let item of classLevelSemester.semesters"
-      class="card shadow-sm col mx-2 pointer"
-    >
+      class="card shadow-sm col mx-2 pointer">
       <div class="card-body text-center">
         <h2 class="h3 bold">SEMESTRE {{ item.number }}</h2>
-        <span class="lead badge badge-{{  item.created ? 'success' : 'danger' }}">{{
+        <span
+          class="lead badge badge-{{  item.created ? 'success' : 'danger' }}">{{
           item.created ? "Déjà déliberé" : "Non délibéré"
-        }}</span>
+          }}</span>
       </div>
       <div class="card-body">
         <div class="d-flex align-items-center">
           <button
             class="btn btn-info ml-1"
-            rippleEffect
+            [disabled]="item.loading"
             (click)="startDeliberation(item)"
-            *ngIf="!item.created"
-          >
-            <i data-feather="check" class="mr-0 mr-sm-1"></i>
-            <span class="d-none d-sm-inline-block"
-              >Démarer la délibération</span
-            >
+            *ngIf="!item.created">
+            <span
+              *ngIf="item.loading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"></span>
+            <span class="d-none d-sm-inline-block">Lancer la délibération</span>
           </button>
           <button
             class="btn btn-warning ml-1"
             rippleEffect
             (click)="routerToDetails(item)"
-            *ngIf="item.created"
-
-          >
-            <i data-feather="list" class="mr-0 mr-sm-1"></i>
-            <span class="d-none d-sm-inline-block">Vérifier les résultats</span>
+            *ngIf="item.created">
+            <span class="d-none d-sm-inline-block">Afficher les résultats</span>
           </button>
         </div>
       </div>
