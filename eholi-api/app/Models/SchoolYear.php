@@ -12,7 +12,7 @@ class SchoolYear extends AbstractModel
     public const ACTIVE = 'active';
     public const INACTIVE = 'inactive';
 
-    protected $fillable = ['name', 'start_at', 'end_at', 'status', 'school_id'];
+    protected $fillable = ['start_at', 'end_at', 'status', 'school_id'];
     // appends
     protected $appends = ['start_end'];
 

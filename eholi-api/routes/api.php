@@ -132,7 +132,7 @@ Route::prefix('students')
         Route::get('/', 'index');
         Route::get('{id}', 'show');
         Route::get('dashboard', 'dashboard');
-
+        Route::post('/update-avatar/{student}', 'updateAvatar');
         Route::post('', 'store');
         Route::put('/{student}', 'update');
         Route::get('/{student}/meta-data', 'metaData');
@@ -160,7 +160,14 @@ Route::prefix('times-tables')
  */
 Route::prefix('student-subscribes')
     ->middleware(['auth:api', 'cors'])
-    ->apiResource('student-subscribes', StudentSubscribeController::class);
+    ->controller(StudentSubscribeController::class)
+    ->group(function () {
+        Route::get('/', 'index');
+        Route::get('class-level-ecard/{classLevel}', 'classLevelEcard');
+        Route::post('my-ecard','myECard');
+        Route::get('/{id}', 'show');
+        Route::put('/{id}', 'update');
+    });
 
 /**
  * ClassRoom
@@ -206,7 +213,8 @@ Route::prefix('tests')
     ->controller(TestController::class)
     ->group(function () {
         Route::get('/', 'index');
-        Route::get('/student-tests-result','studentTests' );
+        Route::get('/student-tests-result', 'studentTests');
+        Route::post('/download-results', "downloadResults");
         Route::get('/{test}', 'show');
         Route::post('/', 'store');
         Route::put('/{test}', 'update');
@@ -232,6 +240,8 @@ Route::prefix('deliberations')
         // crud 
         Route::get('/', 'index');
         Route::get('/student-results', 'studentDeliberation');
+        Route::put('/confirm-deliberation/{deliberation}', 'confirmDeliberation');
+        Route::post('/recreate-deliberation/{deliberation}', "reCreateDeliberation");
         Route::post('/download-builtin', 'downloadStudentBultin');
         Route::get('/{deliberation}', 'show');
         Route::post('/', 'store');
@@ -249,7 +259,7 @@ Route::prefix('rooms')
     ->apiResource('rooms', RoomController::class);
 
 /**
- * Room
+ * Admissions
  */
 Route::prefix('admissions')
     ->middleware(['auth:api', 'cors'])

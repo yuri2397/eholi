@@ -139,6 +139,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
             {app: {appLanguage: language}},
             {emitEvent: true},
         );
+        localStorage.setItem('lang', language);
     }
 
     /**

@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Deliberation extends AbstractModel
 {
-    use HasFactory;
+    const FINISH = "finish";
+    const APPEND = "append";
+    const CANCEL = "cancel";
 
     protected $fillable = [
         'school_year_id',
         'semester_id',
         'class_level_id',
+        'status'
     ];
 
     protected $with = [
@@ -39,7 +42,8 @@ class Deliberation extends AbstractModel
         return $this->hasMany(DeliberationItemResult::class);
     }
 
-    public function deliberationItems()  {
+    public function deliberationItems()
+    {
         return $this->hasMany(DeliberationItem::class);
     }
 

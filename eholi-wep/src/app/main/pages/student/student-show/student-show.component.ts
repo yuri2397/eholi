@@ -1,4 +1,7 @@
-import { Utils } from './../../../../auth/helpers/utils';
+import { first } from 'rxjs/operators';
+import { StudentSubscribeService } from './../../establishment/services/student-subscribes.service';
+import { StudentService } from "./../student.service";
+import { Utils } from "./../../../../auth/helpers/utils";
 import { ClassLevelTestExamService } from "./../../establishment/services/class-level-test-exam.service";
 import { DeliberationService } from "./../../establishment/services/deliberationservice";
 import { Student, StudentMetaData } from "./../student.model";
@@ -18,10 +21,14 @@ export class StudentShowComponent implements OnInit {
   results: any[] = [];
   deliberations: any;
   class_level: ClassLevel;
+  file: any;
+  previewImage: any;
   constructor(
     private _route: ActivatedRoute,
     private testService: ClassLevelTestExamService,
-    private _delService: DeliberationService
+    private _delService: DeliberationService,
+    private _studentService: StudentService,
+    private _studenSubService: StudentSubscribeService
   ) {}
 
   ngOnInit(): void {
@@ -43,19 +50,64 @@ export class StudentShowComponent implements OnInit {
     return "tutor.select." + type;
   }
 
-  downloadBT(deliberation: any){
-    this._delService.downloadBT({
-      'student_id': this.student.id,
-      'semester_id': deliberation.semester.id,
-      'deliberation_id': deliberation.id
-    }).subscribe({
+  myEcard(){
+    this._studenSubService.myEcard({
+      student_id: this.student.id,
+      class_level_id: this.meta_data['class_levels'].id,
+    }).pipe(first()).subscribe({
       next: (response: any) => {
         Utils.printContentHtml(response, this.student.first_name + " " + this.student.last_name + "_builtin");
       },
-      error: (error) => {
-        console.log(error)
+      error: (error: any) =>{
+        console.log(error);
       }
-    })
+    });
+  }
+
+  
+
+  onFileChosed(data: any) {
+    console.log(data);
+    const file: File = data.target.files[0];
+    if (file) {
+      // const reader = new FileReader();
+      // reader.readAsDataURL(file);
+      // reader.onload = () => {
+      //   console.log(reader.result);
+      //   this.previewImage = reader.result;
+      // };
+      console.log(file)
+      let updatedAvatarFormData = new FormData();
+      updatedAvatarFormData.append("image", file);
+      this._studentService
+        .updateAvatar(updatedAvatarFormData, this.student.id)
+        .subscribe({
+          next: (response: Student) => {
+            console.log(response);
+            this.student.media = [...response.media];
+          },
+          error: (errors) => {
+            console.log(errors);
+          },
+        });
+    }
+  }
+  downloadBT(semester: any) {
+    this._delService
+      .downloadBT({
+        student_id: this.student.id,
+        semester_id: semester.id,
+        deliberation_id: this.deliberations.deliberation.id,
+      })
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+          Utils.printContentHtml(response, "bulletin");
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 
   getTests(event: any) {
@@ -73,17 +125,19 @@ export class StudentShowComponent implements OnInit {
   }
 
   getDeliberation(event: any) {
-    this._delService.studentDeliberation({
-      student_id: this.student.id,
-      class_level_id: this.meta_data?.class_levels?.id,
-    }).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this.deliberations = response;
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
+    this._delService
+      .studentDeliberation({
+        student_id: this.student.id,
+        class_level_id: this.meta_data?.class_levels?.id,
+      })
+      .subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.deliberations = response;
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
   }
 }

@@ -24,12 +24,17 @@ class DeliberationItem extends AbstractModel
     const VERY_WEAK = 'very_weak';
     const ANY = 'any';
 
+    const PASSER = "passer";
+    const REDOUBLER = "redoubler";
+    const REPECHER = "repecher";
+
     protected $fillable = [
         'deliberation_id',
         'average',
         'status',
         'mention',
         'class_level_has_student_id',
+        'decision'
     ];
 
     public function deliberation()

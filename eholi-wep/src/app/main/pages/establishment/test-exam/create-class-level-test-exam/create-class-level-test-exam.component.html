@@ -91,7 +91,7 @@
           </label>
 
           <input
-            class="form-control input-md"
+            class="form-control input-md lead bold"
             formControlName="date"
             type="datetime-local"
             id="date"
@@ -159,7 +159,7 @@
             {{ "course.table.professor" | translate }}
           </label>
           <input
-            class="form-control input-md"
+            class="form-control input-md  lead bold"
             disabled
             [value]="
               selectedCourse?.professor?.first_name +
@@ -174,12 +174,13 @@
             {{ "course.table.semester" | translate }}
           </label>
           <input
-            class="form-control input-md"
+            class="form-control input-md lead bold"
             disabled
             [value]="selectedCourse?.semester?.name" />
         </div>
       </div>
     </div>
+   
   </form>
 </div>
 

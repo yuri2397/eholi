@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Déliration - {{ $class_level->name }} - {{ $semester->name }}</title>
-    <link rel="stylesheet" href="http://localhost:8000/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ $appUrl }}/css/bootstrap.min.css">
     <style>
         * {
             font-family: "Helvetica", sans-serif;
@@ -33,6 +33,10 @@
             display: block;
         }
 
+        .bg-s{
+            background-color: #eeeeeed7;
+        }
+
         .lead {
             font-size: 14px;
         }
@@ -56,23 +60,28 @@
         <br>
 
         <div class="text-center">
-            <span class="line"></span>
-            <span class="h5 d-block bold">BULLETIN DE NOTES</span>
-            <span class="line"></span>
+            <span class="h5 d-block bold bg-s">BULLETIN DE NOTES</span>
         </div>
         <br>
-        <div class="d-flex align-items-center justify-content-between">
-            <span class="lead d-inline-block">Prénoms: <span class="bold">{{ $student->first_name }}</span> </span>
-            <span class="lead d-inline-block">Nom: <span class="bold">{{ $student->last_name }}</span> </span>
-        </div>
-        <div class="d-flex align-items-center justify-content-between">
-            <span class="lead d-inline-block">Né(e) le: <span class="bold">{{ date('d-M-Y', strtotime($student->birth_at)) }}</span> </span>
-            <span class="lead d-inline-block">à: <span class="bold">{{ $student->birth_in }}</span> </span>
-            <span class="lead d-inline-block">Classe: <span class="bold">{{ $class_level->name }}</span> </span>
-        </div>
-        <div class="d-flex align-items-center justify-content-between">
-            <span class="lead d-inline-block">Matricule: <span class="bold text-uppercase">{{ $student->reference }}</span> </span>
-            <span class="lead d-inline-block">Nb élèves: <span class="bold">{{ $nb_students }}</span> </span>
+        <div class="d-flex align-items-start justify-content-between">
+            <div>
+                <span class="lead d-inline-block">Matricule: <span class="bold text-uppercase">{{ $student->reference }}</span> </span>
+                <span class="lead d-block">Prénom(s): <span class="bold">{{ $student->first_name }}</span> </span>
+                <span class="lead d-block">Nom: <span class="bold">{{ $student->last_name }}</span> </span>
+                <span class="lead d-block">Né(e) le: <span class="bold">{{ date('d-m-Y', strtotime($student->birth_at)) }} </span>à <span class="bold">{{ $student->birth_in }} </span>
+                <span class="lead d-block">Sexe: <span class="bold text-uppercase">@if ($student->sexe == "m")
+                    Masculin
+                @else
+                    Féminin
+                @endif</span> </span>
+
+            </div>
+            <div>
+                <span class="lead d-block">Tel: <span class="bold text-capitalize">{{ $school->phone }}</span> </span>
+                <span class="lead d-block">Email: <span class="bold">{{ $school->email }}</span> </span>
+                <span class="lead d-block">Classe: <span class="bold">{{ $class_level->name }}</span> </span>
+                <span class="lead d-block">Nb. apprenants: <span class="bold">{{ $nb_students }}</span> </span>
+            </div>
         </div>
         <br>
         <table class="table table-bordered table-striped">
@@ -120,39 +129,112 @@
                 </tr>
             </tbody>
             <br>
-           
+
         </table>
+        @if ($is_last_semester)
         <div class="row">
             <div class="col">
-                {{--  Admin, Rebouble, Exclu avec des case à coche  --}}
-                <div class="col d-inline-block w-100"  >
-                <span class="lead bold">Appréciation du conseils de classe:</span>
+                {{-- Admin, Rebouble, Exclu avec des case à coche  --}}
+                <div class="col d-inline-block w-100">
+                    <span class="lead bold">Appréciation du conseils de classe:</span>
 
-                     <table class="table table-bordered">
+                    <table class="table table-bordered">
                         <tr>
                             <td>Admis(e) en classe superieur</td>
-                            <td>.</td>
+                            <td>@if ($deliberation_item->decision != 'redoubler')
+                                <span class="lead bold h2">X</span>
+                                @endif</td>
                         </tr>
                         <br>
                         <tr>
                             <td>Autorisé(e) à redoublé(e)</td>
-                            <td>.</td>
+                            <td>@if ($deliberation_item->decision == 'redoubler')
+                                <span class="lead bold h2">X</span>
+                                @endif</td>
                         </tr>
                         <br>
                         <tr>
                             <td>Exclusion</td>
                             <td>.</td>
                         </tr>
-                     </table>
+                    </table>
+                </div>
+            </div>
+            <div class="col d-inline-block w-100">
+                <span class="lead bold">Chef de l'établissement</span> <br>
+                <br>
+                <div class="border border-1 d-inline-block w-100" style="height: 100px"></div>
+            </div>
+        </div>
+        @else
+        <div class="row">
+            <div class="col">
+                {{-- Admin, Rebouble, Exclu avec des case à coche  --}}
+                <div class="col d-inline-block w-100">
+                    <span class="lead bold">Appréciation du conseils de classe:</span>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Travail excellent</td>
+                            <td>
+                                @if ($deliberation_item->mention == 'excellent')
+                                <span class="lead bold h2 text-center">X</span>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Satisfaissant doit continuer</td>
+                            <td>
+                                @if ($deliberation_item->mention == 'very_good' || $deliberation_item->mention == "good")
+                                <span class="lead bold h2 text-center">X</span>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Peut mieux faire</td>
+                            <td>
+                                @if ($deliberation_item->mention == 'passable')
+                                <span class="lead bold h2 text-center">X</span>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Insuffisant</td>
+                            <td>
+                                @if ($deliberation_item->mention == 'mediocre')
+                                <span class="lead bold h2 text-center">X</span>
+                                @endif
+                            </td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td>Risque de redoubler</td>
+                            <td>
+                                @if ($deliberation_item->mention == 'weak')
+                                <span class="lead bold h2 text-center">X</span>
+                                @endif
+                            </td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td>Risque l'exclusion</td>
+                            <td>
+                                @if ($deliberation_item->mention == 'very_weak')
+                                <span class="lead bold h2 text-center">X</span>
+                                @endif
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
             </div>
             <div class="col d-inline-block w-100">
                 <span class="lead bold">Le directeur</span> <br>
                 <br>
-                <div class="border border-1 d-inline-block w-100" style="height: 100px" ></div>
+                <div class="border border-1 d-inline-block w-100" style="height: 100px"></div>
             </div>
         </div>
+        @endif
+
     </main>
 </body>
 </html>

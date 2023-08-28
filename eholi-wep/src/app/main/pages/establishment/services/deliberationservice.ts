@@ -5,7 +5,7 @@ import { Paginate } from "app/auth/models/base.model";
 import { Param } from "app/auth/models/data.model";
 import { AbstractService } from "app/shared/abstract.service";
 import { ClassLevel } from "../establishment.model";
-import { tap } from "rxjs/operators";
+import { first, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -27,6 +27,16 @@ export class DeliberationService extends AbstractService {
         responseType: "html" as "json",
       })
       .pipe(tap(() => console.log(`chiffre d'affaire fiche`)));
+  }
+
+  reCreateDeliberation(data: any, deliberation: Deliberation){
+    let url = `${this.endpoint}/recreate-deliberation/${deliberation.id}`;
+    return this._ch.post(url, data, ).pipe(first());
+  }
+
+  confirmDeliberation(deliberation: Deliberation){
+    let url = `${this.endpoint}/confirm-deliberation/${deliberation.id}`;
+    return this._ch.put(url, deliberation);
   }
 
   studentDeliberation(data: any) {

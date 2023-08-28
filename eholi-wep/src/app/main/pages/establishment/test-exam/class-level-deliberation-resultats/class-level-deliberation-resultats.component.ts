@@ -27,70 +27,60 @@ export class ClassLevelDeliberationResultatsComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.data.subscribe((data) => {
-      console.log(data);
       this.deliberation = data.deliberation?.deliberation;
-      this.results = data.deliberation?.results;
+      // this.results = data.deliberation?.results;
+    });
+    this.downloadResult();
+  }
+
+  printResults() {
+    Utils.printContentHtml(this.results);
+  }
+
+  confirmDeliberation(item: any) {
+    Swal.fire({
+      title: "Attention !!!",
+      text: "Si vous confirmez la déliberation, il vous sera impossible de revenir en arriere. Vous aura plus la possibilité de le supprimer ou de le mofidier. Etes-vous sûr?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Je confirme",
+      cancelButtonText: "Annuler",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._deliService.confirmDeliberation(this.deliberation).subscribe({
+          next: (response: any) => {
+            this.deliberation = response;
+            Swal.fire({
+              title: "Félicitation.",
+              text: "Déliberation finalisée avec succès.",
+              icon: "success",
+              showCancelButton: false,
+            })
+          },
+          error: (errors: any) => {
+            console.log(errors);
+            Swal.fire({
+              title: "Erreur !!!",
+              text: errors,
+              icon: "error",
+              showCancelButton: false,
+            })
+          },
+        });
+      }
     });
   }
 
   downloadResult() {
     this._deliService.downloadResults(this.deliberation).subscribe({
-      next: (response) => {
-        console.log(response);
-        Utils.printContentHtml(response);
+      next: (response: any) => {
+        this.results = response;
       },
       error: (err) => {
         console.log(err);
       },
     });
-  }
-
-  removeDeliberation() {
-    Swal.fire({
-      title: "Attention !!!",
-      text: "Vous êtes entrain de supprimer un déliberation. Cette action entrainne la suppression définitive de la délibération. Si vous voulez continuer, clique sur 'valider'",
-      icon: "error",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Valider",
-      cancelButtonText: "Annuler",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this._removeDeliberation();
-      }
-    });
-  }
-  private _removeDeliberation() {
-    this._deliService
-      .delete(this.deliberation.id)
-      .pipe()
-      .subscribe({
-        next: (response) => {
-          Swal.fire({
-            title: "Félicitation",
-            text: "Déliberation supprimé avec succès",
-            icon: "success",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Fermer",
-          }).then((_) => {
-            this.location.back();
-          });
-        },
-        error: (errors) => {
-          console.log(errors);
-          Swal.fire({
-            title: "Oups !!!",
-            text: "Une erreur s'est produit lors de la suppression.",
-            icon: "error",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Fermer",
-          })
-        },
-      });
   }
 }

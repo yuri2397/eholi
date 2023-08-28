@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Deliexit extends Model
+class Surah extends AbstractModel
 {
-    use HasFactory;
+    protected $fillable = ['name', 'number', 'tr_name', 'revelation_type'];
 }

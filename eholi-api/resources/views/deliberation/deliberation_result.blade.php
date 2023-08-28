@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Déliration - {{ $class_level->name }} - {{ $semester->name }}</title>
-    <link rel="stylesheet" href="http://localhost:8000/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ $appUrl }}/css/bootstrap.min.css">
     <style>
         td {
             font-size: 12px;
@@ -14,7 +14,7 @@
         th {
             font-size: 12px;
             font-weight: bold;
-            text-transform: uppercase;
+            text-transform: capitalize;
         }
 
     </style>
@@ -47,7 +47,6 @@
             <tbody>
                 @foreach ($rows as $row)
                 <tr>
-                    <td class="text-uppercase">{{ $row['student']['reference'] }}</td>
                     <td class="text-uppercase">{{ $row['student']['first_name'] }} {{ $row['student']['last_name'] }}</td>
                     @foreach ($row['notes'] as $note)
                     <td class="text-center"> {{ $note['average'] }} </td>

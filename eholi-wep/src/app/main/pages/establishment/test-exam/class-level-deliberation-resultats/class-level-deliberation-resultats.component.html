@@ -8,36 +8,25 @@
     />
   </div> -->
   <div class="card-body">
-    <div
-      class="d-flex align-items-center justify-content-between ">
-      <div class="meetup-header d-flex align-items-center">
-        <div class="meetup-day">
-          <h6 class="mb-0 h3">{{ deliberation.semester.name }}</h6>
-          <span class="mb-0 h1 bold">{{ deliberation.class_level.name }}</span>
-        </div>
-        <button
-          class="btn btn-warning "
-          rippleEffect
-          (click)="downloadResult()">
-          <i data-feather="list" class="mr-0 mr-sm-1"></i>
-          <span class="d-none d-sm-inline-block">Vérifier les résultats</span>
-        </button>
+    <div class="meetup-header d-flex align-items-center">
+      <div class="meetup-day">
+        <h6 class="mb-0 h3">{{ deliberation.semester.name }}</h6>
+        <span class="mb-0 h1 bold">{{ deliberation.class_level.name }}</span>
       </div>
-
       <button
-        class="btn btn-danger"
+        class="btn btn-warning ml-1"
         rippleEffect
-        (click)="removeDeliberation()">
-        <i data-feather="trash" class="mr-0 mr-sm-1"></i>
-        <span class="d-none d-sm-inline-block">Supprimer la délibération</span>
+        (click)="downloadResult()"
+      >
+        <i data-feather="list" class="mr-0 mr-sm-1"></i>
+        <span class="d-none d-sm-inline-block">Vérifier les résultats</span>
       </button>
-
     </div>
   </div>
 </div>
 <br />
 
-<ngb-accordion [closeOthers]="true">
+ <ngb-accordion [closeOthers]="true">
   <ngb-panel *ngFor="let item of results">
     <ng-template ngbPanelTitle>
       <span class="lead collapse-title h2 bold">{{ item.course.name }}</span>
@@ -68,4 +57,9 @@
       </ngx-datatable>
     </ng-template>
   </ngb-panel>
-</ngb-accordion>
+</ngb-accordion> 
+
+
+<div class="card card-body">
+  <div [innerHTML]="results"></div>
+</div>

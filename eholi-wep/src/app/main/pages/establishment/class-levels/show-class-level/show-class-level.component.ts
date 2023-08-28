@@ -1,3 +1,5 @@
+import { Utils } from './../../../../../auth/helpers/utils';
+import { EcardService } from './../../../ecard/ecard.service';
 import {Student} from '../../../student/student.model';
 import {Paginate} from '../../../../../auth/models/base.model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -28,6 +30,7 @@ export class ShowClassLevelComponent implements OnInit {
         private _route: ActivatedRoute,
         private _translateService: TranslateService,
         private _router: Router,
+        private _ecardService: EcardService
     ) {
     }
 
@@ -63,6 +66,17 @@ export class ShowClassLevelComponent implements OnInit {
 
     paginateCourse(page?: any) {
 
+    }
+
+    ecard(){
+        this._ecardService.classLevelEcard(this.class_level.id).subscribe({
+            next: (response: any) =>{
+                Utils.printContentHtml(response, "carte_etudiants")
+            },
+            error: errors => {
+                console.log(errors)
+            }
+        })
     }
 
     ngOnInit(): void {

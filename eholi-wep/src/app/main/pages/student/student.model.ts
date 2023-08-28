@@ -15,6 +15,11 @@ export class Student extends BaseModel {
   sexe: string;
   status: true | false;
   departement?: string;
+  media?: any[]
+
+  get fullname() {
+    return this.first_name + " " + this.last_name;
+  }
 }
 
 export class SchoolStudent extends BaseModel {

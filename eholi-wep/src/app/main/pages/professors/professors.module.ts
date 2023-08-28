@@ -30,6 +30,9 @@ const routes: Routes = [
       professor: ProfessorDetailsResolver,
       courses: CourseProfessorResolverResolver,
     },
+    data: {
+      animation: 'details'
+    }
   },
 ]
 

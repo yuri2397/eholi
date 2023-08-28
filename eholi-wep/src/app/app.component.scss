@@ -19,6 +19,8 @@
     animation-fill-mode: both;
     height: 5px;
     z-index: 100;
+    position: absolute;
+    width: 100% !important;
 }
 
 @keyframes progressBar {

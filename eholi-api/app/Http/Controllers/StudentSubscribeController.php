@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassLevel;
 use Illuminate\Http\Request;
 use App\Models\StudentSubscribe;
 use Illuminate\Support\Facades\DB;
 use App\Models\ClassLevelHasStudent;
+use App\Models\Student;
+use Illuminate\Support\Facades\URL;
 
 class StudentSubscribeController extends Controller
 {
@@ -14,9 +17,9 @@ class StudentSubscribeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -65,6 +68,37 @@ class StudentSubscribeController extends Controller
                 "code" => $th->getCode()
             ], 500);
         }
+    }
+
+    public function classLevelEcard(ClassLevel $classLevel)
+    {
+        $classLevel = $classLevel->load(['students', 'school_year', 'level']);
+
+        return view("ecards.class_level_ecard")->with([
+            'students' => $classLevel->students,
+            'school_year' => $classLevel->school_year,
+            'class_level' => $classLevel,
+            "school" => $classLevel->school_year->school,
+            "appUrl" => URL::to("/")
+        ]);
+    }
+
+    public function myECard(Request $request)
+    {
+        $data = $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'class_level_id' => 'required|exists:class_levels,id'
+        ]);
+
+        $classLevel = ClassLevel::with(['students', 'school_year', 'level'])->whereId($data['class_level_id'])->first();
+        $student = Student::find($data['student_id']);
+        return view("ecards.single_ecard")->with([
+            'student' => $student,
+            'school_year' => $classLevel->school_year,
+            'class_level' => $classLevel,
+            "school" => $classLevel->school_year->school,
+            "appUrl" => URL::to("/")
+        ]);
     }
 
     /**

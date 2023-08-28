@@ -29,6 +29,10 @@
       }
     }
   },
+  "mentions": {
+    "passable": "Passable",
+    "mediocre": "Médiocre"
+  },
   "placeholder": {
     "search": "Rechercher..."
   },
