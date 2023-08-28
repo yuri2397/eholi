@@ -83,4 +83,49 @@ export class ClassLevelDeliberationResultatsComponent implements OnInit {
       },
     });
   }
+
+  
+  reloadDeliberation() {
+    Swal.fire({
+      title: "Attention !!!",
+      text: "Si vous relancez la déliberation, tous les résultats seront perdu. Voulez-vous vraiment continuer?",
+      icon: "error",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Je relance",
+      cancelButtonText: "Annuler",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._reCreateDeliberation();
+      }
+    });
+  }
+
+  _reCreateDeliberation() {
+    this._deliService
+      .reCreateDeliberation(
+        {
+          semester_id: this.deliberation.semester_id,
+          class_level_id: this.deliberation.class_level_id,
+        },
+        this.deliberation
+      )
+      .subscribe({
+        next: (response: Deliberation) => {
+          this._router.navigate(
+            ["/pages/test-exams/deliberation/", response.id],
+            { replaceUrl: true }
+          );
+        },
+        error: (error: any) => {
+          Swal.fire({
+            title: "Error !!!",
+            text: error,
+            icon: "error",
+            showCancelButton: false,
+          });
+        },
+      });
+  }
 }
