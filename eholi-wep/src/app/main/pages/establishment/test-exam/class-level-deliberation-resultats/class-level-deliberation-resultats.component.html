@@ -13,14 +13,37 @@
         <h6 class="mb-0 h3">{{ deliberation.semester.name }}</h6>
         <span class="mb-0 h1 bold">{{ deliberation.class_level.name }}</span>
       </div>
+      <div class="meetup-day">
+        <h6 class="mb-0 h3">Année scolaire</h6>
+        <span class="mb-0 h1 bold">{{ deliberation.school_year.start_end }}</span>
+      </div>
       <button
-        class="btn btn-warning ml-1"
+        class="btn btn-primary ml-1"
         rippleEffect
-        (click)="downloadResult()"
+        (click)="printResults()"
       >
-        <i data-feather="list" class="mr-0 mr-sm-1"></i>
-        <span class="d-none d-sm-inline-block">Vérifier les résultats</span>
+        <i data-feather="download" class="mr-0 mr-sm-1"></i>
+        <span class="d-none d-sm-inline-block">Telecharger les résultats</span>
       </button>
+      <button
+        class="btn btn-danger ml-1"
+        rippleEffect
+        *ngIf="deliberation.status != 'finish'"
+        (click)="reloadDeliberation()"
+      >
+        <i data-feather="download" class="mr-0 mr-sm-1"></i>
+        <span class="d-none d-sm-inline-block">Relancer la délibération</span>
+      </button>
+      <button
+            class="btn btn-success ml-1"
+            rippleEffect
+            (click)="confirmDeliberation(item)"
+            *ngIf="deliberation.status != 'finish'"
+          >
+        <i data-feather="check" class="mr-0 mr-sm-1"></i>
+
+            <span class="d-none d-sm-inline-block">Finaliser la déliberation</span>
+          </button>
     </div>
   </div>
 </div>
