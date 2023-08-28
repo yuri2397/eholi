@@ -28,9 +28,9 @@ export class ClassLevelDeliberationResultatsComponent implements OnInit {
   ngOnInit(): void {
     this._route.data.subscribe((data) => {
       this.deliberation = data.deliberation?.deliberation;
-      // this.results = data.deliberation?.results;
+      this.results = data.deliberation?.results;
     });
-    this.downloadResult();
+    // this.downloadResult();
   }
 
   printResults() {

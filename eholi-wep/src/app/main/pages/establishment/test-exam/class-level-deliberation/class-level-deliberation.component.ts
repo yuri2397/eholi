@@ -55,6 +55,7 @@ export class ClassLevelDeliberationComponent implements OnInit {
     let deliberation = this.deliberations.find(
       (del) => del.semester_id === semester.id
     ) ?? del;
+    
     this._router.navigate(["/pages/test-exams/deliberation", deliberation.id], {
       relativeTo: this._route,
       queryParams: {

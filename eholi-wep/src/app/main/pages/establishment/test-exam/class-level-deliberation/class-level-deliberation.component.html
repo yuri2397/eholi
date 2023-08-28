@@ -34,8 +34,6 @@
           class="lead badge badge-{{ item.created ? 'success' : 'danger' }}"
           >{{ item.created ? "Déjà déliberé" : "Non délibéré" }}</span
         >
-      </div>
-      <div class="card-body">
         <div class="d-flex align-items-center">
           <button
             class="btn btn-info ml-1"
@@ -49,15 +47,18 @@
           </button>
           
           <button
-            class="btn btn-warning ml-1"
+            class="btn btn-primary ml-1"
             rippleEffect
             (click)="routerToDetails(item)"
             *ngIf="item.created"
           >
-            <span class="d-none d-sm-inline-block">Vérifier les résultats</span>
+            <i data-feather="eye" class="mr-0 mr-sm-1"></i>
+
+            <span class="d-none d-sm-inline-block">Voir plus</span>
           </button>
         </div>
       </div>
+        
     </div>
   </div>
 </ng-container>
