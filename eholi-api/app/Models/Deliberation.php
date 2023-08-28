@@ -39,6 +39,10 @@ class Deliberation extends AbstractModel
         return $this->hasMany(DeliberationItemResult::class);
     }
 
+    public function deliberationItems()  {
+        return $this->hasMany(DeliberationItem::class);
+    }
+
     // public function deliberationResults()
     // {
     //     return $this->hasMany(DeliberationResult::class);

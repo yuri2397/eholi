@@ -1,0 +1,24 @@
+[
+    {
+        "id": "4d03f0e5-594a-4905-a8a8-cd493a404e55",
+        "name": "Semestre 2",
+        "number": 2,
+        "created_at": "2023-08-22T23:54:05.000000Z",
+        "updated_at": "2023-08-22T23:54:05.000000Z",
+        "pivot": {
+            "class_level_id": "e1f86e87-20a0-4960-ad7e-f0d966bfa7a4",
+            "semester_id": "4d03f0e5-594a-4905-a8a8-cd493a404e55"
+        }
+    },
+    {
+        "id": "b8a70299-ff6f-4d8e-a70f-62daffa74afc",
+        "name": "Semestre 1",
+        "number": 1,
+        "created_at": "2023-08-22T23:54:05.000000Z",
+        "updated_at": "2023-08-22T23:54:05.000000Z",
+        "pivot": {
+            "class_level_id": "e1f86e87-20a0-4960-ad7e-f0d966bfa7a4",
+            "semester_id": "b8a70299-ff6f-4d8e-a70f-62daffa74afc"
+        }
+    }
+]

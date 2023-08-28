@@ -50,10 +50,10 @@ export class ClassLevelDeliberationComponent implements OnInit {
     this.classLevelId = this._route.snapshot.queryParams["class_level_id"];
   }
 
-  routerToDetails(semester: Semester) {
+  routerToDetails(semester: Semester, del?: Deliberation) {
     let deliberation = this.deliberations.find(
       (del) => del.semester_id === semester.id
-    );
+    ) ?? del;
     this._router.navigate(["/pages/test-exams/deliberation", deliberation.id], {
       relativeTo: this._route,
       queryParams: {
@@ -92,7 +92,7 @@ export class ClassLevelDeliberationComponent implements OnInit {
       .pipe(finalize(() => (semester.loading = false)))
       .subscribe({
         next: (data) => {
-          this.routerToDetails(semester);
+          this.routerToDetails(semester,data);
         },
         error: (errors) => {
           console.log(errors);

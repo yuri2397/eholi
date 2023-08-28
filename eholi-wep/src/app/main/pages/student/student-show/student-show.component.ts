@@ -43,15 +43,14 @@ export class StudentShowComponent implements OnInit {
     return "tutor.select." + type;
   }
 
-  downloadBT(semester: any){
+  downloadBT(deliberation: any){
     this._delService.downloadBT({
       'student_id': this.student.id,
-      'semester_id': semester.id,
-      'deliberation_id': this.deliberations.deliberation.id
+      'semester_id': deliberation.semester.id,
+      'deliberation_id': deliberation.id
     }).subscribe({
       next: (response: any) => {
-        console.log(response)
-        Utils.printContentHtml(response, 'bulletin');
+        Utils.printContentHtml(response, this.student.first_name + " " + this.student.last_name + "_builtin");
       },
       error: (error) => {
         console.log(error)

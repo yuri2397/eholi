@@ -172,13 +172,12 @@
 
             <ng-template ngbNavContent>
               <div class="row">
-                <div *ngFor="let deli of deliberations?.results ?? []" class="col-md-4">
+                <div *ngFor="let deli of deliberations ?? []" class="col-md-4">
                   <div class="card shadow">
-                    
                     <div class="card-body text-center">
                       <span class="lead text-center text-dark d-block">{{ deli.semester.name }}</span>
                       <br>
-                      <button (click)="downloadBT(deli.semester)" class="btn btn-primary mx-3"  rippleEffect>{{ 'Télécharger le builtin'|translate }}</button>      
+                      <button (click)="downloadBT(deli)" class="btn btn-primary mx-3"  rippleEffect>{{ 'Télécharger le builtin'|translate }}</button>      
                     </div>
                   </div>
                 </div>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ClassLevelHasCourse;
 use App\Models\DeliberationItemResult;
 use App\Models\School;
+use Illuminate\Log\Logger;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -78,14 +79,6 @@ class DeliberationController extends Controller
         $data = $request->validate([
             'semester_id' => 'required|uuid|exists:semesters,id',
             'class_level_id' => 'required|uuid|exists:class_levels,id',
-            // 'school_year_id' => 'required|uuid|exists:school_years,id',
-            // 'deliberation_items' => 'required|array',
-            // 'deliberation_items.*.class_level_has_student_id' => 'required|uuid|exists:class_level_has_students,id',
-            // 'deliberation_items.*.class_level_has_course_id' => 'required|uuid|exists:class_level_has_courses,id',
-            // 'deliberation_items.*.average' => 'required|numeric|min:0|max:20',
-            // 'deliberation_items.*.status' => 'required|in:success,append,cancel,remove',
-            // 'deliberation_items.*.rang' => 'required|numeric|min:1',
-            // 'deliberation_items.*.mention' => 'required|in:any,excellent,very_good,good,passable,mediocre,weak,very_weak',
         ]);
 
         // test if a deliberation with the class_level_id and semester_id exists
@@ -137,7 +130,6 @@ class DeliberationController extends Controller
                         )->first()?->note ?? 0;
                     }
                     // moyen de l'etudiant pour les devoirs id duty != 0
-
                     if ($duties->count() != 0) {
                         $duties_average = $duties_average / $duties->count();
                     } else {
@@ -168,7 +160,7 @@ class DeliberationController extends Controller
                     // create deliberation item resultat without deliberation_item_id
                     $deliberation_item_result = DeliberationItemResult::create([
                         'average' => $total_average,
-                        'status' => DeliberationItem::SUCCESS,
+                        'status' => DeliberationItem::APPEND,
                         'mention' => $mention,
                         'coef' => $course->coef,
                         'duty_average' =>  $duties_average,
@@ -321,43 +313,37 @@ class DeliberationController extends Controller
         ]);
     }
 
-    public function studentDeliberation(Request $request)
+    public function studentDeliberation(Request $request, Logger $logger)
     {
         $data = $this->validate($request, [
             "student_id" => "required|uuid|exists:students,id",
             "class_level_id" => "required|uuid|exists:class_levels,id",
         ]);
 
-        $deliberation = Deliberation::whereClassLevelId($data['class_level_id'])->first();
+        $deliberations = Deliberation::with(['semester', 'schoolYear'])->whereClassLevelId($data['class_level_id'])->whereSchoolYearId(school_year()->id)->get();
 
-        if (!$deliberation) {
+        return $deliberations;
+    }
+
+    public function destroy(Deliberation $deliberation)
+    {
+        DB::beginTransaction();
+
+        try {
+            
+            DB::delete('delete from deliberation_items where deliberation_items.deliberation_id = ?;', [$deliberation->id]);
+            DB::delete('delete from deliberation_item_results where deliberation_item_results.deliberation_id = ?;', [$deliberation->id]);
+            DB::delete('delete from deliberations where id = ?;', [$deliberation->id]);
+
+            DB::commit();
+            return response()->json(['message' => "Deliberation supprimeé avec succès."], 200);
+        } catch (\Throwable $th) {
+            DB::rollBack();
             return response()->json([
-                'message' => 'Il faut faire la délibération avant de consulter les résultats',
-            ], 422);
+                "message" => $th->getMessage(),
+                "errors" => $th
+            ], 500);
         }
-        $semesters = ClassLevel::find($data['class_level_id'])->semesters;
-        $result = [];
-        foreach ($semesters as $key => $sem) {
-            $res['semester'] = $sem;
-            $res['data'] =  DeliberationItemResult::join('class_level_has_students as CLS', 'CLS.id', 'deliberation_item_results.class_level_has_student_id')
-                ->join('deliberations as D', 'D.id', 'deliberation_item_results.deliberation_id')
-                ->where('D.semester_id', $sem->id)
-                ->where('CLS.student_id', $data['student_id'])
-                ->where('deliberation_id', $deliberation->id)
-                ->orderBy('class_level_has_course_id', 'ASC')
-                ->get();
-
-            if (count($res['data']) == 0) {
-                continue;
-            }
-
-            $result[] = $res;
-        }
-
-        return [
-            "deliberation" => $deliberation,
-            "results" => $result
-        ];
     }
 
     private function checkCNTPDeliberation($courses)
