@@ -4,19 +4,11 @@ use App\Http\Controllers\DeliberationController;
 use App\Http\Controllers\StudentSubscribeController;
 use App\Models\User;
 use App\Models\Admin;
-<<<<<<< HEAD
 use App\Models\ClassLevel;
 use App\Models\Deliberation;
 use App\Models\School;
 use App\Models\SchoolUser;
 use App\Models\Semester;
-=======
-use App\Models\Ayah;
-use App\Models\Deliberation;
-use App\Models\School;
-use App\Models\SchoolUser;
-use App\Models\Surah;
->>>>>>> 636ef20bdd889cd99c535d2f2b4956adb39f3624
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -33,7 +25,6 @@ Route::get('/deli/{deliberation}', [DeliberationController::class, 'downloadResu
 Route::get('student-subscribes/class-level-ecard/{classLevel}', [StudentSubscribeController::class, "classLevelEcard"]);
 
 Route::any('/', function () {
-<<<<<<< HEAD
     $semesters = Semester::find(["b8a70299-ff6f-4d8e-a70f-62daffa74afc","4d03f0e5-594a-4905-a8a8-cd493a404e55"]);
 
     $classes = ClassLevel::all();
@@ -48,43 +39,6 @@ Route::any('/', function () {
     //     "Semestre 2",
     //     "Semestre 3",
     // ];
-=======
-    ini_set('max_execution_time', 1200);
-
-    // DB::delete('delete from ayahs');
-    // DB::delete('delete from surahs');
-
-    // foreach (Surah::orderBy('number', 'asc')->get() as $surah) {
-    //     $url = "http://api.alquran.cloud/v1/surah/{$surah->number}";
-
-    //     $ch = curl_init();
-    //     curl_setopt($ch, CURLOPT_URL, $url);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //     curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    //     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    //     $curl_response = curl_exec($ch);
-
-    //     $result = json_decode($curl_response, true);
-    //     $ayahs = $result['data']['ayahs'];
-    //     foreach ($ayahs as $ayah) {
-    //         $a = new Ayah();
-    //         $a->number = $ayah['number'];
-    //         $a->text = $ayah['text'];
-    //         $a->number_inSurah = (int)$ayah['numberInSurah'];
-    //         $a->juz = (int)$ayah['juz'];
-    //         $a->manzil = (int)$ayah['manzil'];
-    //         $a->page = (int) $ayah['page'];
-    //         $a->ruku = (int)$ayah['ruku'];
-    //         $a->hizb_quarter = $ayah['hizbQuarter'];
-    //         $a->surah_id = $surah->id;
-    //         $a->save();
-    //     }
-    // }
-
-    // return $ayahs;
->>>>>>> 636ef20bdd889cd99c535d2f2b4956adb39f3624
 
     // foreach ($sem as $key => $value) {
     //     $s = new Semester();
