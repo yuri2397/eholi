@@ -321,6 +321,7 @@ class DeliberationController extends Controller
             "deliberation_id" => "required"
         ]);
         $deliberation = Deliberation::find($data['deliberation_id']);
+        
         $results = DeliberationItemResult::join('class_level_has_students as CLS', 'CLS.id', 'deliberation_item_results.class_level_has_student_id')
             ->join('class_level_has_courses', 'class_level_has_courses.id', 'deliberation_item_results.class_level_has_course_id')
             // join course and select the course and alias it course

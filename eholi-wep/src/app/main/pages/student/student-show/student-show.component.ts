@@ -8,7 +8,7 @@ import { Student, StudentMetaData } from "./../student.model";
 import { Paginate } from "./../../../../auth/models/base.model";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ClassLevel } from '../../establishment/establishment.model';
+import { ClassLevel, Deliberation } from '../../establishment/establishment.model';
 
 @Component({
   selector: "app-student-show",
@@ -19,7 +19,7 @@ export class StudentShowComponent implements OnInit {
   student: Student;
   meta_data: StudentMetaData;
   results: any[] = [];
-  deliberations: any;
+  deliberations: Deliberation[] = [];
   class_level: ClassLevel;
   file: any;
   previewImage: any;
@@ -92,17 +92,17 @@ export class StudentShowComponent implements OnInit {
         });
     }
   }
-  downloadBT(semester: any) {
+  downloadBT(deliberation: any) {
+    
     this._delService
       .downloadBT({
         student_id: this.student.id,
-        semester_id: semester.id,
-        deliberation_id: this.deliberations.deliberation.id,
+        semester_id: deliberation.semester_id,
+        deliberation_id: deliberation.id,
       })
       .subscribe({
         next: (response: any) => {
-          console.log(response);
-          Utils.printContentHtml(response, "bulletin");
+          Utils.printContentHtml(response, this.student.first_name + " " + this.student.last_name + "_builtin");
         },
         error: (error) => {
           console.log(error);
