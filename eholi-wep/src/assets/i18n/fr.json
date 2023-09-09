@@ -75,7 +75,8 @@
       "classrooms": "Salle de classe",
       "courses": "Cours",
       "class-levels": "Classes",
-      "housing": "Logements/Campus"
+      "housing": "Logements/Campus",
+      "recitations": "Récitations"
     }
   },
   "content": {
@@ -104,7 +105,8 @@
       "class_rooms": "Gestion des salles de classe",
       "class-levels": "Gestion des classes",
       "buildings": "Gestion des logements/campus",
-      "admission": "Gestion des inscriptions/reinscriptions"
+      "admission": "Gestion des inscriptions/reinscriptions",
+      "recitations": "Faire récitater les étutidiants"
     },
     "admission": {
       "stepper": [
@@ -664,5 +666,8 @@
         "success": "La chambre a été supprimée avec succès"
       }
     }
+  },
+  "recitations":{
+    "title": "Récitations"
   }
 }

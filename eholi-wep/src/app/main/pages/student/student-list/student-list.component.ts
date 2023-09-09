@@ -86,9 +86,6 @@ export class StudentListComponent implements OnInit {
     // Get the resolver data
     this._route.data.subscribe((data: { students: Paginate<Student> }) => {
       this.students = data.students
-      //console.log(data)
-      console.log(this.students.data);
-      
     })
 
     // get the queryParams

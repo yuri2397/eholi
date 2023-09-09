@@ -78,4 +78,8 @@ class Student extends AbstractModel implements HasMedia
     {
         return $this->rooms()->whereSchoolId(school()->id)->first();
     }
+
+    public function progressions()  {
+        return $this->hasMany(StudentProgression::class);
+    }
 }

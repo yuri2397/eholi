@@ -30,6 +30,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\AyahController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ClassLevelController;
@@ -40,8 +41,11 @@ use Spatie\Permission\Contracts\Role as ContractsRole;
 use App\Http\Controllers\ClassLevelHasCourseController;
 use App\Http\Controllers\DeliberationController;
 use App\Http\Controllers\LevelHasSemesterController;
+use App\Http\Controllers\StudentProgressionController;
+use App\Http\Controllers\SurahController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TimesTableController;
+use App\Models\StudentProgression;
 use App\Models\TestResult;
 use App\Models\TimesTable;
 
@@ -164,7 +168,7 @@ Route::prefix('student-subscribes')
     ->group(function () {
         Route::get('/', 'index');
         Route::get('class-level-ecard/{classLevel}', 'classLevelEcard');
-        Route::post('my-ecard','myECard');
+        Route::post('my-ecard', 'myECard');
         Route::get('/{id}', 'show');
         Route::put('/{id}', 'update');
     });
@@ -257,6 +261,26 @@ Route::prefix('deliberations')
 Route::prefix('rooms')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('rooms', RoomController::class);
+
+/**
+ * Surahs
+ */
+Route::prefix('surahs')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('surahs', SurahController::class);
+
+/**
+ * Ayats
+ */
+Route::prefix('ayats')
+    ->middleware(['auth:api', 'cors'])
+    ->apiResource('ayats', AyahController::class);
+
+
+Route::prefix('progressions')
+->middleware(['auth:api', 'cors'])->controller(StudentProgressionController::class)->group(function () {
+        Route::get('/student-progressions/{student}', 'studentProgression');
+    });
 
 /**
  * Admissions

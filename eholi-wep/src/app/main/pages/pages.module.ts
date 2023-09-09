@@ -20,6 +20,7 @@ import { AccountSettingsModule } from './account-settings/account-settings.modul
 import { AuthenticationModule } from './authentication/authentication.module'
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module'
 import { StudentModule } from './student/student.module'
+import { RecitationModule } from './recitation/recitation.module'
 
 @NgModule({
   declarations: [],
@@ -44,6 +45,7 @@ import { StudentModule } from './student/student.module'
     EstablishmentModule,
     SchoolModule,
     ProfessorsModule,
+    RecitationModule
   ],
 
   providers: [],

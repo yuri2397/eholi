@@ -199,18 +199,7 @@ export const menu: CoreMenu[] = [
           'with[]': ['building'],
         },
       },
-      // {
-      //   id: 'admission.school-year',
-      //   title: 'menu.admission.school-year',
-      //   translate: 'menu.admission.school-year',
-      //   type: 'item',
-      //   icon: 'circle',
-      //   url: 'pages/school-years',
-      //   queryParams: {
-      //     page: 1,
-      //     per_page: 10,
-      //   },
-      // },
+      
     ],
   },
 
@@ -219,7 +208,7 @@ export const menu: CoreMenu[] = [
     title: 'menu.professor.title',
     translate: 'menu.professor.title',
     type: 'collapsible',
-    icon: 'book-open',
+    icon: 'twitch',
     children: [
       {
         id: 'professor-list',
@@ -227,7 +216,7 @@ export const menu: CoreMenu[] = [
         translate: 'menu.professor.list',
         type: 'item',
         icon: 'circle',
-        url: 'pages/professors/index',
+        url: 'pages/professors/in dex',
         queryParams: {
           page: 1,
           per_page: 10,
@@ -235,5 +224,13 @@ export const menu: CoreMenu[] = [
         },
       },
     ],
+  },
+  {
+    id: 'recitations',
+    title: 'menu.schools.recitations',
+    translate: 'menu.schools.recitations',
+    type: 'item',
+    icon: 'book-open',
+    url: 'pages/progressions/index',
   },
 ]

@@ -92,8 +92,7 @@
                 </div>
             </div>
 
-        </div>
-        <div class="row">
+        
             <div class="col-lg-4 col-sm-6 col-12"
                 [routerLink]="'/pages/courses'" [queryParams]="{
                                                                                     per_page: 10,
@@ -142,6 +141,28 @@
                             </p>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
+                            <div class="avatar-content">
+                                <i data-feather="arrow-right"
+                                    class="font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 col-12"
+                [routerLink]="'/pages/progressions/index'" >
+                <div class="card  shadow-sm pointer">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="font-weight-bolder mb-0">
+                                {{ "menu.schools.recitations" | translate }}
+                            </h2>
+                            <p class="card-text">
+                                {{ "content.description.recitations" |
+                                translate }}
+                            </p>
+                        </div>
+                        <div class="avatar bg-light-info p-50 m-0">
                             <div class="avatar-content">
                                 <i data-feather="arrow-right"
                                     class="font-medium-5"></i>
