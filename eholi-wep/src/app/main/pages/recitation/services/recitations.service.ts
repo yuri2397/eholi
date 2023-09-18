@@ -15,4 +15,9 @@ export class RecitationsService extends AbstractService {
     return this.http.get(url);
   }
 
+  studentProgressionDetails(uuid: string){
+    let url = `${this.endpoint}/student-progression-details/${uuid}`;
+    return this.http.get(url);
+  }
+
 }

@@ -280,6 +280,7 @@ Route::prefix('ayats')
 Route::prefix('progressions')
 ->middleware(['auth:api', 'cors'])->controller(StudentProgressionController::class)->group(function () {
         Route::get('/student-progressions/{student}', 'studentProgression');
+        Route::get('/student-progression-details/{studentProgression}', 'studentProgressionDetails');
     });
 
 /**

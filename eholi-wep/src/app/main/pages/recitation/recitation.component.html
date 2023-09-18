@@ -13,19 +13,72 @@
                         class="form-control ml-25"
                         (input)="onSearch($event.target.value)" /></label>
 
-                <ngx-datatable
+                <nz-table #nzTable [nzData]="datas" [nzPageSize]="10"
+                    [nzLoading]="searchLoad">
+                    <thead>
+                        <tr>
+                            <th>{{ 'student.table.profile' | translate }}</th>
+                            <th>{{ 'student.table.reference' | translate }}</th>
+                            <th>{{ 'student.table.first_name' | translate }}</th>
+                            <th>{{ 'student.table.last_name' | translate }}</th>
+                            <th>{{ 'student.table.birth_at' | translate }}</th>
+                            <th>{{ 'student.table.birth_in' | translate }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of nzTable.data">
+                            <td>
+                                <div *ngIf="student.media"
+                                    class="avatar avatar-lg">
+                                    <img
+                                        src="{{ student.media[0]?.original_url }}"
+                                        alt="avatar" />
+                                </div>
+                                <div *ngIf="!student.media"
+                                    class="avatar bg-light-primary avatar-md">
+                                    <span class="avatar-content">{{ userInitial(student.first_name, student.last_name) }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="text-uppercase">{{
+                                    student.reference }}</span>
+                            </td>
+                            <td>{{student.first_name}}</td>
+                            <td>{{student.last_name}}</td>
+                            <td>{{student.birth_at}}</td>
+                            <td>{{student.birth_in}}</td>
+
+                            <td>
+                                <button
+                                    [routerLink]="['/pages/progressions/' + student.id]"
+                                    type="button"
+                                    class="btn btn-icon btn-primary mx-1"
+                                    rippleEffect>
+                                    <span [data-feather]="'eye'"></span>
+                                    {{ 'content.title.detail'|translate }}
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+
+                <!-- <ngx-datatable
                     [rows]="datas"
                     [rowHeight]="80"
                     class="bootstrap core-bootstrap"
                     [limit]="10"
                     [externalPaging]="false"
                     [columnMode]="'force'"
+                    [loadingIndicator]="searchLoad"
                     [headerHeight]="50"
                     [footerHeight]="50"
+                    [messages]="{emptyMessage: 'Aucune donnée', totalMessage: 'total'}"
                     [scrollbarH]="true">
 
                     <ngx-datatable-column
                         name="{{ 'student.table.profile' | translate }}"
+                        [width]="80"
                         prop="student">
 
                         <ng-template let-student="value"
@@ -41,6 +94,11 @@
                     <ngx-datatable-column
                         name="{{ 'student.table.reference' | translate }}"
                         prop="reference">
+                        <ng-template let-reference="value"
+                            ngx-datatable-cell-template>
+                            <span class="text-uppercase">{{ reference }}</span>
+                        </ng-template>
+
                     </ngx-datatable-column>
                     <ngx-datatable-column
                         name="{{ 'student.table.first_name' | translate }}"
@@ -54,31 +112,6 @@
                         name="{{ 'student.table.birth_at' | translate }}"
                         prop="birth_at">
                     </ngx-datatable-column>
-                    <ngx-datatable-column
-                        name="{{ 'student.table.birth_in' | translate }}"
-                        prop="birth_in"
-                        [width]="50">
-                    </ngx-datatable-column>
-
-                    <ngx-datatable-column
-                        name="{{ 'student.table.phone' | translate }}"
-                        prop="telephone"
-                        [width]="40">
-                        <ng-template let-telephone="value"
-                            ngx-datatable-cell-template>
-                            <div
-                                *ngIf="!telephone"
-                                class="badge badge-pill"
-                                [ngClass]="{
-                            'badge-light-danger': true
-                          }">
-                                {{ "content.undefined" | translate }}
-                            </div>
-                            <div *ngIf="telephone">
-                                {{ telephone }}
-                            </div>
-                        </ng-template>
-                    </ngx-datatable-column>
 
                     <ngx-datatable-column
                         name="{{ 'content.table.actions' | translate }}"
@@ -91,11 +124,11 @@
                                 class="btn btn-icon btn-primary mx-1"
                                 rippleEffect>
                                 <span [data-feather]="'eye'"></span>
-                                {{ row.student.id |json }}
+                                {{ 'content.title.detail'|translate }}
                             </button>
                         </ng-template>
                     </ngx-datatable-column>
-                </ngx-datatable>
+                </ngx-datatable> -->
             </div>
         </section>
     </div>

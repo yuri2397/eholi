@@ -1,0 +1,13 @@
+.collapse-title
+{
+    font-size: 2em !important;
+    font-weight: bold;
+}
+
+::ng-deep .accordion .card .card-header button {
+    padding: 1rem;
+    width: 100%;
+    direction: rtl;
+    justify-content: flex-start;
+    display: flex;
+}

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeliberationController;
 use App\Http\Controllers\StudentSubscribeController;
+use App\Models\StudentProgression;
+use App\Models\StudentProgressionItem;
 use Illuminate\Support\Facades\URL;
 
 /**
@@ -25,8 +27,19 @@ use Illuminate\Support\Facades\URL;
 Route::get('/deli/{deliberation}', [DeliberationController::class, 'downloadResults']);
 Route::get('student-subscribes/class-level-ecard/{classLevel}', [StudentSubscribeController::class, "classLevelEcard"]);
 
-Route::any('/', function () {
-    ini_set('max_execution_time', 1200);
+Route::any('/bonjour', function () {
+    // ini_set('max_execution_time', 1200);
+    $progs = StudentProgression::whereStudentId("6d44f50b-f5fa-42b3-b969-1ffe575f627b")->get();
+    foreach ($progs as  $prog) {
+        $item = new StudentProgressionItem();
+        $item->student_progression_id = $prog->id;
+        $item->start_ayah_number = 3;
+        $item->end_ayah_number = 7;
+        $item->note = random_int(1,9);
+        $item->save();
+    }
+
+    return $progs;
 
     // DB::delete('delete from ayahs');
     // DB::delete('delete from surahs');

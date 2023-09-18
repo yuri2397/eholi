@@ -33,7 +33,14 @@ import { ContentHeaderModule } from 'app/layout/components/content-header/conten
 import { ContextMenuComponent } from 'app/main/extensions/context-menu/context-menu.component'
 import { AnimatedCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/animated-custom-context-menu/animated-custom-context-menu.component'
 import { BasicCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/basic-custom-context-menu/basic-custom-context-menu.component'
-import { SubMenuCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component'
+import { SubMenuCustomContextMenuComponent } from './main/extensions/context-menu/custom-context-menu/sub-menu-custom-context-menu/sub-menu-custom-context-menu.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { fr_FR } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import fr from '@angular/common/locales/fr';
+import { FormsModule } from '@angular/forms'
+
+registerLocaleData(fr);
 
 const appRoutes: Routes = [
   {
@@ -143,10 +150,12 @@ const appRoutes: Routes = [
     LayoutModule,
     ContentHeaderModule,
     SharedModule,
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: NZ_I18N, useValue: fr_FR },
     // ! IMPORTANT: Provider used to create fake backend, comment while using real API
     // fakeBackendProvider,
   ],

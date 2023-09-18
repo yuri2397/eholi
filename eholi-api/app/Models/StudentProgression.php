@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Surah;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StudentProgression extends AbstractModel
 {
     protected $fillable=  ['*'];
 
-    protected $with = ['studentProgressionItem', 'surah'];
+    protected $with = ['studentProgressionItems', 'surah'];
 
-    public function studentProgressionItem()
+    public function studentProgressionItems()
     {
         return $this->hasMany(StudentProgressionItem::class);
     }

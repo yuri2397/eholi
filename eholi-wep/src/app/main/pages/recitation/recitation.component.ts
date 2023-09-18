@@ -15,7 +15,8 @@ import { Student } from "../student/student.model";
 export class RecitationComponent implements OnInit {
   public contentHeader!: any;
   datas: any;
-  searchLoad = true;
+  searchLoad = false;
+  loadingIndicator = false;
   constructor(
     private _route: ActivatedRoute,
     private _translateService: TranslateService,
@@ -37,8 +38,8 @@ export class RecitationComponent implements OnInit {
   }
 
   onSearch(data: string) {
-    console.log(data);
     if (data && data.length > 2) {
+      this.searchLoad = true;
       this.studentService
         .index<Student>({
           search_query: data,
@@ -57,5 +58,9 @@ export class RecitationComponent implements OnInit {
           },
         });
     }
+  }
+
+  userInitial(fn: string, ln: string){
+    return fn[0] + ln[0];
   }
 }

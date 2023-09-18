@@ -1,1 +1,94 @@
-<p>recitation-details works!</p>
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="card card-developer-meetup">
+                    <div class="bg-light-primary rounded-top text-center"><img
+                            src="assets/images/illustration/email.svg" alt="Meeting Pic" height="170"></div>
+                    <div class="card-body">
+                        <div class="meetup-header d-flex align-items-center">
+                            <div class="meetup-day">
+                                <h6 class="mb-1">Reference</h6>
+                                <h3 class="mb-0 text-uppercase">{{
+                                    details.reference }}</h3>
+                            </div>
+                            <div class="my-auto">
+                                <h4 class="card-title mb-25">{{
+                                    details.first_name }} {{ details.last_name
+                                    }}</h4>
+                                <p class="card-text mb-0">Né(e) le {{
+                                    details.birth_at }} à {{ details.birth_in }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-12">
+                <div class="card">
+                    <div class="card-header">Progression</div>
+                    <div class="card-body">`
+                        <div class="accordion collapse-shadow">
+                            <ngb-accordion #acc="ngbAccordion" #panelShadow [closeOthers]="true" [destroyOnHide]="true"
+                                (panelChange)="onPanelChange($event, panelShadow)">
+                                <ngb-panel [id]="'id' + prog.surah.number" *ngFor="let prog of details.progressions">
+                                    <ng-template ngbPanelTitle>
+                                        <span class=" collapse-title h1 text-dark">
+                                            {{ prog.surah.number }} - {{ prog.surah.name }}</span>
+                                    </ng-template>
+                                    <ng-template ngbPanelContent>
+                                        <nz-list>
+                                            <div class="card card-body shadow-sm border border-2"
+                                                *ngFor="let items of currentProgressionDetails; index">
+
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <div>
+
+                                                            <p class="card-text bold h1">Sourats : {{
+                                                                items.config.start_ayah_number }} à
+                                                                {{ items.config.end_ayah_number }}</p>
+                                                                <div class="progress-wrapper">
+                                                                    <div class="mb-25">Reticulating splines&hellip; {{ items.config.note * 10 }}%</div>
+                                                                    <ngb-progressbar type="primary" [value]="items.config.note * 10"></ngb-progressbar>
+                                                                  </div>
+                                                        </div>
+                                                        <div class="avatar bg-light-danger p-50 m-0">
+                                                            <div class="avatar-content" (click)="showDetailsItem(detailModal, items)">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                    height="14" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-eye font-medium-5">
+                                                                    <path
+                                                                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                                    </path>
+                                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nz-list>
+                                    </ng-template>
+                                </ngb-panel>
+                            </ngb-accordion>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #panelHearder>
+    <span class="lead"></span>
+</ng-template>
+
+
+<div class="modal-primary d-inline-block">
+    <ng-template #detailModal let-modal>
+      <app-progression-item-details [data]="selectedData" [modal]="modal"></app-progression-item-details>
+    </ng-template>
+</div>

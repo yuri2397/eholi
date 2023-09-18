@@ -216,7 +216,7 @@ export const menu: CoreMenu[] = [
         translate: 'menu.professor.list',
         type: 'item',
         icon: 'circle',
-        url: 'pages/professors/in dex',
+        url: 'pages/professors/index',
         queryParams: {
           page: 1,
           per_page: 10,

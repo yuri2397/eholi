@@ -5,6 +5,6 @@
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: 'http://192.168.1.100:8000',
+  apiUrl: 'http://127.0.0.1:8000',
   api: 'http://127.0.0.1:8000/api/'
 };

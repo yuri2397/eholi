@@ -6,6 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'app/shared/shared.module';
 import { RecitationDetailsComponent } from './recitation-details/recitation-details.component';
 import { RecitationDetailResolver } from './resolvers/recitations.resolver';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { ProgressionItemDetailsComponent } from './progression-item-details/progression-item-details.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 const routes: Routes = [
   {
@@ -23,6 +27,15 @@ const routes: Routes = [
     },
     data: { animation: 'details' },
   },
+  // {
+  //   path: 'progressions-items/:uuid',
+  //   component: RecitationDetailsComponent,
+  //   canActivate: [AuthGuard],
+  //   resolve: {
+  //     progression: RecitationDetailResolver
+  //   },
+  //   data: { animation: 'details' },
+  // },
   
 ]
 
@@ -30,9 +43,10 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     RecitationComponent,
-    RecitationDetailsComponent
+    RecitationDetailsComponent,
+    ProgressionItemDetailsComponent
   ],
-  imports: [RouterModule.forChild(routes), SharedModule],
+  imports: [RouterModule.forChild(routes), SharedModule, NzCollapseModule, NzListModule],
 
 })
 export class RecitationModule { }

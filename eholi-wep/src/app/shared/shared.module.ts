@@ -15,6 +15,7 @@ import {
   SWIPER_CONFIG,
 } from 'ngx-swiper-wrapper'
 import { AutocompleteLibModule } from 'angular-ng-autocomplete'
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { CoreSidebarModule } from '@core/components'
 import { CoreTouchspinModule } from '@core/components/core-touchspin/core-touchspin.module'
@@ -53,6 +54,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     NgSelectModule,
     AutocompleteLibModule,
     SweetAlert2Module,
+    NzTableModule,
   ],
   imports: [
     CommonModule,
@@ -79,6 +81,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
     CoreSidebarModule,
     NgSelectModule,
     AutocompleteLibModule,
+    NzTableModule,
     SweetAlert2Module.forRoot(),
   ],
   providers: [

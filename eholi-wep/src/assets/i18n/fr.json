@@ -79,6 +79,10 @@
       "recitations": "Récitations"
     }
   },
+  "progression":{
+    "title": "Progressions",
+    "detail_title": "Détails progression"
+  },
   "content": {
     "general": "Général",
     "change_password": "Mot de passe",
@@ -226,7 +230,8 @@
       "adress": "Adresse",
       "sexe": "Sexe",
       "status": "Statut",
-      "departement": "Département"
+      "departement": "Département",
+      "profile": "Profil"
     },
     "btn": {
       "add": "Ajouter un étudiant"
