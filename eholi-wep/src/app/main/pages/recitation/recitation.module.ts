@@ -10,6 +10,10 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { ProgressionItemDetailsComponent } from './progression-item-details/progression-item-details.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { AttachSourahToStudentComponent } from './attach-sourah-to-student/attach-sourah-to-student.component';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -25,6 +29,7 @@ const routes: Routes = [
     resolve: {
       progression: RecitationDetailResolver
     },
+    runGuardsAndResolvers: 'always',
     data: { animation: 'details' },
   },
   // {
@@ -44,9 +49,10 @@ const routes: Routes = [
   declarations: [
     RecitationComponent,
     RecitationDetailsComponent,
-    ProgressionItemDetailsComponent
+    ProgressionItemDetailsComponent,
+    AttachSourahToStudentComponent
   ],
-  imports: [RouterModule.forChild(routes), SharedModule, NzCollapseModule, NzListModule],
+  imports: [RouterModule.forChild(routes), SharedModule, NzCollapseModule, NzListModule, NzAutocompleteModule, ReactiveFormsModule],
 
 })
 export class RecitationModule { }

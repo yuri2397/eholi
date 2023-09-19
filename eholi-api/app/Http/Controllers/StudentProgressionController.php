@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Ayah;
 use App\Models\Student;
 use App\Models\StudentProgression;
+use App\Models\StudentProgressionItem;
 use App\Models\Surah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentProgressionController extends Controller
 {
@@ -50,4 +52,50 @@ class StudentProgressionController extends Controller
             "progression" => $studentProgression
         ]);
     }
+
+    public function store(Request $request)  {
+        $data = $request->validate([
+            "student_id" => ['required'],
+            "surah_id" => ['required', 'exists:surahs,id'],
+        ]);
+
+       DB::beginTransaction();
+
+       try {
+
+            $progression = new StudentProgression();
+            $progression->student_id = $data['student_id'];
+            $progression->surah_id = $data['surah_id'];
+            $progression->progression = 0;
+            $progression->save();
+
+            DB::commit();
+            return response()->json($progression->load('studentProgressionItems'));
+       } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json([
+                "message" => $th->getMessage(),
+                "error" => $th
+            ], 500);
+       }
+        
+    }
+
+    /**
+     * 
+     * $surah = Surah::find($data['surah_id']);
+            $ayatsCount = count($surah->ayahs);
+
+            if($data['start'] >= $data['end'] ){
+                return response()->json([
+                    "message" => "Le début du ayat ne pas être supperieur à la fin.",
+                ], 422);
+            }
+
+            if( $data['end'] > $ayatsCount ){
+                return response()->json([
+                    "message" => "Le Sourat " . $surah->name . " ne compte que $ayatsCount." . "Choissir une fin plus petite que $ayatsCount."
+                ], 422);
+            }
+     */
 }

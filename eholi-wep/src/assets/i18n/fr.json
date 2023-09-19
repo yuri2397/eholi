@@ -81,7 +81,8 @@
   },
   "progression":{
     "title": "Progressions",
-    "detail_title": "Détails progression"
+    "detail_title": "Détails progression",
+    "add": "Ajouter un sourat"
   },
   "content": {
     "general": "Général",
@@ -100,7 +101,8 @@
       "timestable": "Emploi du temps",
       "list": "Liste",
       "tests": "Examen/Devoir",
-      "professeur": "Professeurs"
+      "professeur": "Professeurs",
+      "add": "Ajouter"
     },
     "description": {
       "students": "Lister, profile étudiant...",

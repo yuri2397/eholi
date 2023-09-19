@@ -12,8 +12,10 @@ class SurahController extends Controller
         $query = Surah::with($request->with ?? []);
 
         if ($request->has('search') && $request->search) {
-            $query->where('name', 'LIKE', "%$request->search%");
+            $query->where('name', 'LIKE', "%$request->search%")
+            ->orWhere('number', $request->search);
         }
+
 
         $query->orderBy('number', 'ASC');
 

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AbstractService } from 'app/shared/abstract.service';
@@ -18,6 +19,12 @@ export class RecitationsService extends AbstractService {
   studentProgressionDetails(uuid: string){
     let url = `${this.endpoint}/student-progression-details/${uuid}`;
     return this.http.get(url);
+  }
+
+
+  override create(data: any): Observable<any>{
+    let url = `${this.endpoint}/store`;
+    return this.http.post(url, data);
   }
 
 }

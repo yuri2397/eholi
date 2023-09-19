@@ -1,7 +1,7 @@
 <div class="content-wrapper container-xxl p-0">
     <div class="content-body">
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-12">
+            <div class="col-12">
                 <div class="card card-developer-meetup">
                     <div class="bg-light-primary rounded-top text-center"><img
                             src="assets/images/illustration/email.svg" alt="Meeting Pic" height="170"></div>
@@ -23,19 +23,61 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8 col-md-8 col-12">
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card ">
+                    <div class="card-header w-100">
+                        <span class=" text-dark h3">Sourates</span>
+                    </div>
+                    <nz-table #nzTable [nzData]="surahs" [nzPageSize]="10">
+                        <thead>
+                            <tr>
+                                <th>Numéro</th>
+                                <th>Sourates</th>
+                                <th>Traduction</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i of nzTable.data">
+                                <td>{{i.number}}</td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.tr_name}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-icon btn-primary" rippleEffect
+                                        (click)="attachSurah(i)">
+                                        <span [data-feather]="'arrow-right'"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </div>
+            <div class="col">
                 <div class="card">
-                    <div class="card-header">Progression</div>
+                    <div class="card-header w-100">
+                        <span class=" text-dark h3">Progression de l'étudiant</span>
+                    </div>
                     <div class="card-body">`
                         <div class="accordion collapse-shadow">
                             <ngb-accordion #acc="ngbAccordion" #panelShadow [closeOthers]="true" [destroyOnHide]="true"
                                 (panelChange)="onPanelChange($event, panelShadow)">
                                 <ngb-panel [id]="'id' + prog.surah.number" *ngFor="let prog of details.progressions">
+                                   
                                     <ng-template ngbPanelTitle>
-                                        <span class=" collapse-title h1 text-dark">
-                                            {{ prog.surah.number }} - {{ prog.surah.name }}</span>
+                                        <div>
+                                            <span class=" collapse-title h1 text-dark d-inline-block">
+                                                {{ prog.surah.number }} - {{ prog.surah.name }}
+                                            </span>
+
+                                        </div>
                                     </ng-template>
                                     <ng-template ngbPanelContent>
+                                        <button (click)="addNewSourah(attachSourahModal, prog)" type="button" class="btn btn-icon btn-icon  btn-primary" rippleEffect>
+                                            <span [data-feather]="'plus'"></span>
+                                        </button>
                                         <nz-list>
                                             <div class="card card-body shadow-sm border border-2"
                                                 *ngFor="let items of currentProgressionDetails; index">
@@ -44,16 +86,19 @@
                                                     <div class="card-header">
                                                         <div>
 
-                                                            <p class="card-text bold h1">Sourats : {{
+                                                            <p class="card-text bold h1">Ayats : {{
                                                                 items.config.start_ayah_number }} à
                                                                 {{ items.config.end_ayah_number }}</p>
-                                                                <div class="progress-wrapper">
-                                                                    <div class="mb-25">Reticulating splines&hellip; {{ items.config.note * 10 }}%</div>
-                                                                    <ngb-progressbar type="primary" [value]="items.config.note * 10"></ngb-progressbar>
-                                                                  </div>
+                                                            <div class="progress-wrapper">
+                                                                <div class="mb-25">Reticulating splines&hellip; {{
+                                                                    items.config.note * 10 }}%</div>
+                                                                <ngb-progressbar type="primary"
+                                                                    [value]="items.config.note * 10"></ngb-progressbar>
+                                                            </div>
                                                         </div>
                                                         <div class="avatar bg-light-danger p-50 m-0">
-                                                            <div class="avatar-content" (click)="showDetailsItem(detailModal, items)">
+                                                            <div class="avatar-content"
+                                                                (click)="showDetailsItem(detailModal, items)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14"
                                                                     height="14" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"
@@ -89,6 +134,12 @@
 
 <div class="modal-primary d-inline-block">
     <ng-template #detailModal let-modal>
-      <app-progression-item-details [data]="selectedData" [modal]="modal"></app-progression-item-details>
+        <app-progression-item-details [data]="selectedData" [modal]="modal"></app-progression-item-details>
+    </ng-template>
+</div>
+
+<div class="modal-primary d-inline-block">
+    <ng-template #attachSourahModal let-modal>
+        <app-attach-sourah-to-student [modal]="modal"></app-attach-sourah-to-student>
     </ng-template>
 </div>
