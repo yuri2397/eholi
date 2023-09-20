@@ -103,6 +103,7 @@
       "tests": "Examen/Devoir",
       "professeur": "Professeurs",
       "add": "Ajouter"
+      
     },
     "description": {
       "students": "Lister, profile étudiant...",
@@ -181,7 +182,8 @@
       "validate": "Valider",
       "new_line": "Ajouter une ligne",
       "delete": "Supprimer",
-      "close": "Fermer"
+      "close": "Fermer",
+      "update": "Modifier"
     },
     "sexe": {
       "m": "Masculin",

@@ -8,32 +8,30 @@
 </div>
 <div class="modal-body p-2 text-right " tabindex="0" ngbAutofocus>
     <div class="card shadow-sm">
-        <div class="card-header"  dir="rtl">
+        <div class="card-header" dir="rtl">
         </div>
         <div class="card-body">
             <div class="d-flex align-items-center justify-content-between">
                 <label for="f">Début</label>
-                <input type="number"  id="f" class="form-control mx-2" (ngModelChange)="sliderScalePipesValue = [$event, sliderScalePipesValue[1]]" [(ngModel)]="sliderScalePipesValue[0]">
+                <input type="number" id="f" class="form-control mx-2"
+                    (ngModelChange)="sliderScalePipesValue = [$event, sliderScalePipesValue[1]]"
+                    [(ngModel)]="sliderScalePipesValue[0]">
                 <label for="l">Fin</label>
-                <input type="number" id="l" class="form-control mx-2" (ngModelChange)="sliderScalePipesValue = [sliderScalePipesValue[0], $event]" [(ngModel)]="sliderScalePipesValue[1]">
+                <input type="number" id="l" class="form-control mx-2"
+                    (ngModelChange)="sliderScalePipesValue = [sliderScalePipesValue[0], $event]"
+                    [(ngModel)]="sliderScalePipesValue[1]">
             </div>
-            <nouislider
-            *ngIf="configSliderScalePipes"
-            [connect]="true"
-            [tooltips]="[true, true]"
-            [config]="configSliderScalePipes"
-            [(ngModel)]="sliderScalePipesValue"
-            (ngModelChange)="onChange($event)"
-            [ngClass]="'my-3 w-100'"
-          ></nouislider>
+            <nouislider *ngIf="configSliderScalePipes" [connect]="true" [tooltips]="[true, true]"
+                [config]="configSliderScalePipes" [(ngModel)]="sliderScalePipesValue" (ngModelChange)="onChange($event)"
+                [ngClass]="'my-3 w-100'"></nouislider>
         </div>
     </div>
     <span *ngIf="!loading" class="text-ar" [innerHtml]="fullText"></span>
-    
-  <div *ngIf="loading" class="spinner-border my-3 mx-auto" role="status">
-    <span class="sr-only">Chargement...</span>
-  </div>
-  
+
+    <div *ngIf="loading" class="spinner-border my-3 mx-auto" role="status">
+        <span class="sr-only">Chargement...</span>
+    </div>
+
 </div>
 <div class="modal-footer">
     <div class="w-100 d-flex align-items-center justify-content-between">

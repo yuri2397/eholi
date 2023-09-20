@@ -71,32 +71,31 @@
                                             <span class=" collapse-title h1 text-dark d-inline-block">
                                                 {{ prog.surah.number }} - {{ prog.surah.name }}
                                             </span>
-
                                         </div>
                                     </ng-template>
                                     <ng-template ngbPanelContent>
                                         <button (click)="addNewSourah(attachSourahModal, prog)" type="button" class="btn btn-icon btn-icon  btn-primary" rippleEffect>
-                                            <span [data-feather]="'plus'"></span>
+                                            <span [data-feather]="'plus'"></span> Ajouter des ayats
                                         </button>
+                                        <br>
+                                        <br>
                                         <nz-list>
                                             <div class="card card-body shadow-sm border border-2"
                                                 *ngFor="let items of currentProgressionDetails; index">
-
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <div>
 
-                                                            <p class="card-text bold h1">Ayats : {{
-                                                                items.config.start_ayah_number }} à
-                                                                {{ items.config.end_ayah_number }}</p>
-                                                            <div class="progress-wrapper">
+                                                            <p class="card-text bold h1" dir="rtl" lang="ar">{{ itemStart(items) }} - {{ itemEnd(items) }}</p>
+                                                            <!-- <div class="progress-wrapper">
                                                                 <div class="mb-25">Reticulating splines&hellip; {{
                                                                     items.config.note * 10 }}%</div>
                                                                 <ngb-progressbar type="primary"
                                                                     [value]="items.config.note * 10"></ngb-progressbar>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
-                                                        <div class="avatar bg-light-danger p-50 m-0">
+                                                       <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="avatar bg-light-primary p-50 m-0">
                                                             <div class="avatar-content"
                                                                 (click)="showDetailsItem(detailModal, items)">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14"
@@ -111,6 +110,7 @@
                                                                 </svg>
                                                             </div>
                                                         </div>
+                                                       </div>
                                                     </div>
                                                 </div>
                                             </div>

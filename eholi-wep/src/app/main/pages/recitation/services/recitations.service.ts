@@ -27,4 +27,9 @@ export class RecitationsService extends AbstractService {
     return this.http.post(url, data);
   }
 
+  attachAyatsForStudent(data: any) {
+    let url = `${this.endpoint}/attach-new-ayah`;
+    return this.http.post(url, data);
+  }
+
 }

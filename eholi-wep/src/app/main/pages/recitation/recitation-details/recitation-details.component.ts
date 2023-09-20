@@ -37,12 +37,10 @@ export class RecitationDetailsComponent implements OnInit {
     this._router.routeReuseStrategy.shouldReuseRoute = () => false;
     this._route.data.subscribe((data) => {
       this.details = data.progression as ProgressionDetails;
-      console.log(this.details);
     });
     this._surahService.index<any>().subscribe({
       next: (response: any) => {
         this.surahs = response;
-        console.log(this.surahs);
       },
     });
   }
@@ -66,9 +64,7 @@ export class RecitationDetailsComponent implements OnInit {
       )
       .subscribe({
         next: (response: any) => {
-          console.log(response);
           this.currentProgressionDetails = response.ayahs;
-          console.log(this.currentProgressionDetails);
         },
         error: (errors) => {
           console.log(errors);
@@ -87,7 +83,6 @@ export class RecitationDetailsComponent implements OnInit {
         keyboard: false,
       })
       .result.then((result) => {
-        console.log(result, "result");
       })
       .catch((_) => {});
   }
@@ -104,7 +99,6 @@ export class RecitationDetailsComponent implements OnInit {
       cancelButtonText: "Annuler",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(surah)
         this._addSurahToStudent(surah);
       }
     });
@@ -126,10 +120,37 @@ export class RecitationDetailsComponent implements OnInit {
             this._router.navigate([], { relativeTo: this._route })
         },
         error: (errors) => {
-          console.log(errors);
+          Swal.fire({
+            title: "Oups !!!",
+            text: errors,
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Fermer",
+          })
         },
       });
   }
+
+  itemStart(data: any) {
+   let firstAyat = data.data[0];
+   return " ۝" + this.convertirEnChiffresArabes( data.config.start_ayah_number - ( firstAyat.number  - 1))
+  }
+
+  itemEnd(data: { config: any, data: Ayah[]}) {
+    let firstAyat = data.data[0];
+    return " ۝" + this.convertirEnChiffresArabes(data.config.end_ayah_number - ( firstAyat.number  - 1))
+   }
+
+   convertirEnChiffresArabes(nombre: number): string {
+    const chiffresArabes = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+
+    const nombreEnChiffres = nombre.toString().split('').map(digit => chiffresArabes[parseInt(digit)]);
+
+    return nombreEnChiffres.join('');
+}
+
 
   addNewSourah(modal: any, progressions: any) {
     this.selectedProg = progressions;
@@ -137,11 +158,15 @@ export class RecitationDetailsComponent implements OnInit {
       .open(modal, {
         centered: true,
         windowClass: "modal modal-primary",
-        size: "lg",
+        size: "xl",
         keyboard: false,
       })
-      .result.then((result) => {
+      .result.then((result: Progression) => {
         console.log(result, "result");
+        let index = this.details.progressions.indexOf(this.details.progressions.find(e => e.id === result.id));
+        this.details.progressions.fill(result, index, index + 1);
+        this.details.progressions = [...this.details.progressions];
+        this._router.navigate([], { queryParams: { refresh: Math.random() * 100 ,} , queryParamsHandling: 'merge',  })
       })
       .catch((_) => {});
   }

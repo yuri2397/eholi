@@ -3,6 +3,7 @@ import { RecitationsService } from "../services/recitations.service";
 import { SurahService } from "../services/surah.service";
 import { Ayah, Surah } from "../progression";
 import { finalize } from "rxjs/operators";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-attach-sourah-to-student",
@@ -26,10 +27,7 @@ export class AttachSourahToStudentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data);
-    console.log(this.modal);
     this.getSurahDétails();
-    
   }
   getSurahDétails() {
     this.loading = true;
@@ -42,20 +40,23 @@ export class AttachSourahToStudentComponent implements OnInit {
       )
       .subscribe({
         next: (response) => {
-          this.sliderScalePipesValue = [1, parseInt((response.ayahs.length / 2) + "")];
-          this.configSliderScalePipes =  {
+          this.sliderScalePipesValue = [
+            this.min(response.ayahs),
+            parseInt(this.max(response.ayahs)/2 + ""),
+          ];
+          this.configSliderScalePipes = {
             behaviour: "tap",
             connect: true,
             margin: 0,
             limit: response.ayahs.length,
             range: {
-              min: 0,
-              max: response.ayahs.length
+              min: this.min(response.ayahs),
+              max: this.max(response.ayahs),
             },
             pips: {
-              mode: 'steps',
-              density: 5
-            }
+              mode: "steps",
+              density: 5,
+            },
           };
           this.ayahs = response.ayahs;
           this.fullAyahs = this.ayahs;
@@ -67,8 +68,42 @@ export class AttachSourahToStudentComponent implements OnInit {
       });
   }
 
-  onChange(data: any){
-    this.ayahs = this.fullAyahs.filter((e) =>  (data[0] <= e.number_inSurah && e.number_inSurah <= data[1])  );
+  max(tableau: Ayah[]) {
+    if (tableau.length === 0) {
+      return 0;
+    }
+
+    let max = tableau[0];
+
+    for (const objet of tableau) {
+      if (objet.number_inSurah > max.number_inSurah) {
+        max = objet;
+      }
+    }
+
+    return max.number_inSurah;
+  }
+
+  min(tableau: Ayah[]) {
+    if (tableau.length === 0) {
+      return 0;
+    }
+
+    let min = tableau[0];
+
+    for (const objet of tableau) {
+      if (objet.number_inSurah < min.number_inSurah) {
+        min = objet;
+      }
+    }
+
+    return min.number_inSurah;
+  }
+
+  onChange(data: any) {
+    this.ayahs = this.fullAyahs.filter(
+      (e) => data[0] <= e.number_inSurah && e.number_inSurah <= data[1]
+    );
     this.fullText = this._fullText;
   }
 
@@ -91,5 +126,47 @@ export class AttachSourahToStudentComponent implements OnInit {
     });
   };
 
-  save() {}
+  save() {
+    let data = {
+      start: this.sliderScalePipesValue[0],
+      end: this.sliderScalePipesValue[1],
+      progression_id: this.data.id,
+    };
+
+    Swal.fire({
+      title: "Attention !!!",
+      text: "Voulez-vous ajoute ces ayats dans la liste?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Oui, j'ajoute",
+      cancelButtonText: "Annuler",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._save(data);
+      }
+    });
+  }
+  private _save(data: { start: number; end: number; progression_id: any }) {
+    this._progressionService
+      .attachAyatsForStudent(data)
+      .pipe(finalize(() => {}))
+      .subscribe({
+        next: (response) => {
+          this.modal.close(response);
+        },
+        error: (error) => {
+          Swal.fire({
+            title: "Oups !!!",
+            text: error,
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Fermer",
+          });
+        },
+      });
+  }
 }

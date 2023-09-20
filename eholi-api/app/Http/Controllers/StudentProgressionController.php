@@ -53,16 +53,23 @@ class StudentProgressionController extends Controller
         ]);
     }
 
-    public function store(Request $request)  {
+    public function store(Request $request)
+    {
         $data = $request->validate([
             "student_id" => ['required'],
             "surah_id" => ['required', 'exists:surahs,id'],
         ]);
 
-       DB::beginTransaction();
+        DB::beginTransaction();
 
-       try {
+        try {
+            $alreadyExists = StudentProgression::whereStudentId($data['student_id'])->whereSurahId($data['surah_id'])->get();
 
+            if ($alreadyExists && count($alreadyExists) > 0) {
+                return response()->json([
+                    "message" => Surah::find($data['surah_id'])->name . " est déjà ajouté pour cet étudiant."
+                ], 422);
+            }
             $progression = new StudentProgression();
             $progression->student_id = $data['student_id'];
             $progression->surah_id = $data['surah_id'];
@@ -71,31 +78,47 @@ class StudentProgressionController extends Controller
 
             DB::commit();
             return response()->json($progression->load('studentProgressionItems'));
-       } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             DB::rollBack();
             return response()->json([
                 "message" => $th->getMessage(),
                 "error" => $th
             ], 500);
-       }
-        
+        }
     }
 
-    /**
-     * 
-     * $surah = Surah::find($data['surah_id']);
-            $ayatsCount = count($surah->ayahs);
+    public function attachNewAyah(Request $request)
+    {
+        $data = $request->validate([
+            "start" => ['required', 'numeric'],
+            "end" => ['required', 'numeric'],
+            "progression_id" => ["required"],
+        ]);
 
-            if($data['start'] >= $data['end'] ){
-                return response()->json([
-                    "message" => "Le début du ayat ne pas être supperieur à la fin.",
-                ], 422);
-            }
+        $progression = StudentProgression::find($data['progression_id']);
 
-            if( $data['end'] > $ayatsCount ){
-                return response()->json([
-                    "message" => "Le Sourat " . $surah->name . " ne compte que $ayatsCount." . "Choissir une fin plus petite que $ayatsCount."
-                ], 422);
-            }
-     */
+        $surah = Surah::find($progression->surah_id);
+        $ayatsCount = count($surah->ayahs);
+
+        if ($data['start'] >= $data['end']) {
+            return response()->json([
+                "message" => "Le début du ayat ne pas être supperieur à la fin.",
+            ], 422);
+        }
+
+        if ($data['end'] > $ayatsCount) {
+            return response()->json([
+                "message" => "Le Sourat " . $surah->name . " ne compte que $ayatsCount." . "Choissir une fin plus petite que $ayatsCount."
+            ], 422);
+        }
+
+        $item = new StudentProgressionItem();
+        $item->start_ayah_number = $data['start'] + $surah->ayahs()->orderBy('number', 'asc')->first()->number - 1;
+        $item->end_ayah_number = $data['end'] + $surah->ayahs()->orderBy('number', 'asc')->first()->number - 1;
+        $item->student_progression_id = $progression->id;
+        $item->save();
+
+        return response()->json($progression->load(['studentProgressionItems']));
+    }
+
 }

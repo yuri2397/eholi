@@ -283,6 +283,7 @@ Route::prefix('progressions')
         Route::get('/student-progression-details/{studentProgression}', 'studentProgressionDetails');
 
         Route::post('/store', 'store');
+        Route::post('/attach-new-ayah', 'attachNewAyah');
     });
 
 /**
