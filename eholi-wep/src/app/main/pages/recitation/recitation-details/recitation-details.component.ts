@@ -1,7 +1,7 @@
 import { finalize } from "rxjs/operators";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Ayah, ProgressionDetails, Surah } from "../progression";
+import { Ayah, Progression, ProgressionDetails, Surah } from "../progression";
 import { RecitationsService } from "../services/recitations.service";
 import { NzModalService } from "ng-zorro-antd/modal";
 import { ProgressionItemDetailsComponent } from "../progression-item-details/progression-item-details.component";
@@ -14,6 +14,7 @@ import { ToastrService, GlobalConfig } from 'ngx-toastr';
   selector: "app-recitation-details",
   templateUrl: "./recitation-details.component.html",
   styleUrls: ["./recitation-details.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RecitationDetailsComponent implements OnInit {
   details: ProgressionDetails;
@@ -22,6 +23,7 @@ export class RecitationDetailsComponent implements OnInit {
   selectedData: any;
   surahs: Surah[] = [];
   selectedSurah: Surah;
+  selectedProg: any;
   constructor(
     private _route: ActivatedRoute,
     private _progressionService: RecitationsService,
@@ -74,8 +76,9 @@ export class RecitationDetailsComponent implements OnInit {
       });
   }
 
-  showDetailsItem(modal: any, data: any) {
+  showDetailsItem(modal: any, data: Progression) {
     this.selectedData = data;
+    this.selectedSurah = this.surahs.find((e) => e.id == data.surah_id);
     this._modalService
       .open(modal, {
         centered: true,
@@ -129,7 +132,7 @@ export class RecitationDetailsComponent implements OnInit {
   }
 
   addNewSourah(modal: any, progressions: any) {
-    this.selectedSurah=progressions;
+    this.selectedProg = progressions;
     this._modalService
       .open(modal, {
         centered: true,

@@ -49,6 +49,7 @@ export interface Surah {
     name:            string;
     tr_name:         string;
     revelation_type: string;
+    ayahs: Ayah[];
     created_at:      Date;
     updated_at:      Date;
 }

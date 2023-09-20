@@ -15,7 +15,7 @@ export class ProgressionItemDetailsComponent implements OnInit {
 
   get fullText() {
     let fullText = "";
-    this.data.data.forEach((e) => {
+    this.data.data.sort((a, b) => a.number - b.number).forEach((e) => {
       fullText += e.text + " ۝" + this.toIndiaDiits(e.number_inSurah + '')  + " ";
     });
 

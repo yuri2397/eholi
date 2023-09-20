@@ -28,6 +28,7 @@ class SurahController extends Controller
 
     public function show(Request $request, Surah $surah)
     {
+        return $surah->load($request->with ?? []);
     }
 
     public function store(Request $request)

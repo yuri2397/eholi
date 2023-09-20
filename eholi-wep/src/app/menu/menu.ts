@@ -229,8 +229,17 @@ export const menu: CoreMenu[] = [
     id: 'recitations',
     title: 'menu.schools.recitations',
     translate: 'menu.schools.recitations',
-    type: 'item',
+    type: 'collapsible',
     icon: 'book-open',
-    url: 'pages/progressions/index',
+    children: [
+      {
+        id: 'recitations-list',
+        title: 'menu.schools.recitations',
+        translate: 'menu.schools.recitations',
+        type: 'item',
+        icon: 'circle',
+        url: 'pages/progressions/index',
+      },
+    ],
   },
 ]

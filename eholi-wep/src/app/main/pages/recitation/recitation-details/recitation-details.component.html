@@ -42,7 +42,7 @@
                         <tbody>
                             <tr *ngFor="let i of nzTable.data">
                                 <td>{{i.number}}</td>
-                                <td>{{i.name}}</td>
+                                <td class="name-text">{{i.name}}</td>
                                 <td>{{i.tr_name}}</td>
                                 <td>
                                     <button type="button" class="btn btn-icon btn-primary" rippleEffect
@@ -140,6 +140,6 @@
 
 <div class="modal-primary d-inline-block">
     <ng-template #attachSourahModal let-modal>
-        <app-attach-sourah-to-student [modal]="modal"></app-attach-sourah-to-student>
+        <app-attach-sourah-to-student [surah]="selectedSurah" [data]="selectedProg" [modal]="modal"></app-attach-sourah-to-student>
     </ng-template>
 </div>
