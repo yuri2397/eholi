@@ -8,7 +8,7 @@ import { ProgressionItemDetailsComponent } from "../progression-item-details/pro
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { SurahService } from "../services/surah.service";
 import Swal from "sweetalert2";
-import { ToastrService, GlobalConfig } from 'ngx-toastr';
+import { ToastrService, GlobalConfig } from "ngx-toastr";
 
 @Component({
   selector: "app-recitation-details",
@@ -37,6 +37,10 @@ export class RecitationDetailsComponent implements OnInit {
     this._router.routeReuseStrategy.shouldReuseRoute = () => false;
     this._route.data.subscribe((data) => {
       this.details = data.progression as ProgressionDetails;
+      this.details.progressions = this.details.progressions.sort(
+        (a, b) => a.surah?.number - b.surah?.number
+      );
+      console.log(this.details.progressions);
     });
     this._surahService.index<any>().subscribe({
       next: (response: any) => {
@@ -53,7 +57,6 @@ export class RecitationDetailsComponent implements OnInit {
       }
     })[0];
 
-    console.log(progression);
     this.loadDetails = true;
     this._progressionService
       .studentProgressionDetails(progression.id)
@@ -82,9 +85,75 @@ export class RecitationDetailsComponent implements OnInit {
         size: "xl",
         keyboard: false,
       })
-      .result.then((result) => {
-      })
+      .result.then((result) => {})
       .catch((_) => {});
+  }
+  removeDetailsItem(data: Progression) {
+    this.selectedData = data;
+    console.clear();
+    console.log(data);
+    Swal.fire({
+      title: "Attention !!!",
+      text: "Voulez-vous supprimer cette progression?",
+      icon: "error",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Oui, supprimer",
+      cancelButtonText: "Annuler",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._removeDetailsItem(data);
+      }
+    });
+  }
+
+  _removeDetailsItem(data: any) {
+    this._progressionService
+      .delete(data.config.id)
+      .pipe(finalize(() => {}))
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          window.location.reload();
+        },
+        error: (errors) => {
+          console.log(errors);
+        },
+      });
+  }
+
+  validDetailsItem(data: any) {
+    console.clear();
+    console.log(data);
+    Swal.fire({
+      title: "Attention !!!",
+      text: "Voulez-vous valider cette progression?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Oui, valider",
+      cancelButtonText: "Annuler",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this._validDetailsItem(data);
+      }
+    });
+  }
+  _validDetailsItem(data: any) {
+    this._progressionService
+      .valid(data.config.id)
+      .pipe(finalize(() => {}))
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          window.location.reload();
+        },
+        error: (errors) => {
+          console.log(errors);
+        },
+      });
   }
 
   attachSurah(surah: Surah) {
@@ -113,11 +182,11 @@ export class RecitationDetailsComponent implements OnInit {
       .pipe()
       .subscribe({
         next: (response: any) => {
-            this._toastr.success('Sourate ajouté avec succès..', 'Success!', {
-              toastClass: 'toast ngx-toastr',
-              closeButton: true
-            });
-            this._router.navigate([], { relativeTo: this._route })
+          this._toastr.success("Sourate ajouté avec succès..", "Success!", {
+            toastClass: "toast ngx-toastr",
+            closeButton: true,
+          });
+          this._router.navigate([], { relativeTo: this._route });
         },
         error: (errors) => {
           Swal.fire({
@@ -128,29 +197,29 @@ export class RecitationDetailsComponent implements OnInit {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             cancelButtonText: "Fermer",
-          })
+          });
         },
       });
   }
 
   itemStart(data: any) {
-   let firstAyat = data.data[0];
-   return " ۝" + this.convertirEnChiffresArabes( data.config.start_ayah_number - ( firstAyat.number  - 1))
+    return " ۝" + this.convertirEnChiffresArabes(data.config.start_ayah_number);
   }
 
-  itemEnd(data: { config: any, data: Ayah[]}) {
-    let firstAyat = data.data[0];
-    return " ۝" + this.convertirEnChiffresArabes(data.config.end_ayah_number - ( firstAyat.number  - 1))
-   }
+  itemEnd(data: { config: any; data: Ayah[] }) {
+    return " ۝" + this.convertirEnChiffresArabes(data.config.end_ayah_number);
+  }
 
-   convertirEnChiffresArabes(nombre: number): string {
-    const chiffresArabes = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+  convertirEnChiffresArabes(nombre: number): string {
+    const chiffresArabes = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
 
-    const nombreEnChiffres = nombre.toString().split('').map(digit => chiffresArabes[parseInt(digit)]);
+    const nombreEnChiffres = nombre
+      .toString()
+      .split("")
+      .map((digit) => chiffresArabes[parseInt(digit)]);
 
-    return nombreEnChiffres.join('');
-}
-
+    return nombreEnChiffres.join("");
+  }
 
   addNewSourah(modal: any, progressions: any) {
     this.selectedProg = progressions;
@@ -163,10 +232,15 @@ export class RecitationDetailsComponent implements OnInit {
       })
       .result.then((result: Progression) => {
         console.log(result, "result");
-        let index = this.details.progressions.indexOf(this.details.progressions.find(e => e.id === result.id));
+        let index = this.details.progressions.indexOf(
+          this.details.progressions.find((e) => e.id === result.id)
+        );
         this.details.progressions.fill(result, index, index + 1);
         this.details.progressions = [...this.details.progressions];
-        this._router.navigate([], { queryParams: { refresh: Math.random() * 100 ,} , queryParamsHandling: 'merge',  })
+        this._router.navigate([], {
+          queryParams: { refresh: Math.random() * 100 },
+          queryParamsHandling: "merge",
+        });
       })
       .catch((_) => {});
   }

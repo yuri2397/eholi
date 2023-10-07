@@ -1,30 +1,16 @@
-    <div class="modal-header">
-   
-            <div class="d-flex align-items-center justify-content-end">
-                <button type="reset" class="btn btn-success mx-1" (click)="modal.dismiss('cancel')" rippleEffect>
-                    {{ 'content.btn.submit'|translate }}
-                </button>
-                <button type="reset" class="btn btn-primary mx-1" (click)="modal.dismiss('cancel')" rippleEffect>
-                    {{ 'content.btn.update'|translate }}
-                </button>
-              
-                <button type="reset" class="btn btn-danger m-1" (click)="modal.dismiss('cancel')" rippleEffect>
-                    {{ 'content.btn.delete'|translate }}
-                </button>
+<div class="modal-header">
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body text-right " tabindex="0" ngbAutofocus>
 
-        </div>
-        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+    <span class="text-ar">{{ fullText }}</span>
+</div>
+<div class="modal-footer">
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <button type="reset" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')" rippleEffect>
+            {{ 'content.btn.cancel'|translate }}
         </button>
     </div>
-    <div class="modal-body text-right " tabindex="0" ngbAutofocus>
-        
-        <span class="text-ar">{{ fullText }}</span>
-    </div>
-    <div class="modal-footer">
-        <div class="w-100 d-flex align-items-center justify-content-between">
-            <button type="reset" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel')" rippleEffect>
-                {{ 'content.btn.cancel'|translate }}
-            </button>
-        </div>
-    </div>
+</div>

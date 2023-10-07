@@ -27,10 +27,10 @@
         <div class="row">
             <div class="col">
                 <div class="card ">
-                    <div class="card-header w-100">
+                    <div class="card-header w-100 ">
                         <span class=" text-dark h3">Sourates</span>
                     </div>
-                    <nz-table #nzTable [nzData]="surahs" [nzPageSize]="10">
+                    <nz-table #nzTable [nzData]="surahs" [nzPageSize]="8">
                         <thead>
                             <tr>
                                 <th>Numéro</th>
@@ -56,25 +56,27 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card">
+                <div class="card h">
                     <div class="card-header w-100">
                         <span class=" text-dark h3">Progression de l'étudiant</span>
                     </div>
-                    <div class="card-body">`
+                    <div class="card-body detail-h">`
                         <div class="accordion collapse-shadow">
                             <ngb-accordion #acc="ngbAccordion" #panelShadow [closeOthers]="true" [destroyOnHide]="true"
                                 (panelChange)="onPanelChange($event, panelShadow)">
                                 <ngb-panel [id]="'id' + prog.surah.number" *ngFor="let prog of details.progressions">
-                                   
+
                                     <ng-template ngbPanelTitle>
                                         <div>
                                             <span class=" collapse-title h1 text-dark d-inline-block">
-                                                {{ prog.surah.number }} - {{ prog.surah.name }}
+                                                {{ convertirEnChiffresArabes(prog.surah.number) }} - {{ prog.surah.name
+                                                }}
                                             </span>
                                         </div>
                                     </ng-template>
                                     <ng-template ngbPanelContent>
-                                        <button (click)="addNewSourah(attachSourahModal, prog)" type="button" class="btn btn-icon btn-icon  btn-primary" rippleEffect>
+                                        <button (click)="addNewSourah(attachSourahModal, prog)" type="button"
+                                            class="btn btn-icon btn-icon  btn-primary" rippleEffect>
                                             <span [data-feather]="'plus'"></span> Ajouter des ayats
                                         </button>
                                         <br>
@@ -86,31 +88,68 @@
                                                     <div class="card-header">
                                                         <div>
 
-                                                            <p class="card-text bold h1" dir="rtl" lang="ar">{{ itemStart(items) }} - {{ itemEnd(items) }}</p>
+                                                            <p class="card-text bold h1" dir="rtl" lang="ar">{{
+                                                                itemStart(items) }} - {{ itemEnd(items) }}</p>
+                                                                <span class="mx-2 badge badge-{{items.config.note <= 1 ? 'danger' : 'success' }}">{{ items.config.note <= 1 ? 'En cours' : 'Terminer' }}</span>
                                                             <!-- <div class="progress-wrapper">
                                                                 <div class="mb-25">Reticulating splines&hellip; {{
                                                                     items.config.note * 10 }}%</div>
-                                                                <ngb-progressbar type="primary"
+                                                                <ngb-progressbar tvype="primary"
                                                                     [value]="items.config.note * 10"></ngb-progressbar>
                                                             </div> -->
                                                         </div>
-                                                       <div class="d-flex align-items-center justify-content-between">
-                                                        <div class="avatar bg-light-primary p-50 m-0">
-                                                            <div class="avatar-content"
-                                                                (click)="showDetailsItem(detailModal, items)">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                    height="14" viewBox="0 0 24 24" fill="none"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="feather feather-eye font-medium-5">
-                                                                    <path
-                                                                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
-                                                                    </path>
-                                                                    <circle cx="12" cy="12" r="3"></circle>
-                                                                </svg>
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <div class="avatar bg-light-success p-50 m-1">
+                                                                <div class="avatar-content"
+                                                                    (click)="validDetailsItem(items)">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                                        <path d="M8.5 12.5L10.5 14.5L15.5 9.5"
+                                                                            stroke="currentColor" stroke-width="1.5"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" />
+                                                                        <path
+                                                                            d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                                                                            stroke="currentColor" stroke-width="1.5"
+                                                                            stroke-linecap="round" />
+                                                                        <deepl-alert xmlns="" /><deepl-alert
+                                                                            xmlns="" /><deepl-alert
+                                                                            xmlns="" /><deepl-alert xmlns="" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                            <div class="avatar bg-light-danger p-50 m-1">
+                                                                <div class="avatar-content"
+                                                                    (click)="removeDetailsItem(items)">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none">
+                                                                        <path
+                                                                            d="M3 3L21 21M18 6L17.6 12M17.2498 17.2527L17.1991 18.0129C17.129 19.065 17.0939 19.5911 16.8667 19.99C16.6666 20.3412 16.3648 20.6235 16.0011 20.7998C15.588 21 15.0607 21 14.0062 21H9.99377C8.93927 21 8.41202 21 7.99889 20.7998C7.63517 20.6235 7.33339 20.3412 7.13332 19.99C6.90607 19.5911 6.871 19.065 6.80086 18.0129L6 6H4M16 6L15.4559 4.36754C15.1837 3.55086 14.4194 3 13.5585 3H10.4416C9.94243 3 9.47576 3.18519 9.11865 3.5M11.6133 6H20M14 14V17M10 10V17"
+                                                                            stroke="currentColor" stroke-width="2"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" />
+                                                                        <deepl-alert xmlns="" /><deepl-alert
+                                                                            xmlns="" /><deepl-alert
+                                                                            xmlns="" /><deepl-alert xmlns="" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                            <div class="avatar bg-light-primary p-50 m-1">
+                                                                <div class="avatar-content"
+                                                                    (click)="showDetailsItem(detailModal, items)">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14"
+                                                                        height="14" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-eye font-medium-5">
+                                                                        <path
+                                                                            d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z">
+                                                                        </path>
+                                                                        <circle cx="12" cy="12" r="3"></circle>
+                                                                    </svg>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                       </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -140,6 +179,7 @@
 
 <div class="modal-primary d-inline-block">
     <ng-template #attachSourahModal let-modal>
-        <app-attach-sourah-to-student [surah]="selectedSurah" [data]="selectedProg" [modal]="modal"></app-attach-sourah-to-student>
+        <app-attach-sourah-to-student [surah]="selectedSurah" [data]="selectedProg"
+            [modal]="modal"></app-attach-sourah-to-student>
     </ng-template>
 </div>

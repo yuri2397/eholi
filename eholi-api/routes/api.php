@@ -283,6 +283,8 @@ Route::prefix('progressions')
         Route::get('/student-progression-details/{studentProgression}', 'studentProgressionDetails');
 
         Route::post('/store', 'store');
+        Route::delete('/delete/{studentProgression}', 'destroy');
+        Route::put('/valid/{studentProgression}', 'valid');
         Route::post('/attach-new-ayah', 'attachNewAyah');
     });
 

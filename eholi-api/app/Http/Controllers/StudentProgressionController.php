@@ -121,4 +121,15 @@ class StudentProgressionController extends Controller
         return response()->json($progression->load(['studentProgressionItems']));
     }
 
+
+    public function destroy(StudentProgressionItem $studentProgression) {
+        $studentProgression->delete();
+        return $studentProgression;
+    }
+
+    public function valid(StudentProgressionItem $studentProgression) {
+        $studentProgression->note = 100;
+        $studentProgression->save();
+        return $studentProgression;
+    }
 }

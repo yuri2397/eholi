@@ -32,4 +32,16 @@ export class RecitationsService extends AbstractService {
     return this.http.post(url, data);
   }
 
+  override delete(uuid: string): Observable<any> {
+    let url = `${this.endpoint}/delete/${uuid}`;
+    return this.http.delete(url);
+
+  }
+
+  valid(uuid: string): Observable<any> {
+    let url = `${this.endpoint}/valid/${uuid}`;
+    return this.http.put(url, {});
+
+  }
+
 }
