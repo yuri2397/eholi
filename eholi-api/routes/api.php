@@ -140,7 +140,7 @@ Route::prefix('students')
         Route::post('', 'store');
         Route::put('/{student}', 'update');
         Route::get('/{student}/meta-data', 'metaData');
-
+        Route::delete('/{student}', 'destroy');
         // disable student in school
         Route::put('/{student}/disable', 'disableStudentInSchool');
     });

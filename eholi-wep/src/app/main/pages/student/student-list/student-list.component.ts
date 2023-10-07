@@ -55,6 +55,7 @@ export class StudentListComponent implements OnInit {
       this.studentService.delete(deleteRow.id).subscribe({
         next: response => {
           console.log(response);
+          window.location.reload();
         }, error: errors => {
 
         }
