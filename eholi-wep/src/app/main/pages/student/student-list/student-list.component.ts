@@ -51,6 +51,16 @@ export class StudentListComponent implements OnInit {
         .catch((_) => {})
     }
 
+    deleteStudent(deleteRow: any){
+      this.studentService.delete(deleteRow.id).subscribe({
+        next: response => {
+          console.log(response);
+        }, error: errors => {
+
+        }
+      })
+    }
+
     openEditModal(modal: any, item: Student) {
       this.editingStudent = item
       this._modalService

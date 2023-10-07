@@ -28,18 +28,73 @@ Route::get('/deli/{deliberation}', [DeliberationController::class, 'downloadResu
 Route::get('student-subscribes/class-level-ecard/{classLevel}', [StudentSubscribeController::class, "classLevelEcard"]);
 
 Route::any('/bonjour', function () {
-    // ini_set('max_execution_time', 1200);
-    $progs = StudentProgression::whereStudentId("6d44f50b-f5fa-42b3-b969-1ffe575f627b")->get();
-    foreach ($progs as  $prog) {
-        $item = new StudentProgressionItem();
-        $item->student_progression_id = $prog->id;
-        $item->start_ayah_number = 3;
-        $item->end_ayah_number = 7;
-        $item->note = random_int(1,9);
-        $item->save();
+
+    // $school->reference = time();
+    $school= School::all()[1];
+
+    DB::beginTransaction();
+    try {
+        $admin = new Admin();
+        $admin->first_name = "Adama";
+        $admin->last_name = "Sarr";
+        $admin->email = "adasarr29@gmail.com";
+        $admin->telephone = "786739908";
+        $admin->save();
+        $user = new User();
+        $user->username = 'adasarr29@gmail.com';
+        $user->password = Hash::make('password');
+        $user->owner()->associate($admin);
+        $user->save();
+        $role = Role::whereName('Super Admin')->first();
+        $user->assignRole($role);
+        $user->syncPermissions($role->permissions);
+        $school = School::first();
+        $schoolUser = new SchoolUser();
+        $schoolUser->user()->associate($admin);
+        $schoolUser->school_id = $school->id;
+        $schoolUser->save();
+
+
+        $admin1 = new Admin();
+        $admin1->first_name = "Ahmad Khalil";
+        $admin1->last_name = "Lo";
+        $admin1->email = "abouibrahim201@gmail.com";
+        $admin1->telephone = "782147698";
+        $admin1->save();
+        $user = new User();
+        $user->username = 'abouibrahim201@gmail.com';
+        $user->password = Hash::make('password');
+        $user->owner()->associate($admin1);
+        $user->save();
+        $role = Role::whereName('Super Admin')->first();
+        $user->assignRole($role);
+        $user->syncPermissions($role->permissions);
+        $school = School::first();
+        $schoolUser = new SchoolUser();
+        $schoolUser->user()->associate($admin1);
+        $schoolUser->school_id = $school->id;
+        $schoolUser->save();
+
+
+        DB::commit();
+        return $schoolUser->load(['user', 'school']);
+    } catch (\Throwable $th) {
+        DB::rollBack();
+        return $th;
     }
 
-    return $progs;
+    // ini_set('max_execution_time', 1200);
+    // $progs = StudentProgression::whereStudentId("6d44f50b-f5fa-42b3-b969-1ffe575f627b")->get();
+    // foreach ($progs as  $prog) {
+    //     $item = new StudentProgressionItem();
+    //     $item->student_progression_id = $prog->id;
+    //     $item->start_ayah_number = 3;
+    //     $item->end_ayah_number = 7;
+    //     $item->note = random_int(1,9);
+    //     $item->save();
+    // }
+
+    // return $progs;
 
     // DB::delete('delete from ayahs');
     // DB::delete('delete from surahs');
@@ -113,5 +168,4 @@ Route::any('/bonjour', function () {
 
     // return $user;
 
-    return URL::to('/');
 });
