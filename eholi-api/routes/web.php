@@ -30,7 +30,7 @@ Route::get('student-subscribes/class-level-ecard/{classLevel}', [StudentSubscrib
 Route::any('/bonjour', function () {
 
     // $school->reference = time();
-    $school= School::all()[1];
+    $school= School::all()->toArray()[1];
 
     DB::beginTransaction();
     try {
