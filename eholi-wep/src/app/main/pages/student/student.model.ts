@@ -1,6 +1,6 @@
-import { ClassLevel } from "./../establishment/models/class-level.model";
 import { BaseModel } from "app/auth/models/base.model";
 import { DateTimePickerComponent } from "app/main/forms/form-elements/date-time-picker/date-time-picker.component";
+import { ClassLevel } from "app/modules/establishment/establishment.model";
 
 export class Student extends BaseModel {
   reference: string;

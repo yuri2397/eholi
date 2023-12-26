@@ -2,6 +2,8 @@
 
 use App\Models\SchoolYear;
 use App\Models\User;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\App;
 
 if (!function_exists('school_year')) {
 
@@ -10,6 +12,7 @@ if (!function_exists('school_year')) {
     {
         if (($user = auth()->user())) {
             $school = school();
+
             $school_year = SchoolYear::with($with_school ? 'school' : [])->whereSchoolId($school->id)
                 ->whereStatus(SchoolYear::ACTIVE)
                 ->orderBy('created_at')
@@ -35,9 +38,9 @@ if (!function_exists('school')) {
     function school()
     {
         if (auth()->user()) {
-            $owner = User::with(['owner.school_user.school'])->find(auth()->id());
-            if ($owner && $owner->owner && $owner->owner->school_user) {
-                return $owner->owner->school_user->school;
+            $user = User::with(['owner.school_user.school'])->find(auth()->id());
+            if ($user && $user->owner && $user->owner->school_user) {
+                return $user->owner->school_user->school;
             }
             return throw new Exception('Not owner for the authenticated user.', 409);
         }

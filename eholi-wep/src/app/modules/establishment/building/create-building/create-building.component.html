@@ -1,0 +1,60 @@
+<!-- HEADER -->
+<div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">
+        {{ "buildings.create_title" | translate }}
+    </h5>
+    <button
+        type="button"
+        class="close"
+        (click)="modal.dismiss('cancel')"
+        aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<!-- BODY -->
+<div class="modal-body py-4" tabindex="0" ngbAutofocus>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label class="form-control-label" for="name">
+                        {{ "buildings.name" | translate }}
+                    </label>
+                    <input
+                    autofocus
+                        class="form-control input-md"
+                        formControlName="name"
+                        type="text"
+                        placeholder="{{ 'buildings.name' | translate }}"
+                        id="name"
+                        [class.error]="name.invalid && (name.dirty || name.touched)" />
+                    <span
+                        *ngIf="name.invalid && (name.dirty || name.touched)"
+                        class="invalid-form">
+                        <small
+                            class="form-text text-danger danger"
+                            *ngIf="name.errors?.['required']">
+                            {{ "form.validation.errors.required" | translate }}
+                        </small>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <button type="reset" class="btn btn-outline-secondary"
+            (click)="modal.dismiss('cancel')" rippleEffect>
+            {{ 'content.btn.cancel'|translate }}
+        </button>
+        <button type="submit" [disabled]="!form.valid"
+            (click)="submit(form.value)" class="btn btn-primary mr-1"
+            rippleEffect>
+            <span *ngIf="createdLoad" class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"></span>{{
+            'content.btn.submit'|translate }}</button>
+    </div>
+</div>

@@ -1,4 +1,56 @@
 {
+  "dashboard": {
+    "title": "Tableau de Bord"
+  },
+  "class":{
+    "title": "Classes"
+  },
+  "classrooms":{
+    "title": "Salle de classes"
+  },
+  "courses":{
+    "title": "Cours/Modules"
+  },
+  "students":{
+    "title": "Eleves/Etudiants"
+  },
+  "professors":{
+    "title": "Enseignants/Professeurs"
+  },
+  "settings": {
+    "title" :"Configuration",
+    "archive": {
+      "title": "Archives"
+    }
+  },
+  "establishment":{
+    "title": "Etablissement"
+  },
+  "buildings": {
+    "title": "Batiments",
+    "name": "Nom du bâtiment",
+    "nb_salle": "Nombre de salles",
+    "create_title": "Ajouter un nouveau bâtiment",
+    "edit_title": "Modifier le bâtiment",
+    "create_success_body": "Bâtiment crée avec succès.",
+    "create_success_title": "Opération terminée",
+    "edit_success_body": "Bâtiment modifié avec succès.",
+    "edit_success_title": "Opération terminée"
+  },
+  "housing": {
+    "title": "Logements/Campus"
+  },
+  "shared":{
+    "name": "Nom",
+    "title": "Titre"
+  }
+
+
+
+
+
+
+,
   "auth": {
     "username": {
       "text": "Nom d'utilisateur",

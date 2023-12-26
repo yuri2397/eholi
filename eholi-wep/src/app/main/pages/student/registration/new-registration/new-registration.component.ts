@@ -1,4 +1,3 @@
-import { StudentSubscribeService } from './../../../establishment/services/student-subscribes.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { first, finalize } from 'rxjs/operators';
 import { Student } from '../../student.model';
 import { StudentService } from '../../student.service';
+import { StudentSubscribeService } from 'app/modules/establishment/services/student-subscribes.service';
 
 @Component({
   selector: 'app-new-registration',

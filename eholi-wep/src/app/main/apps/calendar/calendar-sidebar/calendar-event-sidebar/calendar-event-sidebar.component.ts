@@ -5,14 +5,12 @@ import {CoreSidebarService} from '@core/components/core-sidebar/core-sidebar.ser
 import {EventRef} from 'app/main/apps/calendar/calendar.model';
 import {CalendarService} from 'app/main/apps/calendar/calendar.service';
 import {ProfessorsService} from '../../../../pages/professors/professors.service';
-import {CourseService} from '../../../../pages/establishment/services/course.service';
 import {Professor} from '../../../../pages/professors/professor';
 import {ActivatedRoute} from '@angular/router';
 import {first} from 'rxjs/operators';
-import {Course} from '../../../../pages/establishment/models/course.model';
-import {ClassRoomService} from '../../../../pages/establishment/services/class-room.service';
-import {ClassRoom} from '../../../../pages/establishment/models/class-room.model';
-import {ClassLevelCourseService} from '../../../../pages/establishment/services/class-level-courses.service';
+import { ClassRoom, Course } from 'app/modules/establishment/establishment.model';
+import { ClassLevelCourseService } from 'app/modules/establishment/services/class-level-courses.service';
+import { ClassRoomService } from 'app/modules/establishment/services/class-room.service';
 
 @Component({
     selector: 'app-calendar-event-sidebar',

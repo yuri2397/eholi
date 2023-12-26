@@ -116,6 +116,13 @@ class SchoolYearController extends Controller
 
     public function currentSchoolYear(Request $request)
     {
-        return school_year();
+        try {
+            return school_year();
+        } catch (\Throwable $th) {
+            return response()->json([
+                "message" => $th->getMessage(),
+                "code" => $th->getCode()
+            ], $th->getCode());
+        }
     }
 }

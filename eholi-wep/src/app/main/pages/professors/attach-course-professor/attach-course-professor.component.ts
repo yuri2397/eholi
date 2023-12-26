@@ -1,11 +1,11 @@
 import { TranslateService } from '@ngx-translate/core'
 import { Professor } from './../professor'
-import { ClassLevelCourseService } from '../../establishment/services/class-level-courses.service'
-import { ClassLevelCourse } from '../../establishment/models/class-level-course.model'
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { finalize } from 'rxjs/operators'
 import { ToastrService } from 'ngx-toastr'
+import { ClassLevelCourseService } from 'app/modules/establishment/services/class-level-courses.service'
+import { ClassLevelCourse } from 'app/modules/establishment/models/class-level-course.model'
 
 @Component({
   selector: 'app-attach-course-professor',

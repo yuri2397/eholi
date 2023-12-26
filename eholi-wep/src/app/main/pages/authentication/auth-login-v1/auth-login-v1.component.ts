@@ -1,24 +1,24 @@
-import { AuthenticationService } from "./../../../../auth/service/authentication.service";
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { AuthenticationService } from './../../../../auth/service/authentication.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
-} from "@angular/forms";
+} from '@angular/forms';
 
-import { first, takeUntil } from "rxjs/operators";
-import { pipe, Subject } from "rxjs";
+import { first, takeUntil } from 'rxjs/operators';
+import { pipe, Subject } from 'rxjs';
 
-import { CoreConfigService } from "@core/services/config.service";
-import { TranslateService } from "@ngx-translate/core";
-import { ToastrService, GlobalConfig } from "ngx-toastr";
-import { ActivatedRoute, Router } from "@angular/router";
-import { CoreLoadingScreenService } from "@core/services/loading-screen.service";
+import { CoreConfigService } from '@core/services/config.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService, GlobalConfig } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CoreLoadingScreenService } from '@core/services/loading-screen.service';
 
 @Component({
-  selector: "app-auth-login-v1",
-  templateUrl: "./auth-login-v1.component.html",
-  styleUrls: ["./auth-login-v1.component.scss"],
+  selector: 'app-auth-login-v1',
+  templateUrl: './auth-login-v1.component.html',
+  styleUrls: ['./auth-login-v1.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class AuthLoginV1Component implements OnInit {
@@ -27,7 +27,7 @@ export class AuthLoginV1Component implements OnInit {
   public loginForm: UntypedFormGroup;
   public submitted = false;
   public passwordTextType: boolean;
-  param = { value: "world" };
+  param = { value: 'world' };
   // Private
   private _unsubscribeAll: Subject<any>;
   returnUrl: any;
@@ -100,26 +100,26 @@ export class AuthLoginV1Component implements OnInit {
         next: (response) => {
           this._authService
             .getCurrentUser({
-              "with[]": [
-                "owner",
-                "roles",
-                "permissions",
-                "owner.school_user.school",
+              'with[]': [
+                'owner',
+                'roles',
+                'permissions',
+                'owner.school_user.school',
               ],
             })
             .subscribe({
               next: (user: any) => {
                 this.loading = false;
-                let m = "";
-                let t = "";
+                let m = '';
+                let t = '';
                 this.translate
-                  .get("auth.login.ok.message")
+                  .get('auth.login.ok.message')
                   .subscribe((text) => (m = text));
                 this.translate
-                  .get("auth.login.ok.title")
+                  .get('auth.login.ok.title')
                   .subscribe((text) => (t = text));
                 this._toastrService.success(`👋 ${m}`, t, {
-                  toastClass: "toast ngx-toastr",
+                  toastClass: 'toast ngx-toastr',
                   closeButton: true,
                 });
 
@@ -143,12 +143,12 @@ export class AuthLoginV1Component implements OnInit {
    */
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      username: ["", [Validators.required]],
-      password: ["", Validators.required],
+      username: ['', [Validators.required]],
+      password: ['', Validators.required],
     });
 
     this.returnUrl =
-      this._route.snapshot.queryParams["returnUrl"] || "/dashboard";
+      this._route.snapshot.queryParams['returnUrl'] || '/dashboard';
 
     // Subscribe to config changes
     this._coreConfigService.config

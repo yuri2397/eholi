@@ -1,5 +1,4 @@
 import { Paginate } from 'app/auth/models/base.model'
-import { CourseService } from './../../establishment/services/course.service'
 import { Injectable } from '@angular/core'
 import {
   Router,
@@ -8,9 +7,8 @@ import {
   ActivatedRouteSnapshot,
 } from '@angular/router'
 import { Observable, of } from 'rxjs'
-import { Course } from '../../establishment/establishment.model'
-import { ClassLevelCourseService } from '../../establishment/services/class-level-courses.service'
-import { ClassLevelCourse } from '../../establishment/models/class-level-course.model'
+import { ClassLevelCourse } from 'app/modules/establishment/establishment.model'
+import { ClassLevelCourseService } from 'app/modules/establishment/services/class-level-courses.service'
 
 @Injectable({
   providedIn: 'root',

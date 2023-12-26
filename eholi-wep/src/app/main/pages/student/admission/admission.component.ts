@@ -4,13 +4,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { TranslateService } from '@ngx-translate/core'
 import Stepper from 'bs-stepper'
 import { TutorsService } from '../../school/services/tutors.service'
-import { ClassLevelService } from '../../establishment/services/class-level.service'
-import { ClassLevel } from '../../establishment/models/class-level.model'
 import Swal from 'sweetalert2'
 import { AdminissionService } from '../services/adminission.service'
 import { ToastrService } from 'ngx-toastr'
 import { Paginate } from 'app/auth/models/base.model'
 import { Location } from '@angular/common'
+import { ClassLevel } from 'app/modules/establishment/establishment.model'
+import { ClassLevelService } from 'app/modules/establishment/services/class-level.service'
 
 @Component({
   selector: 'app-admission',

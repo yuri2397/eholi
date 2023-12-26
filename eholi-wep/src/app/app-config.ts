@@ -16,14 +16,14 @@ import { CoreConfig } from '@core/types'
 // prettier-ignore
 export const coreConfig: CoreConfig = {
   app: {
-    appName     : 'Eholi',                                        // App Name
-    appTitle    : 'Eholi - Gérer votre établissement scolaire.', // App Title
+    appName     : 'GE2P',                                        // App Name
+    appTitle    : 'GE2P - Gérer votre établissement scolaire.', // App Title
     appLogoImage: 'assets/images/logo/holi1.svg',                  // App Logo
     appLanguage : 'fr',                                           // App Default Language (en, fr, de, pt etc..)
   },
   layout: {
-    skin  : 'default',                        // default, dark, bordered, semi-dark
-    type  : 'vertical',                       // vertical, horizontal
+    skin  : 'bordered',                        // default, dark, bordered, semi-dark
+    type  : 'horizontal',                       // vertical, horizontal
     animation : 'fadeIn',                     // fadeInLeft, zoomIn , fadeIn, none
     menu : {
       hidden               : false,           // Boolean: true, false
@@ -32,7 +32,7 @@ export const coreConfig: CoreConfig = {
     // ? For horizontal menu, navbar type will work for navMenu type
     navbar: {
       hidden               : false,           // Boolean: true, false
-      type                 : 'fixed-top',  // navbar-static-top, fixed-top, floating-nav, d-none
+      type                 : 'floating-nav',  // navbar-static-top, fixed-top, floating-nav, d-none
       background           : 'navbar-light',  // navbar-light. navbar-dark
       customBackgroundColor: true,            // Boolean: true, false
       backgroundColor      : ''               // BS color i.e bg-primary, bg-success

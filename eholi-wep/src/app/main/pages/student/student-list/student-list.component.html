@@ -73,13 +73,11 @@
           <ngx-datatable-column
             name="{{ 'student.table.first_name' | translate }}"
             prop="first_name"
-            [width]="120"
           >
           </ngx-datatable-column>
           <ngx-datatable-column
             name="{{ 'student.table.last_name' | translate }}"
             prop="last_name"
-            [width]="50"
           >
           </ngx-datatable-column>
           <ngx-datatable-column
@@ -90,7 +88,6 @@
           <ngx-datatable-column
             name="{{ 'student.table.birth_in' | translate }}"
             prop="birth_in"
-            [width]="50"
           >
           </ngx-datatable-column>
           <ngx-datatable-column
@@ -115,7 +112,6 @@
           <ngx-datatable-column
             name="{{ 'student.table.phone' | translate }}"
             prop="telephone"
-            [width]="40"
           >
             <ng-template let-telephone="value" ngx-datatable-cell-template>
               <div
@@ -135,7 +131,6 @@
 
           <ngx-datatable-column
             name="{{ 'content.table.actions' | translate }}"
-            [width]="50"
             [sortable]="false"
           >
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -156,14 +151,14 @@
                 >
                   <span [data-feather]="'eye'"></span>
                 </button>
-                <button
+              <!--  <button
                 (click)="deleteStudent(row)"
                 type="button"
                 class="btn btn-icon btn-danger"
                 rippleEffect
               >
                 <span [data-feather]="'trash'"></span>
-              </button>
+              </button>-->
               </div>
             </ng-template>
           </ngx-datatable-column>

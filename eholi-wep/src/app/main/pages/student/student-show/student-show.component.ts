@@ -1,14 +1,13 @@
 import { first } from 'rxjs/operators';
-import { StudentSubscribeService } from './../../establishment/services/student-subscribes.service';
 import { StudentService } from "./../student.service";
 import { Utils } from "./../../../../auth/helpers/utils";
-import { ClassLevelTestExamService } from "./../../establishment/services/class-level-test-exam.service";
-import { DeliberationService } from "./../../establishment/services/deliberationservice";
 import { Student, StudentMetaData } from "./../student.model";
-import { Paginate } from "./../../../../auth/models/base.model";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ClassLevel, Deliberation } from '../../establishment/establishment.model';
+import { Deliberation, ClassLevel } from 'app/modules/establishment/establishment.model';
+import { ClassLevelTestExamService } from 'app/modules/establishment/services/class-level-test-exam.service';
+import { DeliberationService } from 'app/modules/establishment/services/deliberationservice';
+import { StudentSubscribeService } from 'app/modules/establishment/services/student-subscribes.service';
 
 @Component({
   selector: "app-student-show",

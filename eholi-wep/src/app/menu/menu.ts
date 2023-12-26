@@ -1,78 +1,9 @@
-import { CoreMenu } from '@core/types'
+import { CoreMenu } from "@core/types";
 
 //? DOC: http://localhost:7777/demo/vuexy-angular-admin-dashboard-template/documentation/guide/development/navigation-menus.html#interface
 
 export const menu: CoreMenu[] = [
-  // Dashboard
-  // {
-  //   id: 'dashboard',
-  //   title: 'menu.dashboard.home',
-  //   translate: 'menu.dashboard.home',
-  //   type: 'collapsible',
-  //   // role: ['Admin'], //? To hide collapsible based on user role
-  //   icon: 'home',
-  //   children: [
-  //     {
-  //       id: 'analytics',
-  //       title: 'menu.dashboard.analytics',
-  //       translate: 'menu.dashboard.analytics',
-  //       type: 'item',
-  //       // role: ['Admin'], //? To set multiple role: ['Admin', 'Client']
-  //       icon: 'circle',
-  //       url: 'dashboard/analytics',
-  //     },
-  //     {
-  //       // If role is not assigned will be display to all
-  //       id: 'ecommerce',
-  //       title: 'menu.dashboard.ecommerce',
-  //       translate: 'menu.dashboard.ecommerce',
-  //       type: 'item',
-  //       icon: 'circle',
-  //       url: 'dashboard/ecommerce',
-  //     },
-  //   ],
-  // },
-
-  // ADMINISTRATIONS
-  // {
-  //   id: 'schools',
-  //   title: 'menu.administration.title',
-  //   translate: 'menu.administration.title',
-  //   type: 'collapsible',
-  //   icon: 'paperclip',
-  //   children: [
-  //     {
-  //       id: 'parent',
-  //       title: 'menu.administration.parent',
-  //       translate: 'menu.administration.parent',
-  //       type: 'item',
-  //       icon: 'circle',
-  //       url: 'pages/tutors/index',
-  //       queryParams: {
-  //         per_page: 15,
-  //         page: 1,
-  //       },
-  //     },
-  //     {
-  //       id: 'personal',
-  //       title: 'menu.administration.personal',
-  //       translate: 'menu.administration.personal',
-  //       type: 'item',
-  //       icon: 'circle',
-  //       url: 'pages/personals',
-  //     },
-  //     {
-  //       id: 'attendance',
-  //       title: 'menu.administration.attendance',
-  //       translate: 'menu.administration.attendance',
-  //       type: 'item',
-  //       icon: 'circle',
-  //       url: 'pages/attendances',
-  //     },
-  //   ],
-  // },
-
-  // STUDENT MANAGEMENT
+  /*
   {
     id: 'student',
     title: 'menu.student.title',
@@ -241,5 +172,134 @@ export const menu: CoreMenu[] = [
         url: 'pages/progressions/index',
       },
     ],
+  },*/
+
+  {
+    id: "dashboard",
+    title: "dashboard.title",
+    translate: "dashboard.title",
+    type: "item",
+    icon: "home",
+    url: "dashboard",
   },
-]
+  {
+    id: "establishment",
+    title: "establishment.title",
+    translate: "establishment.title",
+    type: "collapsible",
+    icon: "home",
+    children: [
+      {
+        id: "buildings",
+        title: "buildings.title",
+        translate: "buildings.title",
+        icon: "compass",
+        type: "item",
+        url: "pages/buildings"
+      },
+      {
+        id: "classrooms",
+        title: "classrooms.title",
+        translate: "classrooms.title",
+        type: "item",
+        icon: "book-open",
+        url: "pages/classrooms",
+        queryParams: {
+          page: 1,
+          per_page: 10,
+          order_by: "name",
+          order: "desc",
+          "with[]": "building",
+        },
+      },
+      {
+        id: 'housing',
+        title: 'housing.title',
+        translate: 'housing.title',
+        type: 'item',
+        icon: 'target',
+        url: 'pages/housing',
+        queryParams: {
+          page: 1,
+          per_page: 10,
+          'with[]': ['building'],
+        },
+      },
+    ]
+  },
+  
+  {
+    id: "class",
+    title: "class.title",
+    translate: "class.title",
+    type: "item",
+    icon: "briefcase",
+    url: "pages/class-levels",
+    queryParams: {
+      page: 1,
+      per_page: 10,
+      "with[]": ["level"],
+      "columns[]": ["name", "id", "level_id"],
+    },
+  },
+  {
+    id: "courses",
+    title: "courses.title",
+    translate: "courses.title",
+    type: "item",
+    icon: "book-open",
+    url: "pages/courses",
+    queryParams: {
+      page: 1,
+      per_page: 10,
+      "with[]": ["semester", "class_level", "course", "professor"],
+    },
+  },
+  {
+    id: "professors",
+    title: "professors.title",
+    translate: "professors.title",
+    type: "item",
+    icon: "pen-tool",
+    url: "pages/professors/index",
+    queryParams: {
+      page: 1,
+      per_page: 10,
+      "with[]": ["school"],
+    },
+  },
+  {
+    id: "students",
+    title: "students.title",
+    translate: "students.title",
+    type: "item",
+    icon: "users",
+    url: "pages/students/index",
+    queryParams: {
+      page: 1,
+      per_page: 15,
+      order_by: "last_name",
+      order: "desc",
+    },
+  },
+  {
+    id: 'settings',
+    title: 'settings.title',
+    translate: 'settings.title',
+    type: 'collapsible',
+    icon: 'settings',
+    children: [
+      {
+        id: 'settings.archive.title',
+        title: 'settings.archive.title',
+        translate: 'settings.archive.title',
+        type: 'item',
+        icon: 'archive',
+        url: 'pages/settings/index',
+        queryParams: {
+         
+        },
+      },
+    ],
+  },
+];

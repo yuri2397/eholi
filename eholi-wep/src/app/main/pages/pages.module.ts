@@ -1,6 +1,5 @@
 import { ProfessorsModule } from './professors/professors.module'
 import { SchoolModule } from './school/school.module'
-import { EstablishmentModule } from './establishment/establishment.module'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule } from '@angular/forms'
@@ -21,6 +20,7 @@ import { AuthenticationModule } from './authentication/authentication.module'
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module'
 import { StudentModule } from './student/student.module'
 import { RecitationModule } from './recitation/recitation.module'
+import { EstablishmentModule } from 'app/modules/establishment/establishment.module'
 
 @NgModule({
   declarations: [],

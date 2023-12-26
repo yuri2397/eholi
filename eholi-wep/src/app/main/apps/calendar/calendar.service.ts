@@ -5,8 +5,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import {EventRef} from 'app/main/apps/calendar/calendar.model';
-import {environment} from '../../../../environments/environment';
-import {TimesTablesService} from '../../pages/establishment/services/times_table.service';
+import { TimesTablesService } from 'app/modules/establishment/services/times_table.service';
 
 @Injectable()
 export class CalendarService implements Resolve<any> {

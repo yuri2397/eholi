@@ -1,4 +1,3 @@
-import { SchoolYearsService } from "./../../main/pages/establishment/services/school-years.service";
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -10,6 +9,7 @@ import { ToastrService } from "ngx-toastr";
 import { LoginResponse } from "../models/response.model";
 import { Token } from "../models/token";
 import { Param, Permission } from "../models/data.model";
+import { SchoolYearsService } from "app/modules/establishment/services/school-years.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
@@ -25,7 +25,7 @@ export class AuthenticationService {
   /**
    *
    * @param {HttpClient} _http
-   * @param {ToastrService} _toastrService
+   * @param _syService
    */
   constructor(
     private _http: HttpClient,
@@ -33,7 +33,7 @@ export class AuthenticationService {
   ) {
     this._baseUrl = `${env.api}users/`;
     this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem("currentUser"))
+      JSON.parse(localStorage.getItem('currentUser'))
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -86,7 +86,7 @@ export class AuthenticationService {
   /**
    * User login
    *
-   * @param email
+   * @param username
    * @param password
    * @returns user
    */
@@ -116,11 +116,11 @@ export class AuthenticationService {
           if (user) {
             this._syService.currentSchoolYear().subscribe((res: any) => {
               console.log(res);
-              localStorage.setItem("school_year", JSON.stringify(res));
+              localStorage.setItem('school_year', JSON.stringify(res));
             });
             localStorage.setItem(this._current_user_key, JSON.stringify(user));
             localStorage.setItem(
-              "school_data",
+              'school_data',
               JSON.stringify(user.owner.school_user.school)
             );
             this.currentUserSubject.next(user);

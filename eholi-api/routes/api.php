@@ -42,12 +42,16 @@ use App\Http\Controllers\ClassLevelHasCourseController;
 use App\Http\Controllers\DeliberationController;
 use App\Http\Controllers\LevelHasSemesterController;
 use App\Http\Controllers\StudentProgressionController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SurahController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TimesTableController;
 use App\Models\StudentProgression;
 use App\Models\TestResult;
 use App\Models\TimesTable;
+
+//Route::post('/add-new-school', [SuperAdminController::class, 'newSchool']);
+
 
 /**
  * UserController
@@ -278,7 +282,7 @@ Route::prefix('ayats')
 
 
 Route::prefix('progressions')
-->middleware(['auth:api', 'cors'])->controller(StudentProgressionController::class)->group(function () {
+    ->middleware(['auth:api', 'cors'])->controller(StudentProgressionController::class)->group(function () {
         Route::get('/student-progressions/{student}', 'studentProgression');
         Route::get('/student-progression-details/{studentProgression}', 'studentProgressionDetails');
 
@@ -301,6 +305,8 @@ Route::prefix('admissions')
 Route::prefix('buildings')
     ->middleware(['auth:api', 'cors'])
     ->apiResource('buildings', BuildingController::class);
+
+
 
 /**
  * TEST URL

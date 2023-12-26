@@ -1,13 +1,13 @@
 import { TranslateService } from '@ngx-translate/core'
 import { first, finalize } from 'rxjs/operators'
 import { ProfessorsService } from './../professors.service'
-import { ClassLevelCourse } from './../../establishment/models/class-level-course.model'
 import { Professor } from './../professor'
 import { ActivatedRoute } from '@angular/router'
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { ToastrService } from 'ngx-toastr'
 import { SchoolHasProfessor } from 'app/shared/models/school_has_professor.model'
+import { ClassLevelCourse } from 'app/modules/establishment/establishment.model'
 
 @Component({
   selector: 'app-show-professor',
