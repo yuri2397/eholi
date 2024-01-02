@@ -131,6 +131,7 @@
             <a ngbNavLink><span [data-feather]="'calendar'"></span>
               {{ "timestable.title" | translate }}</a>
             <ng-template ngbNavContent>
+              <app-add-times-tables [id]="this.class_level.times_table?.id"></app-add-times-tables>
               <!--<app-class-level-test-examen></app-class-level-test-examen> -->
             </ng-template>
           </li>

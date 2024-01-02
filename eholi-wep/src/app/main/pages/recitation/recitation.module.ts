@@ -14,6 +14,7 @@ import { AttachSourahToStudentComponent } from './attach-sourah-to-student/attac
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { ReactiveFormsModule } from '@angular/forms';
+import { XalxaComponent } from './xalxa/xalxa.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,8 @@ const routes: Routes = [
     RecitationComponent,
     RecitationDetailsComponent,
     ProgressionItemDetailsComponent,
-    AttachSourahToStudentComponent
+    AttachSourahToStudentComponent,
+    XalxaComponent
   ],
   imports: [RouterModule.forChild(routes), SharedModule, NzCollapseModule, NzListModule, NzAutocompleteModule, ReactiveFormsModule],
 

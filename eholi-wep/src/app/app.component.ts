@@ -97,20 +97,33 @@ export class AppComponent implements OnInit, OnDestroy {
     this._router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((_: NavigationEnd) => {
-        this.showLoader();
+        this.closeLoader();
       });
 
     // Subscribe on route start
     this._router.events
       .pipe(filter((event) => event instanceof NavigationStart))
       .subscribe((_: NavigationStart) => {
-        this.closeLoader();
+        this.showLoader();
       });
   }
 
-  showLoader() {}
+  showLoader() {
+    console.log("SHOW LOADER")
+    let load = window.document.getElementById("transition-load");
+    if (load) {
+      load.style.display = "block";
+    }
+  }
 
-  closeLoader() {}
+  closeLoader() {
+    console.log("closeLoader LOADER")
+
+    let load = window.document.getElementById("transition-load");
+    if (load) {
+      load.style.display = "none";
+    }
+  }
 
   // Lifecycle hooks
   // -----------------------------------------------------------------------------------------------------

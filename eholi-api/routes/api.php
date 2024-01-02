@@ -1,27 +1,8 @@
 <?php
 
-use App\Models\Room;
-use App\Models\User;
-use App\Models\Admin;
-use App\Models\Tutor;
-use App\Models\School;
-use App\Models\Student;
-use App\Models\ClassLevel;
-use App\Models\SchoolUser;
-use App\Models\SchoolYear;
-use Illuminate\Http\Request;
-use App\Models\SchoolStudent;
-use App\Models\StudentHasRoom;
-use App\Events\AssociateUserTo;
-use App\Models\StudentSubscribe;
-use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
-use App\Models\ClassLevelHasStudent;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
-use App\Events\AssociateCustomerToSchool;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\CourseController;
@@ -35,23 +16,17 @@ use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\ClassLevelController;
 use App\Http\Controllers\SchoolYearController;
-use PHPUnit\Framework\MockObject\Builder\Stub;
 use App\Http\Controllers\StudentSubscribeController;
-use Spatie\Permission\Contracts\Role as ContractsRole;
 use App\Http\Controllers\ClassLevelHasCourseController;
 use App\Http\Controllers\DeliberationController;
 use App\Http\Controllers\LevelHasSemesterController;
 use App\Http\Controllers\StudentProgressionController;
-use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SurahController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TimesTableController;
-use App\Models\StudentProgression;
 use App\Models\TestResult;
-use App\Models\TimesTable;
 
 //Route::post('/add-new-school', [SuperAdminController::class, 'newSchool']);
-
 
 /**
  * UserController
@@ -245,7 +220,7 @@ Route::prefix('level-semesters')
  */
 Route::prefix('deliberations')
     ->middleware(['auth:api', 'cors'])->controller(DeliberationController::class)->group(function () {
-        // crud 
+        // crud
         Route::get('/', 'index');
         Route::get('/student-results', 'studentDeliberation');
         Route::put('/confirm-deliberation/{deliberation}', 'confirmDeliberation');
@@ -271,7 +246,10 @@ Route::prefix('rooms')
  */
 Route::prefix('surahs')
     ->middleware(['auth:api', 'cors'])
-    ->apiResource('surahs', SurahController::class);
+    ->controller(SurahController::class)->group(function(){
+        Route::get('/', 'index');
+        Route::get("/{surah}", "show");
+    });
 
 /**
  * Ayats

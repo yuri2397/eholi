@@ -63,6 +63,12 @@ export class StudentShowComponent implements OnInit {
     });
   }
 
+  changeRoom(status: boolean){
+    console.log(status);
+    if(status){
+      
+    }
+  }
   
 
   onFileChosed(data: any) {

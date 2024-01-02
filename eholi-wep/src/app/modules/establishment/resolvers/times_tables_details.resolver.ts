@@ -22,6 +22,6 @@ export class TimesTablesDetailsResolver
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<any> {
-    return this._timesTablesService.show(route.params['id'], route.queryParams);
+    return this._timesTablesService.show(route.params['timestable_id'] , route.queryParams);
   }
 }

@@ -33,6 +33,7 @@ import { Building } from "./establishment.model";
 import { BuildingComponent } from "./building/building.component";
 import { BuildingResolver } from "./resolvers/building.resolver";
 import { BuildingModule } from "./building/building.module";
+import { TimesTablesDetailsResolver } from "./resolvers/times_tables_details.resolver";
 
 const routes: Routes = [
   // {

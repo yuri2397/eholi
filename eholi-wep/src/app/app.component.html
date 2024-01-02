@@ -1,5 +1,5 @@
 <div *ngIf="progressBar" class="progress">
-<span style="width:95%;"><span class="progress"></span></span> 
+  <span style="width:95%;"><span class="progress"></span></span>
 </div>
 <!-- vertical-layout -->
 <ng-container *ngIf="coreConfig.layout.type === 'vertical'">
@@ -22,3 +22,13 @@
   </a>
   <core-theme-customizer></core-theme-customizer>
 </core-sidebar> -->
+
+<div
+id="transition-load"
+  class="transition-load">
+  <div class="loading">
+    <div class="effect-1 effects"></div>
+    <div class="effect-2 effects"></div>
+    <div class="effect-3 effects"></div>
+  </div>
+</div>

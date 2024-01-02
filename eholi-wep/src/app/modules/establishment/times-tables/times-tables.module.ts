@@ -28,6 +28,10 @@ const routes: Routes = [
         AddTimesTablesComponent,
         UpdateTimesTablesComponent,
     ],
+    exports: [
+        AddTimesTablesComponent,
+        UpdateTimesTablesComponent,
+    ],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),

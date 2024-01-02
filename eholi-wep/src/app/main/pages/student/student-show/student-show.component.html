@@ -1,314 +1,341 @@
 <div class="content-wrapper container-xxl p-0">
   <div class="content-body">
-    <div class="card card-developer-meetup">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="meetup-header d-flex align-items-center">
-            <div class="meetup-day">
-              <div
-                class="avatar bg-light-danger avatar-xl"
-                (click)="img.click()"
-              >
-                <input
-                  type="file"
-                  id="image"
-                  name="image"
-                  hidden
-                  #img
-                  (change)="onFileChosed($event)"
-                />
-                <span class="avatar-content">
-                  <ng-container
-                    *ngIf="
-                      student?.media && student.media.length;
-                      else elseTemplate
-                    "
-                  >
-                    <img [src]="student.media[0].original_url" />
-                  </ng-container>
-                  <ng-template #elseTemplate>
-                    {{ subName() }}
-                  </ng-template>
-                </span>
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <div class="card card-developer-meetup">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="meetup-header d-flex align-items-center">
+                <div class="meetup-day">
+                  <div
+                    class="avatar bg-light-danger avatar-xl"
+                    (click)="img.click()">
+                    <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      hidden
+                      #img
+                      (change)="onFileChosed($event)" />
+                    <span class="avatar-content">
+                      <ng-container
+                        *ngIf="
+                          student?.media && student.media.length;
+                          else elseTemplate
+                        ">
+                        <img [src]="student.media[0].original_url" />
+                      </ng-container>
+                      <ng-template #elseTemplate>
+                        {{ subName() }}
+                      </ng-template>
+                    </span>
+                  </div>
+                  <div class="d-block mt-1">
+                    <span class="text-dark text-uppercase">{{ student.reference
+                      }}
+                    </span>
+                    <h3 class="bold">
+                      {{ student.first_name }} {{ student.last_name }}
+                    </h3>
+                  </div>
+                </div>
+                <div class="d-block lead">
+                  <div>
+                    <span class="text-dark bold">{{ "student.table.adress" |
+                      translate }}:
+                    </span>
+                    {{ student.adress ?? 'Indéfinie' }}
+                  </div>
+                  <br />
+                  <div>
+                    <span class="text-dark bold">{{ "student.table.birth_in" |
+                      translate }}:
+                    </span>
+                    {{ student.birth_in }}
+                  </div>
+                  <br />
+                  <div>
+                    <span class="text-dark bold">{{ "student.table.birth_at" |
+                      translate }}:
+                    </span>
+                    {{ student.birth_at }}
+                  </div>
+                  <br />
+                  <div>
+                    <span class="text-dark bold">Classe: </span>
+                    {{ meta_data["class_levels"].name }}
+                  </div>
+                  <br>
+                  <!-- <div>
+                    <span class="text-dark bold">{{ "class_level.table.level" |
+                      translate }}:
+                    </span>
+                    {{ class_level.name }}
+                  </div> -->
+                </div>
+
               </div>
-              <div class="d-block mt-1">
-                <span class="text-dark text-uppercase"
-                  >{{ student.reference }}
-                </span>
-                <h2 class="bold">
-                  {{ student.first_name }} {{ student.last_name }}
-                </h2>
-              </div>
-            </div>
-            <div class="d-block lead">
-              <div>
-                <span class="text-dark bold"
-                  >{{ "student.table.adress" | translate }}:
-                </span>
-                {{ student.adress }}
-              </div>
-              <br />
-              <div>
-                <span class="text-dark bold"
-                  >{{ "student.table.birth_in" | translate }}:
-                </span>
-                {{ student.birth_in }}
-              </div>
-              <br />
-              <div>
-                <span class="text-dark bold"
-                  >{{ "student.table.birth_at" | translate }}:
-                </span>
-                {{ student.birth_at }}
-              </div>
-              <br />
-              <div>
-                <span class="text-dark bold">Classe: </span>
-                {{ meta_data["class_levels"].name }}
-              </div>
-            </div>
-            <br>
-            <div>
-              <span class="text-dark bold"
-                >{{ "class_level.table.level" | translate }}:
-              </span>
-              {{ class_level.name }}
             </div>
           </div>
-          <button (click)="myEcard()" rippleEffect class="btn btn-primary">
-            <i data-feather="download" class="mr-0 mr-sm-1"></i
-              ><span class="d-none d-sm-inline-block">Carte de l'étudiant</span>
-          </button>
         </div>
-        <hr />
-        <ul
-          ngbNav
-          #navWithIcons="ngbNav"
-          class="nav-tabs justify-content-start"
-        >
-          <li ngbNavItem>
-            <a ngbNavLink
-              ><span [data-feather]="'users'"></span>
-              {{ "student.tabs.parent" | translate }}</a
-            >
-            <ng-template ngbNavContent>
-              <!-- list of tutors -->
-              <div
-                *ngIf="
-                  meta_data.tutors && meta_data.tutors.length != 0;
-                  else emptyTable
-                "
-                class="table-responsive"
-              >
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">{{ "tutor.table.name" | translate }}</th>
-                      <th scope="col">
-                        {{ "tutor.table.phone1" | translate }}
-                      </th>
-                      <th scope="col">
-                        {{ "tutor.table.adress" | translate }}
-                      </th>
-                      <th scope="col">{{ "tutor.table.type" | translate }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let tutor of meta_data.tutors">
-                      <td>{{ tutor.name }}</td>
-                      <td>{{ tutor.phone1 }}</td>
-                      <td>{{ tutor.adress }}</td>
-                      <td>{{ tutorType(tutor.type) | translate }}</td>
-                    </tr>
-                  </tbody>
-                </table>
+      </div>
+      <div class="col">
+        <div class="card business-card">
+          <div class="card-header pb-1">
+            <h4 class="card-title">Campus</h4>
+            <i data-feather="more-vertical"
+              class="font-medium-3 cursor-pointer"></i>
+          </div>
+          <div class="card-body">
+            <div class="business-items">
+              <div class="business-item">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"
+                      id="business-checkbox-1" ngModel (ngModelChange)="changeRoom($event)" checked />
+                    <label class="custom-control-label"
+                      for="business-checkbox-1">Chambre: {{
+                      meta_data?.room?.name ?? '??' }} </label>
+                  </div>
+                  <div
+                    class="badge badge-light-{{ meta_data?.room ? 'danger' : 'success'}} pointer">{{
+                    meta_data?.room ? 'Desactiver' : 'Activer' }}</div>
+                </div>
               </div>
-            </ng-template>
-          </li>
-          <li ngbNavItem (shown)="getTests($event)">
-            <a ngbNavLink
-              ><span [data-feather]="'bar-chart'"></span>Examens/Devoirs</a
-            >
-            <ng-template ngbNavContent>
-              <ngb-accordion [closeOthers]="true">
-                <ngb-panel *ngFor="let item of results">
-                  <ng-template ngbPanelTitle>
-                    <span class="lead collapse-title h2 bold">{{
-                      item.semester.name | uppercase
+              <div class="business-item">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"
+                      id="business-checkbox-2" disabled checked />
+                    <label class="custom-control-label"
+                      for="business-checkbox-2">Restaurant: </label>
+                  </div>
+                  <div
+                    class="badge badge-light-primary pointer">Desactiver</div>
+                </div>
+              </div>
+              <div class="business-item">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"
+                      id="business-checkbox-3" disabled checked />
+                    <label class="custom-control-label "
+                      for="business-checkbox-3">Transport: </label>
+                  </div>
+                  <div
+                    class="badge badge-light-success pointer">Desactiver</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="card card-body">
+      <!-- <button (click)="myEcard()" [disabled]="true" rippleEffect
+            class="btn btn-primary">
+            <i data-feather="download" class="mr-0 mr-sm-1"></i><span
+              class="d-none d-sm-inline-block">Carte de l'étudiant</span>
+          </button> -->
+      <ul
+        ngbNav
+        #navWithIcons="ngbNav"
+        class="nav-tabs justify-content-start">
+        <li ngbNavItem>
+          <a ngbNavLink><span [data-feather]="'users'"></span>
+            {{ "student.tabs.parent" | translate }}</a>
+          <ng-template ngbNavContent>
+            <!-- list of tutors -->
+            <div
+              *ngIf="
+              meta_data.tutors && meta_data.tutors.length != 0;
+              else emptyTable
+            "
+              class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">{{ "tutor.table.name" | translate }}</th>
+                    <th scope="col">
+                      {{ "tutor.table.phone1" | translate }}
+                    </th>
+                    <th scope="col">
+                      {{ "tutor.table.adress" | translate }}
+                    </th>
+                    <th scope="col">{{ "tutor.table.type" | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let tutor of meta_data.tutors">
+                    <td>{{ tutor.name }}</td>
+                    <td>{{ tutor.phone1 }}</td>
+                    <td>{{ tutor.adress }}</td>
+                    <td>{{ tutorType(tutor.type) | translate }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </li>
+        <li ngbNavItem (shown)="getTests($event)">
+          <a ngbNavLink><span
+              [data-feather]="'bar-chart'"></span>Examens/Devoirs</a>
+          <ng-template ngbNavContent>
+            <ngb-accordion [closeOthers]="true">
+              <ngb-panel *ngFor="let item of results">
+                <ng-template ngbPanelTitle>
+                  <span class="lead collapse-title h2 bold">{{
+                    item.semester.name | uppercase
                     }}</span>
-                  </ng-template>
-                  <ng-template ngbPanelContent>
-                    <ngx-datatable
-                      [rows]="item.result"
-                      [rowHeight]="50"
-                      class="bootstrap core-bootstrap"
-                      [columnMode]="'force'"
-                      [headerHeight]="50"
-                      [footerHeight]="50"
-                    >
-                      <ngx-datatable-column name="Examens/Devois" prop="title">
-                      </ngx-datatable-column>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <ngx-datatable
+                    [rows]="item.result"
+                    [rowHeight]="50"
+                    class="bootstrap core-bootstrap"
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="50">
+                    <ngx-datatable-column name="Examens/Devois" prop="title">
+                    </ngx-datatable-column>
 
-                      <ngx-datatable-column name="Coéf" prop="coef">
-                      </ngx-datatable-column>
-                      <ngx-datatable-column name="Type" prop="type">
-                        <ng-template
-                          let-type="value"
-                          ngx-datatable-cell-template
-                        >
-                          <span
-                            class="badge badge-pill badge-{{
-                              type == 'exam' ? 'primary' : 'warning'
-                            }}"
-                          >
-                            {{
-                              (type == "exam" ? "Examen" : "Devoir") | translate
-                            }}
-                          </span>
-                        </ng-template>
-                      </ngx-datatable-column>
-                      <ngx-datatable-column name="Note" prop="note">
-                        <ng-template
-                          let-note="value"
-                          ngx-datatable-cell-template
-                        >
-                          {{ note }}
-                        </ng-template>
-                      </ngx-datatable-column>
-                      <ngx-datatable-column name="Etat" prop="status">
-                        <ng-template
-                          let-status="value"
-                          ngx-datatable-cell-template
-                        >
-                          <span
-                            class="badge badge-pill badge-{{
-                              status == 'ok' ? 'success' : 'danger'
-                            }}"
-                          >
-                            {{
-                              (status == "ok" ? "Déjà corrigé" : "Non corrigé")
-                                | translate
-                            }}
-                          </span>
-                        </ng-template>
-                      </ngx-datatable-column>
-                    </ngx-datatable>
-                  </ng-template>
-                </ngb-panel>
-              </ngb-accordion>
-            </ng-template>
-          </li>
+                    <ngx-datatable-column name="Coéf" prop="coef">
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Type" prop="type">
+                      <ng-template
+                        let-type="value"
+                        ngx-datatable-cell-template>
+                        <span
+                          class="badge badge-pill badge-{{
+                          type == 'exam' ? 'primary' : 'warning'
+                        }}">
+                          {{
+                          (type == "exam" ? "Examen" : "Devoir") | translate
+                          }}
+                        </span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Note" prop="note">
+                      <ng-template
+                        let-note="value"
+                        ngx-datatable-cell-template>
+                        {{ note }}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Etat" prop="status">
+                      <ng-template
+                        let-status="value"
+                        ngx-datatable-cell-template>
+                        <span
+                          class="badge badge-pill badge-{{
+                          status == 'ok' ? 'success' : 'danger'
+                        }}">
+                          {{
+                          (status == "ok" ? "Déjà corrigé" : "Non corrigé")
+                          | translate
+                          }}
+                        </span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </ng-template>
+        </li>
 
-          <li ngbNavItem (shown)="getDeliberation($event)">
-            <a ngbNavLink
-              ><span [data-feather]="'life-buoy'"></span>
-              {{ "Déliberation" | translate }}</a
-            >
+        <li ngbNavItem (shown)="getDeliberation($event)">
+          <a ngbNavLink><span [data-feather]="'life-buoy'"></span>
+            {{ "Déliberation" | translate }}</a>
 
-            <ng-template ngbNavContent>
-              <div class="row">
-                <div *ngFor="let deli of deliberations ?? []" class="col-md-4">
-                  <div class="card shadow">
-                    <div class="card-body text-center">
-                      <span class="lead text-center text-dark d-block">{{ deli.semester.name }}</span>
-                      <br>
-                      <button (click)="downloadBT(deli)" class="btn btn-primary mx-3"  rippleEffect>{{ 'Télécharger le builtin'|translate }}</button>      
-                    </div>
+          <ng-template ngbNavContent>
+            <div class="row">
+              <div *ngFor="let deli of deliberations ?? []" class="col-md-4">
+                <div class="card shadow">
+                  <div class="card-body text-center">
+                    <span class="lead text-center text-dark d-block">{{
+                      deli.semester.name }}</span>
+                    <br>
+                    <button (click)="downloadBT(deli)"
+                      class="btn btn-primary mx-3" rippleEffect>{{
+                      'Télécharger le builtin'|translate }}</button>
                   </div>
                 </div>
               </div>
-            </ng-template>
-          </li>
+            </div>
+          </ng-template>
+        </li>
 
-          <li ngbNavItem [disabled]="true">
-            <a ngbNavLink
-              ><span [data-feather]="'book'"></span>
-              {{ "student.tabs.library" | translate }}</a
-            >
-            <ng-template ngbNavContent>
-              <p>
-                Chocolate croissant cupcake croissant jelly donut. Cheesecakeœ
-                toffee apple pie chocolate bar biscuit tart croissant. Lemon
-                drops danish cookie. Oat cake macaroon icing tart lollipop
-                cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
-                drops ice cream wafer gummies dragée. Chocolate bar liquorice
-                cheesecake cookie chupa chups marshmallow oat cake biscuit.
-                Dessert toffee fruitcake ice cream powder tootsie roll cake.
-              </p>
-            </ng-template>
-          </li>
-          <li ngbNavItem [disabled]="true">
-            <a ngbNavLink
-              ><span [data-feather]="'dollar-sign'"></span>
-              {{ "student.tabs.fee" | translate }}</a
-            >
-            <ng-template ngbNavContent>
-              <p>
-                Chocolate croissant cupcake croissant jelly donut. Cheesecake
-                toffee apple pie chocolate bar biscuit tart croissant. Lemon
-                drops danish cookie. Oat cake macaroon icing tart lollipop
-                cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
-                drops ice cream wafer gummies dragée. Chocolate bar liquorice
-                cheesecake cookie chupa chups marshmallow oat cake biscuit.
-                Dessert toffee fruitcake ice cream powder tootsie roll cake.
-              </p>
-            </ng-template>
-          </li>
-          <li ngbNavItem [disabled]="true">
-            <a ngbNavLink
-              ><span [data-feather]="'home'"></span>
-              {{ "student.tabs.housing" | translate }}</a
-            >
-            <ng-template ngbNavContent>
-              <p>
-                Chocolate croissant cupcake croissant jelly donut. Cheesecake
-                toffee apple pie chocolate bar biscuit tart croissant. Lemon
-                drops danish cookie. Oat cake macaroon icing tart lollipop
-                cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
-                drops ice cream wafer gummies dragée. Chocolate bar liquorice
-                cheesecake cookie chupa chups marshmallow oat cake biscuit.
-                Dessert toffee fruitcake ice cream powder tootsie roll cake.
-              </p>
-            </ng-template>
-          </li>
+        <li ngbNavItem [disabled]="true">
+          <a ngbNavLink><span [data-feather]="'book'"></span>
+            {{ "student.tabs.library" | translate }}</a>
+          <ng-template ngbNavContent>
+            <p>
+              Chocolate croissant cupcake croissant jelly donut. Cheesecakeœ
+              toffee apple pie chocolate bar biscuit tart croissant. Lemon
+              drops danish cookie. Oat cake macaroon icing tart lollipop
+              cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
+              drops ice cream wafer gummies dragée. Chocolate bar liquorice
+              cheesecake cookie chupa chups marshmallow oat cake biscuit.
+              Dessert toffee fruitcake ice cream powder tootsie roll cake.
+            </p>
+          </ng-template>
+        </li>
+        <li ngbNavItem [disabled]="true">
+          <a ngbNavLink><span [data-feather]="'dollar-sign'"></span>
+            {{ "student.tabs.fee" | translate }}</a>
+          <ng-template ngbNavContent>
+            <div class="card mb-4">
+              <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <div class="card-subtitle text-muted mb-1">Card
+                  subtitle</div>
+                <p class="card-text"> Some quick example text to build on the
+                  card title and make up the bulk of the card's content.
+                </p>
+                <a href="javascript:void(0)" class="card-link">Card
+                  link</a>
+                <a href="javascript:void(0)"
+                  class="card-link">Another link</a>
+              </div>
+            </div>
+          </ng-template>
+        </li>
 
-          <li ngbNavItem [disabled]="true">
-            <a ngbNavLink
-              ><span [data-feather]="'heart'"></span>
-              {{ "student.tabs.medical" | translate }}</a
-            >
-            <ng-template ngbNavContent>
-              <p>
-                Chocolate croissant cupcake croissant jelly donut. Cheesecake
-                toffee apple pie chocolate bar biscuit tart croissant. Lemon
-                drops danish cookie. Oat cake macaroon icing tart lollipop
-                cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
-                drops ice cream wafer gummies dragée. Chocolate bar liquorice
-                cheesecake cookie chupa chups marshmallow oat cake biscuit.
-                Dessert toffee fruitcake ice cream powder tootsie roll cake.
-              </p>
-            </ng-template>
-          </li>
-          <li ngbNavItem [disabled]="true">
-            <a ngbNavLink
-              ><span [data-feather]="'bell'"></span>
-              {{ "student.tabs.alert" | translate }}</a
-            >
-            <ng-template ngbNavContent>
-              <p>
-                Chocolate croissant cupcake croissant jelly donut. Cheesecake
-                toffee apple pie chocolate bar biscuit tart croissant. Lemon
-                drops danish cookie. Oat cake macaroon icing tart lollipop
-                cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
-                drops ice cream wafer gummies dragée. Chocolate bar liquorice
-                cheesecake cookie chupa chups marshmallow oat cake biscuit.
-                Dessert toffee fruitcake ice cream powder tootsie roll cake.
-              </p>
-            </ng-template>
-          </li>
-        </ul>
-        <div [ngbNavOutlet]="navWithIcons" class="mt-2"></div>
-      </div>
+        <li ngbNavItem [disabled]="true">
+          <a ngbNavLink><span [data-feather]="'heart'"></span>
+            {{ "student.tabs.medical" | translate }}</a>
+          <ng-template ngbNavContent>
+            <p>
+              Chocolate croissant cupcake croissant jelly donut. Cheesecake
+              toffee apple pie chocolate bar biscuit tart croissant. Lemon
+              drops danish cookie. Oat cake macaroon icing tart lollipop
+              cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
+              drops ice cream wafer gummies dragée. Chocolate bar liquorice
+              cheesecake cookie chupa chups marshmallow oat cake biscuit.
+              Dessert toffee fruitcake ice cream powder tootsie roll cake.
+            </p>
+          </ng-template>
+        </li>
+        <li ngbNavItem [disabled]="true">
+          <a ngbNavLink><span [data-feather]="'bell'"></span>
+            {{ "student.tabs.alert" | translate }}</a>
+          <ng-template ngbNavContent>
+            <p>
+              Chocolate croissant cupcake croissant jelly donut. Cheesecake
+              toffee apple pie chocolate bar biscuit tart croissant. Lemon
+              drops danish cookie. Oat cake macaroon icing tart lollipop
+              cookie sweet bear claw. Carrot cake dragée chocolate. Lemon
+              drops ice cream wafer gummies dragée. Chocolate bar liquorice
+              cheesecake cookie chupa chups marshmallow oat cake biscuit.
+              Dessert toffee fruitcake ice cream powder tootsie roll cake.
+            </p>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="navWithIcons" class="mt-2"></div>
     </div>
   </div>
 </div>
@@ -319,10 +346,10 @@
     <p>{{ "content.table.empty.message" | translate }}</p>
     <hr />
     <button class="btn btn-primary ml-1" rippleEffect disabled>
-      <i data-feather="plus" class="mr-0 mr-sm-1"></i
-      ><span class="d-none d-sm-inline-block">{{
+      <i data-feather="plus" class="mr-0 mr-sm-1"></i><span
+        class="d-none d-sm-inline-block">{{
         "content.table.empty.btn" | translate
-      }}</span>
+        }}</span>
     </button>
   </div>
 </ng-template>

@@ -58,7 +58,7 @@ export class Tutor extends BaseModel {
 export interface StudentMetaData {
   room: {
     id: string;
-    name: null;
+    name: string;
   };
   class_levels: {
     id: string;

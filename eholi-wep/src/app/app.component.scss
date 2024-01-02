@@ -114,3 +114,14 @@
         width: 97%;
     }
 }
+
+
+.transition-load{
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 100% !important;
+    height: 100vh !important;
+    z-index: 1000 !important;
+    background-color: rgb(0 0 0 / 20%);
+}
